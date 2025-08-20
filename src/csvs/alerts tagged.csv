@@ -1,0 +1,26 @@
+Priority [status|c],Name,Status ,Case [icon|c],SLO,Disposition,AI Disposition,Comments [r],Assignee,Created Date,Tags [chip],Customer Code,Customer Flags [chip]
+Medium,Brute Force Attempt on Admin Account,Closed,FALSE,1 minutes,Benign,Unknown,10,Jack Wilson,07/20/2025 04:26:23 AM,"Cloud Misconfig, Exfiltration",ARAR-8474,Repeat Offender
+Low,Suspicious Access from Foreign IP,Open,TRUE,5 minutes,Malicious,Suspicious,1,Frank Thompson,07/01/2025 10:45:23 AM,,ARAR-9098,Under Investigation
+High,Unusual Script Execution in PowerShell,Open,FALSE,8 hours,Malicious,Suspicious,8,Alice Johnson,07/13/2025 11:01:23 AM,"Phishing, Reconnaissance",ARAR-9610,Under Investigation
+Critical,Multiple Failed Login Attempts Detected,Investigating,FALSE,1 hours,Benign,Suspicious,8,Diana Patel,07/15/2025 04:39:23 AM,Phishing,ARAR-3895,
+Critical,Unauthorized Access to Confidential Share,Investigating,FALSE,9 minutes,Benign,Unknown,0,Isla Brown,07/31/2025 03:58:23 AM,"Phishing, Reconnaissance",ARAR-9447,"Production System, VIP Account, SOC Watchlist"
+Critical,Unexpected Outbound Traffic to Known Malicious IP,Closed,TRUE,8 minutes,Suspicious,Benign,1,Grace Lee,07/04/2025 03:47:23 AM,"Reconnaissance, Endpoint Compromise, Phishing",ARAR-6968,Under Investigation
+Low,Elevated Privilege Usage Outside Business Hours,Open,TRUE,10 minutes,Suspicious,Malicious,4,Diana Patel,07/01/2025 09:23:23 AM,"Reconnaissance, Endpoint Compromise",ARAR-6470,
+Low,Data Transfer to External Storage,Investigating,TRUE,10 minutes,Benign,Suspicious,3,Hector Garcia,07/15/2025 10:28:23 PM,,ARAR-5647,"VIP Account, Under Investigation"
+Low,New Domain Joined to AD from Unrecognized Host,Investigating,FALSE,7 hours,Malicious,Unknown,3,Bob Smith,07/18/2025 04:21:23 AM,Phishing,ARAR-7771,
+Low,Unusual Login Pattern Across Multiple Locations,Open,TRUE,10 days,Suspicious,Malicious,7,Frank Thompson,07/30/2025 04:38:23 AM,Exfiltration,ARAR-1295,
+High,Anomalous File Download Activity,Investigating,FALSE,7 hours,Suspicious,Unknown,9,Bob Smith,07/16/2025 09:09:23 AM,"Cloud Misconfig, Phishing, Endpoint Compromise",ARAR-2533,
+High,Unencrypted Traffic on Sensitive Port,Open,FALSE,1 hours,Benign,Unknown,3,Bob Smith,07/11/2025 03:57:23 AM,"Reconnaissance, Cloud Misconfig",ARAR-7149,"Production System, Repeat Offender, VIP Account"
+Low,Misconfigured IAM Role with Excessive Permissions,Investigating,TRUE,8 hours,Benign,Suspicious,7,Hector Garcia,07/28/2025 01:59:23 PM,,ARAR-2395,"Under Investigation, VIP Account"
+Medium,S3 Bucket Publicly Accessible,Open,TRUE,5 days,Malicious,Unknown,9,Hector Garcia,07/11/2025 08:00:23 AM,"Exfiltration, Suspicious Behavior",ARAR-4137,"Customer Escalation, SOC Watchlist, Production System"
+Medium,Open RDP Port Detected,Investigating,FALSE,8 days,Benign,Suspicious,9,Diana Patel,07/06/2025 03:31:23 AM,"Credential Access, Exfiltration, Brute Force",ARAR-3027,VIP Account
+High,Excessive API Calls by Service Account,Closed,TRUE,8 days,Benign,Suspicious,1,Alice Johnson,07/18/2025 09:58:23 PM,"Exfiltration, Phishing, Credential Access",ARAR-7782,VIP Account
+Critical,New Device Registered by End User,Open,FALSE,10 hours,Suspicious,Benign,4,Eve Chen,07/28/2025 12:41:23 AM,,ARAR-3354,"Customer Escalation, Repeat Offender, Production System"
+Critical,AV Signature Alert from CrowdStrike,Investigating,TRUE,3 minutes,Unknown,Suspicious,5,Grace Lee,07/16/2025 12:23:23 PM,"Exfiltration, Credential Access",ARAR-4163,"Customer Escalation, SOC Watchlist, Under Investigation"
+Low,Endpoint Malware Behavior Detected,Investigating,TRUE,8 days,Malicious,Benign,7,Charlie Nguyen,07/12/2025 03:38:23 PM,Credential Access,ARAR-5123,
+High,Suspicious Process Chain Observed,Closed,TRUE,5 minutes,Benign,Malicious,2,Jack Wilson,07/08/2025 02:44:23 PM,"Reconnaissance, Cloud Misconfig",ARAR-6350,
+Low,DNS Tunneling Behavior Identified,Closed,TRUE,1 minutes,Benign,Suspicious,0,Diana Patel,07/13/2025 10:22:23 PM,"Credential Access, Brute Force",ARAR-6087,"Under Investigation, VIP Account"
+Medium,C2 Communication Pattern Found,Investigating,TRUE,9 hours,Benign,Malicious,1,Eve Chen,07/11/2025 07:00:23 AM,Cloud Misconfig,ARAR-9228,
+Low,Web Shell Upload Attempt,Open,TRUE,5 minutes,Malicious,Benign,10,Diana Patel,07/28/2025 11:08:23 AM,,ARAR-8833,"Repeat Offender, Customer Escalation"
+Low,Exploit Kit Payload Blocked by EDR,Investigating,FALSE,1 days,Malicious,Unknown,5,Jack Wilson,07/25/2025 05:32:23 PM,Credential Access,ARAR-2264,"Production System, Under Investigation"
+Critical,Abnormal Cloud Resource Creation Pattern,Closed,TRUE,2 hours,Malicious,Benign,7,Isla Brown,07/03/2025 07:37:23 AM,,ARAR-4426,
