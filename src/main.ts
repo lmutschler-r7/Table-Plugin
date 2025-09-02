@@ -5,27 +5,53 @@ export default function () {
   showUI({ width: 360, height: 500, title: 'Leanders Tables' })
 }
 
-/** Variable keys (yours) */
+/** -------- Variable keys (yours) -------- */
 const TEXT_VAR_KEY    = '8d76832d854f9b5de5c63b72dd7c79f96d5f4974'     // semantic/text/primary
 const DIVIDER_VAR_KEY = '38ba50945fb164c3b8647f573cdfcba680511684'     // semantic/divider
 
-/** Component keys (yours) */
-const CHIP_COMPONENT_KEY   = '441c3a585ec17f2b8df3cea23534e2013c52d689'
-const STATUS_COMPONENT_KEY = '2cf7906934e7fb65b2bdf0a5c04665a8799d3abd'
+/** -------- Component keys (yours) -------- */
+const CHIP_COMPONENT_KEY     = '441c3a585ec17f2b8df3cea23534e2013c52d689'
+const STATUS_COMPONENT_KEY   = '2cf7906934e7fb65b2bdf0a5c04665a8799d3abd'
+const BOOLEAN_COMPONENT_KEY  = '56f45b798f25a8d9aa2b473a21388cdf72f78eee'
 
-/* ---------------- Helpers ---------------- */
+/* ================= Helpers ================= */
 function prettyHeaderLabel(header: string): string {
   return header.replace(/\s*\[[^\]]+\]\s*/g, ' ').replace(/\s{2,}/g, ' ').trim()
 }
-function headerHasChips(header: string): boolean {
-  const m = header.match(/\[([^\]]+)\]/g)
-  if (!m) return false
-  return m.some(s => /chip(s)?/i.test(s))
+
+type AlignMeta = {
+  chips: boolean
+  status: boolean
+  boolean: boolean
+  // Figma autolayout alignments
+  crossAxis: 'MIN' | 'CENTER' | 'MAX'           // for cell.counterAxisAlignItems (LEFT/MID/RIGHT)
+  textAlign: 'LEFT' | 'CENTER' | 'RIGHT'        // for TextNode.textAlignHorizontal
 }
-function headerHasStatus(header: string): boolean {
+
+function parseHeaderMeta(header: string): AlignMeta {
+  // defaults: left alignment, no special renderers
+  const meta: AlignMeta = {
+    chips: false,
+    status: false,
+    boolean: false,
+    crossAxis: 'MIN',
+    textAlign: 'LEFT'
+  }
   const m = header.match(/\[([^\]]+)\]/g)
-  if (!m) return false
-  return m.some(s => /status/i.test(s))
+  if (!m) return meta
+  for (const seg of m) {
+    const content = seg.slice(1, -1)
+    for (const rawTok of content.split('|')) {
+      const tok = rawTok.trim().toLowerCase()
+      if (tok === 'chip' || tok === 'chips') meta.chips = true
+      else if (tok === 'status') meta.status = true
+      else if (tok === 'boolean' || tok === 'bool') meta.boolean = true
+      else if (tok === 'c' || tok === 'center') { meta.crossAxis = 'CENTER'; meta.textAlign = 'CENTER' }
+      else if (tok === 'r' || tok === 'right')  { meta.crossAxis = 'MAX';    meta.textAlign = 'RIGHT'  }
+      else if (tok === 'l' || tok === 'left')   { meta.crossAxis = 'MIN';    meta.textAlign = 'LEFT'   }
+    }
+  }
+  return meta
 }
 
 function alias(v: Variable | null): VariableAlias | undefined {
@@ -38,9 +64,8 @@ function variablePaint(v: Variable | null, fallbackRGB: RGB): Paint {
     : { type: 'SOLID', color: fallbackRGB }
 }
 
-/** Map raw cell text -> canonical status variant value */
+/** Status mapping */
 function mapStatusVariant(raw: string): string {
-  // take first token if comma/pipe separated
   const token = (raw || '').split(/[,|]/g).map(s => s.trim()).find(Boolean) || ''
   const s = token.toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim()
   if (s === 'critical') return 'Critical'
@@ -54,7 +79,34 @@ function mapStatusVariant(raw: string): string {
   return 'Unspecified'
 }
 
-/** Measuring helpers (guard against 0-width) */
+/** Parse boolean from cell text */
+function parseBooleanCell(raw: string): boolean {
+  const s = (raw || '').trim().toLowerCase()
+  if (['true','yes','y','1','✓','check','checked','on'].includes(s)) return true
+  if (['false','no','n','0','✗','x','off','unchecked'].includes(s)) return false
+  return false
+}
+
+/** Set boolean property (BOOLEAN prop or a VARIANT axis that accepts true/false) */
+function setBooleanProperty(inst: InstanceNode, value: boolean) {
+  const props = (inst as any).componentProperties as Record<string, { type: string; value: any }> | undefined
+  if (!props) return
+  const trySet = (key: string, v: any) => { try { inst.setProperties({ [key]: v }) } catch {} }
+
+  // BOOLEAN prop preferred
+  for (const [key, p] of Object.entries(props)) {
+    if (p.type === 'BOOLEAN') { trySet(key, value); return }
+  }
+  // VARIANT axis with true/false labels
+  for (const [key, p] of Object.entries(props)) {
+    if (p.type !== 'VARIANT') continue
+    trySet(key, value ? 'true' : 'false')
+    trySet(key, value ? 'True' : 'False')
+    trySet(key, value ? 'TRUE' : 'FALSE')
+  }
+}
+
+/** Measuring helpers */
 async function measureTextWidth(textValue: string, opts: { header?: boolean } = {}): Promise<number> {
   const n = figma.createText()
   n.characters = textValue
@@ -71,7 +123,7 @@ async function measureChipGroupWidth(raw: string): Promise<number> {
   const tokens = raw.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
   if (tokens.length === 0) return 0
   const chipHPad = 16
-  const gap = 8
+  const gap = 4
   let sum = 0
   for (let i = 0; i < tokens.length; i++) {
     const t = figma.createText()
@@ -87,7 +139,7 @@ async function measureChipGroupWidth(raw: string): Promise<number> {
   return Math.max(4, sum)
 }
 
-/** Divider sized explicitly to avoid 0px width edge cases */
+/** Divider with explicit width */
 function createDivider(dividerVar: Variable | null, width: number): FrameNode {
   const d = figma.createFrame()
   d.name = 'divider'
@@ -99,7 +151,7 @@ function createDivider(dividerVar: Variable | null, width: number): FrameNode {
   return d
 }
 
-/** Chip creation (instance if we have a master; fallback pill otherwise) */
+/** Chips */
 function createChipFromComponent(
   chipMaster: ComponentNode | null,
   label: string,
@@ -117,10 +169,10 @@ function createChipFromComponent(
       labelNode.lineHeight = { value: 16, unit: 'PIXELS' }
       labelNode.characters = label
       labelNode.fills = [variablePaint(textVar, { r: 0.10, g: 0.10, b: 0.12 })]
-      return inst
     }
+    return inst
   }
-  // Fallback pill
+  // (If chipMaster failed to import, we skip creating a fallback pill to keep parity with your component-driven flow.)
   const chip = figma.createFrame()
   chip.name = `Chip / ${label}`
   chip.layoutMode = 'HORIZONTAL'
@@ -130,7 +182,7 @@ function createChipFromComponent(
   chip.paddingRight = 8
   chip.paddingTop = 4
   chip.paddingBottom = 4
-  chip.itemSpacing = 6
+  chip.itemSpacing = 4
   chip.cornerRadius = 6
   chip.fills = [{ type: 'SOLID', color: { r: 0.96, g: 0.96, b: 0.96 } }]
   chip.strokes = [{ type: 'SOLID', color: { r: 0.84, g: 0.84, b: 0.84 } }]
@@ -141,28 +193,22 @@ function createChipFromComponent(
   txt.lineHeight = { value: 16, unit: 'PIXELS' }
   txt.characters = label
   txt.textAutoResize = 'WIDTH_AND_HEIGHT'
-  txt.fills = [variablePaint(textVar, { r: 0.10, g: 0.10, b: 0.12 })]
   chip.appendChild(txt)
   return chip
 }
 
-/** Create a Status instance and set its `status` property. If no master, fallback to plain text. */
-function createStatusNode(
-  statusMaster: ComponentNode | null,
-  raw: string
-): SceneNode {
+/** Status */
+function createStatusNode(statusMaster: ComponentNode | null, raw: string): SceneNode {
   const variant = mapStatusVariant(raw)
   if (statusMaster) {
     const inst = statusMaster.createInstance()
     inst.name = `Status / ${variant}`
-    // Only set if property exists
     const props = (inst as any).componentProperties as Record<string, any> | undefined
     if (props && Object.prototype.hasOwnProperty.call(props, 'status')) {
       ;(inst as InstanceNode).setProperties({ status: variant })
     }
     return inst
   }
-  // Fallback: plain text badge
   const t = figma.createText()
   t.fontName = { family: 'Inter', style: 'Medium' }
   t.fontSize = 12
@@ -172,7 +218,7 @@ function createStatusNode(
   return t
 }
 
-/* ---------------- Build table ---------------- */
+/* ================= Build table ================= */
 on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
   try {
     // Fonts
@@ -180,57 +226,70 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
     await figma.loadFontAsync({ family: 'Inter', style: 'Medium' })
 
     // Variables + components
-    const textVar    = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
-    const dividerVar = await figma.variables.importVariableByKeyAsync(DIVIDER_VAR_KEY).catch(() => null)
+    const textVar      = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
+    const dividerVar   = await figma.variables.importVariableByKeyAsync(DIVIDER_VAR_KEY).catch(() => null)
     const chipMaster   = await figma.importComponentByKeyAsync(CHIP_COMPONENT_KEY).catch(() => null)
     const statusMaster = await figma.importComponentByKeyAsync(STATUS_COMPONENT_KEY).catch(() => null)
+    const booleanMaster = await figma.importComponentByKeyAsync(BOOLEAN_COMPONENT_KEY).catch(() => null)
 
     const headerHeight = 56
     const rowHeight = 40
     const cellHPad = 10
 
-    const isChipsCol  = headers.map(h => headerHasChips(h))
-    const isStatusCol = headers.map(h => headerHasStatus(h))
+    // Per-column meta (chips/status/boolean + alignment)
+    const metas: AlignMeta[] = headers.map(h => parseHeaderMeta(h))
     const prettyHeaders = headers.map(h => prettyHeaderLabel(h))
 
-    // Pre-measure a status instance width (if we have a master)
+    // Pre-measure status width (if available)
     let statusWidth = 0
     if (statusMaster) {
       const inst = statusMaster.createInstance()
       figma.currentPage.appendChild(inst)
-      // set a representative variant so width is realistic
-      if ((inst as any).componentProperties && 'status' in (inst as any).componentProperties) {
-        ;(inst as InstanceNode).setProperties({ status: 'Unspecified' })
-      }
+      const props = (inst as any).componentProperties as Record<string, any> | undefined
+      if (props && 'status' in props) { ;(inst as InstanceNode).setProperties({ status: 'Unspecified' }) }
       statusWidth = Math.ceil(inst.width)
       inst.remove()
+    }
+
+    // Pre-measure boolean widths (if available)
+    let booleanWidth = 0
+    if (booleanMaster) {
+      const tmpTrue  = booleanMaster.createInstance()
+      const tmpFalse = booleanMaster.createInstance()
+      figma.currentPage.appendChild(tmpTrue)
+      figma.currentPage.appendChild(tmpFalse)
+      setBooleanProperty(tmpTrue as InstanceNode, true)
+      setBooleanProperty(tmpFalse as InstanceNode, false)
+      booleanWidth = Math.max(Math.ceil(tmpTrue.width), Math.ceil(tmpFalse.width))
+      tmpTrue.remove(); tmpFalse.remove()
     }
 
     // Column widths
     const colWidths = new Array(headers.length).fill(0) as number[]
     for (let c = 0; c < headers.length; c++) {
+      const meta = metas[c]
       const hw = await measureTextWidth(prettyHeaders[c], { header: true })
       colWidths[c] = Math.max(colWidths[c], hw)
 
-      if (isChipsCol[c]) {
+      if (meta.chips) {
         for (let r = 0; r < rows.length; r++) {
           const raw = (rows[r][headers[c]] ?? '').trim()
           if (!raw) continue
           const w = await measureChipGroupWidth(raw)
           colWidths[c] = Math.max(colWidths[c], w)
         }
-      } else if (isStatusCol[c]) {
-        // Use measured status instance width (fallback to text width if master missing)
-        if (statusWidth > 0) {
-          colWidths[c] = Math.max(colWidths[c], statusWidth)
-        } else {
-          // fallback: measure text of mapped variant
+      } else if (meta.status) {
+        if (statusWidth > 0) colWidths[c] = Math.max(colWidths[c], statusWidth)
+        else {
           for (let r = 0; r < rows.length; r++) {
             const tv = mapStatusVariant(rows[r][headers[c]] ?? '')
             const w = await measureTextWidth(tv)
             colWidths[c] = Math.max(colWidths[c], w)
           }
         }
+      } else if (meta.boolean) {
+        if (booleanWidth > 0) colWidths[c] = Math.max(colWidths[c], booleanWidth)
+        else colWidths[c] = Math.max(colWidths[c], 16)
       } else {
         for (let r = 0; r < rows.length; r++) {
           const tv = (rows[r][headers[c]] ?? '')
@@ -238,8 +297,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
           colWidths[c] = Math.max(colWidths[c], w)
         }
       }
-
-      colWidths[c] = Math.max(colWidths[c], 8) // guard
+      colWidths[c] = Math.max(colWidths[c], 8)
     }
 
     // Table width for reliable divider sizing
@@ -265,6 +323,8 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
       row.fills = []
 
       values.forEach((val, c) => {
+        const meta = metas[c]
+
         const cell = figma.createFrame()
         cell.name = opts.header ? 'header cell' : 'cell'
         cell.layoutMode = 'VERTICAL'
@@ -275,7 +335,9 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
         cell.paddingTop = opts.header ? 0 : 10
         cell.paddingBottom = opts.header ? 0 : 10
         cell.fills = []
+        // Vertical center within the row, horizontal by meta
         cell.primaryAxisAlignItems = 'CENTER'
+        cell.counterAxisAlignItems = meta.crossAxis
         cell.resize(colWidths[c] + cellHPad * 2, opts.header ? headerHeight : rowHeight)
 
         if (opts.header) {
@@ -285,22 +347,30 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
           t.lineHeight = { value: 24, unit: 'PIXELS' }
           t.textAutoResize = 'HEIGHT'
           t.characters = prettyHeaderLabel(val)
+          t.textAlignHorizontal = meta.textAlign
           t.fills = [variablePaint(textVar, { r: 0.12, g: 0.14, b: 0.20 })]
           cell.appendChild(t)
           t.resize(Math.max(4, colWidths[c]), t.height)
-        } else if (isChipsCol[c]) {
+        } else if (meta.chips) {
           const wrap = figma.createFrame()
           wrap.layoutMode = 'HORIZONTAL'
           wrap.primaryAxisSizingMode = 'AUTO'
           wrap.counterAxisSizingMode = 'AUTO'
-          wrap.itemSpacing = 8
+          wrap.itemSpacing = 4
           wrap.fills = []
           const tokens = val.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
           tokens.forEach(token => wrap.appendChild(createChipFromComponent(chipMaster, token, textVar)))
           cell.appendChild(wrap)
-        } else if (isStatusCol[c]) {
+        } else if (meta.status) {
           const node = createStatusNode(statusMaster, val)
           cell.appendChild(node)
+        } else if (meta.boolean) {
+          if (booleanMaster) {
+            const boolVal = parseBooleanCell(val)
+            const inst = booleanMaster.createInstance()
+            setBooleanProperty(inst as InstanceNode, boolVal)
+            cell.appendChild(inst)
+          }
         } else {
           const t = figma.createText()
           t.fontName = { family: 'Inter', style: 'Regular' }
@@ -308,6 +378,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
           t.lineHeight = { value: 20, unit: 'PIXELS' }
           t.textAutoResize = 'HEIGHT'
           t.characters = val
+          t.textAlignHorizontal = meta.textAlign
           t.fills = [variablePaint(textVar, { r: 0.16, g: 0.18, b: 0.22 })]
           cell.appendChild(t)
           t.resize(Math.max(4, colWidths[c]), t.height)
