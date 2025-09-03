@@ -13,6 +13,7 @@
     "typescript": ">=4"
   },
   "scripts": {
+    "csvs": "node scripts/generate-csvs.mjs",
     "build": "build-figma-plugin --typecheck --minify",
     "watch": "build-figma-plugin --typecheck --watch"
   },
