@@ -41,9 +41,9 @@ Low,Exploit Kit Payload Blocked by EDR,Investigating,FALSE,1 days,Malicious,Unkn
 Critical,Abnormal Cloud Resource Creation Pattern,Closed,TRUE,2 hours,Malicious,Benign,7,Isla Brown,07/03/2025 07:37:23 AM,,ARAR-4426,`
   },
   {
-    id: "findings",
-    label: "Findings",
-    filename: "findings.csv",
+    id: "vulnerability findings",
+    label: "Vulnerability Findings",
+    filename: "vulnerability findings.csv",
     contents: `CVE,Title,Risk [c],CVSS [c],CISA KEV [boolean|c],EPSS,Affected Assets [r],Findings [r],First Detected,Last Detected
 CVE-2024-62436,Apache HTTP Server Path Traversal,7.2,3.0,True,0.918,78,20,2024-09-26 06:24:52 PM,2024-10-19 06:24:52 PM
 CVE-2016-15454,Windows SMBv3 Remote Code Execution,6.19,9.8,True,0.081,37,7,2025-05-20 06:24:52 PM,2025-07-06 06:24:52 PM

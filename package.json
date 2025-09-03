@@ -14,8 +14,8 @@
   },
   "scripts": {
     "csvs": "node scripts/generate-csvs.mjs",
-    "build": "build-figma-plugin --typecheck --minify",
-    "watch": "build-figma-plugin --typecheck --watch"
+    "build": "npm run csvs && build-figma-plugin --typecheck --minify",
+    "watch": "npm run csvs && node scripts/watch-csvs.mjs & build-figma-plugin --typecheck --watch"
   },
   "figma-plugin": {
     "editorType": [
