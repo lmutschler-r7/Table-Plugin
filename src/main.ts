@@ -1,52 +1,81 @@
 import { on, showUI } from '@create-figma-plugin/utilities'
-import type { CsvParsedEvent } from './types'
 
+/* ============================================================
+   Window
+============================================================ */
 export default function () {
   showUI({ width: 360, height: 500, title: 'Leanders Tables' })
 }
 
-/** ---------------- Your variable & component keys ---------------- */
+/* ============================================================
+   Keys (your variables & components)
+============================================================ */
 const TEXT_VAR_KEY    = '8d76832d854f9b5de5c63b72dd7c79f96d5f4974'     // semantic/text/primary
 const DIVIDER_VAR_KEY = '38ba50945fb164c3b8647f573cdfcba680511684'     // semantic/divider
 
-const CHIP_COMPONENT_KEY   = '441c3a585ec17f2b8df3cea23534e2013c52d689'
-const STATUS_COMPONENT_KEY = '2cf7906934e7fb65b2bdf0a5c04665a8799d3abd'
+const CHIP_COMPONENT_KEY    = '441c3a585ec17f2b8df3cea23534e2013c52d689'
+const STATUS_COMPONENT_KEY  = '2cf7906934e7fb65b2bdf0a5c04665a8799d3abd'
 const BOOLEAN_COMPONENT_KEY = '56f45b798f25a8d9aa2b473a21388cdf72f78eee'
 
-/** ---------------- Helpers: header parsing & mapping ------------- */
+/* ============================================================
+   Types
+============================================================ */
+type CsvRow = Record<string, string>
+
+type SortDir = 'asc' | 'desc' | null
+type SortState = { by: string | null; dir: SortDir } | undefined
+
+type CsvParsedPayload = {
+  headers: string[]
+  rows: CsvRow[]
+  // optional — UI may send it so we can draw the icon in the header
+  sort?: SortState
+}
+
+type CsvParsedEvent = {
+  name: 'CSV_PARSED'
+  handler: (payload: CsvParsedPayload) => void
+}
+
+type ResizeEvent = {
+  name: 'RESIZE'
+  handler: (payload: { width: number; height: number }) => void
+}
+
+/* ============================================================
+   Small helpers
+============================================================ */
 function prettyHeaderLabel(header: string): string {
   return header.replace(/\s*\[[^\]]+\]\s*/g, ' ').replace(/\s{2,}/g, ' ').trim()
 }
+
 function headerHasChips(header: string): boolean {
   const m = header.match(/\[([^\]]+)\]/g)
   return !!m && m.some(s => /chip(s)?/i.test(s))
 }
+
 function headerHasStatus(header: string): boolean {
   const m = header.match(/\[([^\]]+)\]/g)
   return !!m && m.some(s => /status/i.test(s))
 }
+
 function headerHasBoolean(header: string): boolean {
   const m = header.match(/\[([^\]]+)\]/g)
   return !!m && m.some(s => /boolean/i.test(s))
 }
+
 type Align = 'LEFT' | 'CENTER' | 'RIGHT'
-function parseAlign(header: string): Align {
-  const m = header.match(/\[([^\]]+)\]/g)
-  if (!m) return 'LEFT'
-  const tokens = m
-    .map(s => s.slice(1, -1))
-    .join('|')
-    .split('|')
-    .map(t => t.trim().toLowerCase())
-  if (tokens.includes('c')) return 'CENTER'
-  if (tokens.includes('r')) return 'RIGHT'
+function headerAlign(header: string): Align {
+  const tags = header.match(/\[([^\]]+)\]/g)?.join(' ').toLowerCase() ?? ''
+  if (/\b(r|right)\b/.test(tags)) return 'RIGHT'
+  if (/\b(c|center|centre)\b/.test(tags)) return 'CENTER'
   return 'LEFT'
 }
 
-/** ---------------- Helpers: variables & paints ------------------- */
 function alias(v: Variable | null): VariableAlias | undefined {
   return v ? { type: 'VARIABLE_ALIAS', id: v.id } : undefined
 }
+
 function variablePaint(v: Variable | null, fallbackRGB: RGB): Paint {
   const a = alias(v)
   return a
@@ -54,22 +83,118 @@ function variablePaint(v: Variable | null, fallbackRGB: RGB): Paint {
     : { type: 'SOLID', color: fallbackRGB }
 }
 
-/** ---------------- Helpers: status mapping ----------------------- */
+/* ---------- Status value mapping (canonicalize to variants) ---------- */
 function mapStatusVariant(raw: string): string {
   const token = (raw || '').split(/[,|]/g).map(s => s.trim()).find(Boolean) || ''
   const s = token.toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim()
+
   if (s === 'critical') return 'Critical'
+  if (s === 'error') return 'Error'
   if (s === 'high') return 'High'
   if (s === 'medium') return 'Medium'
   if (s === 'low') return 'Low'
   if (s === 'very low' || s === 'verylow') return 'Very Low'
-  if (s === 'healthy') return 'Healthy'
+  if (s === 'unresponsive' || s === 'not responding') return 'Unresponsive'
+  if (s === 'bad') return 'Bad'
+  if (s === 'poor') return 'Poor'
   if (s === 'inactive') return 'Inactive'
+  if (s === 'not monitored' || s === 'unmonitored') return 'Not Monitored'
+  if (s === 'idle') return 'Idle'
+  if (s === 'healthy') return 'Healthy'
+  if (s === 'good') return 'Good'
+  if (s === 'online') return 'Online'
   if (s === 'unspecified' || s === '') return 'Unspecified'
   return 'Unspecified'
 }
 
-/** ---------------- Measuring helpers (guard zero-width) ---------- */
+/* Status rank for smart sorting (lower number = higher priority) */
+const STATUS_RANK: Record<string, number> = {
+  'Critical': 0,
+  'Error': 0,
+  'High': 1,
+  'Medium': 2,
+  'Low': 3,
+  'Very Low': 4,
+  'Unresponsive': 5,
+  'Bad': 6,
+  'Poor': 7,
+  'Inactive': 8,
+  'Not monitored': 9,
+  'Idle': 10,
+  'Healthy': 11,
+  'Good': 12,
+  'Online': 13,
+  'Unspecified': 14
+}
+
+/* ---------- Content-aware sorting helpers ---------- */
+function firstToken(s: string): string {
+  return (s || '').split(/[,|]/g).map(t => t.trim()).find(Boolean) || ''
+}
+
+function parseBooleanLike(s: string): boolean | null {
+  const v = (s || '').trim().toLowerCase()
+  if (['true','yes','y','1'].includes(v)) return true
+  if (['false','no','n','0'].includes(v)) return false
+  return null
+}
+
+function parseNumeric(s: string): number | null {
+  const n = Number((s || '').replace(/[, ]+/g, ''))
+  return Number.isFinite(n) ? n : null
+}
+
+function parseDurationSeconds(s: string): number | null {
+  // supports "7h", "7 hours", "8 days", "1 minute", "30s", etc.
+  const m = (s || '').trim().toLowerCase().match(/(\d+(?:\.\d+)?)\s*(years?|yrs?|y|months?|mos?|mo|weeks?|w|days?|d|hours?|hrs?|h|minutes?|mins?|m|seconds?|secs?|s)\b/)
+  if (!m) return null
+  const qty = parseFloat(m[1])
+  const unit = m[2]
+  if (!Number.isFinite(qty)) return null
+  let sec = 0
+  if (/^y/.test(unit)) sec = qty * 365 * 24 * 3600
+  else if (/^mo(nth)?|^mo$/.test(unit)) sec = qty * 30 * 24 * 3600
+  else if (/^w/.test(unit)) sec = qty * 7 * 24 * 3600
+  else if (/^d/.test(unit)) sec = qty * 24 * 3600
+  else if (/^h/.test(unit)) sec = qty * 3600
+  else if (/^m(?!o)/.test(unit)) sec = qty * 60
+  else if (/^s/.test(unit)) sec = qty
+  return sec
+}
+
+function parseDateMillis(s: string): number | null {
+  const t = (s || '').trim()
+  if (!t) return null
+
+  // Try MM/DD/YYYY HH:MM:SS AM/PM
+  let m = t.match(/^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM))?\s*$/i)
+  if (m) {
+    let [ , mm, dd, yyyy, hh = '0', mi = '0', ss = '0', ap ] = m
+    let H = parseInt(hh, 10)
+    if (ap) {
+      const ampm = ap.toUpperCase()
+      if (ampm === 'AM') {
+        if (H === 12) H = 0
+      } else {
+        if (H !== 12) H += 12
+      }
+    }
+    const date = new Date(
+      parseInt(yyyy, 10),
+      parseInt(mm, 10) - 1,
+      parseInt(dd, 10),
+      H, parseInt(mi, 10), parseInt(ss, 10), 0
+    )
+    const ms = date.getTime()
+    return Number.isFinite(ms) ? ms : null
+  }
+
+  // Try ISO or Date.parse as fallback
+  const ms = Date.parse(t)
+  return Number.isFinite(ms) ? ms : null
+}
+
+/* ---------- Measurement helpers (append/remove to measure reliably) ---------- */
 async function measureTextWidth(textValue: string, opts: { header?: boolean } = {}): Promise<number> {
   const n = figma.createText()
   n.characters = textValue
@@ -82,10 +207,12 @@ async function measureTextWidth(textValue: string, opts: { header?: boolean } = 
   n.remove()
   return Math.max(4, w)
 }
-async function measureChipGroupWidth(raw: string, gap = 4): Promise<number> {
+
+async function measureChipGroupWidth(raw: string): Promise<number> {
   const tokens = raw.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
   if (tokens.length === 0) return 0
-  const chipHPad = 16 // 8 left + 8 right
+  const chipHPad = 16
+  const gap = 4 // we use 4px between chips
   let sum = 0
   for (let i = 0; i < tokens.length; i++) {
     const t = figma.createText()
@@ -101,11 +228,10 @@ async function measureChipGroupWidth(raw: string, gap = 4): Promise<number> {
   return Math.max(4, sum)
 }
 
-/** ---------------- Node creators -------------------------------- */
+/* ---------- Divider (explicit width) ---------- */
 function createDivider(dividerVar: Variable | null, width: number): FrameNode {
   const d = figma.createFrame()
   d.name = 'divider'
-  d.layoutAlign = 'STRETCH'
   d.primaryAxisSizingMode = 'FIXED'
   d.counterAxisSizingMode = 'FIXED'
   d.fills = [variablePaint(dividerVar, { r: 0.88, g: 0.90, b: 0.93 })]
@@ -113,6 +239,7 @@ function createDivider(dividerVar: Variable | null, width: number): FrameNode {
   return d
 }
 
+/* ---------- Chip / Status / Boolean ---------- */
 function createChipFromComponent(
   chipMaster: ComponentNode | null,
   label: string,
@@ -133,15 +260,33 @@ function createChipFromComponent(
     }
     return inst
   }
-  // (No fallback per your request previously; if master missing, return an empty frame)
-  const empty = figma.createFrame()
-  empty.name = `Chip (missing master) / ${label}`
-  empty.fills = []
-  empty.resize(1, 1)
-  return empty
+  // Fallback pill
+  const chip = figma.createFrame()
+  chip.name = `Chip / ${label}`
+  chip.layoutMode = 'HORIZONTAL'
+  chip.primaryAxisSizingMode = 'AUTO'
+  chip.counterAxisSizingMode = 'AUTO'
+  chip.paddingLeft = 8
+  chip.paddingRight = 8
+  chip.paddingTop = 4
+  chip.paddingBottom = 4
+  chip.itemSpacing = 4
+  chip.cornerRadius = 6
+  chip.fills = [{ type: 'SOLID', color: { r: 0.96, g: 0.96, b: 0.96 } }]
+  chip.strokes = [{ type: 'SOLID', color: { r: 0.84, g: 0.84, b: 0.84 } }]
+  chip.strokeAlign = 'INSIDE'
+  const txt = figma.createText()
+  txt.fontName = { family: 'Inter', style: 'Regular' }
+  txt.fontSize = 11
+  txt.lineHeight = { value: 16, unit: 'PIXELS' }
+  txt.characters = label
+  txt.textAutoResize = 'WIDTH_AND_HEIGHT'
+  txt.fills = [variablePaint(textVar, { r: 0.10, g: 0.10, b: 0.12 })]
+  chip.appendChild(txt)
+  return chip
 }
 
-function createStatusInstance(statusMaster: ComponentNode | null, raw: string): SceneNode {
+function createStatusNode(statusMaster: ComponentNode | null, raw: string): SceneNode {
   const variant = mapStatusVariant(raw)
   if (statusMaster) {
     const inst = statusMaster.createInstance()
@@ -152,103 +297,191 @@ function createStatusInstance(statusMaster: ComponentNode | null, raw: string): 
     }
     return inst
   }
-  const empty = figma.createFrame()
-  empty.name = `Status (missing master) / ${variant}`
-  empty.fills = []
-  empty.resize(1, 1)
-  return empty
+  // Fallback text
+  const t = figma.createText()
+  t.fontName = { family: 'Inter', style: 'Medium' }
+  t.fontSize = 12
+  t.lineHeight = { value: 20, unit: 'PIXELS' }
+  t.characters = variant
+  t.textAutoResize = 'WIDTH_AND_HEIGHT'
+  return t
 }
 
-function createBooleanInstance(booleanMaster: ComponentNode | null, raw: string): SceneNode {
-  const val = String(raw).trim().toLowerCase()
-  const boolStr = (val === 'true' || val === 'yes' || val === 'y' || val === '1') ? 'true' : 'false'
+function createBooleanNode(booleanMaster: ComponentNode | null, raw: string): SceneNode {
   if (booleanMaster) {
     const inst = booleanMaster.createInstance()
-    inst.name = `Boolean / ${boolStr}`
+    inst.name = `Boolean`
+    const norm = (raw || '').trim().toLowerCase()
+    const value = norm === 'true' || norm === 'yes' || norm === '1'
     const props = (inst as any).componentProperties as Record<string, any> | undefined
     if (props && Object.prototype.hasOwnProperty.call(props, 'boolean')) {
-      ;(inst as InstanceNode).setProperties({ boolean: boolStr })
+      ;(inst as InstanceNode).setProperties({ boolean: value ? 'true' : 'false' })
     }
     return inst
   }
-  const empty = figma.createFrame()
-  empty.name = `Boolean (missing master) / ${boolStr}`
-  empty.fills = []
-  empty.resize(1, 1)
-  return empty
+  // Fallback text
+  const t = figma.createText()
+  t.fontName = { family: 'Inter', style: 'Regular' }
+  t.fontSize = 12
+  t.lineHeight = { value: 20, unit: 'PIXELS' }
+  t.characters = (raw || '').trim()
+  t.textAutoResize = 'WIDTH_AND_HEIGHT'
+  return t
 }
 
-/** ---------------- Build table ----------------------------------- */
-on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
+/* ---------- Sort icon SVGs + node helper ---------- */
+const SVG_ASC = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V20M12 4C13.3176 4.00001 16.9998 8.99996 16.9998 8.99996M12 4C10.6824 3.99999 6.99979 9 6.99979 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+const SVG_DESC = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20V4M12 20C13.3176 20 17 15.0001 17 15.0001M12 20C10.6824 20 6.99997 15.0001 6.99997 15.0001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+
+function createSortIconNode(dir: 'asc' | 'desc', textVar: Variable | null): FrameNode {
+  const node = figma.createNodeFromSvg(dir === 'desc' ? SVG_DESC : SVG_ASC)
+  node.name = dir === 'desc' ? 'Sort / Desc' : 'Sort / Asc'
+
+  const paint: Paint = textVar
+    ? {
+        type: 'SOLID',
+        opacity: 1,
+        color: { r: 0.12, g: 0.14, b: 0.20 },
+        boundVariables: { color: { type: 'VARIABLE_ALIAS', id: textVar.id } }
+      }
+    : { type: 'SOLID', color: { r: 0.12, g: 0.14, b: 0.20 } }
+
+  node.findAll(n => 'strokes' in n).forEach(n => {
+    const g = n as GeometryMixin
+    g.strokes = [paint]
+  })
+
+  node.resize(18, 18)
+  return node
+}
+
+/* ============================================================
+   Selected container or page center
+============================================================ */
+function getSelectedContainer(): (BaseNode & ChildrenMixin) | null {
+  const sel = figma.currentPage.selection[0]
+  if (!sel) return null
+  if ('appendChild' in sel) return sel as BaseNode & ChildrenMixin
+  return null
+}
+
+/* ============================================================
+   Smart comparator (content-aware) 
+============================================================ */
+function makeComparator(
+  headers: string[],
+  colIndex: number,
+  isStatus: boolean,
+  isBoolean: boolean,
+  isChips: boolean,
+  dir: 'asc' | 'desc'
+) {
+  const header = headers[colIndex]
+  const mul = dir === 'desc' ? -1 : 1
+
+  return (a: CsvRow, b: CsvRow) => {
+    const av = (a[header] ?? '').trim()
+    const bv = (b[header] ?? '').trim()
+
+    // Status by custom severity rank
+    if (isStatus) {
+      const ar = STATUS_RANK[mapStatusVariant(av)] ?? 999
+      const br = STATUS_RANK[mapStatusVariant(bv)] ?? 999
+      if (ar !== br) return (ar - br) * mul
+    }
+
+    // Boolean columns (true > false when ascending)
+    if (isBoolean) {
+      const ab = parseBooleanLike(av)
+      const bb = parseBooleanLike(bv)
+      if (ab !== null && bb !== null) {
+        if (ab === bb) return 0
+        return (ab ? 1 : 0) - (bb ? 1 : 0) * mul
+      }
+    }
+
+    // Duration like "8 days", "7 hours"
+    const adur = parseDurationSeconds(av)
+    const bdur = parseDurationSeconds(bv)
+    if (adur !== null && bdur !== null && Number.isFinite(adur) && Number.isFinite(bdur)) {
+      if (adur !== bdur) return (adur - bdur) * mul
+    }
+
+    // Datetime like "07/20/2025 04:26:23 AM" or ISO
+    const adt = parseDateMillis(av)
+    const bdt = parseDateMillis(bv)
+    if (adt !== null && bdt !== null && Number.isFinite(adt) && Number.isFinite(bdt)) {
+      if (adt !== bdt) return (adt - bdt) * mul
+    }
+
+    // Numeric (pure)
+    const an = parseNumeric(av)
+    const bn = parseNumeric(bv)
+    if (an !== null && bn !== null) {
+      if (an !== bn) return (an - bn) * mul
+    }
+
+    // Chips → first token text
+    if (isChips) {
+      const at = firstToken(av).toLowerCase()
+      const bt = firstToken(bv).toLowerCase()
+      if (at !== bt) return at.localeCompare(bt) * mul
+    }
+
+    // Default: case-insensitive alpha
+    const as = av.toLowerCase()
+    const bs = bv.toLowerCase()
+    return as.localeCompare(bs) * mul
+  }
+}
+
+/* ============================================================
+   Table builder
+============================================================ */
+on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
   try {
     // Fonts
     await figma.loadFontAsync({ family: 'Inter', style: 'Regular' })
     await figma.loadFontAsync({ family: 'Inter', style: 'Medium' })
 
-    // Variables + components
-    const textVar      = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
-    const dividerVar   = await figma.variables.importVariableByKeyAsync(DIVIDER_VAR_KEY).catch(() => null)
-    const chipMaster   = await figma.importComponentByKeyAsync(CHIP_COMPONENT_KEY).catch(() => null)
-    const statusMaster = await figma.importComponentByKeyAsync(STATUS_COMPONENT_KEY).catch(() => null)
+    // Variables / components (import once)
+    const textVar       = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
+    const dividerVar    = await figma.variables.importVariableByKeyAsync(DIVIDER_VAR_KEY).catch(() => null)
+    const chipMaster    = await figma.importComponentByKeyAsync(CHIP_COMPONENT_KEY).catch(() => null)
+    const statusMaster  = await figma.importComponentByKeyAsync(STATUS_COMPONENT_KEY).catch(() => null)
     const booleanMaster = await figma.importComponentByKeyAsync(BOOLEAN_COMPONENT_KEY).catch(() => null)
 
-    // Dimensions
     const headerHeight = 56
     const rowHeight = 40
     const cellHPad = 10
-    const chipGap = 4
 
-    // Column meta
-    const isChipsCol    = headers.map(h => headerHasChips(h))
-    const isStatusCol   = headers.map(h => headerHasStatus(h))
-    const isBooleanCol  = headers.map(h => headerHasBoolean(h))
-    const alignments    = headers.map(h => parseAlign(h))
-    const prettyHeaders = headers.map(h => prettyHeaderLabel(h))
+    const isChipsCol     = headers.map(h => headerHasChips(h))
+    const isStatusCol    = headers.map(h => headerHasStatus(h))
+    const isBooleanCol   = headers.map(h => headerHasBoolean(h))
+    const aligns: Align[] = headers.map(h => headerAlign(h))
+    const prettyHeaders  = headers.map(h => prettyHeaderLabel(h))
 
-    // Pre-measure a single status instance across observed variants (for accuracy)
-    let statusMeasureWidth = 0
+    // representative widths
+    let statusRepWidth = 0
     if (statusMaster) {
       const inst = statusMaster.createInstance()
       figma.currentPage.appendChild(inst)
       const props = (inst as any).componentProperties as Record<string, any> | undefined
-      const setVariant = (value: string) => {
-        if (props && Object.prototype.hasOwnProperty.call(props, 'status')) {
-          ;(inst as InstanceNode).setProperties({ status: value })
-        }
+      if (props && Object.prototype.hasOwnProperty.call(props, 'status')) {
+        ;(inst as InstanceNode).setProperties({ status: 'Unspecified' })
       }
-      // Measure across all variants observed in dataset (mapped)
-      const seen = new Set<string>()
-      for (const r of rows) {
-        for (let c = 0; c < headers.length; c++) {
-          if (!isStatusCol[c]) continue
-          const v = mapStatusVariant(r[headers[c]] ?? '')
-          if (seen.has(v)) continue
-          seen.add(v)
-          setVariant(v)
-          statusMeasureWidth = Math.max(statusMeasureWidth, Math.ceil(inst.width))
-        }
-      }
-      // Ensure at least Unspecified
-      setVariant('Unspecified')
-      statusMeasureWidth = Math.max(statusMeasureWidth, Math.ceil(inst.width))
+      statusRepWidth = Math.ceil(inst.width)
       inst.remove()
     }
-
-    // Pre-measure boolean instance width (true/false) if present
-    let booleanMeasureWidth = 0
+    let booleanRepWidth = 0
     if (booleanMaster) {
       const inst = booleanMaster.createInstance()
       figma.currentPage.appendChild(inst)
       const props = (inst as any).componentProperties as Record<string, any> | undefined
-      const setBool = (value: 'true' | 'false') => {
-        if (props && Object.prototype.hasOwnProperty.call(props, 'boolean')) {
-          ;(inst as InstanceNode).setProperties({ boolean: value })
-        }
+      if (props && Object.prototype.hasOwnProperty.call(props, 'boolean')) {
+        ;(inst as InstanceNode).setProperties({ boolean: 'true' })
       }
-      setBool('true')
-      booleanMeasureWidth = Math.max(booleanMeasureWidth, Math.ceil(inst.width))
-      setBool('false')
-      booleanMeasureWidth = Math.max(booleanMeasureWidth, Math.ceil(inst.width))
+      booleanRepWidth = Math.ceil(inst.width)
       inst.remove()
     }
 
@@ -256,37 +489,37 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
     const colWidths = new Array(headers.length).fill(0) as number[]
     for (let c = 0; c < headers.length; c++) {
       const hw = await measureTextWidth(prettyHeaders[c], { header: true })
-      colWidths[c] = Math.max(colWidths[c], hw)
+      const sortReserve = sort && sort.by === headers[c] && (sort.dir === 'asc' || sort.dir === 'desc') ? 22 : 0
+      colWidths[c] = Math.max(colWidths[c], hw + sortReserve)
 
       if (isChipsCol[c]) {
         for (let r = 0; r < rows.length; r++) {
           const raw = (rows[r][headers[c]] ?? '').trim()
           if (!raw) continue
-          const w = await measureChipGroupWidth(raw, chipGap)
+          const w = await measureChipGroupWidth(raw)
           colWidths[c] = Math.max(colWidths[c], w)
         }
       } else if (isStatusCol[c]) {
-        if (statusMeasureWidth > 0) {
-          colWidths[c] = Math.max(colWidths[c], statusMeasureWidth)
+        if (statusRepWidth > 0) {
+          colWidths[c] = Math.max(colWidths[c], statusRepWidth)
         } else {
-          // fallback measure by text if status master missing
           for (let r = 0; r < rows.length; r++) {
-            const tv = mapStatusVariant(rows[r][headers[c]] ?? '')
-            const w = await measureTextWidth(tv)
+            const w = await measureTextWidth(mapStatusVariant(rows[r][headers[c]] ?? ''))
             colWidths[c] = Math.max(colWidths[c], w)
           }
         }
       } else if (isBooleanCol[c]) {
-        if (booleanMeasureWidth > 0) {
-          colWidths[c] = Math.max(colWidths[c], booleanMeasureWidth)
+        if (booleanRepWidth > 0) {
+          colWidths[c] = Math.max(colWidths[c], booleanRepWidth)
         } else {
-          // if missing, minimal space
-          colWidths[c] = Math.max(colWidths[c], 12)
+          for (let r = 0; r < rows.length; r++) {
+            const w = await measureTextWidth((rows[r][headers[c]] ?? '').trim())
+            colWidths[c] = Math.max(colWidths[c], w)
+          }
         }
       } else {
         for (let r = 0; r < rows.length; r++) {
-          const tv = (rows[r][headers[c]] ?? '')
-          const w = await measureTextWidth(tv)
+          const w = await measureTextWidth(rows[r][headers[c]] ?? '')
           colWidths[c] = Math.max(colWidths[c], w)
         }
       }
@@ -294,10 +527,25 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
       colWidths[c] = Math.max(colWidths[c], 8)
     }
 
-    // Total table width (for reliable divider sizing)
+    // Apply smart/content-aware sorting if requested
+    let finalRows = rows
+    const sortColIndex =
+      sort && sort.by && sort.dir ? headers.findIndex(h => h === sort.by) : -1
+    if (sortColIndex >= 0 && (sort!.dir === 'asc' || sort!.dir === 'desc')) {
+      const cmp = makeComparator(
+        headers,
+        sortColIndex,
+        isStatusCol[sortColIndex],
+        isBooleanCol[sortColIndex],
+        isChipsCol[sortColIndex],
+        sort!.dir!
+      )
+      finalRows = rows.slice().sort(cmp)
+    }
+
     const tableWidth = colWidths.reduce((sum, w) => sum + w + cellHPad * 2, 0)
 
-    // Table root
+    // Root table frame
     const table = figma.createFrame()
     table.name = 'table'
     table.layoutMode = 'VERTICAL'
@@ -306,7 +554,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
     table.itemSpacing = 0
     table.fills = []
 
-    // Row builder
+    // Build a single row
     const buildRow = (values: string[], opts: { header: boolean }) => {
       const row = figma.createFrame()
       row.name = opts.header ? 'header' : 'row'
@@ -316,7 +564,9 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
       row.itemSpacing = 0
       row.fills = []
 
-      values.forEach((val, c) => {
+      for (let c = 0; c < values.length; c++) {
+        const val = values[c]
+        const align = aligns[c]
         const cell = figma.createFrame()
         cell.name = opts.header ? 'header cell' : 'cell'
         cell.layoutMode = 'VERTICAL'
@@ -327,98 +577,106 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
         cell.paddingTop = opts.header ? 0 : 10
         cell.paddingBottom = opts.header ? 0 : 10
         cell.fills = []
-        // Horizontal alignment inside the cell (counter axis)
-        cell.counterAxisAlignItems =
-          alignments[c] === 'LEFT' ? 'MIN' : alignments[c] === 'RIGHT' ? 'MAX' : 'CENTER'
-        // Vertical centering
+        // Horizontal alignment inside this cell
+        cell.counterAxisAlignItems = align === 'LEFT' ? 'MIN' : align === 'RIGHT' ? 'MAX' : 'CENTER'
+        // Vertical alignment (center)
         cell.primaryAxisAlignItems = 'CENTER'
-        // Size cell
         cell.resize(colWidths[c] + cellHPad * 2, opts.header ? headerHeight : rowHeight)
 
         if (opts.header) {
+          // tiny H-wrap to keep icon + text vertically centered together
+          const hWrap = figma.createFrame()
+          hWrap.name = 'Header Content'
+          hWrap.layoutMode = 'HORIZONTAL'
+          hWrap.primaryAxisSizingMode = 'AUTO'
+          hWrap.counterAxisSizingMode = 'AUTO'
+          hWrap.itemSpacing = 4
+          hWrap.counterAxisAlignItems = 'CENTER'
+          hWrap.fills = []
+
           const t = figma.createText()
           t.fontName = { family: 'Inter', style: 'Medium' }
           t.fontSize = 14
           t.lineHeight = { value: 24, unit: 'PIXELS' }
-          t.textAutoResize = 'WIDTH_AND_HEIGHT' // hug
+          t.textAutoResize = 'WIDTH_AND_HEIGHT' // hug width & height
           t.characters = prettyHeaderLabel(val)
           t.fills = [variablePaint(textVar, { r: 0.12, g: 0.14, b: 0.20 })]
-          cell.appendChild(t)
+          hWrap.appendChild(t)
+
+          // If this header is the sorted column, append a sort icon
+          if (sort && sort.by === headers[c] && (sort.dir === 'asc' || sort.dir === 'desc')) {
+            const icon = createSortIconNode(sort.dir, textVar)
+            hWrap.appendChild(icon)
+          }
+
+          cell.appendChild(hWrap)
         } else if (isChipsCol[c]) {
           const wrap = figma.createFrame()
           wrap.layoutMode = 'HORIZONTAL'
           wrap.primaryAxisSizingMode = 'AUTO'
           wrap.counterAxisSizingMode = 'AUTO'
-          wrap.itemSpacing = chipGap
+          wrap.itemSpacing = 4 // 4px gap between chips
           wrap.fills = []
           const tokens = val.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
-          tokens.forEach(token => wrap.appendChild(createChipFromComponent(chipMaster, token, textVar)))
+          for (const token of tokens) {
+            wrap.appendChild(createChipFromComponent(chipMaster, token, textVar))
+          }
           cell.appendChild(wrap)
         } else if (isStatusCol[c]) {
-          const node = createStatusInstance(statusMaster, val)
-          cell.appendChild(node)
+          cell.appendChild(createStatusNode(statusMaster, val))
         } else if (isBooleanCol[c]) {
-          const node = createBooleanInstance(booleanMaster, val)
-          cell.appendChild(node)
+          cell.appendChild(createBooleanNode(booleanMaster, val))
         } else {
           const t = figma.createText()
           t.fontName = { family: 'Inter', style: 'Regular' }
           t.fontSize = 12
           t.lineHeight = { value: 20, unit: 'PIXELS' }
-          t.textAutoResize = 'WIDTH_AND_HEIGHT' // hug
+          t.textAutoResize = 'WIDTH_AND_HEIGHT' // hug width & height
           t.characters = val
           t.fills = [variablePaint(textVar, { r: 0.16, g: 0.18, b: 0.22 })]
           cell.appendChild(t)
         }
 
         row.appendChild(cell)
-      })
-
+      }
       return row
     }
 
-    // Header + divider + rows (+ dividers)
+    // Header + divider + rows
     const headerRow = buildRow(headers, { header: true })
     table.appendChild(headerRow)
     table.appendChild(createDivider(dividerVar, tableWidth))
 
-    rows.forEach((r, i) => {
-      const vals = headers.map(h => (r[h] ?? '').trim())
+    for (let i = 0; i < finalRows.length; i++) {
+      const vals = headers.map(h => (finalRows[i][h] ?? '').trim())
       const rowNode = buildRow(vals, { header: false })
       table.appendChild(rowNode)
-      if (i < rows.length - 1) table.appendChild(createDivider(dividerVar, tableWidth))
-    })
+      if (i < finalRows.length - 1) {
+        table.appendChild(createDivider(dividerVar, tableWidth))
+      }
+    }
 
-    /** ------------ Insert: inside selection or center viewport ---- */
-    const selection = figma.currentPage.selection
-    const container = selection.find(n => n.type === 'FRAME' || n.type === 'COMPONENT') as
-      | FrameNode
-      | ComponentNode
-      | undefined
-
+    // Place table
+    const container = getSelectedContainer()
     if (container) {
       container.appendChild(table)
       if ('layoutMode' in container && container.layoutMode !== 'NONE') {
-        // Auto Layout parent → participate in layout
-        table.layoutPositioning = 'AUTO'
+        // Auto Layout parent: pin to top-left
+        table.layoutAlign = 'MIN'
       } else {
-        // Non–Auto Layout parent → absolute positioned at top-left
-        // (Do NOT set layoutPositioning here; property only valid for Auto Layout parents)
+        // Absolutely positioned inside non-AL frame: put at (0,0)
         table.x = 0
         table.y = 0
       }
-      figma.currentPage.selection = [table]
-      figma.viewport.scrollAndZoomIntoView([table])
     } else {
-      // No suitable container → center in viewport
       const { x, y } = figma.viewport.center
       table.x = x
       table.y = y
       figma.currentPage.appendChild(table)
-      figma.currentPage.selection = [table]
-      figma.viewport.scrollAndZoomIntoView([table])
     }
 
+    figma.currentPage.selection = [table]
+    figma.viewport.scrollAndZoomIntoView([table])
     figma.notify('Table created')
   } catch (err) {
     console.error(err)
@@ -426,10 +684,12 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows }) => {
   }
 })
 
-/** ----------- RESIZE from UI (kept) ------------------------------ */
+/* ============================================================
+   UI-driven resize (keep your min bounds)
+============================================================ */
 const MIN_WIDTH = 360
 const MIN_HEIGHT = 290
-type ResizeEvent = { name: 'RESIZE'; handler: (payload: { width: number; height: number }) => void }
+
 on<ResizeEvent>('RESIZE', ({ width, height }) => {
   const w = Math.max(MIN_WIDTH, Math.round(width))
   const h = Math.max(MIN_HEIGHT, Math.round(height))
