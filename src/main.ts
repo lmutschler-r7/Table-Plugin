@@ -28,8 +28,9 @@ type SortState = { by: string | null; dir: SortDir } | undefined
 type CsvParsedPayload = {
   headers: string[]
   rows: CsvRow[]
-  // optional — UI may send it so we can draw the icon in the header
   sort?: SortState
+  /** NEW: how many rows to render (apply after sorting) */
+  rowLimit?: number
 }
 
 type CsvParsedEvent = {
@@ -145,7 +146,6 @@ function parseNumeric(s: string): number | null {
 }
 
 function parseDurationSeconds(s: string): number | null {
-  // supports "7h", "7 hours", "8 days", "1 minute", "30s", etc.
   const m = (s || '').trim().toLowerCase().match(/(\d+(?:\.\d+)?)\s*(years?|yrs?|y|months?|mos?|mo|weeks?|w|days?|d|hours?|hrs?|h|minutes?|mins?|m|seconds?|secs?|s)\b/)
   if (!m) return null
   const qty = parseFloat(m[1])
@@ -166,35 +166,24 @@ function parseDateMillis(s: string): number | null {
   const t = (s || '').trim()
   if (!t) return null
 
-  // Try MM/DD/YYYY HH:MM:SS AM/PM
   let m = t.match(/^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM))?\s*$/i)
   if (m) {
     let [ , mm, dd, yyyy, hh = '0', mi = '0', ss = '0', ap ] = m
     let H = parseInt(hh, 10)
     if (ap) {
       const ampm = ap.toUpperCase()
-      if (ampm === 'AM') {
-        if (H === 12) H = 0
-      } else {
-        if (H !== 12) H += 12
-      }
+      if (ampm === 'AM') { if (H === 12) H = 0 } else { if (H !== 12) H += 12 }
     }
-    const date = new Date(
-      parseInt(yyyy, 10),
-      parseInt(mm, 10) - 1,
-      parseInt(dd, 10),
-      H, parseInt(mi, 10), parseInt(ss, 10), 0
-    )
+    const date = new Date(parseInt(yyyy, 10), parseInt(mm, 10) - 1, parseInt(dd, 10), H, parseInt(mi, 10), parseInt(ss, 10), 0)
     const ms = date.getTime()
     return Number.isFinite(ms) ? ms : null
   }
 
-  // Try ISO or Date.parse as fallback
   const ms = Date.parse(t)
   return Number.isFinite(ms) ? ms : null
 }
 
-/* ---------- Measurement helpers (append/remove to measure reliably) ---------- */
+/* ---------- Measurement helpers ---------- */
 async function measureTextWidth(textValue: string, opts: { header?: boolean } = {}): Promise<number> {
   const n = figma.createText()
   n.characters = textValue
@@ -212,7 +201,7 @@ async function measureChipGroupWidth(raw: string): Promise<number> {
   const tokens = raw.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
   if (tokens.length === 0) return 0
   const chipHPad = 16
-  const gap = 4 // we use 4px between chips
+  const gap = 4
   let sum = 0
   for (let i = 0; i < tokens.length; i++) {
     const t = figma.createText()
@@ -297,7 +286,6 @@ function createStatusNode(statusMaster: ComponentNode | null, raw: string): Scen
     }
     return inst
   }
-  // Fallback text
   const t = figma.createText()
   t.fontName = { family: 'Inter', style: 'Medium' }
   t.fontSize = 12
@@ -319,7 +307,6 @@ function createBooleanNode(booleanMaster: ComponentNode | null, raw: string): Sc
     }
     return inst
   }
-  // Fallback text
   const t = figma.createText()
   t.fontName = { family: 'Inter', style: 'Regular' }
   t.fontSize = 12
@@ -366,7 +353,7 @@ function getSelectedContainer(): (BaseNode & ChildrenMixin) | null {
 }
 
 /* ============================================================
-   Smart comparator (content-aware) 
+   Smart comparator (content-aware)
 ============================================================ */
 function makeComparator(
   headers: string[],
@@ -383,52 +370,45 @@ function makeComparator(
     const av = (a[header] ?? '').trim()
     const bv = (b[header] ?? '').trim()
 
-    // Status by custom severity rank
     if (isStatus) {
       const ar = STATUS_RANK[mapStatusVariant(av)] ?? 999
       const br = STATUS_RANK[mapStatusVariant(bv)] ?? 999
       if (ar !== br) return (ar - br) * mul
     }
 
-    // Boolean columns (true > false when ascending)
     if (isBoolean) {
       const ab = parseBooleanLike(av)
       const bb = parseBooleanLike(bv)
       if (ab !== null && bb !== null) {
         if (ab === bb) return 0
-        return (ab ? 1 : 0) - (bb ? 1 : 0) * mul
+        return ((ab ? 1 : 0) - (bb ? 1 : 0)) * mul
       }
     }
 
-    // Duration like "8 days", "7 hours"
     const adur = parseDurationSeconds(av)
     const bdur = parseDurationSeconds(bv)
-    if (adur !== null && bdur !== null && Number.isFinite(adur) && Number.isFinite(bdur)) {
+    if (adur !== null && bdur !== null) {
       if (adur !== bdur) return (adur - bdur) * mul
     }
 
-    // Datetime like "07/20/2025 04:26:23 AM" or ISO
     const adt = parseDateMillis(av)
     const bdt = parseDateMillis(bv)
-    if (adt !== null && bdt !== null && Number.isFinite(adt) && Number.isFinite(bdt)) {
+    if (adt !== null && bdt !== null) {
       if (adt !== bdt) return (adt - bdt) * mul
     }
 
-    // Numeric (pure)
     const an = parseNumeric(av)
     const bn = parseNumeric(bv)
     if (an !== null && bn !== null) {
       if (an !== bn) return (an - bn) * mul
     }
 
-    // Chips → first token text
     if (isChips) {
       const at = firstToken(av).toLowerCase()
       const bt = firstToken(bv).toLowerCase()
       if (at !== bt) return at.localeCompare(bt) * mul
     }
 
-    // Default: case-insensitive alpha
     const as = av.toLowerCase()
     const bs = bv.toLowerCase()
     return as.localeCompare(bs) * mul
@@ -438,7 +418,7 @@ function makeComparator(
 /* ============================================================
    Table builder
 ============================================================ */
-on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
+on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, rowLimit }) => {
   try {
     // Fonts
     await figma.loadFontAsync({ family: 'Inter', style: 'Regular' })
@@ -485,7 +465,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
       inst.remove()
     }
 
-    // Column widths
+    // Column widths (measure against full dataset; safe even if we later limit rows)
     const colWidths = new Array(headers.length).fill(0) as number[]
     for (let c = 0; c < headers.length; c++) {
       const hw = await measureTextWidth(prettyHeaders[c], { header: true })
@@ -523,11 +503,10 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
           colWidths[c] = Math.max(colWidths[c], w)
         }
       }
-
       colWidths[c] = Math.max(colWidths[c], 8)
     }
 
-    // Apply smart/content-aware sorting if requested
+    // Sort (content-aware) then apply row limit
     let finalRows = rows
     const sortColIndex =
       sort && sort.by && sort.dir ? headers.findIndex(h => h === sort.by) : -1
@@ -542,6 +521,8 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
       )
       finalRows = rows.slice().sort(cmp)
     }
+    const limit = typeof rowLimit === 'number' && rowLimit > 0 ? rowLimit : finalRows.length
+    const limitedRows = finalRows.slice(0, limit)
 
     const tableWidth = colWidths.reduce((sum, w) => sum + w + cellHPad * 2, 0)
 
@@ -577,14 +558,11 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
         cell.paddingTop = opts.header ? 0 : 10
         cell.paddingBottom = opts.header ? 0 : 10
         cell.fills = []
-        // Horizontal alignment inside this cell
         cell.counterAxisAlignItems = align === 'LEFT' ? 'MIN' : align === 'RIGHT' ? 'MAX' : 'CENTER'
-        // Vertical alignment (center)
         cell.primaryAxisAlignItems = 'CENTER'
         cell.resize(colWidths[c] + cellHPad * 2, opts.header ? headerHeight : rowHeight)
 
         if (opts.header) {
-          // tiny H-wrap to keep icon + text vertically centered together
           const hWrap = figma.createFrame()
           hWrap.name = 'Header Content'
           hWrap.layoutMode = 'HORIZONTAL'
@@ -598,40 +576,37 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
           t.fontName = { family: 'Inter', style: 'Medium' }
           t.fontSize = 14
           t.lineHeight = { value: 24, unit: 'PIXELS' }
-          t.textAutoResize = 'WIDTH_AND_HEIGHT' // hug width & height
+          t.textAutoResize = 'WIDTH_AND_HEIGHT'
           t.characters = prettyHeaderLabel(val)
           t.fills = [variablePaint(textVar, { r: 0.12, g: 0.14, b: 0.20 })]
           hWrap.appendChild(t)
 
-          // If this header is the sorted column, append a sort icon
           if (sort && sort.by === headers[c] && (sort.dir === 'asc' || sort.dir === 'desc')) {
             const icon = createSortIconNode(sort.dir, textVar)
             hWrap.appendChild(icon)
           }
 
           cell.appendChild(hWrap)
-        } else if (isChipsCol[c]) {
+        } else if (headerHasChips(headers[c])) {
           const wrap = figma.createFrame()
           wrap.layoutMode = 'HORIZONTAL'
           wrap.primaryAxisSizingMode = 'AUTO'
           wrap.counterAxisSizingMode = 'AUTO'
-          wrap.itemSpacing = 4 // 4px gap between chips
+          wrap.itemSpacing = 4
           wrap.fills = []
           const tokens = val.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
-          for (const token of tokens) {
-            wrap.appendChild(createChipFromComponent(chipMaster, token, textVar))
-          }
+          for (const token of tokens) wrap.appendChild(createChipFromComponent(chipMaster, token, textVar))
           cell.appendChild(wrap)
-        } else if (isStatusCol[c]) {
+        } else if (headerHasStatus(headers[c])) {
           cell.appendChild(createStatusNode(statusMaster, val))
-        } else if (isBooleanCol[c]) {
+        } else if (headerHasBoolean(headers[c])) {
           cell.appendChild(createBooleanNode(booleanMaster, val))
         } else {
           const t = figma.createText()
           t.fontName = { family: 'Inter', style: 'Regular' }
           t.fontSize = 12
           t.lineHeight = { value: 20, unit: 'PIXELS' }
-          t.textAutoResize = 'WIDTH_AND_HEIGHT' // hug width & height
+          t.textAutoResize = 'WIDTH_AND_HEIGHT'
           t.characters = val
           t.fills = [variablePaint(textVar, { r: 0.16, g: 0.18, b: 0.22 })]
           cell.appendChild(t)
@@ -642,29 +617,27 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
       return row
     }
 
-    // Header + divider + rows
+    // Header + divider + limited rows
     const headerRow = buildRow(headers, { header: true })
     table.appendChild(headerRow)
     table.appendChild(createDivider(dividerVar, tableWidth))
 
-    for (let i = 0; i < finalRows.length; i++) {
-      const vals = headers.map(h => (finalRows[i][h] ?? '').trim())
+    for (let i = 0; i < limitedRows.length; i++) {
+      const vals = headers.map(h => (limitedRows[i][h] ?? '').trim())
       const rowNode = buildRow(vals, { header: false })
       table.appendChild(rowNode)
-      if (i < finalRows.length - 1) {
+      if (i < limitedRows.length - 1) {
         table.appendChild(createDivider(dividerVar, tableWidth))
       }
     }
 
-    // Place table
+    // Place table (inside selection if it can contain children; otherwise at viewport center)
     const container = getSelectedContainer()
     if (container) {
       container.appendChild(table)
       if ('layoutMode' in container && container.layoutMode !== 'NONE') {
-        // Auto Layout parent: pin to top-left
         table.layoutAlign = 'MIN'
       } else {
-        // Absolutely positioned inside non-AL frame: put at (0,0)
         table.x = 0
         table.y = 0
       }

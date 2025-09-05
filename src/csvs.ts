@@ -12,7 +12,7 @@ export const BUILTIN_CSVS: CsvPreset[] = [
   {
     id: "alerts",
     label: "Alerts",
-    filename: "alerts.csv",
+    filename: "alerts.CSV",
     contents: `Priority [status],Name,Status ,Case [boolean|c],SLO,Disposition,AI Disposition,Comments [r],Assignee,Created Date,Tags [chip],Customer Code,Customer Flags [chip]
 Medium,Brute Force Attempt on Admin Account,Closed,FALSE,1 minutes,Benign,Unknown,10,Jack Wilson,07/20/2025 04:26:23 AM,"Cloud Misconfig, Exfiltration",ARAR-8474,Repeat Offender
 Low,Suspicious Access from Foreign IP,Open,TRUE,5 minutes,Malicious,Suspicious,1,Frank Thompson,07/01/2025 10:45:23 AM,,ARAR-9098,Under Investigation
