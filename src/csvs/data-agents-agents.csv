@@ -1,0 +1,31 @@
+Agent ID,Hostname,Status [status],Antivirus Health [status],Connection,Group [chip],Last Seen,Version
+8CfFRvJRYJo1cuvm7NgV,SERVER-20,Idle,Good,Direct to platform,IT Admins,2025-07-07,1.11.5
+WmJUGj7mmQbrLQdv1J03,SERVER-02,Idle,Good,,Berlin Lab,2024-07-10,4.2.0
+fFfUvSQmhdH2mdraL0oG,k8s-node-149,Online,Good,Direct to platform,Berlin Lab,2025-07-23,2.6.7
+g8HHYLK3S1o2iHjKEm7x,firewall-sfo-05,Online,Good,Direct to platform,Logistics,2024-06-23,4.1.6
+OF60MSdv7Sd9JXaVqsyX,SERVER-36,Idle,Error,Direct to platform,Logistics,2024-02-09,2.2.8
+GwFODsxHLnQQTpLwsv5D,rds-dev-03,Idle,Poor,Direct to platform,Support,2024-07-09,6.7.9
+pINst9OSXOBeBSU6WqGg,db-dev-03,Online,Good,Direct to platform,New York Office,2025-05-07,3.14.2
+ckCu0MuzRvweJHMq5Q22,rds-qa-03,Unresponsive,Good,Direct to platform,Mobile Team,2024-12-02,3.10.14
+Pr7wKb3HsreHcmwN1Ugh,mail-blr-17,Unresponsive,Good,,Berlin Lab,2023-09-09,2.7.0
+171p1zMLmHiXrmkCIu7Y,firewall-lon-01,Unresponsive,Good,Direct to platform,SF Office,2024-01-04,2.14.11
+XCBJZ3w06mjkpYJz0F7K,SERVER-34,Online,Good,Direct to platform,Engineering,2025-08-23,4.11.4
+3bALFRO8o6YnwUs775ia,vm-sales-196,Online,Good,Direct to platform,Legal,2025-08-12,5.9.16
+hFikzWaoR5V06GVE5wYo,k8s-node-031,Idle,Good,Direct to platform,Legal,2025-01-05,7.5.13
+qDVaZiw5Qbo7j12u58eO,app-qa-03,Idle,Not monitored,,London Office,2024-03-26,2.7.6
+OIU5pXygSP6SuFiS0e8z,app-dev-01,Online,Not monitored,,Design,2025-04-29,3.0.14
+hIvTOrCRUjsCriR9V4qf,mail-tok-19,Online,Good,Direct to platform,Engineering,2024-07-10,5.5.19
+O7Sb88ZlEhGgpcTwK2YQ,vm-it-091,Online,Good,Direct to platform,Berlin Lab,2024-07-16,6.8.12
+5gkW5afTylukuld4fTTc,k8s-node-084,Online,Good,,Engineering,2025-03-07,1.1.7
+sbOLzc5FJwLFJDU5L9tQ,vm-mkt-150,Online,Good,Direct to platform,Security,2024-06-21,1.8.5
+YhknHU5Zk93ssebFzHBr,rds-qa-05,Unresponsive,Poor,Direct to platform,Marketing,2023-09-18,7.15.14
+ktWyk8Q7nF4eSLq9cNDR,SERVER-68,Online,Good,Direct to platform,London Office,2025-04-07,6.13.9
+nApotqNyyeODQjJl4PqA,firewall-tok-07,Online,Good,,Sydney Ops,2024-12-26,3.4.5
+YiUcCD7j4AhuRmqgQvHu,app-staging-03,Idle,Good,,Cloud,2023-10-16,4.7.15
+V6PQIu6SEyKH11MQyrF1,rds-staging-04,Online,Error,Direct to platform,HR,2023-12-30,1.7.10
+9EdP8tfXyiWRvR5xld5o,mail-dub-14,Online,Good,Direct to platform,Legal,2025-02-23,7.14.1
+6NDxaoyNSpTybI4RkzCQ,SERVER-63,Online,Good,Direct to platform,Legal,2025-05-09,5.4.18
+PmabhrZPcibGAIg5LYjj,mail-blr-16,Online,Error,Direct to platform,Tokyo Finance,2023-10-15,3.8.15
+Rmx7hURZ7D7FLbc7etiX,rds-dev-03,Online,Error,Direct to platform,Design,2024-07-05,1.11.20
+J6Vxti4WdDQakDUOb151,k8s-node-149,Online,Not monitored,Direct to platform,HR,2024-09-30,6.13.9
+0fcKuX2q0KEBpN8g2NFI,k8s-node-057,Unresponsive,Good,Direct to platform,Security,2023-12-22,7.2.5

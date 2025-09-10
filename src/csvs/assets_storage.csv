@@ -1,0 +1,101 @@
+Name [link],Virtualized [boolean],Public [boolean],Active [boolean],Encrypted [boolean],Sensitive [boolean],Tags [chip],Groups [chip]
+foxtrot-orion-charlie-id640,False,False,True,True,False,prod,"Data Lake, Object Storage"
+cold-apollo-id931,True,False,True,True,True,pci,
+images-orion-id239,True,False,True,True,False,"datahub, lake","HR Data, HIPAA"
+zephyr-nebula-9m18,True,False,True,True,False,"pci, tok, dl","Regional US, GDPR"
+aurora-dev-keywfl,False,True,False,True,False,prod,"SOX, Archive"
+reports-logs-fusion-ephb,True,True,True,True,False,analytics,Disaster Recovery
+stage-nimbus-9edm,False,False,True,True,False,"nyc, eng, qa",
+apollo-fusion-logs-xfm2,False,False,True,True,False,"eng, datahub, nyc",Block Storage
+canary-nimbus-cold-frme,False,False,True,False,False,"dl, pii, gdpr",
+lake-qa-keyrrf,True,False,True,True,False,"pci, dub, finance",Regional US
+apollo-foxtrot-curated-lpbi,False,False,False,True,False,"lon, dev, sfo",
+vertex-atlas-uble,True,False,True,True,False,"par, logs","HR Data, HIPAA"
+quantum-videos-14pq,True,False,True,True,False,blr,
+vertex-matrix-summit-id117,False,False,True,True,True,"dub, qa, finance","Cold Storage, PCI"
+nebula-tier1-nimbus-id330,True,False,True,True,False,"tok, sales","Data Mart, GDPR"
+vault-delta-lake-2mxb,True,False,True,True,False,"sales, fra",Backups
+horizon-etl-ma2f,True,False,True,True,False,"dub, images, qa",Hot Storage
+bravo-nova-udd7,True,False,False,True,False,"datahub, gdpr",
+orion-vector-cold-id414,True,False,False,False,False,sfo,
+fusion-prod-a0ae,True,False,True,True,True,"legal, phi, lon","Block Storage, Finance Data"
+mart-aurora-id229,False,False,True,True,False,"logs, pci",
+docs-gold-tier1-id422,True,False,False,False,False,"dub, sales, analytics","Block Storage, Finance Data"
+bronze-prod-tier1-keyfia,True,False,True,False,False,"gdpr, prod, sfo",
+cold-gamma-summit-a79b,False,False,True,False,False,"fra, prod, datahub","Regional EU, Cold Storage"
+lake-bronze-gamma-head,True,False,True,True,False,"fra, legal","Block Storage, GDPR"
+apollo-docs-id280,True,False,True,True,False,"eng, phi, gdpr","HR Data, Archive"
+horizon-matrix-mart-cdsi,True,True,True,True,False,"dev, lake, hr",Block Storage
+curated-videos-keymjf,True,False,False,False,True,sales,
+delta-qa-quantum-keybbz,True,False,True,False,False,"eng, sfo, images",Backups
+lake-polaris-id960,False,False,True,True,False,"datahub, mart, dev",Regional US
+nebula-tier1-e5q1,True,False,False,False,False,"logs, sales",
+events-nimbus-tier1-ed9b,True,False,True,False,True,"datahub, lake",
+events-mart-canary-ekkp,True,False,True,False,False,phi,
+backup-silver-dpfy,True,False,True,True,False,"phi, dl","SOX, Archive"
+zephyr-docs-omega-id522,False,False,False,True,True,"backups, eng, images",PII Restricted
+nebula-curated-horizon-id549,True,False,True,False,False,blr,PCI
+phoenix-vector-silver-j5br,True,False,True,True,True,"dev, blr",
+omega-stage-mart-id78,True,False,False,True,True,"legal, sales, dl","SOX, Data Lake"
+quantum-phoenix-nova-keyynj,True,False,True,True,False,"par, gdpr",
+images-charlie-phoenix-id372,True,False,True,True,True,"images, sales, marketing",
+nimbus-canary-id157,True,False,True,True,True,datahub,Regional US
+prod-bronze-quantum-m64f,True,True,False,False,True,"blr, docs, images",
+images-charlie-keye07,True,False,True,True,False,"dub, qa, gdpr",
+polaris-images-gamma-id857,False,True,True,True,False,"tok, ams",Hot Storage
+phoenix-backup-h8cg,True,False,True,False,False,"par, backups",Archive
+echo-alpha-ziz0,False,True,True,True,False,"sales, sfo, analytics",
+raw-vector-polaris-keyfem,True,False,False,True,False,backups,"Data Mart, Regional US"
+qa-backup-videos-keye5f,False,False,True,True,False,"stage, dev, lon",Backups
+etl-quantum-orion-id675,True,True,True,True,False,eng,Finance Data
+bronze-cold-stage-keyn3c,False,True,True,False,True,"finance, pii, phi",Hot Storage
+polaris-nebula-hacs,False,False,True,False,False,"tok, nyc, fra","SOX, Hot Storage"
+archive-zephyr-vertex-id900,True,False,True,True,False,sfo,
+phoenix-alpha-hot-agea,True,False,True,True,False,lon,"Disaster Recovery, Regional US"
+raw-dev-tier1-keyh3d,True,False,True,True,False,blr,HIPAA
+prod-foxtrot-vector-id10,True,True,True,True,False,"blr, syd",Backups
+vertex-mart-id534,True,False,True,True,False,stage,
+nimbus-etl-charlie-key8bo,False,True,True,False,False,etl,PII Restricted
+images-aurora-vertex-id687,False,False,True,True,False,datahub,Archive
+charlie-summit-jnbc,False,False,True,True,False,"etl, prod, dub",SOX
+hot-reports-foxtrot-keyk9y,True,False,True,True,True,mart,
+backup-tier2-danb,True,False,False,True,False,"datahub, hr",GDPR
+canary-nova-keyapc,True,False,True,True,False,"nyc, marketing",HIPAA
+stage-gamma-keye2t,True,True,True,True,True,lon,"HR Data, Disaster Recovery"
+logs-etl-archive-keyece,True,False,True,False,True,"sfo, finance",Archive
+fusion-docs-backup-id242,True,False,True,False,False,legal,Analytics
+reports-hot-raw-keyd59,True,False,False,True,False,lon,Cold Storage
+prod-images-zephyr-kcan,False,False,True,False,True,"par, marketing",
+delta-dev-1c5b,True,False,True,True,False,"backups, fra","Archive, PII Restricted"
+matrix-qa-cold-keyfmg,True,False,True,True,False,"lake, dev",
+hydra-tier2-polaris-id648,True,False,True,False,False,"lake, dev, ml",SOX
+fusion-reports-nimbus-eaf4,True,False,True,True,False,phi,"Finance Data, Data Mart"
+horizon-silver-archive-hcmc,True,False,True,True,False,"qa, marketing",
+raw-vault-hydra-id300,True,False,False,True,False,sales,
+cold-nimbus-id205,False,False,False,True,False,"marketing, finance, images",PII Restricted
+vector-aurora-nova-id54,True,False,True,False,False,"images, marketing, sfo","Backups, Data Lake"
+bravo-omega-mart-keyd7a,True,False,True,False,False,analytics,
+reports-bronze-keyra5,True,False,True,True,False,"mart, backups",Backups
+mart-bravo-videos-id130,False,False,True,True,False,"finance, syd, sox",
+zephyr-vault-pvlj,True,False,True,True,True,etl,"Object Storage, Hot Storage"
+dev-nebula-ccva,True,True,True,False,False,ams,Archive
+dev-polaris-echo-keyssa,True,False,True,True,False,"blr, phi","HR Data, Finance Data"
+hot-lake-fusion-keyez5,True,False,True,True,False,"dl, par, sfo",GDPR
+prod-vertex-id431,True,True,True,False,False,"datahub, images, backups","SOX, HR Data"
+fusion-tier1-logs-keyec0,True,False,False,False,False,"fra, sales","SOX, Regional EU"
+videos-summit-archive-cc5e,True,False,False,True,True,"sox, ml, backups",
+matrix-docs-images-rp5p,True,False,True,False,False,sfo,"HR Data, Cold Storage"
+lake-polaris-summit-keybyd,True,False,False,True,False,images,Regional EU
+hydra-gold-charlie-jpac,True,False,True,True,False,analytics,Analytics
+docs-aurora-sftc,False,False,True,True,False,marketing,"SOX, Disaster Recovery"
+echo-metrics-id211,True,False,True,True,False,"ams, sales",
+hot-tier1-charlie-b6fs,False,False,False,True,False,"backups, qa, mart",
+lake-images-etl-id924,True,True,False,True,True,"images, backups, sfo",
+bronze-qa-events-id924,True,False,True,False,False,"dl, eng",Data Mart
+backup-dev-orion-id451,True,False,True,False,False,"eng, sfo, legal",
+aurora-echo-polaris-id274,True,False,True,True,False,"dl, eng, etl",
+images-videos-reports-id975,True,False,True,True,False,"sox, ams",PII Restricted
+lake-bronze-silver-keyvjx,False,False,True,False,False,logs,"Analytics, HIPAA"
+silver-vector-charlie-id337,True,False,True,False,False,"par, ams",Object Storage
+orion-raw-fusion-f5bd,True,True,False,True,True,"ml, hr","SOX, GDPR"
+silver-hot-vault-keywfd,True,False,False,True,False,sox,"HIPAA, Regional US"

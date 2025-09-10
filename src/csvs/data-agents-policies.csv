@@ -1,0 +1,101 @@
+Name [link],Agents [r],Last Modified,Modified by [chip],Created on,Created by [chip]
+Linux Zero Trust Tier 1,5787,"May 24, 2024",Liam Taylor,"Feb 19, 2024",Kendall Adams
+CrowdStrike Connector - Toronto,8296,"Nov 22, 2024",Rowan Allen,"Mar 17, 2024",Ethan Collins
+Linux Hardening - Austin,5991,"May 18, 2024",Kendall King,"May 25, 2020",Nora Taylor
+Policy 676 - Endpoints Browser Hardening,6,"Jan 15, 2024",Mia Parker,"Jan 01, 2024",Mason Nelson
+S3 Ingestion Baseline - QA,7244,"May 02, 2025",Henry Turner,"Jan 29, 2025",Reese Clark
+Network Local Admin Removal,7386,"Apr 16, 2024",Olivia Hall,"Apr 07, 2023",Emerson Smith
+Elastic Agent Baseline - Prod,7952,"Aug 07, 2020",Skyler Martin,"Mar 16, 2020",Aiden Brown
+Network Certificate Rotation 90d,1124,"Aug 01, 2024",Amelia Nelson,"May 25, 2024",Jordan Turner
+Containers Certificate Rotation 90d,3987,"Mar 22, 2025",Harper Thompson,"Dec 27, 2021",Zoe Jackson
+Splunk Forwarder Baseline - Dev,6009,"Jan 31, 2025",Morgan Anderson,"Jun 23, 2024",Logan Hall
+Policy 968 - Endpoints MFA Required,4164,"Nov 26, 2024",Avery Harris,"May 06, 2023",Emma Baker
+Azure Sentinel Baseline - Dev,5942,"Apr 30, 2025",Casey Hall,"Jun 06, 2024",Alex Martinez
+Endpoints Hardening - Toronto,9679,"Nov 25, 2024",Charlie Parker,"Apr 04, 2022",Reese Martinez
+Network Hardening - Berlin,4604,"Sep 18, 2024",Reese Edwards,"Nov 18, 2020",Mason King
+Policy 347 - Windows Audit Logging Level 2,3790,"Aug 28, 2025",Casey Roberts,"Jul 23, 2021",Taylor Thomas
+Linux Hardening - New York,2851,"Apr 04, 2025",Jamie King,"Sep 02, 2023",Olivia Anderson
+Network Hardening - Toronto,2772,"Mar 03, 2023",Rowan Lewis,"Oct 23, 2021",Jamie Martin
+Policy 410 - Containers PowerShell Constrained,7912,"Jun 01, 2023",Elliot Young,"Sep 07, 2021",Luna Campbell
+Kafka Ingestion - Berlin,255,"Apr 04, 2025",Avery Phillips,"Mar 28, 2020",Mia Smith
+Windows Hardening - Austin,7969,"Oct 01, 2022",Casey Walker,"Jun 21, 2022",Isabella Clark
+Containers Patch Critical,6328,"Dec 19, 2024",Benjamin Harris,"Jun 19, 2024",Zoe Adams
+Splunk Forwarder - Paris,3584,"Jun 12, 2025",Reese King,"May 21, 2025",Hayden Thomas
+macOS Browser Hardening - Staging,7739,"Aug 02, 2025",Logan Robinson,"Dec 05, 2022",Chloe Edwards
+Syslog 514 Baseline - Prod,7056,"Aug 21, 2025",Charlie Green,"May 17, 2025",Chris Scott
+Azure Sentinel - Dublin,4652,"May 06, 2025",Morgan White,"Dec 07, 2024",Avery Thomas
+Containers Hardening - New York,111,"Dec 07, 2023",Alex Green,"Dec 23, 2021",Isla Turner
+Containers Zero Trust Tier 1 - QA,6652,"Apr 05, 2023",Zoe Hall,"Jul 20, 2022",Jamie Taylor
+macOS SSH Hardening,8442,"Nov 17, 2023",Sophia Baker,"Jan 18, 2022",Jamie Johnson
+Network Admin Lockdown,3508,"Nov 29, 2023",Morgan Parker,"Nov 10, 2023",Emerson Thomas
+Azure Sentinel Baseline - QA,4097,"Jul 12, 2024",Charlie Harris,"May 25, 2021",Logan Roberts
+macOS TLS 1.0 Disabled,8993,"Feb 12, 2022",Reese Walker,"Mar 27, 2021",Emma Walker
+Cloud Hardening - Austin,4036,"Jul 25, 2025",Parker Jackson,"Jun 24, 2025",Chloe Jackson
+S3 Ingestion Baseline - Staging,2099,"Jan 02, 2024",Jordan Smith,"Feb 02, 2020",Liam Lewis
+Endpoints EDR Baseline - Dev,6843,"Aug 05, 2025",Lucas Baker,"Feb 23, 2023",Leo Lewis
+Azure Sentinel Baseline - Prod,973,"Oct 19, 2024",Drew Robinson,"Apr 11, 2022",James Roberts
+Policy 608 - Windows TLS 1.0 Disabled,3186,"Apr 17, 2024",Kendall Rodriguez,"Dec 10, 2022",Zoe Martinez
+Endpoints Certificate Rotation 90d - Staging,9110,"Dec 01, 2024",Elliot Mitchell,"May 16, 2023",Avery Phillips
+Azure Sentinel - Paris,9053,"Mar 28, 2024",James Adams,"Jan 19, 2024",Henry Johnson
+Cloud Audit Logging Level 2,9216,"Sep 05, 2025",Olivia Hall,"Jul 09, 2024",Logan Hall
+Linux Remote Access VPN Only,6822,"May 23, 2022",Emerson Wright,"May 30, 2020",Ella Robinson
+ServiceNow Connector - New York,515,"Nov 02, 2024",Kendall Mitchell,"Oct 01, 2021",Logan Hall
+Containers TLS Enforcement,5854,"May 25, 2021",Emma Robinson,"Apr 15, 2021",Harper Campbell
+Cloud EDR Baseline - QA,3623,"Nov 28, 2023",Zoe Harris,"Sep 15, 2020",Ethan Walker
+Policy 890 - Cloud Firewall Strict,9985,"Dec 04, 2023",Mason Roberts,"Jan 11, 2020",Lucas Martin
+Endpoints SSH Hardening,3769,"Dec 20, 2023",Taylor Thomas,"Sep 15, 2022",Henry Thompson
+Cloud EDR Baseline - Dev,3655,"Oct 03, 2024",Elijah Martinez,"Sep 22, 2023",Jesse Harris
+macOS Secrets Scanning,2316,"Sep 06, 2021",Emerson Brown,"Oct 31, 2020",Morgan Turner
+Windows Browser Hardening - Dev,583,"Dec 15, 2020",Drew Phillips,"Aug 12, 2020",Henry Brown
+Cloud Kernel Module Blocklist,6605,"Sep 06, 2022",Amelia Evans,"Jun 20, 2020",Skyler Brown
+macOS Audit Logging Level 2 - Staging,2387,"Aug 16, 2025",James Phillips,"Jul 20, 2025",Benjamin Clark
+Kafka Ingestion Baseline - Dev,1339,"Mar 02, 2024",Jordan Hall,"Dec 18, 2021",Lucas Anderson
+Kafka Ingestion Baseline - Staging,9113,"Nov 27, 2023",Casey Green,"Nov 07, 2023",Ethan Hall
+CrowdStrike Connector - Berlin,5265,"Feb 21, 2024",Chloe Adams,"Dec 20, 2022",Quinn Wright
+Policy 941 - Containers MFA Required,6922,"Jun 12, 2024",Aria Brown,"Mar 12, 2024",Leo Green
+Kafka Ingestion Baseline - QA,517,"Jun 22, 2024",Reese Hall,"Apr 23, 2024",Cameron Brown
+ServiceNow Connector - Berlin,9962,"Jul 28, 2024",Riley Roberts,"Apr 04, 2022",Sophia Thomas
+Windows SSH Hardening,2841,"Aug 08, 2025",Leo Lee,"May 08, 2025",Harper Brown
+Endpoints Hardening - Dublin,9197,"May 20, 2025",Kendall Mitchell,"Jul 07, 2023",Jordan Clark
+Endpoints USB Control,9866,"Apr 02, 2025",Mason Thompson,"Aug 06, 2024",Quinn Thompson
+Elastic Agent - Bangalore,4108,"Jun 27, 2025",Elliot Thomas,"Jun 25, 2025",Sam Roberts
+macOS Kernel Module Blocklist,2619,"May 21, 2025",Hayden Thomas,"Nov 09, 2022",Ethan Anderson
+Containers TLS 1.0 Disabled - Prod,8054,"Nov 09, 2020",Emerson Jackson,"Oct 01, 2020",Reese Taylor
+Endpoints Hardening - Tokyo,547,"Jan 01, 2023",Ethan Rodriguez,"May 07, 2022",Reese Turner
+Endpoints Browser Hardening - Dev,8859,"Mar 04, 2025",Isabella Garcia,"Dec 30, 2020",Isla Turner
+Azure Sentinel - London,299,"Dec 29, 2024",Lucas Rodriguez,"Nov 05, 2022",Ella Carter
+CrowdStrike Connector - Austin,257,"Jul 06, 2023",Charlie Collins,"Apr 27, 2020",Drew Allen
+Containers EDR Baseline - Prod,6743,"Feb 23, 2024",Noah Martin,"Jan 21, 2024",Rowan Baker
+Cloud Hardening - Paris,3395,"Nov 24, 2023",Nora Allen,"Sep 01, 2021",Liam Walker
+Containers Hardening - Austin,4868,"Oct 09, 2024",Luna Allen,"Jun 25, 2021",Aiden Lee
+Cloud Audit Logging Level 2 - Dev,1434,"Aug 14, 2025",Zoe Campbell,"Aug 13, 2025",Jamie Thompson
+Containers Hardening - Bangalore,7731,"Aug 26, 2025",Rowan Roberts,"Aug 05, 2024",Reese King
+Network TLS 1.0 Disabled,430,"Dec 15, 2024",Morgan Green,"Sep 21, 2020",Olivia Turner
+Cloud Hardening - Bangalore,4481,"Nov 09, 2024",Skyler Allen,"Mar 20, 2023",Olivia Robinson
+Policy 912 - Windows EDR Baseline,1227,"Aug 30, 2023",Skyler Collins,"Apr 17, 2022",Chris Jackson
+Cloud SSH Hardening,8374,"Apr 13, 2023",Logan Brown,"Jun 05, 2021",Skyler Mitchell
+Containers Zero Trust Tier 1 - Staging,9968,"Jul 16, 2025",Rowan Smith,"Apr 08, 2020",Alex Young
+CrowdStrike Connector Baseline - QA,339,"Nov 16, 2024",Avery Green,"Sep 21, 2021",Nora Johnson
+Windows Secrets Scanning,5570,"Aug 06, 2021",Luna Thompson,"Jan 19, 2021",Amelia Roberts
+macOS Hardening - Tokyo,9788,"Feb 18, 2025",Jamie Anderson,"Dec 17, 2020",Sam White
+Policy 802 - Network Admin Lockdown,411,"Aug 18, 2024",Leo Allen,"May 13, 2021",Casey Evans
+Splunk Forwarder Baseline - Staging,1949,"May 22, 2025",Avery King,"Mar 02, 2022",Charlie Parker
+Containers Hardening - Tokyo,454,"Sep 01, 2024",Drew Walker,"May 24, 2024",Mia Phillips
+Azure Sentinel - Tokyo,8175,"Jun 07, 2025",Leo Evans,"Apr 07, 2023",Henry Mitchell
+Cloud PowerShell Constrained,9960,"Feb 05, 2025",Rowan Allen,"Sep 07, 2023",Isla Taylor
+S3 Ingestion - Sydney,9910,"Mar 04, 2024",Mason Edwards,"Apr 13, 2020",Harper Robinson
+macOS Hardening - Toronto,4960,"Oct 18, 2022",Ethan Wright,"May 08, 2020",Liam Green
+Windows Hardening - Sydney,4211,"Oct 20, 2023",Zoe Martin,"May 17, 2020",Nora Lee
+Policy 543 - macOS Admin Lockdown,1119,"May 11, 2022",Olivia Green,"Jul 30, 2020",Skyler Evans
+ServiceNow Connector - Toronto,8248,"Aug 18, 2022",Jordan Hall,"May 13, 2021",Ella Hall
+Containers Kernel Module Blocklist - QA,1681,"May 16, 2025",Chris Jackson,"Feb 13, 2022",James Evans
+Linux Local Admin Removal,4389,"Aug 17, 2024",Kendall Evans,"Mar 19, 2020",Drew Anderson
+Linux Local Admin Removal - Dev,3091,"Sep 09, 2022",Elliot Harris,"Jun 07, 2021",Avery Hall
+Linux Hardening - Berlin,3245,"Mar 16, 2025",Mason Martin,"Feb 27, 2025",Casey Collins
+Windows Certificate Rotation 90d,6633,"Feb 18, 2025",Harper Clark,"Aug 03, 2024",Noah Green
+CrowdStrike Connector - Sydney,3234,"Nov 17, 2023",Logan Adams,"Jul 23, 2023",Cameron Edwards
+Linux Browser Hardening - Prod,1670,"May 06, 2025",Mia Thomas,"Nov 09, 2024",Aria Scott
+Policy 566 - Linux Audit Logging Level 2,5531,"May 24, 2024",Aria Hall,"Oct 20, 2022",Casey Walker
+CrowdStrike Connector - New York,3973,"Nov 26, 2024",Chris Green,"Jan 09, 2023",Noah Campbell
+Cloud SSH Hardening - Prod,8482,"Nov 28, 2024",Mia Collins,"Nov 16, 2020",Riley Brown
+Containers Zero Trust Tier 1,6620,"Jan 08, 2025",Lucas Anderson,"Dec 17, 2024",Ella Allen
