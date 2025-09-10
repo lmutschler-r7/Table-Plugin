@@ -13,7 +13,7 @@ export const BUILTIN_CSVS: CsvPreset[] = [
     id: "alerts",
     label: "Alerts",
     filename: "alerts.csv",
-    contents: `Priority [status],Name,Status ,Case [boolean|c],SLO,Disposition,AI Disposition,Comments [r],Assignee,Created Date,Tags [chip],Customer Code,Customer Flags [chip]
+    contents: `Priority [status],Name [link],Status ,Case [boolean|c],SLO,Disposition,AI Disposition,Comments [r],Assignee,Created Date,Tags [chip],Customer Code,Customer Flags [chip]
 Medium,Brute Force Attempt on Admin Account,Closed,FALSE,1 minutes,Benign,Unknown,10,Jack Wilson,07/20/2025 04:26:23 AM,"Cloud Misconfig, Exfiltration",ARAR-8474,Repeat Offender
 Low,Suspicious Access from Foreign IP,Open,TRUE,5 minutes,Malicious,Suspicious,1,Frank Thompson,07/01/2025 10:45:23 AM,,ARAR-9098,Under Investigation
 High,Unusual Script Execution in PowerShell,Open,FALSE,8 hours,Malicious,Suspicious,8,Alice Johnson,07/13/2025 11:01:23 AM,"Phishing, Reconnaissance",ARAR-9610,Under Investigation
@@ -41,9 +41,474 @@ Low,Exploit Kit Payload Blocked by EDR,Investigating,FALSE,1 days,Malicious,Unkn
 Critical,Abnormal Cloud Resource Creation Pattern,Closed,TRUE,2 hours,Malicious,Benign,7,Isla Brown,07/03/2025 07:37:23 AM,,ARAR-4426,`
   },
   {
-    id: "vulnerability findings",
-    label: "Vulnerability Findings",
-    filename: "vulnerability findings.csv",
+    id: "assets_servers",
+    label: "Assets Servers",
+    filename: "assets_servers.csv",
+    contents: `Name [link],Sources,Hostnames [chip],IP Address(es)[chip],OS Family,Class,Asset Type,Tags [chip],Groups [chip]
+0-net-jump-q.vuln.lax.corp.example,"TenableAsset, CrowdStrikeHost",0-net-jump-q.vuln.lax.corp.example,192.168.246.16,Windows,Server,Server,finance,"VDI, London"
+1-net-bastion-u.corp.blr.corp.example,"TenableAsset, QualysHostAsset",1-net-bastion-u.corp.blr.corp.example,"192.168.214.147, 10.39.107.129",Windows,Server,Server,dev,Lab
+2-sys-mq-s.cloud.iad.corp.example,"Rapid7InsightVMAsset, QualysHostAsset",2-sys-mq-s.cloud.iad.corp.example,10.69.161.209,Linux,Server,Guest,"prod, core","SOX, APAC"
+3-ops-jenkins-u.dmz.par.corp.example,Rapid7InsightVMAsset,3-ops-jenkins-u.dmz.par.corp.example,"172.20.151.56, 172.21.0.16",Windows,Workstation,Server,stage,SOX
+4-web-db-c.svc.lax.corp.example,Rapid7InsightVMAsset,4-web-db-c.svc.lax.corp.example,10.252.55.138,IOS,Workstation,Server,"lon, fra","Kubernetes, APAC"
+5-net-kdc-c.svc.lon.corp.example,TenableAsset,5-net-kdc-c.svc.lon.corp.example,"192.168.196.31, 192.168.136.129",Linux,Server,Server,"web, hipaa",DB Tier
+6-sys-proxy-p.svc.lon.corp.example,"QualysHostAsset, Rapid7IVMAsset",6-sys-proxy-p.svc.lon.corp.example,"10.57.29.40, 172.22.104.235",Linux,Server,Server,backup,"Core, EMEA"
+7-web-proxy-p.vuln.tok.corp.example,"QualysHostAsset, CrowdStrikeHost",7-web-proxy-p.vuln.tok.corp.example,192.168.208.147,Linux,Server,General,"hipaa, par","SF, VDI"
+8-eng-etcd-c.dmz.lax.corp.example,"TenableAsset, CrowdStrikeHost",8-eng-etcd-c.dmz.lax.corp.example,"172.23.133.246, 192.168.188.7",Windows,Server,Server,"oracle, sfo","London, HIPAA"
+9-web-backup-q.svc.sfo.corp.example,CrowdStrikeHost,9-web-backup-q.svc.sfo.corp.example,"172.31.60.13, 10.186.216.20",Linux,Server,Server,"dmz, lon","London, Core"
+10-app-backup-u.svc.dfw.corp.example,"TenableAsset, Rapid7InsightVMAsset",10-app-backup-u.svc.dfw.corp.example,"192.168.173.209, 192.168.186.56",IOS,Server,Server,"syd, qa","PCI, Web Tier"
+11-cis-kong-d.corp.nyc.corp.example,CrowdStrikeHost,11-cis-kong-d.corp.nyc.corp.example,192.168.249.56,IOS,Server,Server,"dev, lab, prod",
+12-app-files-s.vuln.blr.corp.example,Rapid7IVMAsset,12-app-files-s.vuln.blr.corp.example,192.168.62.94,Windows,Server,Server,hr,EMEA
+13-db-jump-p.cloud.par.corp.example,"QualysHostAsset, CrowdStrikeHost",13-db-jump-p.cloud.par.corp.example,172.21.88.175,Windows,Server,Server,"lab, ams, web",Core
+14-eng-proxy-p.svc.dub.corp.example,TenableAsset,14-eng-proxy-p.svc.dub.corp.example,"192.168.106.251, 172.28.180.63",Linux,Server,Server,hipaa,
+15-ops-sso-c.corp.par.corp.example,CrowdStrikeHost,15-ops-sso-c.corp.par.corp.example,"10.82.7.247, 192.168.152.56",Windows,Workstation,Server,"ams, backup","Web Tier, Core"
+16-db-tomcat-u.vuln.fra.corp.example,CrowdStrikeHost,16-db-tomcat-u.vuln.fra.corp.example,"192.168.145.254, 172.18.104.62",Linux,Server,Server,tok,"Lab, DMZ"
+17-app-grafana-p.corp.nyc.corp.example,QualysHostAsset,17-app-grafana-p.corp.nyc.corp.example,"10.40.110.53, 172.22.154.214",Linux,Server,Server,fra,"EMEA, SF"
+18-ops-jump-c.dmz.sin.corp.example,"TenableAsset, CrowdStrikeHost",18-ops-jump-c.dmz.sin.corp.example,"10.171.203.117, 172.23.151.154",Linux,Server,General,"hipaa, dev, ams",
+19-eng-jenkins-q.corp.lon.corp.example,"TenableAsset, Rapid7IVMAsset",19-eng-jenkins-q.corp.lon.corp.example,"10.3.19.180, 172.22.109.66",Linux,Server,Server,"par, stage, prod",
+20-web-kong-u.corp.ams.corp.example,"QualysHostAsset, Rapid7IVMAsset",20-web-kong-u.corp.ams.corp.example,"172.16.238.228, 192.168.98.140",Linux,Workstation,Server,dub,"London, SOX"
+21-ops-backup-p.dmz.blr.corp.example,Rapid7InsightVMAsset,21-ops-backup-p.dmz.blr.corp.example,"172.21.230.96, 172.23.216.98",Linux,Server,Guest,oracle,"SF, VDI"
+22-web-sso-c.corp.par.corp.example,Rapid7IVMAsset,22-web-sso-c.corp.par.corp.example,10.42.243.176,Linux,Server,Server,blr,Backups
+23-db-ldap-u.vuln.ams.corp.example,"TenableAsset, Rapid7InsightVMAsset",23-db-ldap-u.vuln.ams.corp.example,172.20.169.49,Linux,Server,General,"oracle, web","DMZ, App Tier"
+24-net-backup-d.vuln.tok.corp.example,"CrowdStrikeHost, QualysHostAsset",24-net-backup-d.vuln.tok.corp.example,"10.2.92.37, 192.168.32.168",Windows,Workstation,General,"pci, par, hipaa",
+25-eng-api-p.dmz.cdg.corp.example,Rapid7InsightVMAsset,25-eng-api-p.dmz.cdg.corp.example,172.26.79.53,Windows,Server,Server,"app, ams, sap",Lab
+26-db-sso-u.corp.blr.corp.example,QualysHostAsset,26-db-sso-u.corp.blr.corp.example,"172.21.154.212, 192.168.191.24",Linux,Server,Server,prod,"DB Tier, Staging"
+27-eng-proxy-s.vuln.sin.corp.example,CrowdStrikeHost,27-eng-proxy-s.vuln.sin.corp.example,192.168.223.211,IOS,Server,Guest,blr,
+28-sys-db-q.cloud.cdg.corp.example,"CrowdStrikeHost, QualysHostAsset",28-sys-db-q.cloud.cdg.corp.example,10.93.173.80,Linux,Server,Guest,"db, blr","Shared Services, Prod"
+29-web-jenkins-d.corp.sfo.corp.example,"TenableAsset, Rapid7IVMAsset",29-web-jenkins-d.corp.sfo.corp.example,"192.168.36.59, 192.168.137.81",Linux,Server,Guest,"hipaa, pci",
+30-app-kdc-d.cloud.dfw.corp.example,CrowdStrikeHost,30-app-kdc-d.cloud.dfw.corp.example,"10.60.222.184, 192.168.214.207",Linux,Server,Server,"syd, stage, hr",New York
+31-sys-jenkins-s.corp.sfo.corp.example,Rapid7IVMAsset,31-sys-jenkins-s.corp.sfo.corp.example,10.173.123.160,Linux,Server,Server,"oracle, sap, backup",Web Tier
+32-ops-jump-q.dmz.par.corp.example,"Rapid7InsightVMAsset, Rapid7IVMAsset",32-ops-jump-q.dmz.par.corp.example,"192.168.202.208, 10.246.118.238",Linux,Server,Server,"blr, fra, k8s","DMZ, Backups"
+33-db-db-s.corp.nyc.corp.example,TenableAsset,33-db-db-s.corp.nyc.corp.example,"10.20.144.6, 10.236.1.208",Linux,Server,Server,dub,"Lab, EMEA"
+34-net-cache-q.svc.blr.corp.example,TenableAsset,34-net-cache-q.svc.blr.corp.example,172.24.150.225,Linux,Server,Guest,"tok, nyc, prod","Web Tier, App Tier"
+35-ops-db-c.dmz.nyc.corp.example,"Rapid7InsightVMAsset, TenableAsset",35-ops-db-c.dmz.nyc.corp.example,"192.168.213.189, 10.139.38.252",Windows,Server,General,"fra, core, sap",Web Tier
+36-eng-ldap-s.dmz.dfw.corp.example,Rapid7InsightVMAsset,36-eng-ldap-s.dmz.dfw.corp.example,10.20.175.168,Linux,Server,Server,"app, tok",HIPAA
+37-sys-backup-u.svc.fra.corp.example,CrowdStrikeHost,37-sys-backup-u.svc.fra.corp.example,192.168.203.72,Windows,Server,Server,"backup, pci",EMEA
+38-app-kibana-u.cloud.dfw.corp.example,"TenableAsset, CrowdStrikeHost",38-app-kibana-u.cloud.dfw.corp.example,"192.168.115.183, 10.103.50.179",Windows,Server,Server,"web, stage, prod",Lab
+39-web-kibana-s.dmz.blr.corp.example,"Rapid7InsightVMAsset, TenableAsset",39-web-kibana-s.dmz.blr.corp.example,172.20.17.28,Linux,Server,Server,"hipaa, core, backup",
+40-ops-bastion-s.dmz.lon.corp.example,TenableAsset,40-ops-bastion-s.dmz.lon.corp.example,"172.20.184.56, 10.25.188.135",Linux,Server,Server,"hipaa, stage, prod",Backups
+41-sys-nginx-c.corp.dub.corp.example,"CrowdStrikeHost, TenableAsset",41-sys-nginx-c.corp.dub.corp.example,"172.23.237.55, 192.168.240.247",Windows,Server,Server,prod,"PCI, Staging"
+42-cis-grafana-q.svc.nyc.corp.example,TenableAsset,42-cis-grafana-q.svc.nyc.corp.example,"192.168.247.110, 192.168.40.210",Windows,Server,Server,dmz,London
+43-eng-es-p.vuln.syd.corp.example,QualysHostAsset,43-eng-es-p.vuln.syd.corp.example,"10.225.28.185, 172.22.250.192",Windows,Server,General,"web, finance",
+44-sec-api-s.svc.par.corp.example,QualysHostAsset,44-sec-api-s.svc.par.corp.example,172.20.251.32,Windows,Workstation,Server,"dev, blr",
+45-net-es-u.dmz.fra.corp.example,"Rapid7IVMAsset, TenableAsset",45-net-es-u.dmz.fra.corp.example,"192.168.194.222, 172.30.172.195",Linux,Server,General,"sap, pci",Prod
+46-eng-kibana-p.dmz.tok.corp.example,CrowdStrikeHost,46-eng-kibana-p.dmz.tok.corp.example,172.20.150.69,Windows,Server,Guest,"syd, oracle, core","DB Tier, Web Tier"
+47-ops-kdc-p.cloud.ord.corp.example,QualysHostAsset,47-ops-kdc-p.cloud.ord.corp.example,10.209.100.201,Linux,Server,Server,"hipaa, sfo","App Tier, HIPAA"
+48-ops-es-q.svc.sfo.corp.example,TenableAsset,48-ops-es-q.svc.sfo.corp.example,172.27.45.164,Linux,Server,Server,fra,Core
+49-db-sso-d.vuln.iad.corp.example,"QualysHostAsset, TenableAsset",49-db-sso-d.vuln.iad.corp.example,172.23.93.12,Windows,Server,Server,prod,
+50-web-kibana-p.dmz.tok.corp.example,CrowdStrikeHost,50-web-kibana-p.dmz.tok.corp.example,192.168.25.254,Windows,Server,Server,"dev, lab, lon",
+51-sys-tomcat-u.cloud.cdg.corp.example,"TenableAsset, QualysHostAsset",51-sys-tomcat-u.cloud.cdg.corp.example,"192.168.234.235, 172.27.183.143",Windows,Workstation,Server,tok,
+52-ops-sso-q.dmz.iad.corp.example,QualysHostAsset,52-ops-sso-q.dmz.iad.corp.example,10.164.69.126,Windows,Server,General,"sox, lab, web","Core, APAC"
+53-db-sso-c.dmz.dub.corp.example,"Rapid7IVMAsset, CrowdStrikeHost",53-db-sso-c.dmz.dub.corp.example,"10.214.224.138, 172.22.155.65",Linux,Server,Server,"oracle, blr, nyc","Core, Prod"
+54-sec-db-d.corp.sin.corp.example,Rapid7InsightVMAsset,54-sec-db-d.corp.sin.corp.example,172.24.32.165,Linux,Server,Server,"dmz, lon","EMEA, HIPAA"
+55-db-kdc-p.svc.iad.corp.example,"QualysHostAsset, Rapid7IVMAsset",55-db-kdc-p.svc.iad.corp.example,10.99.116.79,Linux,Server,Server,"lon, dev, lab",Staging
+56-eng-jenkins-d.corp.ams.corp.example,"Rapid7InsightVMAsset, TenableAsset",56-eng-jenkins-d.corp.ams.corp.example,172.23.78.195,Linux,Server,Server,prod,Lab
+57-sys-sso-p.corp.sin.corp.example,Rapid7IVMAsset,57-sys-sso-p.corp.sin.corp.example,192.168.76.27,Linux,Server,Server,sfo,
+58-app-jump-q.cloud.ams.corp.example,"Rapid7IVMAsset, Rapid7InsightVMAsset",58-app-jump-q.cloud.ams.corp.example,"172.23.71.37, 192.168.106.160",Linux,Server,Server,"core, db, hr",
+59-ops-etcd-c.svc.sfo.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",59-ops-etcd-c.svc.sfo.corp.example,"10.42.123.26, 10.234.253.140",Windows,Server,Server,"sap, par, web",
+60-eng-kibana-s.corp.tok.corp.example,"CrowdStrikeHost, TenableAsset",60-eng-kibana-s.corp.tok.corp.example,192.168.54.68,Linux,Server,Server,backup,"Prod, Web Tier"
+61-cis-es-u.cloud.iad.corp.example,"Rapid7InsightVMAsset, CrowdStrikeHost",61-cis-es-u.cloud.iad.corp.example,"192.168.182.153, 10.184.8.149",Windows,Server,Server,"finance, oracle, sap",
+62-web-sso-u.svc.sin.corp.example,"Rapid7InsightVMAsset, TenableAsset",62-web-sso-u.svc.sin.corp.example,"172.26.158.75, 10.160.84.25",Linux,Server,Server,"backup, db, lab",App Tier
+63-web-files-p.corp.syd.corp.example,"Rapid7IVMAsset, CrowdStrikeHost",63-web-files-p.corp.syd.corp.example,192.168.102.84,Linux,Workstation,Server,"dmz, ams","SF, Shared Services"
+64-db-etcd-q.dmz.dfw.corp.example,QualysHostAsset,64-db-etcd-q.dmz.dfw.corp.example,"10.247.149.153, 172.20.142.67",Windows,Server,Server,ams,Shared Services
+65-net-kong-d.cloud.tok.corp.example,"CrowdStrikeHost, Rapid7InsightVMAsset",65-net-kong-d.cloud.tok.corp.example,172.29.169.137,Windows,Server,Server,"db, dub",
+66-db-grafana-c.dmz.ams.corp.example,"QualysHostAsset, TenableAsset",66-db-grafana-c.dmz.ams.corp.example,172.28.15.231,Windows,Server,General,"oracle, web, sfo","SF, SOX"
+67-db-jenkins-q.vuln.iad.corp.example,"CrowdStrikeHost, Rapid7IVMAsset",67-db-jenkins-q.vuln.iad.corp.example,10.140.240.210,Windows,Workstation,Server,core,
+68-db-es-d.svc.sin.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",68-db-es-d.svc.sin.corp.example,192.168.48.138,Windows,Server,Server,k8s,New York
+69-ops-kong-d.cloud.dub.corp.example,"Rapid7IVMAsset, QualysHostAsset",69-ops-kong-d.cloud.dub.corp.example,"192.168.187.118, 10.77.53.182",Windows,Server,Server,"dmz, sox","EMEA, HIPAA"
+70-cis-jenkins-q.cloud.lax.corp.example,CrowdStrikeHost,70-cis-jenkins-q.cloud.lax.corp.example,10.68.212.250,Linux,Workstation,General,"pci, core",
+71-web-db-s.cloud.lax.corp.example,"CrowdStrikeHost, QualysHostAsset",71-web-db-s.cloud.lax.corp.example,192.168.85.128,Linux,Workstation,Server,dev,
+72-cis-bastion-s.corp.lax.corp.example,Rapid7InsightVMAsset,72-cis-bastion-s.corp.lax.corp.example,172.19.69.222,Linux,Server,Server,"nyc, dub, finance","HIPAA, DMZ"
+73-cis-kdc-s.svc.dub.corp.example,TenableAsset,73-cis-kdc-s.svc.dub.corp.example,172.22.4.72,Windows,Server,General,"core, syd",
+74-app-bastion-p.dmz.tok.corp.example,"CrowdStrikeHost, QualysHostAsset",74-app-bastion-p.dmz.tok.corp.example,"192.168.124.44, 192.168.125.209",Linux,Server,Server,dmz,"VDI, Staging"
+75-sec-kdc-c.cloud.sfo.corp.example,QualysHostAsset,75-sec-kdc-c.cloud.sfo.corp.example,172.19.133.122,Linux,Server,Server,"db, dev, oracle",SOX
+76-db-nginx-p.cloud.sfo.corp.example,CrowdStrikeHost,76-db-nginx-p.cloud.sfo.corp.example,"192.168.206.198, 192.168.193.168",Windows,Server,Server,"pci, nyc",DMZ
+77-web-etcd-c.svc.sin.corp.example,"CrowdStrikeHost, QualysHostAsset",77-web-etcd-c.svc.sin.corp.example,192.168.150.1,Windows,Server,Server,"prod, k8s","Core, App Tier"
+78-eng-ldap-c.cloud.blr.corp.example,CrowdStrikeHost,78-eng-ldap-c.cloud.blr.corp.example,192.168.32.117,Linux,Server,Server,"sox, tok",Backups
+79-eng-sso-q.dmz.sfo.corp.example,QualysHostAsset,79-eng-sso-q.dmz.sfo.corp.example,172.24.195.9,Windows,Server,General,oracle,Web Tier
+80-cis-sso-d.cloud.dub.corp.example,"QualysHostAsset, CrowdStrikeHost",80-cis-sso-d.cloud.dub.corp.example,"10.55.130.190, 172.20.128.52",Linux,Server,Server,"k8s, pci, db",
+81-cis-db-c.corp.nyc.corp.example,QualysHostAsset,81-cis-db-c.corp.nyc.corp.example,172.27.71.131,Linux,Server,Server,oracle,"New York, SF"
+82-db-sso-s.svc.lax.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",82-db-sso-s.svc.lax.corp.example,"192.168.152.175, 10.53.81.139",Linux,Server,Server,"finance, prod",New York
+83-app-api-u.vuln.cdg.corp.example,"Rapid7IVMAsset, TenableAsset",83-app-api-u.vuln.cdg.corp.example,"192.168.77.67, 192.168.24.18",Windows,Server,Guest,k8s,London
+84-eng-etcd-u.dmz.tok.corp.example,"TenableAsset, Rapid7IVMAsset",84-eng-etcd-u.dmz.tok.corp.example,172.24.91.155,Windows,Server,Server,"fra, prod",PCI
+85-app-api-q.corp.lax.corp.example,"Rapid7IVMAsset, Rapid7InsightVMAsset",85-app-api-q.corp.lax.corp.example,"192.168.230.250, 172.17.120.121",Windows,Server,Server,prod,DMZ
+86-sys-grafana-c.cloud.ord.corp.example,Rapid7IVMAsset,86-sys-grafana-c.cloud.ord.corp.example,"172.29.228.29, 192.168.61.52",Linux,Server,General,"dev, sfo",PCI
+87-cis-files-u.dmz.syd.corp.example,"Rapid7IVMAsset, QualysHostAsset",87-cis-files-u.dmz.syd.corp.example,"10.169.147.233, 10.109.153.252",Windows,Server,Server,"db, sfo, syd",
+88-sec-kibana-d.corp.syd.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",88-sec-kibana-d.corp.syd.corp.example,192.168.186.86,Linux,Server,Server,syd,SF
+89-db-sso-d.cloud.sfo.corp.example,"TenableAsset, QualysHostAsset",89-db-sso-d.cloud.sfo.corp.example,192.168.85.129,Linux,Server,Server,"lon, hr, stage",Prod
+90-sys-backup-c.vuln.lon.corp.example,"TenableAsset, QualysHostAsset",90-sys-backup-c.vuln.lon.corp.example,"10.11.22.134, 192.168.143.230",Linux,Server,Server,"prod, dmz",DB Tier
+91-app-kong-c.dmz.ord.corp.example,"Rapid7IVMAsset, QualysHostAsset",91-app-kong-c.dmz.ord.corp.example,10.167.163.36,Linux,Server,Guest,oracle,
+92-web-es-p.corp.lon.corp.example,"Rapid7InsightVMAsset, TenableAsset",92-web-es-p.corp.lon.corp.example,172.17.127.238,Windows,Server,Server,"backup, finance, ams",
+93-db-nginx-c.dmz.ams.corp.example,"CrowdStrikeHost, Rapid7InsightVMAsset",93-db-nginx-c.dmz.ams.corp.example,"172.16.193.150, 172.22.193.155",Linux,Server,Server,"core, qa",
+94-web-tomcat-u.cloud.fra.corp.example,"CrowdStrikeHost, TenableAsset",94-web-tomcat-u.cloud.fra.corp.example,"172.22.166.198, 172.18.21.58",Windows,Server,Server,dub,SOX
+95-cis-cache-d.dmz.cdg.corp.example,Rapid7InsightVMAsset,95-cis-cache-d.dmz.cdg.corp.example,192.168.249.195,Linux,Server,General,"sfo, lab",EMEA
+96-eng-ldap-u.corp.syd.corp.example,Rapid7InsightVMAsset,96-eng-ldap-u.corp.syd.corp.example,10.166.238.119,Linux,Server,Server,"fra, sap",HIPAA
+97-app-backup-d.svc.syd.corp.example,CrowdStrikeHost,97-app-backup-d.svc.syd.corp.example,10.184.58.136,Linux,Server,General,dmz,"APAC, London"
+98-net-grafana-u.dmz.lax.corp.example,Rapid7InsightVMAsset,98-net-grafana-u.dmz.lax.corp.example,172.20.229.9,Linux,Server,Server,"syd, prod, db","HIPAA, Web Tier"
+99-sec-jump-q.svc.dfw.corp.example,"TenableAsset, CrowdStrikeHost",99-sec-jump-q.svc.dfw.corp.example,192.168.16.181,Linux,Server,Server,"web, dmz",London
+`
+  },
+  {
+    id: "assets_storage",
+    label: "Assets Storage",
+    filename: "assets_storage.csv",
+    contents: `Name [link],Virtualized [boolean],Public [boolean],Active [boolean],Encrypted [boolean],Sensitive [boolean],Tags [chip],Groups [chip]
+foxtrot-orion-charlie-id640,False,False,True,True,False,prod,"Data Lake, Object Storage"
+cold-apollo-id931,True,False,True,True,True,pci,
+images-orion-id239,True,False,True,True,False,"datahub, lake","HR Data, HIPAA"
+zephyr-nebula-9m18,True,False,True,True,False,"pci, tok, dl","Regional US, GDPR"
+aurora-dev-keywfl,False,True,False,True,False,prod,"SOX, Archive"
+reports-logs-fusion-ephb,True,True,True,True,False,analytics,Disaster Recovery
+stage-nimbus-9edm,False,False,True,True,False,"nyc, eng, qa",
+apollo-fusion-logs-xfm2,False,False,True,True,False,"eng, datahub, nyc",Block Storage
+canary-nimbus-cold-frme,False,False,True,False,False,"dl, pii, gdpr",
+lake-qa-keyrrf,True,False,True,True,False,"pci, dub, finance",Regional US
+apollo-foxtrot-curated-lpbi,False,False,False,True,False,"lon, dev, sfo",
+vertex-atlas-uble,True,False,True,True,False,"par, logs","HR Data, HIPAA"
+quantum-videos-14pq,True,False,True,True,False,blr,
+vertex-matrix-summit-id117,False,False,True,True,True,"dub, qa, finance","Cold Storage, PCI"
+nebula-tier1-nimbus-id330,True,False,True,True,False,"tok, sales","Data Mart, GDPR"
+vault-delta-lake-2mxb,True,False,True,True,False,"sales, fra",Backups
+horizon-etl-ma2f,True,False,True,True,False,"dub, images, qa",Hot Storage
+bravo-nova-udd7,True,False,False,True,False,"datahub, gdpr",
+orion-vector-cold-id414,True,False,False,False,False,sfo,
+fusion-prod-a0ae,True,False,True,True,True,"legal, phi, lon","Block Storage, Finance Data"
+mart-aurora-id229,False,False,True,True,False,"logs, pci",
+docs-gold-tier1-id422,True,False,False,False,False,"dub, sales, analytics","Block Storage, Finance Data"
+bronze-prod-tier1-keyfia,True,False,True,False,False,"gdpr, prod, sfo",
+cold-gamma-summit-a79b,False,False,True,False,False,"fra, prod, datahub","Regional EU, Cold Storage"
+lake-bronze-gamma-head,True,False,True,True,False,"fra, legal","Block Storage, GDPR"
+apollo-docs-id280,True,False,True,True,False,"eng, phi, gdpr","HR Data, Archive"
+horizon-matrix-mart-cdsi,True,True,True,True,False,"dev, lake, hr",Block Storage
+curated-videos-keymjf,True,False,False,False,True,sales,
+delta-qa-quantum-keybbz,True,False,True,False,False,"eng, sfo, images",Backups
+lake-polaris-id960,False,False,True,True,False,"datahub, mart, dev",Regional US
+nebula-tier1-e5q1,True,False,False,False,False,"logs, sales",
+events-nimbus-tier1-ed9b,True,False,True,False,True,"datahub, lake",
+events-mart-canary-ekkp,True,False,True,False,False,phi,
+backup-silver-dpfy,True,False,True,True,False,"phi, dl","SOX, Archive"
+zephyr-docs-omega-id522,False,False,False,True,True,"backups, eng, images",PII Restricted
+nebula-curated-horizon-id549,True,False,True,False,False,blr,PCI
+phoenix-vector-silver-j5br,True,False,True,True,True,"dev, blr",
+omega-stage-mart-id78,True,False,False,True,True,"legal, sales, dl","SOX, Data Lake"
+quantum-phoenix-nova-keyynj,True,False,True,True,False,"par, gdpr",
+images-charlie-phoenix-id372,True,False,True,True,True,"images, sales, marketing",
+nimbus-canary-id157,True,False,True,True,True,datahub,Regional US
+prod-bronze-quantum-m64f,True,True,False,False,True,"blr, docs, images",
+images-charlie-keye07,True,False,True,True,False,"dub, qa, gdpr",
+polaris-images-gamma-id857,False,True,True,True,False,"tok, ams",Hot Storage
+phoenix-backup-h8cg,True,False,True,False,False,"par, backups",Archive
+echo-alpha-ziz0,False,True,True,True,False,"sales, sfo, analytics",
+raw-vector-polaris-keyfem,True,False,False,True,False,backups,"Data Mart, Regional US"
+qa-backup-videos-keye5f,False,False,True,True,False,"stage, dev, lon",Backups
+etl-quantum-orion-id675,True,True,True,True,False,eng,Finance Data
+bronze-cold-stage-keyn3c,False,True,True,False,True,"finance, pii, phi",Hot Storage
+polaris-nebula-hacs,False,False,True,False,False,"tok, nyc, fra","SOX, Hot Storage"
+archive-zephyr-vertex-id900,True,False,True,True,False,sfo,
+phoenix-alpha-hot-agea,True,False,True,True,False,lon,"Disaster Recovery, Regional US"
+raw-dev-tier1-keyh3d,True,False,True,True,False,blr,HIPAA
+prod-foxtrot-vector-id10,True,True,True,True,False,"blr, syd",Backups
+vertex-mart-id534,True,False,True,True,False,stage,
+nimbus-etl-charlie-key8bo,False,True,True,False,False,etl,PII Restricted
+images-aurora-vertex-id687,False,False,True,True,False,datahub,Archive
+charlie-summit-jnbc,False,False,True,True,False,"etl, prod, dub",SOX
+hot-reports-foxtrot-keyk9y,True,False,True,True,True,mart,
+backup-tier2-danb,True,False,False,True,False,"datahub, hr",GDPR
+canary-nova-keyapc,True,False,True,True,False,"nyc, marketing",HIPAA
+stage-gamma-keye2t,True,True,True,True,True,lon,"HR Data, Disaster Recovery"
+logs-etl-archive-keyece,True,False,True,False,True,"sfo, finance",Archive
+fusion-docs-backup-id242,True,False,True,False,False,legal,Analytics
+reports-hot-raw-keyd59,True,False,False,True,False,lon,Cold Storage
+prod-images-zephyr-kcan,False,False,True,False,True,"par, marketing",
+delta-dev-1c5b,True,False,True,True,False,"backups, fra","Archive, PII Restricted"
+matrix-qa-cold-keyfmg,True,False,True,True,False,"lake, dev",
+hydra-tier2-polaris-id648,True,False,True,False,False,"lake, dev, ml",SOX
+fusion-reports-nimbus-eaf4,True,False,True,True,False,phi,"Finance Data, Data Mart"
+horizon-silver-archive-hcmc,True,False,True,True,False,"qa, marketing",
+raw-vault-hydra-id300,True,False,False,True,False,sales,
+cold-nimbus-id205,False,False,False,True,False,"marketing, finance, images",PII Restricted
+vector-aurora-nova-id54,True,False,True,False,False,"images, marketing, sfo","Backups, Data Lake"
+bravo-omega-mart-keyd7a,True,False,True,False,False,analytics,
+reports-bronze-keyra5,True,False,True,True,False,"mart, backups",Backups
+mart-bravo-videos-id130,False,False,True,True,False,"finance, syd, sox",
+zephyr-vault-pvlj,True,False,True,True,True,etl,"Object Storage, Hot Storage"
+dev-nebula-ccva,True,True,True,False,False,ams,Archive
+dev-polaris-echo-keyssa,True,False,True,True,False,"blr, phi","HR Data, Finance Data"
+hot-lake-fusion-keyez5,True,False,True,True,False,"dl, par, sfo",GDPR
+prod-vertex-id431,True,True,True,False,False,"datahub, images, backups","SOX, HR Data"
+fusion-tier1-logs-keyec0,True,False,False,False,False,"fra, sales","SOX, Regional EU"
+videos-summit-archive-cc5e,True,False,False,True,True,"sox, ml, backups",
+matrix-docs-images-rp5p,True,False,True,False,False,sfo,"HR Data, Cold Storage"
+lake-polaris-summit-keybyd,True,False,False,True,False,images,Regional EU
+hydra-gold-charlie-jpac,True,False,True,True,False,analytics,Analytics
+docs-aurora-sftc,False,False,True,True,False,marketing,"SOX, Disaster Recovery"
+echo-metrics-id211,True,False,True,True,False,"ams, sales",
+hot-tier1-charlie-b6fs,False,False,False,True,False,"backups, qa, mart",
+lake-images-etl-id924,True,True,False,True,True,"images, backups, sfo",
+bronze-qa-events-id924,True,False,True,False,False,"dl, eng",Data Mart
+backup-dev-orion-id451,True,False,True,False,False,"eng, sfo, legal",
+aurora-echo-polaris-id274,True,False,True,True,False,"dl, eng, etl",
+images-videos-reports-id975,True,False,True,True,False,"sox, ams",PII Restricted
+lake-bronze-silver-keyvjx,False,False,True,False,False,logs,"Analytics, HIPAA"
+silver-vector-charlie-id337,True,False,True,False,False,"par, ams",Object Storage
+orion-raw-fusion-f5bd,True,True,False,True,True,"ml, hr","SOX, GDPR"
+silver-hot-vault-keywfd,True,False,False,True,False,sox,"HIPAA, Regional US"
+`
+  },
+  {
+    id: "data-agents-agents",
+    label: "Data Agents Agents",
+    filename: "data-agents-agents.csv",
+    contents: `Agent ID,Hostname,Status [status],Antivirus Health [status],Connection,Group [chip],Last Seen,Version
+8CfFRvJRYJo1cuvm7NgV,SERVER-20,Idle,Good,Direct to platform,IT Admins,2025-07-07,1.11.5
+WmJUGj7mmQbrLQdv1J03,SERVER-02,Idle,Good,,Berlin Lab,2024-07-10,4.2.0
+fFfUvSQmhdH2mdraL0oG,k8s-node-149,Online,Good,Direct to platform,Berlin Lab,2025-07-23,2.6.7
+g8HHYLK3S1o2iHjKEm7x,firewall-sfo-05,Online,Good,Direct to platform,Logistics,2024-06-23,4.1.6
+OF60MSdv7Sd9JXaVqsyX,SERVER-36,Idle,Error,Direct to platform,Logistics,2024-02-09,2.2.8
+GwFODsxHLnQQTpLwsv5D,rds-dev-03,Idle,Poor,Direct to platform,Support,2024-07-09,6.7.9
+pINst9OSXOBeBSU6WqGg,db-dev-03,Online,Good,Direct to platform,New York Office,2025-05-07,3.14.2
+ckCu0MuzRvweJHMq5Q22,rds-qa-03,Unresponsive,Good,Direct to platform,Mobile Team,2024-12-02,3.10.14
+Pr7wKb3HsreHcmwN1Ugh,mail-blr-17,Unresponsive,Good,,Berlin Lab,2023-09-09,2.7.0
+171p1zMLmHiXrmkCIu7Y,firewall-lon-01,Unresponsive,Good,Direct to platform,SF Office,2024-01-04,2.14.11
+XCBJZ3w06mjkpYJz0F7K,SERVER-34,Online,Good,Direct to platform,Engineering,2025-08-23,4.11.4
+3bALFRO8o6YnwUs775ia,vm-sales-196,Online,Good,Direct to platform,Legal,2025-08-12,5.9.16
+hFikzWaoR5V06GVE5wYo,k8s-node-031,Idle,Good,Direct to platform,Legal,2025-01-05,7.5.13
+qDVaZiw5Qbo7j12u58eO,app-qa-03,Idle,Not monitored,,London Office,2024-03-26,2.7.6
+OIU5pXygSP6SuFiS0e8z,app-dev-01,Online,Not monitored,,Design,2025-04-29,3.0.14
+hIvTOrCRUjsCriR9V4qf,mail-tok-19,Online,Good,Direct to platform,Engineering,2024-07-10,5.5.19
+O7Sb88ZlEhGgpcTwK2YQ,vm-it-091,Online,Good,Direct to platform,Berlin Lab,2024-07-16,6.8.12
+5gkW5afTylukuld4fTTc,k8s-node-084,Online,Good,,Engineering,2025-03-07,1.1.7
+sbOLzc5FJwLFJDU5L9tQ,vm-mkt-150,Online,Good,Direct to platform,Security,2024-06-21,1.8.5
+YhknHU5Zk93ssebFzHBr,rds-qa-05,Unresponsive,Poor,Direct to platform,Marketing,2023-09-18,7.15.14
+ktWyk8Q7nF4eSLq9cNDR,SERVER-68,Online,Good,Direct to platform,London Office,2025-04-07,6.13.9
+nApotqNyyeODQjJl4PqA,firewall-tok-07,Online,Good,,Sydney Ops,2024-12-26,3.4.5
+YiUcCD7j4AhuRmqgQvHu,app-staging-03,Idle,Good,,Cloud,2023-10-16,4.7.15
+V6PQIu6SEyKH11MQyrF1,rds-staging-04,Online,Error,Direct to platform,HR,2023-12-30,1.7.10
+9EdP8tfXyiWRvR5xld5o,mail-dub-14,Online,Good,Direct to platform,Legal,2025-02-23,7.14.1
+6NDxaoyNSpTybI4RkzCQ,SERVER-63,Online,Good,Direct to platform,Legal,2025-05-09,5.4.18
+PmabhrZPcibGAIg5LYjj,mail-blr-16,Online,Error,Direct to platform,Tokyo Finance,2023-10-15,3.8.15
+Rmx7hURZ7D7FLbc7etiX,rds-dev-03,Online,Error,Direct to platform,Design,2024-07-05,1.11.20
+J6Vxti4WdDQakDUOb151,k8s-node-149,Online,Not monitored,Direct to platform,HR,2024-09-30,6.13.9
+0fcKuX2q0KEBpN8g2NFI,k8s-node-057,Unresponsive,Good,Direct to platform,Security,2023-12-22,7.2.5
+`
+  },
+  {
+    id: "data-agents-groups",
+    label: "Data Agents Groups",
+    filename: "data-agents-groups.csv",
+    contents: `Name,Agents [r],Exclusions [chip],Last Modified,Modified by [chip],Created on,Created by [chip],Version [r]
+Workstations - Dev,7570,devtools,"Jul 17, 2025 at 12:20 AM UTC",Mia Young,"Jul 11, 2021 at 05:21 AM UTC",pbrown,2.13.9
+Android Agents - Dublin,7047,usb,"Feb 01, 2024 at 02:08 PM UTC",Emma Johnson,"Jan 26, 2023 at 10:17 PM UTC",hwright,2.3.1
+Berlin Office,9918,backups,"Jul 04, 2025 at 06:42 AM UTC",Elliot Rodriguez,"Jun 29, 2024 at 05:51 PM UTC",ethomas,4.0.2
+Bangalore Office,5073,backups,"Mar 15, 2023 at 08:10 AM UTC",Casey Wright,"Nov 19, 2022 at 06:39 AM UTC",eclark,2.3.12
+Android Agents - Austin,3362,updates,"Jul 10, 2025 at 03:16 PM UTC",Hayden Taylor,"May 16, 2025 at 02:54 AM UTC",myoung40,2.5.10
+Stockholm iOS,4555,usb,"May 08, 2025 at 10:13 PM UTC",Emerson Hall,"Jun 27, 2022 at 04:41 AM UTC",ayoung,4.14.20
+Servers - QA,2921,cache,"Nov 27, 2024 at 02:10 AM UTC",Cameron Allen,"Sep 16, 2023 at 05:20 AM UTC",acarter,7.14.14
+Bangalore iOS,4181,,"Oct 31, 2023 at 03:53 PM UTC",Mia Clark,"Aug 04, 2021 at 07:22 PM UTC",cscott,5.1.2
+Servers - QA,6261,drivers,"Nov 13, 2024 at 10:51 AM UTC",Reese Walker,"Nov 28, 2021 at 11:38 AM UTC",arobinson,7.9.5
+Policy: EDR Required,8795,backups,"Dec 18, 2023 at 02:23 AM UTC",Jack Carter,"Sep 04, 2023 at 07:50 AM UTC",inelson,7.6.9
+Policy: ISO 27001 Baseline,5022,updates,"Jul 05, 2024 at 08:07 PM UTC",Ethan Jackson,"Jul 04, 2021 at 02:13 AM UTC",sclark96,5.9.17
+Exclude: drivers,408,,"Aug 01, 2025 at 10:05 AM UTC",Chloe Anderson,"Jul 24, 2025 at 06:09 PM UTC",sthompson,6.11.20
+Exclude: temp,6663,backups,"Aug 12, 2025 at 08:55 AM UTC",Alex Harris,"Jun 27, 2022 at 09:22 AM UTC",escott,1.4.20
+Linux Agents - Berlin,5375,cache,"Jan 08, 2022 at 10:12 PM UTC",Skyler Jackson,"Jul 14, 2020 at 10:10 PM UTC",ewhite,7.4.8
+Windows Agents - Bangalore,7089,updates,"Jan 19, 2025 at 04:35 AM UTC",Emma Nelson,"Jan 03, 2024 at 11:31 PM UTC",janderson,3.2.4
+San Francisco HR,8323,vpn,"Aug 19, 2024 at 01:05 PM UTC",Drew Johnson,"May 30, 2024 at 04:41 PM UTC",hallen,4.2.1
+macOS Agents - Sydney,60,"backups, logs","Aug 06, 2023 at 06:02 PM UTC",Mason Wright,"Jun 14, 2020 at 12:04 AM UTC",jtaylor,4.15.20
+Windows Edge - Prod,5445,,"May 11, 2025 at 01:14 AM UTC",Liam Anderson,"Sep 27, 2024 at 05:57 PM UTC",abrown,5.7.18
+Android Workstations - QA,8718,devtools,"Nov 22, 2024 at 10:38 PM UTC",Taylor Allen,"Sep 06, 2023 at 09:02 AM UTC",ethomas,2.4.9
+iOS Agents - Chicago,3198,games,"May 14, 2025 at 10:28 AM UTC",Taylor Rodriguez,"Oct 28, 2024 at 02:01 AM UTC",rgreen67,5.10.12
+Data Science - macOS,7163,usb,"Aug 04, 2025 at 06:54 AM UTC",Noah Smith,"Mar 24, 2024 at 12:57 AM UTC",onelson,6.1.0
+Amsterdam Security,7685,"devtools, usb","Nov 25, 2024 at 08:20 AM UTC",Morgan Thompson,"Aug 05, 2023 at 06:54 AM UTC",crobinson,2.3.10
+Zurich iOS,7097,temp,"Jun 12, 2025 at 12:35 PM UTC",Avery Green,"Sep 27, 2023 at 08:13 AM UTC",jbaker,1.13.8
+Kiosks - Staging,1110,games,"Jun 09, 2025 at 01:56 PM UTC",Jordan Green,"May 27, 2022 at 03:00 AM UTC",hrobinson,1.6.8
+Linux Edge - Dev,9307,usb,"Sep 29, 2023 at 11:42 PM UTC",Isabella Scott,"Aug 20, 2020 at 10:09 PM UTC",ntaylor,2.8.11
+Exclude: drivers,1199,updates,"Jul 16, 2025 at 07:44 AM UTC",Avery Baker,"Feb 03, 2021 at 11:39 PM UTC",rbrown,5.7.12
+Sydney Office,351,logs,"Aug 30, 2024 at 11:06 AM UTC",Mason Jackson,"Aug 26, 2023 at 05:38 AM UTC",crodriguez,3.0.2
+iOS Agents - New York,5516,cache,"Aug 08, 2023 at 12:19 PM UTC",Hayden Carter,"Apr 09, 2023 at 09:22 AM UTC",iclark,7.10.4
+Linux Edge - Dev,6643,devtools,"Dec 03, 2024 at 11:21 AM UTC",Casey Scott,"Aug 16, 2024 at 12:10 AM UTC",rbrown,2.6.3
+Linux Agents - Sydney,308,temp,"Jun 08, 2025 at 03:43 AM UTC",Jamie Thomas,"Apr 02, 2024 at 12:46 AM UTC",mclark,1.7.0
+VDI - Dev,5044,logs,"Feb 08, 2025 at 11:35 PM UTC",Charlie Young,"Nov 10, 2024 at 02:35 AM UTC",orobinson37,1.5.11
+macOS Agents - Stockholm,3721,backups,"Mar 23, 2023 at 03:06 AM UTC",Drew Young,"Nov 22, 2022 at 02:43 AM UTC",rscott,1.4.17
+Stockholm macOS,1385,devtools,"Mar 19, 2024 at 02:35 PM UTC",Chris Nelson,"Feb 16, 2023 at 09:29 PM UTC",agreen6,7.4.17
+Windows Agents - Singapore,7422,"temp, games","Jan 13, 2023 at 07:52 AM UTC",Reese Anderson,"Sep 21, 2021 at 01:30 PM UTC",cthomas,1.15.10
+Sales - Edge,6217,devtools,"Sep 19, 2024 at 05:43 AM UTC",Sophia Garcia,"Jul 06, 2024 at 08:35 AM UTC",olee,4.15.6
+Policy: EDR Required,3536,media,"Jun 24, 2025 at 06:23 AM UTC",Emerson Martin,"Aug 12, 2021 at 06:35 PM UTC",hjohnson,3.0.8
+Policy: EDR Required,4267,backups,"Jul 09, 2024 at 04:54 PM UTC",Isabella Carter,"Jan 20, 2024 at 10:05 PM UTC",sclark,5.4.11
+iOS Containers - Prod,4182,drivers,"May 25, 2022 at 02:56 AM UTC",Charlie White,"Jun 10, 2021 at 04:40 AM UTC",hthompson,5.9.13
+Amsterdam Linux,8327,updates,"Dec 15, 2022 at 05:45 PM UTC",Emma Clark,"Jun 01, 2021 at 10:57 AM UTC",zadams73,7.0.15
+Toronto Office,5657,devtools,"Jan 24, 2025 at 05:57 AM UTC",Jack Clark,"Apr 30, 2023 at 01:30 AM UTC",mjohnson26,1.7.6
+Linux Containers - DR,7628,media,"May 07, 2024 at 01:36 AM UTC",Elliot White,"Jul 10, 2020 at 02:09 PM UTC",hmartin,4.7.2
+Windows VDI - Dev,6176,vpn,"Sep 07, 2025 at 04:59 AM UTC",Olivia Anderson,"Aug 23, 2025 at 10:26 PM UTC",oharris72,7.5.4
+macOS Agents - Dublin,1246,cache,"Feb 17, 2022 at 12:06 AM UTC",Elliot Lewis,"May 17, 2020 at 07:10 AM UTC",amartinez,3.3.10
+Linux VDI - QA,8693,backups,"Aug 01, 2025 at 06:37 AM UTC",Avery Green,"Mar 05, 2022 at 11:51 PM UTC",abrown,7.6.17
+Kiosks - Staging,5332,,"Apr 13, 2020 at 07:20 PM UTC",Logan Green,"Mar 21, 2020 at 07:46 PM UTC",cwalker,5.5.12
+HR - Windows,9883,,"Jan 05, 2025 at 08:12 AM UTC",Sophia Brown,"Sep 26, 2024 at 02:22 PM UTC",swhite68,5.12.17
+Engineering - macOS,659,drivers,"Mar 23, 2023 at 04:32 AM UTC",Rowan Lee,"Jan 13, 2023 at 10:16 AM UTC",zsmith,7.14.1
+Chicago Office,7504,"temp, logs","Jan 24, 2023 at 01:09 PM UTC",Mia Clark,"Jan 30, 2022 at 08:06 AM UTC",erodriguez14,4.12.15
+macOS Workstations - QA,4471,updates,"Aug 26, 2024 at 07:29 PM UTC",Henry Smith,"Oct 27, 2023 at 11:54 PM UTC",abaker,3.1.5
+Support - Containers,8827,"usb, games","Jun 07, 2025 at 02:34 AM UTC",Rowan King,"Dec 26, 2020 at 02:28 AM UTC",jharris20,3.9.19
+Policy: Hardened,2832,,"Sep 11, 2023 at 09:07 PM UTC",Morgan Young,"Aug 21, 2023 at 11:33 PM UTC",jmartin,6.5.17
+Exclude: devtools,647,"devtools, usb","Jan 03, 2024 at 09:14 PM UTC",Mia Harris,"Mar 31, 2023 at 11:16 AM UTC",ajackson,3.6.4
+Policy: NIST Moderate,3638,,"Nov 11, 2022 at 09:45 PM UTC",Skyler Lee,"Jan 11, 2022 at 09:51 PM UTC",slee43,4.8.20
+Amsterdam Windows,5229,vpn,"Oct 29, 2024 at 05:18 PM UTC",Riley Nelson,"Jan 17, 2024 at 11:12 PM UTC",mcarter57,6.11.5
+Berlin Office,7791,"vpn, logs","Jun 01, 2025 at 06:14 PM UTC",Emma Thompson,"May 14, 2024 at 11:16 AM UTC",hking,6.9.2
+Windows Laptops - Prod,6068,devtools,"Oct 28, 2024 at 10:50 PM UTC",Harper Allen,"Jun 26, 2022 at 11:13 PM UTC",llewis,1.5.20
+HR - Linux,6072,logs,"Dec 21, 2020 at 11:39 PM UTC",Rowan Carter,"Dec 20, 2020 at 10:23 PM UTC",jlewis,4.3.7
+Dublin Support,592,"temp, devtools","May 26, 2023 at 08:17 PM UTC",Avery Martinez,"Jun 06, 2020 at 03:43 PM UTC",srodriguez,4.8.3
+Sydney Finance,2472,devtools,"Dec 21, 2024 at 08:49 AM UTC",Charlie Young,"May 27, 2023 at 04:36 PM UTC",jlee,7.12.6
+Kiosks - Dev,9163,"media, cache","Dec 27, 2023 at 10:46 PM UTC",Chloe Garcia,"Aug 07, 2021 at 10:43 AM UTC",zharris,6.3.7
+Android Agents - Bangalore,4248,temp,"May 07, 2025 at 07:37 AM UTC",Olivia Walker,"Mar 23, 2025 at 05:21 PM UTC",aadams,2.2.3
+iOS Containers - Prod,5722,"backups, logs","Sep 05, 2025 at 01:24 AM UTC",Emma Harris,"Sep 02, 2025 at 01:52 PM UTC",cwright61,5.7.19
+Dublin Windows,2138,"usb, backups","Dec 30, 2024 at 05:03 AM UTC",Sam Young,"Apr 25, 2022 at 10:23 AM UTC",awhite93,3.9.14
+macOS Agents - Zurich,6042,"media, updates","Jun 24, 2025 at 07:44 PM UTC",Mia White,"Nov 27, 2024 at 04:22 AM UTC",hcarter,3.10.9
+Stockholm Office,8315,,"Aug 21, 2025 at 03:29 AM UTC",Quinn Adams,"Nov 23, 2024 at 08:23 PM UTC",kallen,4.12.20
+macOS Agents - Amsterdam,1573,,"Apr 14, 2025 at 06:14 PM UTC",Mason Thompson,"Aug 01, 2022 at 05:23 AM UTC",irodriguez97,1.14.10
+Servers - Prod,6460,"temp, vpn","Oct 18, 2024 at 06:49 AM UTC",Noah Thomas,"Feb 12, 2024 at 12:04 AM UTC",dgreen,1.4.16
+macOS Kiosks - DR,4966,backups,"Oct 14, 2024 at 12:07 AM UTC",Isabella White,"Oct 08, 2023 at 01:52 PM UTC",nbrown44,4.14.2
+Toronto Office,8320,games,"May 26, 2023 at 11:39 PM UTC",Chloe Clark,"Sep 21, 2022 at 04:07 AM UTC",oclark,5.10.9
+New York Windows,8816,vpn,"Oct 03, 2022 at 08:09 PM UTC",Elliot Harris,"Dec 01, 2020 at 12:28 AM UTC",osmith67,1.2.5
+Security - Android,2433,drivers,"Sep 08, 2022 at 10:27 AM UTC",Ethan Carter,"Jan 11, 2022 at 09:00 AM UTC",jscott11,6.6.12
+Workstations - Dev,5152,backups,"Aug 03, 2025 at 09:08 PM UTC",Reese Hall,"May 21, 2025 at 02:02 AM UTC",lwright,3.8.0
+macOS Agents - Bangalore,9031,media,"Feb 14, 2024 at 03:38 AM UTC",Emma Scott,"May 14, 2021 at 04:56 PM UTC",lwright,2.5.19
+Engineering - Windows,6848,vpn,"Apr 21, 2025 at 01:19 PM UTC",Mason Martinez,"Dec 24, 2020 at 11:31 PM UTC",jthomas,6.6.3
+Containers - Staging,712,,"Nov 30, 2020 at 07:17 AM UTC",Taylor Jackson,"Feb 14, 2020 at 11:32 PM UTC",nallen,7.8.15
+Data Science - VDI,7597,"backups, games","Jan 09, 2025 at 05:38 PM UTC",Alex Martinez,"Apr 11, 2020 at 03:59 PM UTC",plewis,2.7.9
+Policy: ISO 27001 Baseline,7903,"drivers, games","Feb 21, 2025 at 10:11 AM UTC",Casey Young,"Dec 12, 2020 at 11:20 AM UTC",hlewis,4.14.9
+San Francisco macOS,9227,temp,"Apr 07, 2022 at 06:20 PM UTC",Skyler Lee,"Sep 29, 2020 at 10:32 PM UTC",cbrown,2.6.18
+Amsterdam Office,7331,,"Apr 10, 2024 at 07:40 AM UTC",Zoe Lee,"Feb 22, 2021 at 12:11 PM UTC",lwalker,5.11.16
+Paris Android,3083,"logs, devtools","Sep 25, 2024 at 02:04 PM UTC",Logan Anderson,"Jan 30, 2021 at 02:08 PM UTC",callen,5.15.12
+Singapore Design,1277,"logs, games","Aug 23, 2024 at 01:17 PM UTC",Mia Lewis,"Mar 28, 2023 at 06:47 PM UTC",tmartinez,5.3.0
+Berlin Office,401,,"Aug 28, 2023 at 07:17 PM UTC",Harper Garcia,"Mar 10, 2023 at 04:10 AM UTC",hmartinez,2.4.16
+Policy: EDR Required,1085,,"Mar 20, 2025 at 12:56 PM UTC",Olivia Walker,"Dec 02, 2023 at 03:21 AM UTC",kcarter,6.8.15
+Policy: Hardened,541,drivers,"Feb 18, 2020 at 06:20 AM UTC",Alex Martin,"Jan 21, 2020 at 10:42 AM UTC",mharris,7.1.16
+Policy: CIS Level 2,4607,games,"Aug 17, 2025 at 12:52 PM UTC",Lucas Robinson,"Aug 15, 2025 at 05:29 AM UTC",lgarcia,1.11.6
+Exclude: games,632,"updates, devtools","Aug 03, 2025 at 11:08 AM UTC",Jordan Smith,"Oct 06, 2024 at 07:19 PM UTC",cjackson,7.5.6
+Toronto Windows,6103,backups,"Aug 20, 2024 at 06:48 PM UTC",Taylor Nelson,"Feb 23, 2023 at 07:21 AM UTC",staylor,4.8.10
+Exclude: cache,3611,games,"May 04, 2025 at 12:13 AM UTC",Sam Green,"Aug 31, 2023 at 09:39 AM UTC",hhall,2.12.18
+Exclude: drivers,239,"media, devtools","Aug 19, 2025 at 07:17 PM UTC",Parker Rodriguez,"Mar 24, 2024 at 08:55 AM UTC",njackson,5.0.17
+Policy: NIST Moderate,8113,drivers,"Oct 10, 2023 at 01:40 AM UTC",Isabella Walker,"Mar 26, 2022 at 07:45 AM UTC",esmith,3.8.2
+Policy: ISO 27001 Baseline,3064,,"Mar 28, 2025 at 08:56 PM UTC",Skyler Lewis,"Jun 20, 2024 at 09:11 PM UTC",lscott,2.11.13
+iOS Agents - New York,144,devtools,"May 06, 2025 at 03:24 PM UTC",Zoe Thomas,"Jan 03, 2025 at 10:00 AM UTC",hjackson,5.4.11
+Exclude: temp,2763,usb,"Jun 16, 2025 at 08:05 PM UTC",Drew Anderson,"May 31, 2025 at 04:02 PM UTC",lrobinson,7.11.8
+Bangalore IT,9728,,"May 27, 2025 at 10:19 AM UTC",Hayden Adams,"Nov 10, 2024 at 06:35 PM UTC",etaylor,5.11.11
+Policy: FIPS Mode,4685,devtools,"Jan 21, 2024 at 01:26 AM UTC",Taylor Harris,"Aug 14, 2022 at 09:30 AM UTC",hlewis20,2.5.12
+Policy: CIS Level 2,4925,backups,"Jul 02, 2024 at 12:26 AM UTC",Elliot Robinson,"Aug 02, 2022 at 03:08 AM UTC",hthomas,6.6.10
+Amsterdam Linux,1749,backups,"Jul 12, 2025 at 02:51 AM UTC",Jordan Lewis,"Apr 22, 2024 at 09:20 AM UTC",rmartinez,3.14.16
+New York Marketing,4244,vpn,"May 25, 2024 at 07:37 PM UTC",Morgan Thomas,"Dec 17, 2022 at 01:05 AM UTC",pbaker,1.6.16
+Windows Edge - QA,2338,"media, vpn","Jul 23, 2020 at 02:35 PM UTC",Sam Jackson,"Jul 03, 2020 at 06:50 AM UTC",hscott,5.10.15
+Edge - Staging,6023,,"Mar 13, 2024 at 11:57 PM UTC",Drew Allen,"Mar 21, 2023 at 08:16 PM UTC",ithompson,3.0.11
+`
+  },
+  {
+    id: "data-agents-policies",
+    label: "Data Agents Policies",
+    filename: "data-agents-policies.csv",
+    contents: `Name [link],Agents [r],Last Modified,Modified by [chip],Created on,Created by [chip]
+Linux Zero Trust Tier 1,5787,"May 24, 2024",Liam Taylor,"Feb 19, 2024",Kendall Adams
+CrowdStrike Connector - Toronto,8296,"Nov 22, 2024",Rowan Allen,"Mar 17, 2024",Ethan Collins
+Linux Hardening - Austin,5991,"May 18, 2024",Kendall King,"May 25, 2020",Nora Taylor
+Policy 676 - Endpoints Browser Hardening,6,"Jan 15, 2024",Mia Parker,"Jan 01, 2024",Mason Nelson
+S3 Ingestion Baseline - QA,7244,"May 02, 2025",Henry Turner,"Jan 29, 2025",Reese Clark
+Network Local Admin Removal,7386,"Apr 16, 2024",Olivia Hall,"Apr 07, 2023",Emerson Smith
+Elastic Agent Baseline - Prod,7952,"Aug 07, 2020",Skyler Martin,"Mar 16, 2020",Aiden Brown
+Network Certificate Rotation 90d,1124,"Aug 01, 2024",Amelia Nelson,"May 25, 2024",Jordan Turner
+Containers Certificate Rotation 90d,3987,"Mar 22, 2025",Harper Thompson,"Dec 27, 2021",Zoe Jackson
+Splunk Forwarder Baseline - Dev,6009,"Jan 31, 2025",Morgan Anderson,"Jun 23, 2024",Logan Hall
+Policy 968 - Endpoints MFA Required,4164,"Nov 26, 2024",Avery Harris,"May 06, 2023",Emma Baker
+Azure Sentinel Baseline - Dev,5942,"Apr 30, 2025",Casey Hall,"Jun 06, 2024",Alex Martinez
+Endpoints Hardening - Toronto,9679,"Nov 25, 2024",Charlie Parker,"Apr 04, 2022",Reese Martinez
+Network Hardening - Berlin,4604,"Sep 18, 2024",Reese Edwards,"Nov 18, 2020",Mason King
+Policy 347 - Windows Audit Logging Level 2,3790,"Aug 28, 2025",Casey Roberts,"Jul 23, 2021",Taylor Thomas
+Linux Hardening - New York,2851,"Apr 04, 2025",Jamie King,"Sep 02, 2023",Olivia Anderson
+Network Hardening - Toronto,2772,"Mar 03, 2023",Rowan Lewis,"Oct 23, 2021",Jamie Martin
+Policy 410 - Containers PowerShell Constrained,7912,"Jun 01, 2023",Elliot Young,"Sep 07, 2021",Luna Campbell
+Kafka Ingestion - Berlin,255,"Apr 04, 2025",Avery Phillips,"Mar 28, 2020",Mia Smith
+Windows Hardening - Austin,7969,"Oct 01, 2022",Casey Walker,"Jun 21, 2022",Isabella Clark
+Containers Patch Critical,6328,"Dec 19, 2024",Benjamin Harris,"Jun 19, 2024",Zoe Adams
+Splunk Forwarder - Paris,3584,"Jun 12, 2025",Reese King,"May 21, 2025",Hayden Thomas
+macOS Browser Hardening - Staging,7739,"Aug 02, 2025",Logan Robinson,"Dec 05, 2022",Chloe Edwards
+Syslog 514 Baseline - Prod,7056,"Aug 21, 2025",Charlie Green,"May 17, 2025",Chris Scott
+Azure Sentinel - Dublin,4652,"May 06, 2025",Morgan White,"Dec 07, 2024",Avery Thomas
+Containers Hardening - New York,111,"Dec 07, 2023",Alex Green,"Dec 23, 2021",Isla Turner
+Containers Zero Trust Tier 1 - QA,6652,"Apr 05, 2023",Zoe Hall,"Jul 20, 2022",Jamie Taylor
+macOS SSH Hardening,8442,"Nov 17, 2023",Sophia Baker,"Jan 18, 2022",Jamie Johnson
+Network Admin Lockdown,3508,"Nov 29, 2023",Morgan Parker,"Nov 10, 2023",Emerson Thomas
+Azure Sentinel Baseline - QA,4097,"Jul 12, 2024",Charlie Harris,"May 25, 2021",Logan Roberts
+macOS TLS 1.0 Disabled,8993,"Feb 12, 2022",Reese Walker,"Mar 27, 2021",Emma Walker
+Cloud Hardening - Austin,4036,"Jul 25, 2025",Parker Jackson,"Jun 24, 2025",Chloe Jackson
+S3 Ingestion Baseline - Staging,2099,"Jan 02, 2024",Jordan Smith,"Feb 02, 2020",Liam Lewis
+Endpoints EDR Baseline - Dev,6843,"Aug 05, 2025",Lucas Baker,"Feb 23, 2023",Leo Lewis
+Azure Sentinel Baseline - Prod,973,"Oct 19, 2024",Drew Robinson,"Apr 11, 2022",James Roberts
+Policy 608 - Windows TLS 1.0 Disabled,3186,"Apr 17, 2024",Kendall Rodriguez,"Dec 10, 2022",Zoe Martinez
+Endpoints Certificate Rotation 90d - Staging,9110,"Dec 01, 2024",Elliot Mitchell,"May 16, 2023",Avery Phillips
+Azure Sentinel - Paris,9053,"Mar 28, 2024",James Adams,"Jan 19, 2024",Henry Johnson
+Cloud Audit Logging Level 2,9216,"Sep 05, 2025",Olivia Hall,"Jul 09, 2024",Logan Hall
+Linux Remote Access VPN Only,6822,"May 23, 2022",Emerson Wright,"May 30, 2020",Ella Robinson
+ServiceNow Connector - New York,515,"Nov 02, 2024",Kendall Mitchell,"Oct 01, 2021",Logan Hall
+Containers TLS Enforcement,5854,"May 25, 2021",Emma Robinson,"Apr 15, 2021",Harper Campbell
+Cloud EDR Baseline - QA,3623,"Nov 28, 2023",Zoe Harris,"Sep 15, 2020",Ethan Walker
+Policy 890 - Cloud Firewall Strict,9985,"Dec 04, 2023",Mason Roberts,"Jan 11, 2020",Lucas Martin
+Endpoints SSH Hardening,3769,"Dec 20, 2023",Taylor Thomas,"Sep 15, 2022",Henry Thompson
+Cloud EDR Baseline - Dev,3655,"Oct 03, 2024",Elijah Martinez,"Sep 22, 2023",Jesse Harris
+macOS Secrets Scanning,2316,"Sep 06, 2021",Emerson Brown,"Oct 31, 2020",Morgan Turner
+Windows Browser Hardening - Dev,583,"Dec 15, 2020",Drew Phillips,"Aug 12, 2020",Henry Brown
+Cloud Kernel Module Blocklist,6605,"Sep 06, 2022",Amelia Evans,"Jun 20, 2020",Skyler Brown
+macOS Audit Logging Level 2 - Staging,2387,"Aug 16, 2025",James Phillips,"Jul 20, 2025",Benjamin Clark
+Kafka Ingestion Baseline - Dev,1339,"Mar 02, 2024",Jordan Hall,"Dec 18, 2021",Lucas Anderson
+Kafka Ingestion Baseline - Staging,9113,"Nov 27, 2023",Casey Green,"Nov 07, 2023",Ethan Hall
+CrowdStrike Connector - Berlin,5265,"Feb 21, 2024",Chloe Adams,"Dec 20, 2022",Quinn Wright
+Policy 941 - Containers MFA Required,6922,"Jun 12, 2024",Aria Brown,"Mar 12, 2024",Leo Green
+Kafka Ingestion Baseline - QA,517,"Jun 22, 2024",Reese Hall,"Apr 23, 2024",Cameron Brown
+ServiceNow Connector - Berlin,9962,"Jul 28, 2024",Riley Roberts,"Apr 04, 2022",Sophia Thomas
+Windows SSH Hardening,2841,"Aug 08, 2025",Leo Lee,"May 08, 2025",Harper Brown
+Endpoints Hardening - Dublin,9197,"May 20, 2025",Kendall Mitchell,"Jul 07, 2023",Jordan Clark
+Endpoints USB Control,9866,"Apr 02, 2025",Mason Thompson,"Aug 06, 2024",Quinn Thompson
+Elastic Agent - Bangalore,4108,"Jun 27, 2025",Elliot Thomas,"Jun 25, 2025",Sam Roberts
+macOS Kernel Module Blocklist,2619,"May 21, 2025",Hayden Thomas,"Nov 09, 2022",Ethan Anderson
+Containers TLS 1.0 Disabled - Prod,8054,"Nov 09, 2020",Emerson Jackson,"Oct 01, 2020",Reese Taylor
+Endpoints Hardening - Tokyo,547,"Jan 01, 2023",Ethan Rodriguez,"May 07, 2022",Reese Turner
+Endpoints Browser Hardening - Dev,8859,"Mar 04, 2025",Isabella Garcia,"Dec 30, 2020",Isla Turner
+Azure Sentinel - London,299,"Dec 29, 2024",Lucas Rodriguez,"Nov 05, 2022",Ella Carter
+CrowdStrike Connector - Austin,257,"Jul 06, 2023",Charlie Collins,"Apr 27, 2020",Drew Allen
+Containers EDR Baseline - Prod,6743,"Feb 23, 2024",Noah Martin,"Jan 21, 2024",Rowan Baker
+Cloud Hardening - Paris,3395,"Nov 24, 2023",Nora Allen,"Sep 01, 2021",Liam Walker
+Containers Hardening - Austin,4868,"Oct 09, 2024",Luna Allen,"Jun 25, 2021",Aiden Lee
+Cloud Audit Logging Level 2 - Dev,1434,"Aug 14, 2025",Zoe Campbell,"Aug 13, 2025",Jamie Thompson
+Containers Hardening - Bangalore,7731,"Aug 26, 2025",Rowan Roberts,"Aug 05, 2024",Reese King
+Network TLS 1.0 Disabled,430,"Dec 15, 2024",Morgan Green,"Sep 21, 2020",Olivia Turner
+Cloud Hardening - Bangalore,4481,"Nov 09, 2024",Skyler Allen,"Mar 20, 2023",Olivia Robinson
+Policy 912 - Windows EDR Baseline,1227,"Aug 30, 2023",Skyler Collins,"Apr 17, 2022",Chris Jackson
+Cloud SSH Hardening,8374,"Apr 13, 2023",Logan Brown,"Jun 05, 2021",Skyler Mitchell
+Containers Zero Trust Tier 1 - Staging,9968,"Jul 16, 2025",Rowan Smith,"Apr 08, 2020",Alex Young
+CrowdStrike Connector Baseline - QA,339,"Nov 16, 2024",Avery Green,"Sep 21, 2021",Nora Johnson
+Windows Secrets Scanning,5570,"Aug 06, 2021",Luna Thompson,"Jan 19, 2021",Amelia Roberts
+macOS Hardening - Tokyo,9788,"Feb 18, 2025",Jamie Anderson,"Dec 17, 2020",Sam White
+Policy 802 - Network Admin Lockdown,411,"Aug 18, 2024",Leo Allen,"May 13, 2021",Casey Evans
+Splunk Forwarder Baseline - Staging,1949,"May 22, 2025",Avery King,"Mar 02, 2022",Charlie Parker
+Containers Hardening - Tokyo,454,"Sep 01, 2024",Drew Walker,"May 24, 2024",Mia Phillips
+Azure Sentinel - Tokyo,8175,"Jun 07, 2025",Leo Evans,"Apr 07, 2023",Henry Mitchell
+Cloud PowerShell Constrained,9960,"Feb 05, 2025",Rowan Allen,"Sep 07, 2023",Isla Taylor
+S3 Ingestion - Sydney,9910,"Mar 04, 2024",Mason Edwards,"Apr 13, 2020",Harper Robinson
+macOS Hardening - Toronto,4960,"Oct 18, 2022",Ethan Wright,"May 08, 2020",Liam Green
+Windows Hardening - Sydney,4211,"Oct 20, 2023",Zoe Martin,"May 17, 2020",Nora Lee
+Policy 543 - macOS Admin Lockdown,1119,"May 11, 2022",Olivia Green,"Jul 30, 2020",Skyler Evans
+ServiceNow Connector - Toronto,8248,"Aug 18, 2022",Jordan Hall,"May 13, 2021",Ella Hall
+Containers Kernel Module Blocklist - QA,1681,"May 16, 2025",Chris Jackson,"Feb 13, 2022",James Evans
+Linux Local Admin Removal,4389,"Aug 17, 2024",Kendall Evans,"Mar 19, 2020",Drew Anderson
+Linux Local Admin Removal - Dev,3091,"Sep 09, 2022",Elliot Harris,"Jun 07, 2021",Avery Hall
+Linux Hardening - Berlin,3245,"Mar 16, 2025",Mason Martin,"Feb 27, 2025",Casey Collins
+Windows Certificate Rotation 90d,6633,"Feb 18, 2025",Harper Clark,"Aug 03, 2024",Noah Green
+CrowdStrike Connector - Sydney,3234,"Nov 17, 2023",Logan Adams,"Jul 23, 2023",Cameron Edwards
+Linux Browser Hardening - Prod,1670,"May 06, 2025",Mia Thomas,"Nov 09, 2024",Aria Scott
+Policy 566 - Linux Audit Logging Level 2,5531,"May 24, 2024",Aria Hall,"Oct 20, 2022",Casey Walker
+CrowdStrike Connector - New York,3973,"Nov 26, 2024",Chris Green,"Jan 09, 2023",Noah Campbell
+Cloud SSH Hardening - Prod,8482,"Nov 28, 2024",Mia Collins,"Nov 16, 2020",Riley Brown
+Containers Zero Trust Tier 1,6620,"Jan 08, 2025",Lucas Anderson,"Dec 17, 2024",Ella Allen
+`
+  },
+  {
+    id: "findings-vluns",
+    label: "Findings Vluns",
+    filename: "findings-vluns.csv",
     contents: `CVE,Title,Risk [c],CVSS [c],CISA KEV [boolean|c],EPSS,Affected Assets [r],Findings [r],First Detected,Last Detected
 CVE-2024-62436,Apache HTTP Server Path Traversal,7.2,3.0,True,0.918,78,20,2024-09-26 06:24:52 PM,2024-10-19 06:24:52 PM
 CVE-2016-15454,Windows SMBv3 Remote Code Execution,6.19,9.8,True,0.081,37,7,2025-05-20 06:24:52 PM,2025-07-06 06:24:52 PM
@@ -70,5 +535,112 @@ CVE-2018-13103,F5 BIG-IP SSRF,9.03,3.9,False,0.674,1,37,2024-08-10 06:24:52 PM,2
 CVE-2023-81025,Drupal Remote Code Execution,5.7,0.2,True,0.545,94,10,2025-04-19 06:24:52 PM,2025-06-03 06:24:52 PM
 CVE-2021-76728,Jenkins Script Console Exposure,0.92,5.0,True,0.743,101,36,2025-02-19 06:24:52 PM,2025-03-15 06:24:52 PM
 CVE-2022-4006,Jira XML External Entity Injection,7.15,7.7,False,0.496,50,6,2024-10-14 06:24:52 PM,2024-10-18 06:24:52 PM`
+  },
+  {
+    id: "r+r-remediations",
+    label: "R+R Remediations",
+    filename: "r+r-remediations.csv",
+    contents: `Type [icon|c],Remediation Name [link],Risk Score [r],Assets [r],Images [r],Vulnerabilites [r],Threat intel [link|r]
+Onprem,Upgrade Go to 4.5.18,775,900,177,901,16
+Onprem,Reconfigure Node.js with secure defaults,851,5076,1152,1433,19
+cloud,Reconfigure Alpine with secure defaults,786,7995,N/A,1050,9
+cloud,Disable TLS 1.0,55,7023,870,464,10
+cloud,Patch OpenSSL to 9.10.6,816,9364,1420,156,0
+Onprem,Enable SELinux,419,7906,1323,905,2
+cloud,Reconfigure OpenSSH with secure defaults,558,4136,150,1209,20
+Onprem,Update container base image to alpine:3.19,937,5881,1093,1195,10
+Onprem,Apply cumulative security update KB8166008 for Windows Server,813,4271,312,801,11
+cloud,Apply Canonical security update KB4045900,944,6956,1338,895,16
+cloud,Apply SUSE security update KB2988694,198,3840,80,784,3
+cloud,Apply cumulative security update KB1382483 for Windows 11,683,8401,1429,955,9
+Onprem,Patch Java JRE to 2.4.16,914,3423,1128,998,5
+cloud,Update EC2 AMI image to 5.11.27,719,1605,1348,1358,9
+Onprem,Enable MFA,629,9108,274,1203,15
+Onprem,Remove vulnerable package and reinstall latest,658,7341,1449,217,16
+Onprem,Remove vulnerable package and reinstall latest,530,6776,778,1413,17
+cloud,Update container base image to distroless:base,741,8442,567,348,7
+cloud,Enable Disk Encryption,860,3334,273,4,6
+Onprem,Reconfigure RabbitMQ with secure defaults,224,31,595,98,15
+cloud,Apply Microsoft security update KB9621654,643,5685,120,89,8
+cloud,Apply cumulative security update KB4876766 for Windows 11,827,2040,1200,1327,20
+Onprem,Update AKS AMI image to 2.0.1,890,6728,1179,914,3
+cloud,Reconfigure Debian with secure defaults,951,6826,1230,1191,2
+cloud,Patch Linux kernel to 2.12.15,919,1387,N/A,1119,20
+cloud,Apply Canonical security update KB1463443,703,6156,1097,462,4
+Onprem,Remove vulnerable package and reinstall latest,828,3647,832,149,9
+cloud,Update container base image to alpine:3.19,227,7729,797,482,13
+cloud,Apply cumulative security update KB6123272 for Windows 10,862,2912,1050,906,0
+cloud,Rotate API keys and credentials,620,8704,477,1226,10
+cloud,Disable TLS 1.0,250,3599,341,485,19
+Onprem,Upgrade OpenJDK to 6.6.18,945,9407,1198,1116,10
+cloud,Enable Secure Boot,853,1158,N/A,401,14
+Onprem,Disable TLS 1.1,861,3847,1310,998,15
+cloud,Apply cumulative security update KB9095322 for Windows 10,877,179,1030,154,9
+Onprem,Reconfigure Alpine with secure defaults,606,3265,1194,619,2
+cloud,Disable FTP,639,377,1341,1170,4
+cloud,Remove vulnerable package and reinstall latest,55,1606,9,780,20
+Onprem,Enable Disk Encryption,259,2113,548,185,5
+Onprem,Patch MongoDB to 10.18.1,943,2270,174,495,2
+Onprem,Apply Oracle security update KB1225138,208,7514,233,867,2
+cloud,Patch Elasticsearch to 9.7.6,601,1735,948,171,7
+cloud,Reconfigure OpenSSL with secure defaults,608,708,1329,1318,11
+Onprem,Reconfigure BusyBox with secure defaults,410,7986,879,49,15
+cloud,Rotate API keys and credentials,856,6863,30,260,15
+Onprem,Apply cumulative security update KB2217534 for Windows 10,565,1459,212,266,13
+Onprem,Rotate API keys and credentials,795,3908,895,528,19
+Onprem,Remove vulnerable package and reinstall latest,37,4906,252,680,12
+Onprem,Patch Windows Server to 2.17.22,883,4201,59,325,8
+Onprem,Rotate API keys and credentials,834,4479,601,836,1
+cloud,Enable MFA,909,5886,73,667,8
+Onprem,Apply Red Hat security update KB8677872,740,6997,N/A,1401,4
+cloud,Remove vulnerable package and reinstall latest,602,4193,106,1058,13
+Onprem,Update App Service AMI image to 10.5.24,811,8819,490,856,7
+Onprem,Update AKS AMI image to 7.16.2,835,3563,1400,497,3
+cloud,Update Cloud Run AMI image to 7.9.4,760,3515,470,1427,9
+cloud,Rotate API keys and credentials,603,5103,1119,266,7
+cloud,Rotate API keys and credentials,626,5457,N/A,730,14
+cloud,Reconfigure Ansible with secure defaults,650,279,1181,160,20
+Onprem,Update EC2 AMI image to 7.18.7,963,3203,703,562,9
+Onprem,Apply cumulative security update KB7971138 for Windows Server,642,9627,1325,571,2
+Onprem,Disable Telnet,901,4981,1230,436,10
+cloud,Update container base image to ubi9,979,8867,649,1233,18
+cloud,Upgrade Docker to 9.18.29,629,675,1331,876,11
+cloud,Apply Red Hat security update KB2129959,818,5090,1242,267,10
+cloud,Update container base image to alpine:3.19,788,8424,N/A,1063,0
+Onprem,Update container base image to ubi9,420,1177,1287,947,13
+cloud,Remove vulnerable package and reinstall latest,629,2820,497,255,2
+Onprem,Update AKS AMI image to 3.19.15,898,3803,449,1216,14
+Onprem,Update EC2 AMI image to 7.4.28,723,886,309,1053,20
+cloud,Upgrade Redis to 1.5.27,866,9383,771,1455,6
+cloud,Patch NGINX to 7.2.7,116,301,253,276,18
+cloud,Upgrade Ubuntu to 8.12.15,0,9675,742,608,2
+cloud,Apply cumulative security update KB9773988 for Windows 11,712,9144,1435,401,20
+cloud,Disable Telnet,887,7726,847,1125,5
+cloud,Upgrade OpenJDK to 5.0.17,366,3587,458,775,4
+cloud,Apply cumulative security update KB7155643 for Windows 11,896,8967,375,1231,14
+Onprem,Upgrade OpenJDK to 4.2.12,682,808,174,893,4
+cloud,Patch Redis to 10.0.22,864,11,N/A,848,3
+cloud,Disable LLMNR,975,3485,123,1395,14
+Onprem,Patch Java JRE to 6.17.5,930,5423,731,1308,17
+cloud,Apply cumulative security update KB5261050 for Windows 11,72,2001,743,474,20
+Onprem,Rotate API keys and credentials,978,1280,936,146,7
+Onprem,Reconfigure Cisco IOS with secure defaults,708,8961,1065,312,20
+cloud,Enable Disk Encryption,528,4601,N/A,1161,1
+cloud,Disable TLS 1.1,713,2433,N/A,501,20
+cloud,Patch OpenSSH to 5.5.19,862,2973,399,143,16
+Onprem,Disable SMBv1,741,874,44,524,10
+cloud,Upgrade .NET Runtime to 5.14.15,843,1343,793,139,12
+Onprem,Update container base image to debian:12,1,6229,1128,1464,20
+cloud,Update container base image to alpine:3.19,980,6396,159,1279,0
+cloud,Rotate API keys and credentials,923,9518,82,405,8
+cloud,Apply Oracle security update KB2721959,601,7495,N/A,1033,20
+Onprem,Apply cumulative security update KB6180131 for Windows 11,860,698,260,818,7
+Onprem,Upgrade OpenJDK to 8.6.5,790,2757,1076,736,0
+Onprem,Patch Apache HTTP Server to 2.5.27,631,6135,341,125,15
+cloud,Rotate API keys and credentials,816,1593,146,282,9
+cloud,Patch Docker to 3.15.3,731,1471,1456,987,12
+cloud,Update container base image to ubi9,732,4757,872,1053,8
+Onprem,Upgrade Kubernetes to 2.10.12,947,8477,1296,286,1
+`
   }
 ]

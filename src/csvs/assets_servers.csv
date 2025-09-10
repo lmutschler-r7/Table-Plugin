@@ -1,0 +1,101 @@
+Name [link],Sources,Hostnames [chip],IP Address(es)[chip],OS Family,Class,Asset Type,Tags [chip],Groups [chip]
+0-net-jump-q.vuln.lax.corp.example,"TenableAsset, CrowdStrikeHost",0-net-jump-q.vuln.lax.corp.example,192.168.246.16,Windows,Server,Server,finance,"VDI, London"
+1-net-bastion-u.corp.blr.corp.example,"TenableAsset, QualysHostAsset",1-net-bastion-u.corp.blr.corp.example,"192.168.214.147, 10.39.107.129",Windows,Server,Server,dev,Lab
+2-sys-mq-s.cloud.iad.corp.example,"Rapid7InsightVMAsset, QualysHostAsset",2-sys-mq-s.cloud.iad.corp.example,10.69.161.209,Linux,Server,Guest,"prod, core","SOX, APAC"
+3-ops-jenkins-u.dmz.par.corp.example,Rapid7InsightVMAsset,3-ops-jenkins-u.dmz.par.corp.example,"172.20.151.56, 172.21.0.16",Windows,Workstation,Server,stage,SOX
+4-web-db-c.svc.lax.corp.example,Rapid7InsightVMAsset,4-web-db-c.svc.lax.corp.example,10.252.55.138,IOS,Workstation,Server,"lon, fra","Kubernetes, APAC"
+5-net-kdc-c.svc.lon.corp.example,TenableAsset,5-net-kdc-c.svc.lon.corp.example,"192.168.196.31, 192.168.136.129",Linux,Server,Server,"web, hipaa",DB Tier
+6-sys-proxy-p.svc.lon.corp.example,"QualysHostAsset, Rapid7IVMAsset",6-sys-proxy-p.svc.lon.corp.example,"10.57.29.40, 172.22.104.235",Linux,Server,Server,backup,"Core, EMEA"
+7-web-proxy-p.vuln.tok.corp.example,"QualysHostAsset, CrowdStrikeHost",7-web-proxy-p.vuln.tok.corp.example,192.168.208.147,Linux,Server,General,"hipaa, par","SF, VDI"
+8-eng-etcd-c.dmz.lax.corp.example,"TenableAsset, CrowdStrikeHost",8-eng-etcd-c.dmz.lax.corp.example,"172.23.133.246, 192.168.188.7",Windows,Server,Server,"oracle, sfo","London, HIPAA"
+9-web-backup-q.svc.sfo.corp.example,CrowdStrikeHost,9-web-backup-q.svc.sfo.corp.example,"172.31.60.13, 10.186.216.20",Linux,Server,Server,"dmz, lon","London, Core"
+10-app-backup-u.svc.dfw.corp.example,"TenableAsset, Rapid7InsightVMAsset",10-app-backup-u.svc.dfw.corp.example,"192.168.173.209, 192.168.186.56",IOS,Server,Server,"syd, qa","PCI, Web Tier"
+11-cis-kong-d.corp.nyc.corp.example,CrowdStrikeHost,11-cis-kong-d.corp.nyc.corp.example,192.168.249.56,IOS,Server,Server,"dev, lab, prod",
+12-app-files-s.vuln.blr.corp.example,Rapid7IVMAsset,12-app-files-s.vuln.blr.corp.example,192.168.62.94,Windows,Server,Server,hr,EMEA
+13-db-jump-p.cloud.par.corp.example,"QualysHostAsset, CrowdStrikeHost",13-db-jump-p.cloud.par.corp.example,172.21.88.175,Windows,Server,Server,"lab, ams, web",Core
+14-eng-proxy-p.svc.dub.corp.example,TenableAsset,14-eng-proxy-p.svc.dub.corp.example,"192.168.106.251, 172.28.180.63",Linux,Server,Server,hipaa,
+15-ops-sso-c.corp.par.corp.example,CrowdStrikeHost,15-ops-sso-c.corp.par.corp.example,"10.82.7.247, 192.168.152.56",Windows,Workstation,Server,"ams, backup","Web Tier, Core"
+16-db-tomcat-u.vuln.fra.corp.example,CrowdStrikeHost,16-db-tomcat-u.vuln.fra.corp.example,"192.168.145.254, 172.18.104.62",Linux,Server,Server,tok,"Lab, DMZ"
+17-app-grafana-p.corp.nyc.corp.example,QualysHostAsset,17-app-grafana-p.corp.nyc.corp.example,"10.40.110.53, 172.22.154.214",Linux,Server,Server,fra,"EMEA, SF"
+18-ops-jump-c.dmz.sin.corp.example,"TenableAsset, CrowdStrikeHost",18-ops-jump-c.dmz.sin.corp.example,"10.171.203.117, 172.23.151.154",Linux,Server,General,"hipaa, dev, ams",
+19-eng-jenkins-q.corp.lon.corp.example,"TenableAsset, Rapid7IVMAsset",19-eng-jenkins-q.corp.lon.corp.example,"10.3.19.180, 172.22.109.66",Linux,Server,Server,"par, stage, prod",
+20-web-kong-u.corp.ams.corp.example,"QualysHostAsset, Rapid7IVMAsset",20-web-kong-u.corp.ams.corp.example,"172.16.238.228, 192.168.98.140",Linux,Workstation,Server,dub,"London, SOX"
+21-ops-backup-p.dmz.blr.corp.example,Rapid7InsightVMAsset,21-ops-backup-p.dmz.blr.corp.example,"172.21.230.96, 172.23.216.98",Linux,Server,Guest,oracle,"SF, VDI"
+22-web-sso-c.corp.par.corp.example,Rapid7IVMAsset,22-web-sso-c.corp.par.corp.example,10.42.243.176,Linux,Server,Server,blr,Backups
+23-db-ldap-u.vuln.ams.corp.example,"TenableAsset, Rapid7InsightVMAsset",23-db-ldap-u.vuln.ams.corp.example,172.20.169.49,Linux,Server,General,"oracle, web","DMZ, App Tier"
+24-net-backup-d.vuln.tok.corp.example,"CrowdStrikeHost, QualysHostAsset",24-net-backup-d.vuln.tok.corp.example,"10.2.92.37, 192.168.32.168",Windows,Workstation,General,"pci, par, hipaa",
+25-eng-api-p.dmz.cdg.corp.example,Rapid7InsightVMAsset,25-eng-api-p.dmz.cdg.corp.example,172.26.79.53,Windows,Server,Server,"app, ams, sap",Lab
+26-db-sso-u.corp.blr.corp.example,QualysHostAsset,26-db-sso-u.corp.blr.corp.example,"172.21.154.212, 192.168.191.24",Linux,Server,Server,prod,"DB Tier, Staging"
+27-eng-proxy-s.vuln.sin.corp.example,CrowdStrikeHost,27-eng-proxy-s.vuln.sin.corp.example,192.168.223.211,IOS,Server,Guest,blr,
+28-sys-db-q.cloud.cdg.corp.example,"CrowdStrikeHost, QualysHostAsset",28-sys-db-q.cloud.cdg.corp.example,10.93.173.80,Linux,Server,Guest,"db, blr","Shared Services, Prod"
+29-web-jenkins-d.corp.sfo.corp.example,"TenableAsset, Rapid7IVMAsset",29-web-jenkins-d.corp.sfo.corp.example,"192.168.36.59, 192.168.137.81",Linux,Server,Guest,"hipaa, pci",
+30-app-kdc-d.cloud.dfw.corp.example,CrowdStrikeHost,30-app-kdc-d.cloud.dfw.corp.example,"10.60.222.184, 192.168.214.207",Linux,Server,Server,"syd, stage, hr",New York
+31-sys-jenkins-s.corp.sfo.corp.example,Rapid7IVMAsset,31-sys-jenkins-s.corp.sfo.corp.example,10.173.123.160,Linux,Server,Server,"oracle, sap, backup",Web Tier
+32-ops-jump-q.dmz.par.corp.example,"Rapid7InsightVMAsset, Rapid7IVMAsset",32-ops-jump-q.dmz.par.corp.example,"192.168.202.208, 10.246.118.238",Linux,Server,Server,"blr, fra, k8s","DMZ, Backups"
+33-db-db-s.corp.nyc.corp.example,TenableAsset,33-db-db-s.corp.nyc.corp.example,"10.20.144.6, 10.236.1.208",Linux,Server,Server,dub,"Lab, EMEA"
+34-net-cache-q.svc.blr.corp.example,TenableAsset,34-net-cache-q.svc.blr.corp.example,172.24.150.225,Linux,Server,Guest,"tok, nyc, prod","Web Tier, App Tier"
+35-ops-db-c.dmz.nyc.corp.example,"Rapid7InsightVMAsset, TenableAsset",35-ops-db-c.dmz.nyc.corp.example,"192.168.213.189, 10.139.38.252",Windows,Server,General,"fra, core, sap",Web Tier
+36-eng-ldap-s.dmz.dfw.corp.example,Rapid7InsightVMAsset,36-eng-ldap-s.dmz.dfw.corp.example,10.20.175.168,Linux,Server,Server,"app, tok",HIPAA
+37-sys-backup-u.svc.fra.corp.example,CrowdStrikeHost,37-sys-backup-u.svc.fra.corp.example,192.168.203.72,Windows,Server,Server,"backup, pci",EMEA
+38-app-kibana-u.cloud.dfw.corp.example,"TenableAsset, CrowdStrikeHost",38-app-kibana-u.cloud.dfw.corp.example,"192.168.115.183, 10.103.50.179",Windows,Server,Server,"web, stage, prod",Lab
+39-web-kibana-s.dmz.blr.corp.example,"Rapid7InsightVMAsset, TenableAsset",39-web-kibana-s.dmz.blr.corp.example,172.20.17.28,Linux,Server,Server,"hipaa, core, backup",
+40-ops-bastion-s.dmz.lon.corp.example,TenableAsset,40-ops-bastion-s.dmz.lon.corp.example,"172.20.184.56, 10.25.188.135",Linux,Server,Server,"hipaa, stage, prod",Backups
+41-sys-nginx-c.corp.dub.corp.example,"CrowdStrikeHost, TenableAsset",41-sys-nginx-c.corp.dub.corp.example,"172.23.237.55, 192.168.240.247",Windows,Server,Server,prod,"PCI, Staging"
+42-cis-grafana-q.svc.nyc.corp.example,TenableAsset,42-cis-grafana-q.svc.nyc.corp.example,"192.168.247.110, 192.168.40.210",Windows,Server,Server,dmz,London
+43-eng-es-p.vuln.syd.corp.example,QualysHostAsset,43-eng-es-p.vuln.syd.corp.example,"10.225.28.185, 172.22.250.192",Windows,Server,General,"web, finance",
+44-sec-api-s.svc.par.corp.example,QualysHostAsset,44-sec-api-s.svc.par.corp.example,172.20.251.32,Windows,Workstation,Server,"dev, blr",
+45-net-es-u.dmz.fra.corp.example,"Rapid7IVMAsset, TenableAsset",45-net-es-u.dmz.fra.corp.example,"192.168.194.222, 172.30.172.195",Linux,Server,General,"sap, pci",Prod
+46-eng-kibana-p.dmz.tok.corp.example,CrowdStrikeHost,46-eng-kibana-p.dmz.tok.corp.example,172.20.150.69,Windows,Server,Guest,"syd, oracle, core","DB Tier, Web Tier"
+47-ops-kdc-p.cloud.ord.corp.example,QualysHostAsset,47-ops-kdc-p.cloud.ord.corp.example,10.209.100.201,Linux,Server,Server,"hipaa, sfo","App Tier, HIPAA"
+48-ops-es-q.svc.sfo.corp.example,TenableAsset,48-ops-es-q.svc.sfo.corp.example,172.27.45.164,Linux,Server,Server,fra,Core
+49-db-sso-d.vuln.iad.corp.example,"QualysHostAsset, TenableAsset",49-db-sso-d.vuln.iad.corp.example,172.23.93.12,Windows,Server,Server,prod,
+50-web-kibana-p.dmz.tok.corp.example,CrowdStrikeHost,50-web-kibana-p.dmz.tok.corp.example,192.168.25.254,Windows,Server,Server,"dev, lab, lon",
+51-sys-tomcat-u.cloud.cdg.corp.example,"TenableAsset, QualysHostAsset",51-sys-tomcat-u.cloud.cdg.corp.example,"192.168.234.235, 172.27.183.143",Windows,Workstation,Server,tok,
+52-ops-sso-q.dmz.iad.corp.example,QualysHostAsset,52-ops-sso-q.dmz.iad.corp.example,10.164.69.126,Windows,Server,General,"sox, lab, web","Core, APAC"
+53-db-sso-c.dmz.dub.corp.example,"Rapid7IVMAsset, CrowdStrikeHost",53-db-sso-c.dmz.dub.corp.example,"10.214.224.138, 172.22.155.65",Linux,Server,Server,"oracle, blr, nyc","Core, Prod"
+54-sec-db-d.corp.sin.corp.example,Rapid7InsightVMAsset,54-sec-db-d.corp.sin.corp.example,172.24.32.165,Linux,Server,Server,"dmz, lon","EMEA, HIPAA"
+55-db-kdc-p.svc.iad.corp.example,"QualysHostAsset, Rapid7IVMAsset",55-db-kdc-p.svc.iad.corp.example,10.99.116.79,Linux,Server,Server,"lon, dev, lab",Staging
+56-eng-jenkins-d.corp.ams.corp.example,"Rapid7InsightVMAsset, TenableAsset",56-eng-jenkins-d.corp.ams.corp.example,172.23.78.195,Linux,Server,Server,prod,Lab
+57-sys-sso-p.corp.sin.corp.example,Rapid7IVMAsset,57-sys-sso-p.corp.sin.corp.example,192.168.76.27,Linux,Server,Server,sfo,
+58-app-jump-q.cloud.ams.corp.example,"Rapid7IVMAsset, Rapid7InsightVMAsset",58-app-jump-q.cloud.ams.corp.example,"172.23.71.37, 192.168.106.160",Linux,Server,Server,"core, db, hr",
+59-ops-etcd-c.svc.sfo.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",59-ops-etcd-c.svc.sfo.corp.example,"10.42.123.26, 10.234.253.140",Windows,Server,Server,"sap, par, web",
+60-eng-kibana-s.corp.tok.corp.example,"CrowdStrikeHost, TenableAsset",60-eng-kibana-s.corp.tok.corp.example,192.168.54.68,Linux,Server,Server,backup,"Prod, Web Tier"
+61-cis-es-u.cloud.iad.corp.example,"Rapid7InsightVMAsset, CrowdStrikeHost",61-cis-es-u.cloud.iad.corp.example,"192.168.182.153, 10.184.8.149",Windows,Server,Server,"finance, oracle, sap",
+62-web-sso-u.svc.sin.corp.example,"Rapid7InsightVMAsset, TenableAsset",62-web-sso-u.svc.sin.corp.example,"172.26.158.75, 10.160.84.25",Linux,Server,Server,"backup, db, lab",App Tier
+63-web-files-p.corp.syd.corp.example,"Rapid7IVMAsset, CrowdStrikeHost",63-web-files-p.corp.syd.corp.example,192.168.102.84,Linux,Workstation,Server,"dmz, ams","SF, Shared Services"
+64-db-etcd-q.dmz.dfw.corp.example,QualysHostAsset,64-db-etcd-q.dmz.dfw.corp.example,"10.247.149.153, 172.20.142.67",Windows,Server,Server,ams,Shared Services
+65-net-kong-d.cloud.tok.corp.example,"CrowdStrikeHost, Rapid7InsightVMAsset",65-net-kong-d.cloud.tok.corp.example,172.29.169.137,Windows,Server,Server,"db, dub",
+66-db-grafana-c.dmz.ams.corp.example,"QualysHostAsset, TenableAsset",66-db-grafana-c.dmz.ams.corp.example,172.28.15.231,Windows,Server,General,"oracle, web, sfo","SF, SOX"
+67-db-jenkins-q.vuln.iad.corp.example,"CrowdStrikeHost, Rapid7IVMAsset",67-db-jenkins-q.vuln.iad.corp.example,10.140.240.210,Windows,Workstation,Server,core,
+68-db-es-d.svc.sin.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",68-db-es-d.svc.sin.corp.example,192.168.48.138,Windows,Server,Server,k8s,New York
+69-ops-kong-d.cloud.dub.corp.example,"Rapid7IVMAsset, QualysHostAsset",69-ops-kong-d.cloud.dub.corp.example,"192.168.187.118, 10.77.53.182",Windows,Server,Server,"dmz, sox","EMEA, HIPAA"
+70-cis-jenkins-q.cloud.lax.corp.example,CrowdStrikeHost,70-cis-jenkins-q.cloud.lax.corp.example,10.68.212.250,Linux,Workstation,General,"pci, core",
+71-web-db-s.cloud.lax.corp.example,"CrowdStrikeHost, QualysHostAsset",71-web-db-s.cloud.lax.corp.example,192.168.85.128,Linux,Workstation,Server,dev,
+72-cis-bastion-s.corp.lax.corp.example,Rapid7InsightVMAsset,72-cis-bastion-s.corp.lax.corp.example,172.19.69.222,Linux,Server,Server,"nyc, dub, finance","HIPAA, DMZ"
+73-cis-kdc-s.svc.dub.corp.example,TenableAsset,73-cis-kdc-s.svc.dub.corp.example,172.22.4.72,Windows,Server,General,"core, syd",
+74-app-bastion-p.dmz.tok.corp.example,"CrowdStrikeHost, QualysHostAsset",74-app-bastion-p.dmz.tok.corp.example,"192.168.124.44, 192.168.125.209",Linux,Server,Server,dmz,"VDI, Staging"
+75-sec-kdc-c.cloud.sfo.corp.example,QualysHostAsset,75-sec-kdc-c.cloud.sfo.corp.example,172.19.133.122,Linux,Server,Server,"db, dev, oracle",SOX
+76-db-nginx-p.cloud.sfo.corp.example,CrowdStrikeHost,76-db-nginx-p.cloud.sfo.corp.example,"192.168.206.198, 192.168.193.168",Windows,Server,Server,"pci, nyc",DMZ
+77-web-etcd-c.svc.sin.corp.example,"CrowdStrikeHost, QualysHostAsset",77-web-etcd-c.svc.sin.corp.example,192.168.150.1,Windows,Server,Server,"prod, k8s","Core, App Tier"
+78-eng-ldap-c.cloud.blr.corp.example,CrowdStrikeHost,78-eng-ldap-c.cloud.blr.corp.example,192.168.32.117,Linux,Server,Server,"sox, tok",Backups
+79-eng-sso-q.dmz.sfo.corp.example,QualysHostAsset,79-eng-sso-q.dmz.sfo.corp.example,172.24.195.9,Windows,Server,General,oracle,Web Tier
+80-cis-sso-d.cloud.dub.corp.example,"QualysHostAsset, CrowdStrikeHost",80-cis-sso-d.cloud.dub.corp.example,"10.55.130.190, 172.20.128.52",Linux,Server,Server,"k8s, pci, db",
+81-cis-db-c.corp.nyc.corp.example,QualysHostAsset,81-cis-db-c.corp.nyc.corp.example,172.27.71.131,Linux,Server,Server,oracle,"New York, SF"
+82-db-sso-s.svc.lax.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",82-db-sso-s.svc.lax.corp.example,"192.168.152.175, 10.53.81.139",Linux,Server,Server,"finance, prod",New York
+83-app-api-u.vuln.cdg.corp.example,"Rapid7IVMAsset, TenableAsset",83-app-api-u.vuln.cdg.corp.example,"192.168.77.67, 192.168.24.18",Windows,Server,Guest,k8s,London
+84-eng-etcd-u.dmz.tok.corp.example,"TenableAsset, Rapid7IVMAsset",84-eng-etcd-u.dmz.tok.corp.example,172.24.91.155,Windows,Server,Server,"fra, prod",PCI
+85-app-api-q.corp.lax.corp.example,"Rapid7IVMAsset, Rapid7InsightVMAsset",85-app-api-q.corp.lax.corp.example,"192.168.230.250, 172.17.120.121",Windows,Server,Server,prod,DMZ
+86-sys-grafana-c.cloud.ord.corp.example,Rapid7IVMAsset,86-sys-grafana-c.cloud.ord.corp.example,"172.29.228.29, 192.168.61.52",Linux,Server,General,"dev, sfo",PCI
+87-cis-files-u.dmz.syd.corp.example,"Rapid7IVMAsset, QualysHostAsset",87-cis-files-u.dmz.syd.corp.example,"10.169.147.233, 10.109.153.252",Windows,Server,Server,"db, sfo, syd",
+88-sec-kibana-d.corp.syd.corp.example,"QualysHostAsset, Rapid7InsightVMAsset",88-sec-kibana-d.corp.syd.corp.example,192.168.186.86,Linux,Server,Server,syd,SF
+89-db-sso-d.cloud.sfo.corp.example,"TenableAsset, QualysHostAsset",89-db-sso-d.cloud.sfo.corp.example,192.168.85.129,Linux,Server,Server,"lon, hr, stage",Prod
+90-sys-backup-c.vuln.lon.corp.example,"TenableAsset, QualysHostAsset",90-sys-backup-c.vuln.lon.corp.example,"10.11.22.134, 192.168.143.230",Linux,Server,Server,"prod, dmz",DB Tier
+91-app-kong-c.dmz.ord.corp.example,"Rapid7IVMAsset, QualysHostAsset",91-app-kong-c.dmz.ord.corp.example,10.167.163.36,Linux,Server,Guest,oracle,
+92-web-es-p.corp.lon.corp.example,"Rapid7InsightVMAsset, TenableAsset",92-web-es-p.corp.lon.corp.example,172.17.127.238,Windows,Server,Server,"backup, finance, ams",
+93-db-nginx-c.dmz.ams.corp.example,"CrowdStrikeHost, Rapid7InsightVMAsset",93-db-nginx-c.dmz.ams.corp.example,"172.16.193.150, 172.22.193.155",Linux,Server,Server,"core, qa",
+94-web-tomcat-u.cloud.fra.corp.example,"CrowdStrikeHost, TenableAsset",94-web-tomcat-u.cloud.fra.corp.example,"172.22.166.198, 172.18.21.58",Windows,Server,Server,dub,SOX
+95-cis-cache-d.dmz.cdg.corp.example,Rapid7InsightVMAsset,95-cis-cache-d.dmz.cdg.corp.example,192.168.249.195,Linux,Server,General,"sfo, lab",EMEA
+96-eng-ldap-u.corp.syd.corp.example,Rapid7InsightVMAsset,96-eng-ldap-u.corp.syd.corp.example,10.166.238.119,Linux,Server,Server,"fra, sap",HIPAA
+97-app-backup-d.svc.syd.corp.example,CrowdStrikeHost,97-app-backup-d.svc.syd.corp.example,10.184.58.136,Linux,Server,General,dmz,"APAC, London"
+98-net-grafana-u.dmz.lax.corp.example,Rapid7InsightVMAsset,98-net-grafana-u.dmz.lax.corp.example,172.20.229.9,Linux,Server,Server,"syd, prod, db","HIPAA, Web Tier"
+99-sec-jump-q.svc.dfw.corp.example,"TenableAsset, CrowdStrikeHost",99-sec-jump-q.svc.dfw.corp.example,192.168.16.181,Linux,Server,Server,"web, dmz",London
