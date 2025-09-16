@@ -41,9 +41,9 @@ Low,Exploit Kit Payload Blocked by EDR,Investigating,FALSE,1 days,Malicious,Unkn
 Critical,Abnormal Cloud Resource Creation Pattern,Closed,TRUE,2 hours,Malicious,Benign,7,Isla Brown,07/03/2025 07:37:23 AM,,ARAR-4426,`
   },
   {
-    id: "assets_servers",
+    id: "assets-servers",
     label: "Assets Servers",
-    filename: "assets_servers.csv",
+    filename: "assets-servers.csv",
     contents: `Name [link],Sources,Hostnames [chip],IP Address(es)[chip],OS Family,Class,Asset Type,Tags [chip],Groups [chip]
 0-net-jump-q.vuln.lax.corp.example,"TenableAsset, CrowdStrikeHost",0-net-jump-q.vuln.lax.corp.example,192.168.246.16,Windows,Server,Server,finance,"VDI, London"
 1-net-bastion-u.corp.blr.corp.example,"TenableAsset, QualysHostAsset",1-net-bastion-u.corp.blr.corp.example,"192.168.214.147, 10.39.107.129",Windows,Server,Server,dev,Lab
@@ -148,9 +148,9 @@ Critical,Abnormal Cloud Resource Creation Pattern,Closed,TRUE,2 hours,Malicious,
 `
   },
   {
-    id: "assets_storage",
+    id: "assets-storage",
     label: "Assets Storage",
-    filename: "assets_storage.csv",
+    filename: "assets-storage.csv",
     contents: `Name [link],Virtualized [boolean],Public [boolean],Active [boolean],Encrypted [boolean],Sensitive [boolean],Tags [chip],Groups [chip]
 foxtrot-orion-charlie-id640,False,False,True,True,False,prod,"Data Lake, Object Storage"
 cold-apollo-id931,True,False,True,True,True,pci,
@@ -255,9 +255,9 @@ silver-hot-vault-keywfd,True,False,False,True,False,sox,"HIPAA, Regional US"
 `
   },
   {
-    id: "data-agents-agents",
-    label: "Data Agents Agents",
-    filename: "data-agents-agents.csv",
+    id: "data connectors-agents agents",
+    label: "Data Connectors Agents Agents",
+    filename: "data connectors-agents agents.csv",
     contents: `Agent ID,Hostname,Status [status],Antivirus Health [status],Connection,Group [chip],Last Seen,Version
 8CfFRvJRYJo1cuvm7NgV,SERVER-20,Idle,Good,Direct to platform,IT Admins,2025-07-07,1.11.5
 WmJUGj7mmQbrLQdv1J03,SERVER-02,Idle,Good,,Berlin Lab,2024-07-10,4.2.0
@@ -292,9 +292,9 @@ J6Vxti4WdDQakDUOb151,k8s-node-149,Online,Not monitored,Direct to platform,HR,202
 `
   },
   {
-    id: "data-agents-groups",
-    label: "Data Agents Groups",
-    filename: "data-agents-groups.csv",
+    id: "data connectors-agents groups",
+    label: "Data Connectors Agents Groups",
+    filename: "data connectors-agents groups.csv",
     contents: `Name,Agents [r],Exclusions [chip],Last Modified,Modified by [chip],Created on,Created by [chip],Version [r]
 Workstations - Dev,7570,devtools,"Jul 17, 2025 at 12:20 AM UTC",Mia Young,"Jul 11, 2021 at 05:21 AM UTC",pbrown,2.13.9
 Android Agents - Dublin,7047,usb,"Feb 01, 2024 at 02:08 PM UTC",Emma Johnson,"Jan 26, 2023 at 10:17 PM UTC",hwright,2.3.1
@@ -399,9 +399,9 @@ Edge - Staging,6023,,"Mar 13, 2024 at 11:57 PM UTC",Drew Allen,"Mar 21, 2023 at 
 `
   },
   {
-    id: "data-agents-policies",
-    label: "Data Agents Policies",
-    filename: "data-agents-policies.csv",
+    id: "data connectors-agents policies",
+    label: "Data Connectors Agents Policies",
+    filename: "data connectors-agents policies.csv",
     contents: `Name [link],Agents [r],Last Modified,Modified by [chip],Created on,Created by [chip]
 Linux Zero Trust Tier 1,5787,"May 24, 2024",Liam Taylor,"Feb 19, 2024",Kendall Adams
 CrowdStrike Connector - Toronto,8296,"Nov 22, 2024",Rowan Allen,"Mar 17, 2024",Ethan Collins
@@ -537,9 +537,9 @@ CVE-2021-76728,Jenkins Script Console Exposure,0.92,5.0,True,0.743,101,36,2025-0
 CVE-2022-4006,Jira XML External Entity Injection,7.15,7.7,False,0.496,50,6,2024-10-14 06:24:52 PM,2024-10-18 06:24:52 PM`
   },
   {
-    id: "r+r-remediations",
-    label: "R+R Remediations",
-    filename: "r+r-remediations.csv",
+    id: "remediations-remediations",
+    label: "Remediations Remediations",
+    filename: "remediations-remediations.csv",
     contents: `Type [icon|c],Remediation Name [link],Risk Score [r],Assets [r],Images [r],Vulnerabilites [r],Threat intel [link|r]
 Onprem,Upgrade Go to 4.5.18,775,900,177,901,16
 Onprem,Reconfigure Node.js with secure defaults,851,5076,1152,1433,19
