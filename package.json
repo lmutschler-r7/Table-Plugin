@@ -21,8 +21,8 @@
     "editorType": [
       "figma"
     ],
-    "id": "leanders-tables",
-    "name": "Leanders Tables",
+    "id": "snap-table",
+    "name": "SnapTable",
     "main": "src/main.ts",
     "ui": "src/ui.tsx"
   }
