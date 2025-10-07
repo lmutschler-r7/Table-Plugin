@@ -1,4 +1,4 @@
-Name [link],Virtualized [boolean],Public [boolean],Active [boolean],Encrypted [boolean],Sensitive [boolean],Tags [chip],Groups [chip]
+Name [link],Virtualized [boolean|c],Public [boolean|c],Active [boolean|c],Encrypted [boolean|c],Sensitive [boolean|c],Tags [chip],Groups [chip]
 foxtrot-orion-charlie-id640,False,False,True,True,False,prod,"Data Lake, Object Storage"
 cold-apollo-id931,True,False,True,True,True,pci,
 images-orion-id239,True,False,True,True,False,"datahub, lake","HR Data, HIPAA"
