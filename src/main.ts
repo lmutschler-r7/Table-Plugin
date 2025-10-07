@@ -4,7 +4,7 @@ import { on, showUI } from '@create-figma-plugin/utilities'
    Window
 ============================================================ */
 export default function () {
-  showUI({ width: 360, height: 500, title: 'Leanders Tables' })
+  showUI({ width: 360, height: 500, title: 'SnapTable' })
 }
 
 /* ============================================================
