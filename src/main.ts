@@ -526,8 +526,8 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
     const booleanMaster = await figma.importComponentByKeyAsync(BOOLEAN_COMPONENT_KEY).catch(() => null)
     const iconMaster    = await figma.importComponentByKeyAsync(ICON_COMPONENT_KEY).catch(() => null) // NEW
 
-    const headerHeight = 56
-    const rowHeight = 40
+    const headerHeight = 55
+    const rowHeight = 51
     const cellHPad = 10
 
     const isChipsCol     = headers.map(h => headerHasChips(h))
