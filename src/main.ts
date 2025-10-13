@@ -660,6 +660,8 @@ if (iconMaster) {
     table.counterAxisSizingMode = 'AUTO'
     table.itemSpacing = 0
     table.fills = []
+    // Ensure canvas stacking: First on top
+    table.itemReverseZIndex = true
 
     // Build a row
     const buildRow = (values: string[], opts: { header: boolean }) => {
@@ -749,17 +751,37 @@ if (iconMaster) {
       return row
     }
 
-    // Header + divider + rows
+    // Create body (rows + their dividers) container with Auto Layout, hug both axes
+    const body = figma.createFrame()
+    body.name = 'rows'
+    body.layoutMode = 'VERTICAL'
+    body.primaryAxisSizingMode = 'AUTO'
+    body.counterAxisSizingMode = 'AUTO'
+    body.itemSpacing = 0
+    body.fills = []
+
+    // Header + divider + body
     const headerRow = buildRow(headers, { header: true })
-    table.appendChild(headerRow)
-    table.appendChild(createDivider(dividerVar, tableWidth))
+    const header = figma.createFrame()
+    header.name = 'header'
+    header.layoutMode = 'VERTICAL'
+    header.primaryAxisSizingMode = 'AUTO'
+    header.counterAxisSizingMode = 'AUTO'
+    header.itemSpacing = 0
+    header.fills = []
+    header.appendChild(headerRow)
+    header.appendChild(createDivider(dividerVar, tableWidth))
+    table.appendChild(header)
 
     for (let i = 0; i < finalRows.length; i++) {
       const vals = headers.map(h => (finalRows[i][h] ?? '').trim())
       const rowNode = buildRow(vals, { header: false })
-      table.appendChild(rowNode)
-      if (i < finalRows.length - 1) table.appendChild(createDivider(dividerVar, tableWidth))
+      body.appendChild(rowNode)
+      if (i < finalRows.length - 1) body.appendChild(createDivider(dividerVar, tableWidth))
     }
+
+    // Append body after rows
+    table.appendChild(body)
 
     // Place table
     const container = getSelectedContainer()
