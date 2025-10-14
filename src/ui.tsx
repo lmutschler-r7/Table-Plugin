@@ -588,6 +588,7 @@ function Plugin() {
   const [selectedHeaders, setSelectedHeaders] = useState<string[]>([])
   const [sort, setSort] = useState<SortState>({ by: null, dir: null })
   const [rowLimit, setRowLimit] = useState<number>(50)
+  const [includeCheckboxes, setIncludeCheckboxes] = useState<boolean>(true)
 
   const ready = headers.length > 0
 
@@ -720,7 +721,7 @@ function Plugin() {
       selectedHeaders.forEach((h) => (o[h] = r[h] ?? ''))
       return o
     })
-    emit('CSV_PARSED', { headers: selectedHeaders, rows: filteredRows, sort, rowLimit })
+    emit('CSV_PARSED', { headers: selectedHeaders, rows: filteredRows, sort, rowLimit, includeCheckboxes })
   }
 
   return (
@@ -757,6 +758,15 @@ function Plugin() {
       <RowCountSelect value={rowLimit} onChange={setRowLimit} />
 
       <VerticalSpace space="small" />
+
+      <Divider />
+      <VerticalSpace space="small" />
+      <label style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}} onClick={() => setIncludeCheckboxes(v => !v)}>
+        <img src={includeCheckboxes ? CheckSvg : EmptySvg} width={20} height={20} alt="" style={{opacity: includeCheckboxes ? 1 : 0.7}} />
+        <span style={{fontSize:12}}>include checkboxes</span>
+      </label>
+      <VerticalSpace space="small" />
+
 
       {/* Generate button */}
       <button
