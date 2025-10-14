@@ -18,8 +18,6 @@ const CHIP_COMPONENT_KEY    = '441c3a585ec17f2b8df3cea23534e2013c52d689'
 const STATUS_COMPONENT_KEY  = '2cf7906934e7fb65b2bdf0a5c04665a8799d3abd'
 const BOOLEAN_COMPONENT_KEY = '56f45b798f25a8d9aa2b473a21388cdf72f78eee'
 const ICON_COMPONENT_KEY    = '01d64e52cc1ffc2be8c162efda6a08dd444e4363'   // NEW
-const HEADER_CHECKBOX_COMPONENT_KEY = 'c181a1d687cdccce31a7998c73409a64c0e32ee6'
-const ROW_CHECKBOX_COMPONENT_KEY    = '9a42239aeedca11121258403b4ffae35363e4c51'
 
 /* ============================================================
    Types
@@ -33,8 +31,6 @@ type CsvParsedPayload = {
   headers: string[]
   rows: CsvRow[]
   sort?: SortState
-  rowLimit?: number
-  includeCheckboxes?: boolean
 }
 
 type CsvParsedEvent = {
@@ -514,7 +510,7 @@ function makeComparator(
 /* ============================================================
    Table builder
 ============================================================ */
-on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes }) => {
+on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
   try {
     // Fonts
     await figma.loadFontAsync({ family: 'Inter', style: 'Regular' })
@@ -529,8 +525,6 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes
     const statusMaster  = await figma.importComponentByKeyAsync(STATUS_COMPONENT_KEY).catch(() => null)
     const booleanMaster = await figma.importComponentByKeyAsync(BOOLEAN_COMPONENT_KEY).catch(() => null)
     const iconMaster    = await figma.importComponentByKeyAsync(ICON_COMPONENT_KEY).catch(() => null) // NEW
-    const headerCheckboxMaster = await figma.importComponentByKeyAsync(HEADER_CHECKBOX_COMPONENT_KEY).catch(() => null)
-    const rowCheckboxMaster    = await figma.importComponentByKeyAsync(ROW_CHECKBOX_COMPONENT_KEY).catch(() => null)
 
     const headerHeight = 55
     const rowHeight = 51
@@ -666,8 +660,6 @@ if (iconMaster) {
     table.counterAxisSizingMode = 'AUTO'
     table.itemSpacing = 0
     table.fills = []
-    // Ensure canvas stacking: First on top
-    table.itemReverseZIndex = true
 
     // Build a row
     const buildRow = (values: string[], opts: { header: boolean }) => {
@@ -757,101 +749,17 @@ if (iconMaster) {
       return row
     }
 
-    // Create body (rows + their dividers) container with Auto Layout, hug both axes
-    const body = figma.createFrame()
-    body.name = 'rows'
-    body.layoutMode = 'VERTICAL'
-    body.primaryAxisSizingMode = 'AUTO'
-    body.counterAxisSizingMode = 'AUTO'
-    body.itemSpacing = 0
-    body.fills = []
-
-    // Header group with first divider
+    // Header + divider + rows
     const headerRow = buildRow(headers, { header: true })
-    const header = figma.createFrame()
-    header.name = 'header'
-    header.layoutMode = 'VERTICAL'
-    header.primaryAxisSizingMode = 'AUTO'
-    header.counterAxisSizingMode = 'AUTO'
-    header.itemSpacing = 0
-    header.fills = []
-    header.appendChild(headerRow)
-    header.appendChild(createDivider(dividerVar, tableWidth))
-    table.appendChild(header)
+    table.appendChild(headerRow)
+    table.appendChild(createDivider(dividerVar, tableWidth))
 
-    // Rows + between-row dividers
     for (let i = 0; i < finalRows.length; i++) {
       const vals = headers.map(h => (finalRows[i][h] ?? '').trim())
       const rowNode = buildRow(vals, { header: false })
-      body.appendChild(rowNode)
-      if (i < finalRows.length - 1) body.appendChild(createDivider(dividerVar, tableWidth))
+      table.appendChild(rowNode)
+      if (i < finalRows.length - 1) table.appendChild(createDivider(dividerVar, tableWidth))
     }
-    table.appendChild(body)
-
-    // Optional checkbox column
-    if (includeCheckboxes) {
-      // Pad table left for column
-      table.paddingLeft = 64
-      const checkboxCol = figma.createFrame()
-      checkboxCol.name = 'checkbox column'
-      checkboxCol.layoutMode = 'VERTICAL'
-      checkboxCol.primaryAxisSizingMode = 'AUTO'
-      checkboxCol.counterAxisSizingMode = 'AUTO'
-      checkboxCol.itemSpacing = 0
-      checkboxCol.fills = []
-
-      // Header checkbox cell
-      const headerCell = figma.createFrame()
-      headerCell.name = 'checkbox header cell'
-      headerCell.layoutMode = 'HORIZONTAL'
-      headerCell.primaryAxisSizingMode = 'FIXED'
-      headerCell.counterAxisSizingMode = 'FIXED'
-      headerCell.counterAxisAlignItems = 'CENTER'
-      headerCell.primaryAxisAlignItems = 'MIN'
-      headerCell.paddingLeft = 14
-      headerCell.fills = []
-      headerCell.resize(64, 55)
-      if (headerCheckboxMaster) {
-        const inst = headerCheckboxMaster.createInstance()
-        inst.name = 'header-checkbox'
-        ;(inst as SceneNode).layoutAlign = 'MIN'
-        headerCell.appendChild(inst)
-      }
-      checkboxCol.appendChild(headerCell)
-      // Divider after header
-      checkboxCol.appendChild(createDivider(dividerVar, 64))
-
-      // Row checkbox cells
-      for (let i = 0; i < finalRows.length; i++) {
-        const cell = figma.createFrame()
-        cell.name = 'checkbox cell'
-        cell.layoutMode = 'HORIZONTAL'
-        cell.primaryAxisSizingMode = 'FIXED'
-        cell.counterAxisSizingMode = 'FIXED'
-        cell.counterAxisAlignItems = 'CENTER'
-        cell.primaryAxisAlignItems = 'MIN'
-        cell.paddingLeft = 14
-        cell.fills = []
-        cell.resize(64, 51)
-        if (rowCheckboxMaster) {
-          const inst = rowCheckboxMaster.createInstance()
-          inst.name = 'row-checkbox'
-          ;(inst as SceneNode).layoutAlign = 'MIN'
-          cell.appendChild(inst)
-        }
-        checkboxCol.appendChild(cell)
-        if (i < finalRows.length - 1) {
-          checkboxCol.appendChild(createDivider(dividerVar, 64))
-        }
-      }
-
-      // Append then set absolute position (requires parent Auto Layout)
-      table.appendChild(checkboxCol)
-      checkboxCol.layoutPositioning = 'ABSOLUTE'
-      checkboxCol.x = 0
-      checkboxCol.y = 0
-    }
-
 
     // Place table
     const container = getSelectedContainer()
