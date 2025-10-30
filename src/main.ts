@@ -14,10 +14,21 @@ const TEXT_VAR_KEY       = '8d76832d854f9b5de5c63b72dd7c79f96d5f4974'     // sem
 const DIVIDER_VAR_KEY    = '38ba50945fb164c3b8647f573cdfcba680511684'     // semantic/divider
 const LINK_TEXT_VAR_KEY  = 'bffd7b005cfd848c11a4d4de7e57561bcd229ec1'     // semantic/text/link
 
+const CARD_BG_VAR_KEY     = 'ed5bd3d3d7af1d152d99540bf7fa070f49aedf4c'
+const CARD_BORDER_VAR_KEY = 'c6934f625a4a366fc2d1676008f4f7cff8e03591'
+
+// NEW: published effect (shadow) style key to apply to the card
+const SHADOW_STYLE_KEY    = '871d24f9343adcee852642c1cab0da8dd8eb951a'
+
 const CHIP_COMPONENT_KEY    = '441c3a585ec17f2b8df3cea23534e2013c52d689'
 const STATUS_COMPONENT_KEY  = '2cf7906934e7fb65b2bdf0a5c04665a8799d3abd'
 const BOOLEAN_COMPONENT_KEY = '56f45b798f25a8d9aa2b473a21388cdf72f78eee'
 const ICON_COMPONENT_KEY    = '01d64e52cc1ffc2be8c162efda6a08dd444e4363'   // NEW
+const HEADER_CHECKBOX_COMPONENT_KEY = 'c181a1d687cdccce31a7998c73409a64c0e32ee6'
+const ROW_CHECKBOX_COMPONENT_KEY    = '9a42239aeedca11121258403b4ffae35363e4c51'
+
+// NEW: card header component to insert above the table inside the card
+const CARD_HEADER_COMPONENT_KEY     = '122ad5be139c3f20d9e821f8d39251b95b97ac76'
 
 /* ============================================================
    Types
@@ -31,6 +42,9 @@ type CsvParsedPayload = {
   headers: string[]
   rows: CsvRow[]
   sort?: SortState
+  rowLimit?: number
+  includeCheckboxes?: boolean
+  placeWithinCard?: boolean
 }
 
 type CsvParsedEvent = {
@@ -69,6 +83,9 @@ function headerHasIcon(header: string): boolean {
 // NEW: detect [link]
 function headerHasLink(header: string): boolean {
   const m = header.match(/\[([^\]]+)\]/g)
+  return !!m && someLink(m)
+}
+function someLink(m: RegExpMatchArray | null): boolean {
   return !!m && m.some(s => /link/i.test(s))
 }
 
@@ -95,7 +112,6 @@ function getVariantInfoFromMaster(master: ComponentNode) {
     ? (master.parent as ComponentSetNode)
     : null
   if (!set) return null
-  // Old-but-still-present API: lists axes + allowed values
   const groups = set.variantGroupProperties as Record<string, { values: string[] }>
   const axes = Object.keys(groups || {})
   const allowed: Record<string, string[]> = {}
@@ -105,7 +121,6 @@ function getVariantInfoFromMaster(master: ComponentNode) {
 
 function pickIconAxis(axes: string[]): string | null {
   if (axes.length === 0) return null
-  // Prefer an axis that sounds like it chooses the icon
   const pref = axes.find(a => /^(icon|name|type|category|state|level|platform)$/i.test(a))
   return pref || axes[0]
 }
@@ -114,12 +129,10 @@ function canon(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]/g, '')
 }
 
-// Map common synonyms to increase hit rate
 function normalizeMeaning(s: string): string {
   let c = canon(s)
   if (c === 'onpremise' || c === 'onpremises' || c === 'onprem') c = 'onprem'
   if (c === 'saas') c = 'cloud'
-  // Typo seen in your list
   if (c === 'critival') c = 'critical'
   return c
 }
@@ -129,18 +142,12 @@ function resolveAllowedValue(raw: string, allowed: string[]): string {
   const rawLower = raw.toLowerCase().trim()
   const rawCanon = normalizeMeaning(raw)
 
-  // 1) strict case-insensitive
   let hit = allowed.find(v => v.toLowerCase().trim() === rawLower)
   if (hit) return hit
-
-  // 2) canonical (ignore spaces/dashes; normalize synonyms)
   hit = allowed.find(v => normalizeMeaning(v) === rawCanon)
   if (hit) return hit
-
-  // 3) fallback to first allowed
   return allowed[0]
 }
-
 
 /* ---------- Status value mapping ---------- */
 function mapStatusVariant(raw: string): string {
@@ -166,7 +173,7 @@ function mapStatusVariant(raw: string): string {
   return 'Unspecified'
 }
 
-/* ---------- Icon value mapping (to variant names) ---------- */
+/* ---------- Icon value mapping ---------- */
 function mapIconVariant(raw: string): string {
   const token = (raw || '').split(/[,|]/g).map(s => s.trim()).find(Boolean) || ''
   const s = token.toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim()
@@ -176,7 +183,6 @@ function mapIconVariant(raw: string): string {
   if (s === 'high') return 'High'
   if (s === 'medium') return 'Medium'
   if (s === 'low') return 'Low'
-  // default to something safe your set supports
   return 'Low'
 }
 
@@ -365,31 +371,23 @@ function createBooleanNode(booleanMaster: ComponentNode | null, raw: string): Sc
 function findVariantPropKey(inst: InstanceNode): string | null {
   const props = (inst as any).componentProperties as Record<string, any> | undefined
   if (!props) return null
-  const keys = Object.keys(props)
-  // First try obvious names
-  const preferred = keys.find(k => /icon/i.test(k)) || keys.find(k => /variant/i.test(k))
+  const preferred = Object.keys(props).find(k => /icon/i.test(k)) || Object.keys(props).find(k => /variant/i.test(k))
   if (preferred) return preferred
-  // Else if there is exactly one VARIANT property, use it
-  const variantOnly = keys.filter(k => props[k]?.type === 'VARIANT')
-  if (variantOnly.length === 1) return variantOnly[0]
-  return null
+  const variantOnly = Object.keys(props).filter(k => props[k]?.type === 'VARIANT')
+  return variantOnly.length === 1 ? variantOnly[0] : null
 }
 
 function createIconNode(iconMaster: ComponentNode | null, raw: string): SceneNode {
   if (iconMaster) {
     const inst = iconMaster.createInstance()
     inst.name = 'Icon'
-
     const info = getVariantInfoFromMaster(iconMaster)
     const props = (inst as any).componentProperties as Record<string, any> | undefined
-
     if (info && props) {
       const axis = pickIconAxis(info.axes)
       if (axis) {
         const allowed = info.allowed[axis] || []
         const value = resolveAllowedValue(raw, allowed)
-
-        // Keep all current variant axis values, only change our picked axis
         const toSet: Record<string, string> = {}
         for (const k of Object.keys(props)) {
           if (props[k]?.type === 'VARIANT' && typeof props[k]?.value === 'string') {
@@ -397,18 +395,11 @@ function createIconNode(iconMaster: ComponentNode | null, raw: string): SceneNod
           }
         }
         toSet[axis] = value
-
-        try {
-          ;(inst as InstanceNode).setProperties(toSet)
-        } catch {
-          // Silently fall through – you’ll still get the instance with its default variant
-        }
+        try { (inst as InstanceNode).setProperties(toSet) } catch {}
       }
     }
     return inst
   }
-
-  // Fallback text if master missing
   const t = figma.createText()
   t.fontName = { family: 'Inter', style: 'Regular' }
   t.fontSize = 12
@@ -417,7 +408,6 @@ function createIconNode(iconMaster: ComponentNode | null, raw: string): SceneNod
   t.textAutoResize = 'WIDTH_AND_HEIGHT'
   return t
 }
-
 
 /* ---------- Sort icon SVGs + node helper ---------- */
 const SVG_ASC = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V20M12 4C13.3176 4.00001 16.9998 8.99996 16.9998 8.99996M12 4C10.6824 3.99999 6.99979 9 6.99979 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
@@ -457,17 +447,14 @@ function makeComparator(
 ) {
   const header = headers[colIndex]
   const mul = dir === 'desc' ? -1 : 1
-
   return (a: CsvRow, b: CsvRow) => {
     const av = (a[header] ?? '').trim()
     const bv = (b[header] ?? '').trim()
-
     if (isStatus) {
       const ar = STATUS_RANK[mapStatusVariant(av)] ?? 999
       const br = STATUS_RANK[mapStatusVariant(bv)] ?? 999
       if (ar !== br) return (ar - br) * mul
     }
-
     if (isBoolean) {
       const ab = parseBooleanLike(av)
       const bb = parseBooleanLike(bv)
@@ -476,31 +463,21 @@ function makeComparator(
         return ((ab ? 1 : 0) - (bb ? 1 : 0)) * mul
       }
     }
-
     const adur = parseDurationSeconds(av)
     const bdur = parseDurationSeconds(bv)
     if (adur !== null && bdur !== null && Number.isFinite(adur) && Number.isFinite(bdur)) {
       if (adur !== bdur) return (adur - bdur) * mul
     }
-
     const adt = parseDateMillis(av)
     const bdt = parseDateMillis(bv)
     if (adt !== null && bdt !== null && Number.isFinite(adt) && Number.isFinite(bdt)) {
       if (adt !== bdt) return (adt - bdt) * mul
     }
-
     const an = parseNumeric(av)
     const bn = parseNumeric(bv)
     if (an !== null && bn !== null) {
       if (an !== bn) return (an - bn) * mul
     }
-
-    if (isChips) {
-      const at = firstToken(av).toLowerCase()
-      const bt = firstToken(bv).toLowerCase()
-      if (at !== bt) return at.localeCompare(bt) * mul
-    }
-
     const as = av.toLowerCase()
     const bs = bv.toLowerCase()
     return as.localeCompare(bs) * mul
@@ -510,21 +487,26 @@ function makeComparator(
 /* ============================================================
    Table builder
 ============================================================ */
-on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
+on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes, placeWithinCard }) => {
   try {
-    // Fonts
     await figma.loadFontAsync({ family: 'Inter', style: 'Regular' })
     await figma.loadFontAsync({ family: 'Inter', style: 'Medium' })
 
-    // Variables / components
+    // Variables / components / styles
     const textVar       = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
     const dividerVar    = await figma.variables.importVariableByKeyAsync(DIVIDER_VAR_KEY).catch(() => null)
     const linkTextVar   = await figma.variables.importVariableByKeyAsync(LINK_TEXT_VAR_KEY).catch(() => null)
+    const cardBgVar     = await figma.variables.importVariableByKeyAsync(CARD_BG_VAR_KEY).catch(() => null)
+    const cardBrVar     = await figma.variables.importVariableByKeyAsync(CARD_BORDER_VAR_KEY).catch(() => null)
+    const shadowStyle   = await figma.importStyleByKeyAsync(SHADOW_STYLE_KEY).catch(() => null)
 
     const chipMaster    = await figma.importComponentByKeyAsync(CHIP_COMPONENT_KEY).catch(() => null)
     const statusMaster  = await figma.importComponentByKeyAsync(STATUS_COMPONENT_KEY).catch(() => null)
     const booleanMaster = await figma.importComponentByKeyAsync(BOOLEAN_COMPONENT_KEY).catch(() => null)
-    const iconMaster    = await figma.importComponentByKeyAsync(ICON_COMPONENT_KEY).catch(() => null) // NEW
+    const iconMaster    = await figma.importComponentByKeyAsync(ICON_COMPONENT_KEY).catch(() => null)
+    const headerCheckboxMaster = await figma.importComponentByKeyAsync(HEADER_CHECKBOX_COMPONENT_KEY).catch(() => null)
+    const rowCheckboxMaster    = await figma.importComponentByKeyAsync(ROW_CHECKBOX_COMPONENT_KEY).catch(() => null)
+    const cardHeaderMaster     = await figma.importComponentByKeyAsync(CARD_HEADER_COMPONENT_KEY).catch(() => null)
 
     const headerHeight = 55
     const rowHeight = 51
@@ -533,8 +515,8 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
     const isChipsCol     = headers.map(h => headerHasChips(h))
     const isStatusCol    = headers.map(h => headerHasStatus(h))
     const isBooleanCol   = headers.map(h => headerHasBoolean(h))
-    const isIconCol      = headers.map(h => headerHasIcon(h))   // NEW
-    const isLinkCol      = headers.map(h => headerHasLink(h))   // NEW
+    const isIconCol      = headers.map(h => headerHasIcon(h))
+    const isLinkCol      = headers.map(h => headerHasLink(h))
     const aligns: Align[] = headers.map(h => headerAlign(h))
     const prettyHeaders  = headers.map(h => prettyHeaderLabel(h))
 
@@ -562,29 +544,28 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort }) => {
       inst.remove()
     }
     let iconRepWidth = 0
-if (iconMaster) {
-  const inst = iconMaster.createInstance()
-  figma.currentPage.appendChild(inst)
-  const info = getVariantInfoFromMaster(iconMaster)
-  const props = (inst as any).componentProperties as Record<string, any> | undefined
-  if (info && props) {
-    const axis = pickIconAxis(info.axes)
-    const firstAllowed = axis ? (info.allowed[axis] || [])[0] : undefined
-    if (axis && firstAllowed) {
-      const toSet: Record<string, string> = {}
-      for (const k of Object.keys(props)) {
-        if (props[k]?.type === 'VARIANT' && typeof props[k]?.value === 'string') {
-          toSet[k] = props[k].value
+    if (iconMaster) {
+      const inst = iconMaster.createInstance()
+      figma.currentPage.appendChild(inst)
+      const info = getVariantInfoFromMaster(iconMaster)
+      const props = (inst as any).componentProperties as Record<string, any> | undefined
+      if (info && props) {
+        const axis = pickIconAxis(info.axes)
+        const firstAllowed = axis ? (info.allowed[axis] || [])[0] : undefined
+        if (axis && firstAllowed) {
+          const toSet: Record<string, string> = {}
+          for (const k of Object.keys(props)) {
+            if (props[k]?.type === 'VARIANT' && typeof props[k]?.value === 'string') {
+              toSet[k] = props[k].value
+            }
+          }
+          toSet[axis] = firstAllowed
+          try { (inst as InstanceNode).setProperties(toSet) } catch {}
         }
       }
-      toSet[axis] = firstAllowed
-      try { (inst as InstanceNode).setProperties(toSet) } catch {}
+      iconRepWidth = Math.ceil(inst.width)
+      inst.remove()
     }
-  }
-  iconRepWidth = Math.ceil(inst.width)
-  inst.remove()
-}
-
 
     // Column widths
     const colWidths = new Array(headers.length).fill(0) as number[]
@@ -616,10 +597,9 @@ if (iconMaster) {
             colWidths[c] = Math.max(colWidths[c], w)
           }
         }
-      } else if (isIconCol[c]) { // NEW
+      } else if (isIconCol[c]) {
         if (iconRepWidth > 0) colWidths[c] = Math.max(colWidths[c], iconRepWidth)
         else {
-          // if we somehow couldn't measure, fall back to text width
           for (let r = 0; r < rows.length; r++) {
             const w = await measureTextWidth(rows[r][headers[c]] ?? '')
             colWidths[c] = Math.max(colWidths[c], w)
@@ -631,7 +611,6 @@ if (iconMaster) {
           colWidths[c] = Math.max(colWidths[c], w)
         }
       }
-
       colWidths[c] = Math.max(colWidths[c], 8)
     }
 
@@ -652,14 +631,17 @@ if (iconMaster) {
 
     const tableWidth = colWidths.reduce((sum, w) => sum + w + cellHPad * 2, 0)
 
-    // Root table frame
-    const table = figma.createFrame()
-    table.name = 'table'
-    table.layoutMode = 'VERTICAL'
-    table.primaryAxisSizingMode = 'AUTO'
-    table.counterAxisSizingMode = 'AUTO'
-    table.itemSpacing = 0
-    table.fills = []
+    // Root content frame (scrollable area)
+    const content = figma.createFrame()
+    content.name = 'table'
+    content.layoutMode = 'VERTICAL'
+    content.primaryAxisSizingMode = 'AUTO'
+    content.counterAxisSizingMode = 'AUTO'
+    content.itemSpacing = 0
+    content.fills = []
+    // Scrolling behavior
+    content.clipsContent = true
+    content.overflowDirection = 'BOTH'
 
     // Build a row
     const buildRow = (values: string[], opts: { header: boolean }) => {
@@ -670,7 +652,6 @@ if (iconMaster) {
       row.counterAxisSizingMode = 'AUTO'
       row.itemSpacing = 0
       row.fills = []
-
       for (let c = 0; c < values.length; c++) {
         const val = values[c]
         const align = aligns[c]
@@ -710,7 +691,6 @@ if (iconMaster) {
           if (sort && sort.by === headers[c] && (sort.dir === 'asc' || sort.dir === 'desc')) {
             hWrap.appendChild(createSortIconNode(sort.dir, textVar))
           }
-
           cell.appendChild(hWrap)
         } else if (isChipsCol[c]) {
           const wrap = figma.createFrame()
@@ -726,7 +706,7 @@ if (iconMaster) {
           cell.appendChild(createStatusNode(statusMaster, val))
         } else if (isBooleanCol[c]) {
           cell.appendChild(createBooleanNode(booleanMaster, val))
-        } else if (isIconCol[c]) { // NEW
+        } else if (isIconCol[c]) {
           cell.appendChild(createIconNode(iconMaster, val))
         } else {
           const t = figma.createText()
@@ -743,43 +723,156 @@ if (iconMaster) {
           ]
           cell.appendChild(t)
         }
-
         row.appendChild(cell)
       }
       return row
     }
 
-    // Header + divider + rows
-    const headerRow = buildRow(headers, { header: true })
-    table.appendChild(headerRow)
-    table.appendChild(createDivider(dividerVar, tableWidth))
+    // Create body (rows + their dividers)
+    const body = figma.createFrame()
+    body.name = 'rows'
+    body.layoutMode = 'VERTICAL'
+    body.primaryAxisSizingMode = 'AUTO'
+    body.counterAxisSizingMode = 'AUTO'
+    body.itemSpacing = 0
+    body.fills = []
 
+    // Header group with first divider
+    const headerRow = buildRow(headers, { header: true })
+    const header = figma.createFrame()
+    header.name = 'header'
+    header.layoutMode = 'VERTICAL'
+    header.primaryAxisSizingMode = 'AUTO'
+    header.counterAxisSizingMode = 'AUTO'
+    header.itemSpacing = 0
+    header.fills = []
+    header.appendChild(headerRow)
+    header.appendChild(createDivider(dividerVar, tableWidth))
+    content.appendChild(header)
+
+    // Rows + between-row dividers
     for (let i = 0; i < finalRows.length; i++) {
       const vals = headers.map(h => (finalRows[i][h] ?? '').trim())
       const rowNode = buildRow(vals, { header: false })
-      table.appendChild(rowNode)
-      if (i < finalRows.length - 1) table.appendChild(createDivider(dividerVar, tableWidth))
+      body.appendChild(rowNode)
+      if (i < finalRows.length - 1) body.appendChild(createDivider(dividerVar, tableWidth))
+    }
+    content.appendChild(body)
+
+    // Optional checkbox column (fixed beside scrollable content)
+    let tableRoot: FrameNode = content
+    if (includeCheckboxes) {
+      const checkboxCol = figma.createFrame()
+      checkboxCol.name = 'checkbox column'
+      checkboxCol.layoutMode = 'VERTICAL'
+      checkboxCol.primaryAxisSizingMode = 'AUTO'
+      checkboxCol.counterAxisSizingMode = 'AUTO'
+      checkboxCol.itemSpacing = 0
+      // same bg as card
+      checkboxCol.fills = [variablePaint(cardBgVar, { r: 1, g: 1, b: 1 })]
+
+      const headerCell = figma.createFrame()
+      headerCell.name = 'checkbox header cell'
+      headerCell.layoutMode = 'HORIZONTAL'
+      headerCell.primaryAxisSizingMode = 'FIXED'
+      headerCell.counterAxisSizingMode = 'FIXED'
+      headerCell.counterAxisAlignItems = 'CENTER'
+      headerCell.primaryAxisAlignItems = 'MIN'
+      headerCell.paddingLeft = 14
+      headerCell.fills = []
+      headerCell.resize(64, headerHeight)
+      if (headerCheckboxMaster) {
+        const inst = headerCheckboxMaster.createInstance()
+        headerCell.appendChild(inst)
+      }
+      checkboxCol.appendChild(headerCell)
+      checkboxCol.appendChild(createDivider(dividerVar, 64))
+
+      for (let i = 0; i < finalRows.length; i++) {
+        const cell = figma.createFrame()
+        cell.name = 'checkbox cell'
+        cell.layoutMode = 'HORIZONTAL'
+        cell.primaryAxisSizingMode = 'FIXED'
+        cell.counterAxisSizingMode = 'FIXED'
+        cell.counterAxisAlignItems = 'CENTER'
+        cell.primaryAxisAlignItems = 'MIN'
+        cell.paddingLeft = 14
+        cell.fills = []
+        cell.resize(64, rowHeight)
+        if (rowCheckboxMaster) {
+          const inst = rowCheckboxMaster.createInstance()
+          cell.appendChild(inst)
+        }
+        checkboxCol.appendChild(cell)
+        if (i < finalRows.length - 1) checkboxCol.appendChild(createDivider(dividerVar, 64))
+      }
+
+      const wrapper = figma.createFrame()
+      wrapper.name = 'table (with checkbox)'
+      wrapper.layoutMode = 'HORIZONTAL'
+      wrapper.primaryAxisSizingMode = 'AUTO'
+      wrapper.counterAxisSizingMode = 'AUTO'
+      wrapper.itemSpacing = 0
+      wrapper.fills = []
+
+      wrapper.appendChild(checkboxCol) // fixed column (not inside scroller)
+      wrapper.appendChild(content)     // scrollable content
+      tableRoot = wrapper
     }
 
-    // Place table
+    // Optional card wrapper
+    let topNode: FrameNode = tableRoot
+    if (placeWithinCard) {
+      const card = figma.createFrame()
+      card.name = 'card'
+      card.layoutMode = 'VERTICAL'
+      card.primaryAxisSizingMode = 'AUTO'
+      card.counterAxisSizingMode = 'AUTO'
+      card.itemSpacing = 0
+      card.paddingLeft = 0
+      card.paddingRight = 0
+      card.paddingTop = 0
+      card.paddingBottom = 0
+      card.cornerRadius = 8
+      card.fills = [variablePaint(cardBgVar, { r: 1, g: 1, b: 1 })]
+      card.strokes = [variablePaint(cardBrVar, { r: 0.85, g: 0.85, b: 0.85 })]
+      card.strokeWeight = 1
+      if (shadowStyle) card.effectStyleId = shadowStyle.id
+
+      if (cardHeaderMaster) {
+        const headerInst = cardHeaderMaster.createInstance()
+        headerInst.layoutAlign = 'STRETCH'
+        card.appendChild(headerInst)
+      }
+
+      // Fill width + fill height inside the card
+      tableRoot.layoutAlign = 'STRETCH'
+      // Allow the table area to take remaining height in the card
+      tableRoot.layoutGrow = 1
+
+      card.appendChild(tableRoot)
+      topNode = card
+    }
+
+    // Place table/card
     const container = getSelectedContainer()
     if (container) {
-      container.appendChild(table)
-      if ('layoutMode' in container && container.layoutMode !== 'NONE') {
-        table.layoutAlign = 'MIN'
+      container.appendChild(topNode)
+      if ('layoutMode' in container && (container as any).layoutMode !== 'NONE') {
+        topNode.layoutAlign = 'MIN'
       } else {
-        table.x = 0
-        table.y = 0
+        topNode.x = 0
+        topNode.y = 0
       }
     } else {
       const { x, y } = figma.viewport.center
-      table.x = x
-      table.y = y
-      figma.currentPage.appendChild(table)
+      topNode.x = x
+      topNode.y = y
+      figma.currentPage.appendChild(topNode)
     }
 
-    figma.currentPage.selection = [table]
-    figma.viewport.scrollAndZoomIntoView([table])
+    figma.currentPage.selection = [topNode]
+    figma.viewport.scrollAndZoomIntoView([topNode])
     figma.notify('Table created')
   } catch (err) {
     console.error(err)
