@@ -1,0 +1,15 @@
+cvss_v3_severity,updated_at_week,count
+CRITICAL,"October 27, 2025 – November 02, 2025",122
+CRITICAL,"November 10, 2025 – November 16, 2025",1238
+HIGH,"November 03, 2025 – November 09, 2025",8945
+HIGH,"November 17, 2025 – November 23, 2025",23
+HIGH,"November 24, 2025 – November 30, 2025",823
+MEDIUM,"October 27, 2025 – November 02, 2025",12
+MEDIUM,"November 03, 2025 – November 09, 2025",2358
+MEDIUM,"November 10, 2025 – November 16, 2025",834
+MEDIUM,"November 17, 2025 – November 23, 2025",175
+MEDIUM,"November 24, 2025 – November 30, 2025",489
+LOW,"November 03, 2025 – November 09, 2025",552
+LOW,"November 10, 2025 – November 16, 2025",323
+LOW,"November 17, 2025 – November 23, 2025",359
+LOW,"November 24, 2025 – November 30, 2025",101

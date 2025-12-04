@@ -591,6 +591,9 @@ function Plugin() {
   const [includeCheckboxes, setIncludeCheckboxes] = useState<boolean>(true)
   const [placeWithinCard, setPlaceWithinCard] = useState<boolean>(true)
 
+  // NEW: Place within page (default unchecked)
+  const [placeWithinPage, setPlaceWithinPage] = useState<boolean>(false)
+
   const ready = headers.length > 0
 
   // Initial preset load (if any)
@@ -722,7 +725,7 @@ function Plugin() {
       selectedHeaders.forEach((h) => (o[h] = r[h] ?? ''))
       return o
     })
-    emit('CSV_PARSED', { headers: selectedHeaders, rows: filteredRows, sort, rowLimit, includeCheckboxes, placeWithinCard })
+    emit('CSV_PARSED', {headers: selectedHeaders, rows: filteredRows, sort, rowLimit, includeCheckboxes, placeWithinCard, placeWithinPage, fileName: fileName ?? 'Table'})
   }
 
   return (
@@ -771,6 +774,12 @@ function Plugin() {
 <label style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}} onClick={() => setPlaceWithinCard(v => !v)}>
         <img src={placeWithinCard ? CheckSvg : EmptySvg} width={20} height={20} alt="" style={{opacity: placeWithinCard ? 1 : 0.7}} />
         <span style={{fontSize:12}}> Place within card</span>
+      </label>
+      <VerticalSpace space="small" />
+
+      <label style={{display:'flex', alignItems:'center', gap:8, cursor:'pointer'}} onClick={() => setPlaceWithinPage(v => !v)}>
+        <img src={placeWithinPage ? CheckSvg : EmptySvg} width={20} height={20} alt="" style={{opacity: placeWithinPage ? 1 : 0.7}} />
+        <span style={{fontSize:12}}> Place within page</span>
       </label>
       <VerticalSpace space="small" />
 

@@ -15,6 +15,7 @@ const DIVIDER_VAR_KEY    = '38ba50945fb164c3b8647f573cdfcba680511684'     // sem
 const LINK_TEXT_VAR_KEY  = 'bffd7b005cfd848c11a4d4de7e57561bcd229ec1'     // semantic/text/link
 
 const CARD_BG_VAR_KEY     = 'ed5bd3d3d7af1d152d99540bf7fa070f49aedf4c'
+const PAGE_BG_VAR_KEY     = 'dc0f606fcfead01364826438b2969f920e84a471'
 const CARD_BORDER_VAR_KEY = 'c6934f625a4a366fc2d1676008f4f7cff8e03591'
 
 // NEW: published effect (shadow) style key to apply to the card
@@ -29,6 +30,9 @@ const ROW_CHECKBOX_COMPONENT_KEY    = '9a42239aeedca11121258403b4ffae35363e4c51'
 
 // NEW: card header component to insert above the table inside the card
 const CARD_HEADER_COMPONENT_KEY     = '122ad5be139c3f20d9e821f8d39251b95b97ac76'
+// NEW: navigation component to the left of the table inside page
+const NAV_COMPONENT_KEY            = 'a4972ab1fd8b2d5fa7e3faef7f6574c3660701d3'
+const FILTER_BAR_COMPONENT_KEY     = 'eb91002156214553b38ad0f626a751c4e3819fae'
 
 /* ============================================================
    Types
@@ -45,7 +49,10 @@ type CsvParsedPayload = {
   rowLimit?: number
   includeCheckboxes?: boolean
   placeWithinCard?: boolean
+  placeWithinPage?: boolean
+  fileName?: string
 }
+
 
 type CsvParsedEvent = {
   name: 'CSV_PARSED'
@@ -487,10 +494,11 @@ function makeComparator(
 /* ============================================================
    Table builder
 ============================================================ */
-on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes, placeWithinCard }) => {
+on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, placeWithinCard, placeWithinPage, rows, sort}) => {
   try {
     await figma.loadFontAsync({ family: 'Inter', style: 'Regular' })
     await figma.loadFontAsync({ family: 'Inter', style: 'Medium' })
+    await figma.loadFontAsync({ family: 'Rubik', style: 'Medium' })
 
     // Variables / components / styles
     const textVar       = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
@@ -507,6 +515,9 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes
     const headerCheckboxMaster = await figma.importComponentByKeyAsync(HEADER_CHECKBOX_COMPONENT_KEY).catch(() => null)
     const rowCheckboxMaster    = await figma.importComponentByKeyAsync(ROW_CHECKBOX_COMPONENT_KEY).catch(() => null)
     const cardHeaderMaster     = await figma.importComponentByKeyAsync(CARD_HEADER_COMPONENT_KEY).catch(() => null)
+    // NEW: nav component
+    const navMaster     = await figma.importComponentByKeyAsync(NAV_COMPONENT_KEY).catch(() => null)
+    const filterBarMaster = await figma.importComponentByKeyAsync(FILTER_BAR_COMPONENT_KEY).catch(() => null)
 
     const headerHeight = 55
     const rowHeight = 51
@@ -854,6 +865,84 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes
       topNode = card
     }
 
+    
+    // ===== NEW: Place within page =====
+    if (placeWithinPage) {
+
+      const page = figma.createFrame()
+      page.name = 'page'
+      page.layoutMode = 'HORIZONTAL'
+      page.primaryAxisSizingMode = 'FIXED'
+      page.counterAxisSizingMode = 'FIXED'
+      page.primaryAxisAlignItems = 'MIN'
+      page.counterAxisAlignItems = 'MIN'
+      page.resize(1440, 900)
+      page.cornerRadius = 12
+      page.itemSpacing = 0
+      const pageBgVar = await figma.variables.importVariableByKeyAsync(PAGE_BG_VAR_KEY).catch(() => null)
+      page.fills = [variablePaint(pageBgVar, { r: 1, g: 1, b: 1 })]
+
+      if (navMaster) {
+        const nav = navMaster.createInstance()
+        nav.name = 'navigation'
+        nav.layoutAlign = 'MIN'
+        page.appendChild(nav)
+      }
+
+      const contentWrap = figma.createFrame()
+      contentWrap.name = 'page-content'
+      contentWrap.layoutMode = 'VERTICAL'
+      contentWrap.primaryAxisSizingMode = 'AUTO'
+      contentWrap.counterAxisSizingMode = 'FIXED'
+      contentWrap.itemSpacing = 16
+      contentWrap.paddingLeft = 16
+      contentWrap.paddingRight = 16
+      contentWrap.paddingTop = 16
+      contentWrap.paddingBottom = 16
+      contentWrap.fills = []
+      // force Fill container vertically by setting explicit height to page height
+      try { contentWrap.resize(contentWrap.width, page.height) } catch {}
+      contentWrap.layoutAlign = 'STRETCH'
+      contentWrap.layoutGrow = 1
+      contentWrap.clipsContent = false
+
+      const title = figma.createText()
+      title.name = 'page title'
+      title.fontName = { family: 'Rubik', style: 'Medium' }
+      title.fontSize = 20
+      title.lineHeight = { value: 35, unit: 'PIXELS' }
+      title.characters = (() => {
+        const raw = (fileName && fileName.trim().length ? fileName : 'Table')
+        const base = raw.replace(/\.[^./\\]+$/, '')
+        return base
+          .replace(/[_-]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .split(' ')
+          .map(w => w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w)
+          .join(' ')
+      })()
+      title.textAutoResize = 'WIDTH_AND_HEIGHT'
+      const titleTextVar = await figma.variables.importVariableByKeyAsync(TEXT_VAR_KEY).catch(() => null)
+      title.fills = [variablePaint(titleTextVar, { r: 0.12, g: 0.14, b: 0.20 })]
+      contentWrap.appendChild(title)
+
+      // Filter bar between title and content
+      if (filterBarMaster) {
+        const filterBar = filterBarMaster.createInstance()
+        filterBar.name = 'filter bar'
+        filterBar.layoutAlign = 'STRETCH' // fill width
+        contentWrap.appendChild(filterBar)
+      }
+
+      topNode.layoutAlign = 'STRETCH'
+      topNode.layoutGrow = 1
+      contentWrap.appendChild(topNode)
+
+      page.appendChild(contentWrap)
+      topNode = page
+    }
+
     // Place table/card
     const container = getSelectedContainer()
     if (container) {
@@ -878,7 +967,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({ headers, rows, sort, includeCheckboxes
     console.error(err)
     figma.notify('Failed to create table. See console.')
   }
-})
+    })
 
 /* ============================================================
    UI-driven resize

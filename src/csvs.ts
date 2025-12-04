@@ -576,6 +576,113 @@ Exclude MAC address A1-2B-32-FC-AF-27,exclude,FileHash.value,Exclude contractor 
 `
   },
   {
+    id: "cve definition",
+    label: "Cve Definition",
+    filename: "cve Definition.csv",
+    contents: `cve_id,title,description,cvss_v2_base_score,cvss_v3_base_score,cvss_v2_severity,cvss_v3_severity,cvss_v2_vector,cvss_v3_vector,active_risk_score,url,published_date,added_date,modified_date,is_exploitable,is_exploited_in_the_wild,is_cisa_kev,is_ai_generated_cvss_score,is_emergent_threat,epss_score,epss_percentile
+CVE-2010-66178,PostgreSQL Command Injection,"PostgreSQL is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",5.6,3.8,MEDIUM,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,4.59,https://nvd.nist.gov/vuln/detail/CVE-2010-66178,2023-09-30,2023-11-07,2024-09-21,True,False,False,False,True,0.9374,78.79
+CVE-2022-76261,OpenSSL Insecure Deserialization,"OpenSSL is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",8.3,5.4,HIGH,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,9.1,https://nvd.nist.gov/vuln/detail/CVE-2022-76261,2011-08-13,2011-12-13,2012-06-27,True,True,True,False,True,0.3648,87.05
+CVE-2019-18324,Kubernetes API Server Path Traversal,"Kubernetes API Server is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",6.1,4.5,MEDIUM,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,0.25,https://nvd.nist.gov/vuln/detail/CVE-2019-18324,2015-05-20,2015-09-26,2016-01-26,True,False,False,True,True,0.7359,53.15
+CVE-2017-21412,Fortinet FortiOS Information Disclosure,"Fortinet FortiOS is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",5.7,4.0,MEDIUM,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,9.05,https://nvd.nist.gov/vuln/detail/CVE-2017-21412,2022-08-04,2022-12-19,2023-08-06,True,True,False,False,True,0.932,79.31
+CVE-2013-71498,VMware ESXi Remote Code Execution,"VMware ESXi is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",0.1,7.2,LOW,HIGH,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,4.97,https://nvd.nist.gov/vuln/detail/CVE-2013-71498,2018-11-13,2019-02-26,2019-10-30,False,False,True,True,True,0.6198,67.7
+CVE-2022-42951,MySQL Authentication Bypass,"MySQL is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",7.6,4.8,HIGH,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,8.14,https://nvd.nist.gov/vuln/detail/CVE-2022-42951,2007-01-08,2007-05-07,2008-01-01,False,False,False,False,True,0.6943,77.6
+CVE-2007-87302,Chrome Directory Traversal,"Chrome is vulnerable to directory traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",2.5,0.6,LOW,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,0.21,https://nvd.nist.gov/vuln/detail/CVE-2007-87302,2006-03-19,2006-04-12,2006-10-26,True,True,True,False,False,0.9732,38.28
+CVE-2025-67652,Linux Kernel Directory Traversal,"Linux Kernel is vulnerable to directory traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",9.0,3.7,CRITICAL,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,8.91,https://nvd.nist.gov/vuln/detail/CVE-2025-67652,2018-01-18,2018-04-30,2018-12-15,True,True,False,False,False,0.284,75.91
+CVE-2019-79508,Kubernetes API Server Cross-Site Scripting,"Kubernetes API Server is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",1.3,2.9,LOW,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,5.07,https://nvd.nist.gov/vuln/detail/CVE-2019-79508,2023-11-27,2024-05-17,2024-09-28,True,False,False,True,True,0.663,86.58
+CVE-2019-42412,Chrome Insecure Deserialization,"Chrome is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",7.5,8.9,HIGH,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,5.74,https://nvd.nist.gov/vuln/detail/CVE-2019-42412,2020-08-28,2020-10-21,2020-11-09,False,True,True,True,False,0.2321,28.11
+CVE-2006-21254,Firefox Path Traversal,"Firefox is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",1.5,3.2,LOW,LOW,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,7.08,https://nvd.nist.gov/vuln/detail/CVE-2006-21254,2019-10-28,2020-01-29,2020-12-14,True,True,False,True,False,0.766,88.96
+CVE-2015-23941,Linux Kernel Information Disclosure,"Linux Kernel is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",4.0,0.1,MEDIUM,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,3.84,https://nvd.nist.gov/vuln/detail/CVE-2015-23941,2021-10-12,2022-02-04,2022-03-11,True,False,True,False,True,0.0957,67.26
+CVE-2007-68169,Microsoft Exchange Information Disclosure,"Microsoft Exchange is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",4.1,3.7,MEDIUM,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,6.56,https://nvd.nist.gov/vuln/detail/CVE-2007-68169,2025-05-27,2025-06-12,2026-06-01,False,True,True,True,True,0.6951,80.33
+CVE-2010-35469,Cisco ASA Remote Code Execution,"Cisco ASA is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",8.2,4.2,HIGH,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,2.5,https://nvd.nist.gov/vuln/detail/CVE-2010-35469,2012-03-29,2012-07-23,2013-03-30,True,False,True,False,False,0.715,50.75
+CVE-2018-48673,Fortinet FortiOS Information Disclosure,"Fortinet FortiOS is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",9.8,6.0,CRITICAL,MEDIUM,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,1.22,https://nvd.nist.gov/vuln/detail/CVE-2018-48673,2015-11-05,2016-01-27,2016-12-27,True,False,False,True,False,0.4987,42.85
+CVE-2022-07510,Kubernetes API Server Information Disclosure,"Kubernetes API Server is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",8.0,6.9,HIGH,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,4.42,https://nvd.nist.gov/vuln/detail/CVE-2022-07510,2016-10-08,2017-03-29,2017-04-14,False,False,False,False,True,0.5341,81.47
+CVE-2016-20600,VMware ESXi Insecure Deserialization,"VMware ESXi is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",5.6,8.6,MEDIUM,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,6.45,https://nvd.nist.gov/vuln/detail/CVE-2016-20600,2006-12-23,2007-05-22,2008-01-27,False,False,True,True,False,0.655,48.05
+CVE-2019-62915,OpenSSL Privilege Escalation,"OpenSSL is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",5.1,1.0,MEDIUM,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,8.86,https://nvd.nist.gov/vuln/detail/CVE-2019-62915,2012-05-01,2012-08-04,2012-10-19,False,False,True,True,True,0.2364,86.8
+CVE-2022-49980,Apache HTTP Server Remote Code Execution,"Apache HTTP Server is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",1.1,1.8,LOW,LOW,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,5.1,https://nvd.nist.gov/vuln/detail/CVE-2022-49980,2009-10-03,2010-01-18,2011-01-09,False,False,True,True,False,0.3751,93.55
+CVE-2013-96410,OpenSSL Information Disclosure,"OpenSSL is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",9.0,7.4,CRITICAL,HIGH,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.92,https://nvd.nist.gov/vuln/detail/CVE-2013-96410,2015-10-09,2016-01-15,2016-11-23,True,False,True,True,False,0.3214,62.3
+CVE-2007-47727,Docker Engine Authentication Bypass,"Docker Engine is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",4.4,8.1,MEDIUM,HIGH,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,7.4,https://nvd.nist.gov/vuln/detail/CVE-2007-47727,2022-07-07,2022-07-19,2023-04-16,False,True,False,True,True,0.099,49.39
+CVE-2009-83812,OpenSSL Information Disclosure,"OpenSSL is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",8.3,5.9,HIGH,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,4.05,https://nvd.nist.gov/vuln/detail/CVE-2009-83812,2021-04-03,2021-09-22,2022-05-17,False,False,True,False,True,0.5394,44.21
+CVE-2012-48905,Microsoft Exchange Remote Code Execution,"Microsoft Exchange is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",4.7,0.9,MEDIUM,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,3.6,https://nvd.nist.gov/vuln/detail/CVE-2012-48905,2022-05-31,2022-11-04,2023-06-06,False,True,True,False,False,0.737,9.4
+CVE-2014-20554,MySQL Information Disclosure,"MySQL is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",4.6,1.6,MEDIUM,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,2.35,https://nvd.nist.gov/vuln/detail/CVE-2014-20554,2016-11-03,2017-04-09,2018-01-01,False,False,True,False,True,0.8508,3.12
+CVE-2023-81318,MySQL Privilege Escalation,"MySQL is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",9.3,9.0,CRITICAL,CRITICAL,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,5.15,https://nvd.nist.gov/vuln/detail/CVE-2023-81318,2006-09-25,2006-10-05,2007-06-30,False,False,True,False,False,0.4237,6.28
+CVE-2008-10436,Microsoft Exchange Remote Code Execution,"Microsoft Exchange is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",0.5,0.4,LOW,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,6.29,https://nvd.nist.gov/vuln/detail/CVE-2008-10436,2013-05-18,2013-09-11,2014-01-15,False,True,False,True,True,0.0336,88.53
+CVE-2022-74205,Linux Kernel Sql Injection,"Linux Kernel is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",4.8,9.2,MEDIUM,CRITICAL,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,9.32,https://nvd.nist.gov/vuln/detail/CVE-2022-74205,2014-06-05,2014-07-18,2015-01-08,False,True,False,True,False,0.0086,0.0
+CVE-2019-83077,Firefox Insecure Deserialization,"Firefox is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",3.9,4.2,LOW,MEDIUM,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,7.86,https://nvd.nist.gov/vuln/detail/CVE-2019-83077,2016-01-10,2016-02-28,2016-10-30,False,False,False,True,True,0.7194,83.41
+CVE-2017-73180,Firefox Remote Code Execution,"Firefox is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",3.0,0.9,LOW,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,6.36,https://nvd.nist.gov/vuln/detail/CVE-2017-73180,2024-08-14,2024-11-11,2025-02-14,True,False,True,True,False,0.8614,30.78
+CVE-2006-05388,Apache HTTP Server Command Injection,"Apache HTTP Server is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",5.1,4.3,MEDIUM,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,6.37,https://nvd.nist.gov/vuln/detail/CVE-2006-05388,2025-05-08,2025-11-02,2026-07-15,True,False,False,True,False,0.1823,6.8
+CVE-2009-15168,Linux Kernel Path Traversal,"Linux Kernel is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",8.5,2.6,HIGH,LOW,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,7.06,https://nvd.nist.gov/vuln/detail/CVE-2009-15168,2008-12-30,2009-05-04,2010-01-14,False,False,True,False,True,0.4336,72.45
+CVE-2007-83350,Apache HTTP Server Cross-Site Scripting,"Apache HTTP Server is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",5.3,6.2,MEDIUM,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,2.3,https://nvd.nist.gov/vuln/detail/CVE-2007-83350,2025-01-30,2025-07-05,2026-06-04,True,False,False,False,False,0.6794,65.93
+CVE-2016-60098,Cisco ASA Sql Injection,"Cisco ASA is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",3.7,9.3,LOW,CRITICAL,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,3.42,https://nvd.nist.gov/vuln/detail/CVE-2016-60098,2018-09-28,2018-10-22,2019-08-19,True,True,True,False,True,0.643,79.7
+CVE-2018-68399,Kubernetes API Server Command Injection,"Kubernetes API Server is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",3.7,9.5,LOW,CRITICAL,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,6.93,https://nvd.nist.gov/vuln/detail/CVE-2018-68399,2021-04-05,2021-05-24,2021-11-21,True,False,False,True,False,0.129,44.96
+CVE-2014-04622,Firefox Directory Traversal,"Firefox is vulnerable to directory traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",5.6,5.7,MEDIUM,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,8.39,https://nvd.nist.gov/vuln/detail/CVE-2014-04622,2013-09-27,2014-03-15,2014-12-02,True,False,True,True,False,0.4227,80.99
+CVE-2006-69346,PostgreSQL Privilege Escalation,"PostgreSQL is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",0.5,5.3,LOW,MEDIUM,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,2.53,https://nvd.nist.gov/vuln/detail/CVE-2006-69346,2007-03-14,2007-08-03,2007-10-21,False,False,True,True,False,0.5828,55.77
+CVE-2015-85765,Kubernetes API Server Insecure Deserialization,"Kubernetes API Server is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",1.0,2.5,LOW,LOW,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,3.85,https://nvd.nist.gov/vuln/detail/CVE-2015-85765,2023-07-23,2023-12-06,2024-04-16,False,True,True,False,True,0.2763,59.47
+CVE-2010-25977,Microsoft Exchange Information Disclosure,"Microsoft Exchange is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",4.8,0.5,MEDIUM,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,3.53,https://nvd.nist.gov/vuln/detail/CVE-2010-25977,2016-06-06,2016-06-17,2017-03-06,False,False,False,True,True,0.781,77.98
+CVE-2005-67248,Kubernetes API Server Privilege Escalation,"Kubernetes API Server is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",4.8,1.6,MEDIUM,LOW,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,3.82,https://nvd.nist.gov/vuln/detail/CVE-2005-67248,2016-11-16,2016-12-12,2017-07-07,False,False,True,False,False,0.4115,41.78
+CVE-2009-14893,Kubernetes API Server Information Disclosure,"Kubernetes API Server is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",1.1,7.4,LOW,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,2.43,https://nvd.nist.gov/vuln/detail/CVE-2009-14893,2012-01-16,2012-03-09,2012-12-10,True,False,False,True,False,0.2393,73.29
+CVE-2023-50801,MySQL Insecure Deserialization,"MySQL is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",7.7,2.5,HIGH,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,7.0,https://nvd.nist.gov/vuln/detail/CVE-2023-50801,2012-06-15,2012-10-30,2013-03-19,True,False,True,True,False,0.8659,24.16
+CVE-2010-10309,Citrix ADC Information Disclosure,"Citrix ADC is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",4.2,9.9,MEDIUM,CRITICAL,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,5.32,https://nvd.nist.gov/vuln/detail/CVE-2010-10309,2015-04-14,2015-09-04,2016-03-12,False,True,True,True,False,0.2036,89.37
+CVE-2011-34006,Chrome Insecure Deserialization,"Chrome is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",2.8,2.7,LOW,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,8.97,https://nvd.nist.gov/vuln/detail/CVE-2011-34006,2019-04-29,2019-05-01,2019-09-14,False,True,False,False,False,0.9937,67.11
+CVE-2022-38376,Nginx Command Injection,"Nginx is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",6.3,9.9,MEDIUM,CRITICAL,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,0.96,https://nvd.nist.gov/vuln/detail/CVE-2022-38376,2008-12-11,2009-01-26,2009-10-19,True,False,True,True,True,0.2113,21.3
+CVE-2019-92893,Windows Server Sql Injection,"Windows Server is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",4.7,0.6,MEDIUM,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.62,https://nvd.nist.gov/vuln/detail/CVE-2019-92893,2007-06-09,2007-09-02,2008-02-07,True,True,True,False,False,0.3901,0.48
+CVE-2022-25342,Firefox Insecure Deserialization,"Firefox is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",3.3,10.0,LOW,CRITICAL,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,6.86,https://nvd.nist.gov/vuln/detail/CVE-2022-25342,2022-05-28,2022-10-10,2023-02-11,True,False,False,True,True,0.3293,25.6
+CVE-2013-13033,Firefox Insecure Deserialization,"Firefox is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",7.6,1.8,HIGH,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,0.35,https://nvd.nist.gov/vuln/detail/CVE-2013-13033,2020-03-22,2020-09-02,2020-12-02,False,False,True,True,True,0.013,93.98
+CVE-2008-43752,Firefox Remote Code Execution,"Firefox is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",2.8,2.6,LOW,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,4.92,https://nvd.nist.gov/vuln/detail/CVE-2008-43752,2007-10-14,2008-03-17,2008-07-30,False,False,True,True,True,0.1038,73.5
+CVE-2022-88347,Kubernetes API Server Information Disclosure,"Kubernetes API Server is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",6.8,5.9,MEDIUM,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.33,https://nvd.nist.gov/vuln/detail/CVE-2022-88347,2008-06-24,2008-09-01,2008-09-19,False,True,False,True,True,0.5897,97.28
+CVE-2009-19199,Chrome Privilege Escalation,"Chrome is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",2.4,5.7,LOW,MEDIUM,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,0.4,https://nvd.nist.gov/vuln/detail/CVE-2009-19199,2016-07-14,2016-11-21,2017-04-13,True,False,True,False,False,0.867,45.51
+CVE-2018-96474,Cisco ASA Remote Code Execution,"Cisco ASA is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",2.3,0.1,LOW,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,0.05,https://nvd.nist.gov/vuln/detail/CVE-2018-96474,2017-12-28,2018-06-04,2019-02-26,False,True,False,True,False,0.5513,16.08
+CVE-2016-40047,Apache HTTP Server Cross-Site Scripting,"Apache HTTP Server is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",8.4,6.4,HIGH,MEDIUM,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,4.39,https://nvd.nist.gov/vuln/detail/CVE-2016-40047,2007-03-01,2007-08-11,2007-12-23,True,False,True,False,True,0.4293,65.14
+CVE-2022-52541,Apache HTTP Server Privilege Escalation,"Apache HTTP Server is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",4.6,8.3,MEDIUM,HIGH,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,1.27,https://nvd.nist.gov/vuln/detail/CVE-2022-52541,2009-12-15,2010-01-05,2010-04-12,False,True,True,True,True,0.9356,72.45
+CVE-2020-23340,Chrome Authentication Bypass,"Chrome is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",5.3,4.6,MEDIUM,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,5.54,https://nvd.nist.gov/vuln/detail/CVE-2020-23340,2023-05-13,2023-08-09,2024-02-05,False,True,True,True,False,0.7671,56.08
+CVE-2021-64086,OpenSSL Command Injection,"OpenSSL is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",4.5,2.7,MEDIUM,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,9.67,https://nvd.nist.gov/vuln/detail/CVE-2021-64086,2011-03-09,2011-04-13,2011-10-03,False,False,False,False,True,0.9374,83.91
+CVE-2011-22190,Microsoft Exchange Privilege Escalation,"Microsoft Exchange is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",3.3,8.3,LOW,HIGH,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.81,https://nvd.nist.gov/vuln/detail/CVE-2011-22190,2011-06-13,2011-07-14,2012-01-21,False,True,False,True,True,0.0245,17.62
+CVE-2017-60414,VMware ESXi Remote Code Execution,"VMware ESXi is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",6.5,2.9,MEDIUM,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,4.16,https://nvd.nist.gov/vuln/detail/CVE-2017-60414,2005-04-10,2005-05-23,2006-02-13,True,True,True,False,False,0.7889,65.5
+CVE-2017-34430,Apache HTTP Server Cross-Site Scripting,"Apache HTTP Server is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",1.4,9.2,LOW,CRITICAL,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,8.09,https://nvd.nist.gov/vuln/detail/CVE-2017-34430,2021-12-22,2022-04-29,2023-02-10,True,False,False,True,True,0.5203,91.55
+CVE-2019-72264,Firefox Information Disclosure,"Firefox is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",8.7,1.6,HIGH,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,2.38,https://nvd.nist.gov/vuln/detail/CVE-2019-72264,2017-08-16,2017-12-02,2018-05-28,True,False,True,False,False,0.1082,38.67
+CVE-2020-37936,Chrome Authentication Bypass,"Chrome is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",2.6,3.7,LOW,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,3.0,https://nvd.nist.gov/vuln/detail/CVE-2020-37936,2014-01-26,2014-04-12,2014-08-24,True,True,True,False,True,0.9493,65.94
+CVE-2022-85185,Citrix ADC Cross-Site Scripting,"Citrix ADC is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",4.7,1.3,MEDIUM,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,4.52,https://nvd.nist.gov/vuln/detail/CVE-2022-85185,2006-09-16,2007-01-19,2007-02-13,True,True,True,True,True,0.6309,8.99
+CVE-2017-28844,Nginx Cross-Site Scripting,"Nginx is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",1.5,1.3,LOW,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,0.54,https://nvd.nist.gov/vuln/detail/CVE-2017-28844,2018-03-05,2018-08-11,2018-10-28,False,False,True,False,True,0.1017,33.06
+CVE-2007-32081,Citrix ADC Path Traversal,"Citrix ADC is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",8.5,4.4,HIGH,MEDIUM,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,7.77,https://nvd.nist.gov/vuln/detail/CVE-2007-32081,2024-12-11,2025-01-17,2025-04-07,False,True,False,True,False,0.9881,86.9
+CVE-2019-34868,Cisco ASA Path Traversal,"Cisco ASA is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",5.6,4.4,MEDIUM,MEDIUM,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,3.19,https://nvd.nist.gov/vuln/detail/CVE-2019-34868,2012-12-11,2013-05-08,2013-06-28,True,True,True,True,False,0.6166,86.52
+CVE-2005-64061,Windows Server Path Traversal,"Windows Server is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",6.8,7.3,MEDIUM,HIGH,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,1.85,https://nvd.nist.gov/vuln/detail/CVE-2005-64061,2016-10-19,2017-04-14,2018-01-16,True,True,True,True,True,0.2814,85.26
+CVE-2016-01696,VMware ESXi Authentication Bypass,"VMware ESXi is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",7.9,4.9,HIGH,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,5.63,https://nvd.nist.gov/vuln/detail/CVE-2016-01696,2021-10-25,2022-03-24,2022-05-07,False,True,True,True,True,0.2415,62.32
+CVE-2013-83043,Citrix ADC Sql Injection,"Citrix ADC is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",0.3,4.6,LOW,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,7.77,https://nvd.nist.gov/vuln/detail/CVE-2013-83043,2009-04-10,2009-07-14,2010-05-27,True,True,True,False,False,0.4867,49.24
+CVE-2010-36595,Windows Server Cross-Site Scripting,"Windows Server is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",1.2,3.5,LOW,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,4.66,https://nvd.nist.gov/vuln/detail/CVE-2010-36595,2010-01-29,2010-04-03,2011-02-12,True,True,False,True,True,0.3118,36.91
+CVE-2005-43332,Cisco ASA Path Traversal,"Cisco ASA is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",10.0,2.4,CRITICAL,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,0.47,https://nvd.nist.gov/vuln/detail/CVE-2005-43332,2011-04-25,2011-08-30,2012-03-08,False,False,False,True,False,0.5537,43.22
+CVE-2018-93324,Docker Engine Authentication Bypass,"Docker Engine is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",6.6,9.5,MEDIUM,CRITICAL,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,9.17,https://nvd.nist.gov/vuln/detail/CVE-2018-93324,2008-02-10,2008-08-08,2009-07-16,False,True,True,True,False,0.4119,3.37
+CVE-2021-74435,PostgreSQL Path Traversal,"PostgreSQL is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",1.2,7.4,LOW,HIGH,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,2.53,https://nvd.nist.gov/vuln/detail/CVE-2021-74435,2025-04-03,2025-05-29,2025-08-26,True,True,False,False,True,0.3586,53.58
+CVE-2007-48031,Apache HTTP Server Path Traversal,"Apache HTTP Server is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",3.9,3.5,LOW,LOW,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,5.39,https://nvd.nist.gov/vuln/detail/CVE-2007-48031,2011-03-24,2011-08-28,2011-12-29,True,False,True,True,False,0.6497,25.87
+CVE-2016-02390,Microsoft Exchange Authentication Bypass,"Microsoft Exchange is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",0.8,7.0,LOW,HIGH,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,9.49,https://nvd.nist.gov/vuln/detail/CVE-2016-02390,2021-10-29,2022-03-07,2022-11-27,False,False,False,False,False,0.5251,20.74
+CVE-2009-48763,Kubernetes API Server Command Injection,"Kubernetes API Server is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",4.3,4.6,MEDIUM,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,0.24,https://nvd.nist.gov/vuln/detail/CVE-2009-48763,2006-05-23,2006-10-14,2006-10-31,False,True,True,True,False,0.8308,39.67
+CVE-2016-24075,Fortinet FortiOS Authentication Bypass,"Fortinet FortiOS is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",3.6,6.3,LOW,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,1.52,https://nvd.nist.gov/vuln/detail/CVE-2016-24075,2024-05-25,2024-11-09,2025-09-13,False,False,True,False,False,0.8948,52.02
+CVE-2015-26894,PostgreSQL Path Traversal,"PostgreSQL is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",3.8,8.6,LOW,HIGH,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,9.51,https://nvd.nist.gov/vuln/detail/CVE-2015-26894,2023-12-03,2024-02-08,2024-04-18,False,False,False,False,False,0.8403,22.47
+CVE-2023-37584,Docker Engine Command Injection,"Docker Engine is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",0.2,3.1,LOW,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.18,https://nvd.nist.gov/vuln/detail/CVE-2023-37584,2009-08-26,2009-11-03,2010-01-10,False,False,True,False,True,0.3831,51.27
+CVE-2009-26184,Linux Kernel Path Traversal,"Linux Kernel is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",2.9,5.1,LOW,MEDIUM,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,8.77,https://nvd.nist.gov/vuln/detail/CVE-2009-26184,2008-09-08,2008-10-22,2009-08-02,True,True,True,True,True,0.3926,61.75
+CVE-2010-50882,OpenSSL Remote Code Execution,"OpenSSL is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",6.2,3.3,MEDIUM,LOW,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,3.95,https://nvd.nist.gov/vuln/detail/CVE-2010-50882,2007-03-17,2007-08-08,2007-12-10,False,False,True,False,True,0.8333,93.34
+CVE-2011-26877,PostgreSQL Sql Injection,"PostgreSQL is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",0.1,4.9,LOW,MEDIUM,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,6.0,https://nvd.nist.gov/vuln/detail/CVE-2011-26877,2013-11-24,2014-04-19,2014-05-28,False,True,False,True,False,0.4698,16.27
+CVE-2018-91793,Apache HTTP Server Remote Code Execution,"Apache HTTP Server is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",6.4,0.3,MEDIUM,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,7.71,https://nvd.nist.gov/vuln/detail/CVE-2018-91793,2008-05-27,2008-11-01,2009-10-11,False,False,False,True,False,0.0698,3.2
+CVE-2025-99839,Chrome Sql Injection,"Chrome is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",0.6,8.6,LOW,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,8.05,https://nvd.nist.gov/vuln/detail/CVE-2025-99839,2007-08-22,2007-09-05,2008-04-21,True,True,False,False,False,0.7046,57.91
+CVE-2006-01545,Docker Engine Command Injection,"Docker Engine is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",5.2,8.9,MEDIUM,HIGH,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.58,https://nvd.nist.gov/vuln/detail/CVE-2006-01545,2016-10-21,2016-12-26,2017-08-21,False,True,True,True,True,0.0977,5.19
+CVE-2019-45367,Microsoft Exchange Privilege Escalation,"Microsoft Exchange is vulnerable to privilege escalation, which may allow an attacker to impact confidentiality, integrity, or availability.",6.5,6.9,MEDIUM,MEDIUM,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,1.81,https://nvd.nist.gov/vuln/detail/CVE-2019-45367,2010-07-21,2010-10-24,2010-10-25,False,False,False,True,True,0.4817,45.89
+CVE-2014-35448,Microsoft Exchange Authentication Bypass,"Microsoft Exchange is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",6.7,8.9,MEDIUM,HIGH,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,6.23,https://nvd.nist.gov/vuln/detail/CVE-2014-35448,2009-02-21,2009-05-26,2010-02-07,False,False,True,False,True,0.2989,60.48
+CVE-2016-03469,Chrome Cross-Site Scripting,"Chrome is vulnerable to cross-site scripting, which may allow an attacker to impact confidentiality, integrity, or availability.",8.5,7.7,HIGH,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,4.75,https://nvd.nist.gov/vuln/detail/CVE-2016-03469,2014-10-02,2014-10-10,2014-10-11,False,False,True,True,False,0.8904,62.37
+CVE-2006-84327,VMware ESXi Authentication Bypass,"VMware ESXi is vulnerable to authentication bypass, which may allow an attacker to impact confidentiality, integrity, or availability.",5.6,3.2,MEDIUM,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,5.36,https://nvd.nist.gov/vuln/detail/CVE-2006-84327,2011-07-14,2011-10-13,2011-12-14,True,False,False,False,True,0.7524,13.0
+CVE-2020-54564,Microsoft Exchange Command Injection,"Microsoft Exchange is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",5.0,8.4,MEDIUM,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,8.96,https://nvd.nist.gov/vuln/detail/CVE-2020-54564,2005-06-12,2005-10-28,2006-09-06,True,False,True,True,True,0.2859,63.8
+CVE-2015-27046,Kubernetes API Server Sql Injection,"Kubernetes API Server is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",4.8,1.5,MEDIUM,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,9.22,https://nvd.nist.gov/vuln/detail/CVE-2015-27046,2012-06-20,2012-11-29,2013-06-07,False,False,True,True,True,0.3785,59.22
+CVE-2006-88275,Apache HTTP Server Insecure Deserialization,"Apache HTTP Server is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",1.2,8.0,LOW,HIGH,AV:L/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,5.23,https://nvd.nist.gov/vuln/detail/CVE-2006-88275,2008-11-18,2008-11-26,2009-04-12,False,True,False,False,False,0.3078,98.29
+CVE-2014-07291,OpenSSL Remote Code Execution,"OpenSSL is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",6.3,0.1,MEDIUM,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,7.18,https://nvd.nist.gov/vuln/detail/CVE-2014-07291,2021-01-12,2021-01-12,2021-03-11,False,False,False,True,True,0.0443,72.85
+CVE-2013-05663,PostgreSQL Information Disclosure,"PostgreSQL is vulnerable to information disclosure, which may allow an attacker to impact confidentiality, integrity, or availability.",5.1,5.2,MEDIUM,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H,7.5,https://nvd.nist.gov/vuln/detail/CVE-2013-05663,2011-01-27,2011-04-15,2011-11-12,True,True,True,False,True,0.5001,97.34
+CVE-2021-31539,Apache HTTP Server Directory Traversal,"Apache HTTP Server is vulnerable to directory traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",7.3,6.9,HIGH,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.8,https://nvd.nist.gov/vuln/detail/CVE-2021-31539,2024-09-20,2025-01-04,2025-10-02,False,False,False,True,True,0.7479,95.81
+CVE-2022-51522,Nginx Sql Injection,"Nginx is vulnerable to SQL injection, which may allow an attacker to impact confidentiality, integrity, or availability.",5.0,5.0,MEDIUM,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,5.44,https://nvd.nist.gov/vuln/detail/CVE-2022-51522,2022-01-03,2022-05-20,2022-06-06,True,False,False,False,True,0.704,22.24
+CVE-2021-36024,PostgreSQL Path Traversal,"PostgreSQL is vulnerable to path traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",2.8,6.1,LOW,MEDIUM,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,9.25,https://nvd.nist.gov/vuln/detail/CVE-2021-36024,2022-10-15,2023-03-15,2023-04-08,True,True,True,False,False,0.7132,98.91
+CVE-2014-96574,Cisco ASA Remote Code Execution,"Cisco ASA is vulnerable to remote code execution, which may allow an attacker to impact confidentiality, integrity, or availability.",1.1,6.5,LOW,MEDIUM,AV:N/AC:M/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,9.79,https://nvd.nist.gov/vuln/detail/CVE-2014-96574,2025-12-29,2026-01-18,2026-03-15,True,False,False,True,False,0.1045,50.06
+CVE-2006-23369,Citrix ADC Command Injection,"Citrix ADC is vulnerable to command injection, which may allow an attacker to impact confidentiality, integrity, or availability.",6.0,7.4,MEDIUM,HIGH,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,5.36,https://nvd.nist.gov/vuln/detail/CVE-2006-23369,2013-10-09,2014-02-01,2014-03-23,True,False,True,True,False,0.3395,91.22
+CVE-2023-19028,PostgreSQL Directory Traversal,"PostgreSQL is vulnerable to directory traversal, which may allow an attacker to impact confidentiality, integrity, or availability.",0.9,3.0,LOW,LOW,AV:N/AC:L/Au:N/C:P/I:P/A:P,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L,7.75,https://nvd.nist.gov/vuln/detail/CVE-2023-19028,2015-08-17,2015-10-29,2016-03-12,False,False,False,False,True,0.9014,6.58
+CVE-2008-98115,VMware ESXi Insecure Deserialization,"VMware ESXi is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",4.5,9.2,MEDIUM,CRITICAL,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H,4.43,https://nvd.nist.gov/vuln/detail/CVE-2008-98115,2017-03-21,2017-09-08,2018-01-22,False,False,True,False,True,0.4889,40.41
+CVE-2018-25928,VMware ESXi Insecure Deserialization,"VMware ESXi is vulnerable to insecure deserialization, which may allow an attacker to impact confidentiality, integrity, or availability.",2.9,1.9,LOW,LOW,AV:N/AC:L/Au:N/C:C/I:C/A:C,CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H,9.84,https://nvd.nist.gov/vuln/detail/CVE-2018-25928,2023-10-03,2023-11-29,2024-04-22,False,True,True,True,True,0.6879,80.02
+`
+  },
+  {
     id: "data connectors-agents agents",
     label: "Data Connectors Agents Agents",
     filename: "data connectors-agents agents.csv",
@@ -827,35 +934,238 @@ Containers Zero Trust Tier 1,6620,"Jan 08, 2025",Lucas Anderson,"Dec 17, 2024",E
 `
   },
   {
+    id: "findings_by_severity_week_last_month",
+    label: "Findings By Severity Week Last Month",
+    filename: "findings_by_severity_week_last_month.csv",
+    contents: `cvss_v3_severity,updated_at_week,count
+CRITICAL,"October 27, 2025 – November 02, 2025",122
+CRITICAL,"November 10, 2025 – November 16, 2025",1238
+HIGH,"November 03, 2025 – November 09, 2025",8945
+HIGH,"November 17, 2025 – November 23, 2025",23
+HIGH,"November 24, 2025 – November 30, 2025",823
+MEDIUM,"October 27, 2025 – November 02, 2025",12
+MEDIUM,"November 03, 2025 – November 09, 2025",2358
+MEDIUM,"November 10, 2025 – November 16, 2025",834
+MEDIUM,"November 17, 2025 – November 23, 2025",175
+MEDIUM,"November 24, 2025 – November 30, 2025",489
+LOW,"November 03, 2025 – November 09, 2025",552
+LOW,"November 10, 2025 – November 16, 2025",323
+LOW,"November 17, 2025 – November 23, 2025",359
+LOW,"November 24, 2025 – November 30, 2025",101`
+  },
+  {
+    id: "findings_cve_combo_100_rows",
+    label: "Findings Cve Combo 100 Rows",
+    filename: "findings_cve_combo_100_rows.csv",
+    contents: `finding_id,cve_id,last_detected,title,cvss_v3_base_score,cvss_v3_severity
+FIND-00001,CVE-2025-71610,2024-07-18 03:17:19 PM,Kubernetes API Server Authentication Bypass,5.1,MEDIUM
+FIND-00002,CVE-2019-92458,2024-01-15 04:27:03 PM,Apache HTTP Server Command Injection,3.9,LOW
+FIND-00003,CVE-2017-54078,2024-03-05 02:50:54 PM,Kubernetes API Server Command Injection,4.6,MEDIUM
+FIND-00004,CVE-2024-40494,2024-08-05 12:42:45 PM,Chrome Command Injection,2.3,LOW
+FIND-00005,CVE-2017-03763,2024-02-09 06:09:33 PM,Linux Kernel Command Injection,6.9,MEDIUM
+FIND-00006,CVE-2018-15734,2025-01-15 07:49:48 AM,VMware ESXi Directory Traversal,4.3,MEDIUM
+FIND-00007,CVE-2015-82292,2024-11-09 10:51:28 AM,PostgreSQL Remote Code Execution,9.9,CRITICAL
+FIND-00008,CVE-2017-87236,2024-12-08 02:25:47 PM,Kubernetes API Server Information Disclosure,3.8,LOW
+FIND-00009,CVE-2023-55320,2024-05-06 12:04:09 AM,Nginx Cross-Site Scripting,3.9,LOW
+FIND-00010,CVE-2025-74393,2024-03-10 04:34:56 PM,Linux Kernel Privilege Escalation,0.5,LOW
+FIND-00011,CVE-2015-60892,2024-04-12 08:56:11 AM,Fortinet FortiOS Information Disclosure,4.6,MEDIUM
+FIND-00012,CVE-2016-93227,2025-01-24 07:24:39 AM,Citrix ADC SQL Injection,8.9,HIGH
+FIND-00013,CVE-2022-09306,2024-10-02 07:31:38 PM,Fortinet FortiOS Privilege Escalation,9.9,CRITICAL
+FIND-00014,CVE-2015-03283,2024-07-22 08:11:05 PM,Windows Server Information Disclosure,7.7,HIGH
+FIND-00015,CVE-2023-90368,2024-02-02 02:21:01 AM,PostgreSQL Directory Traversal,0.4,LOW
+FIND-00016,CVE-2021-43605,2024-03-11 06:23:55 AM,OpenSSL SQL Injection,6.8,MEDIUM
+FIND-00017,CVE-2014-09685,2025-05-20 08:11:20 PM,Linux Kernel Path Traversal,3.9,LOW
+FIND-00018,CVE-2019-88576,2025-01-10 09:46:38 AM,Docker Engine Insecure Deserialization,1.0,LOW
+FIND-00019,CVE-2023-42256,2024-04-20 03:08:42 AM,Docker Engine Command Injection,5.8,MEDIUM
+FIND-00020,CVE-2025-79069,2025-10-25 04:50:30 PM,OpenSSL Insecure Deserialization,8.4,HIGH
+FIND-00021,CVE-2018-25110,2025-02-18 10:22:57 PM,Kubernetes API Server Remote Code Execution,0.7,LOW
+FIND-00022,CVE-2015-05104,2025-10-10 04:46:32 PM,Cisco ASA Cross-Site Scripting,9.6,CRITICAL
+FIND-00023,CVE-2016-45301,2024-01-07 07:28:41 AM,PostgreSQL Remote Code Execution,4.7,MEDIUM
+FIND-00024,CVE-2025-51453,2025-02-21 10:49:57 PM,Chrome Remote Code Execution,3.0,LOW
+FIND-00025,CVE-2022-83024,2025-02-14 07:24:44 PM,MySQL SQL Injection,4.8,MEDIUM
+FIND-00026,CVE-2015-56956,2024-03-12 02:25:57 AM,PostgreSQL Information Disclosure,1.4,LOW
+FIND-00027,CVE-2024-54251,2024-04-23 05:07:10 PM,VMware ESXi SQL Injection,8.3,HIGH
+FIND-00028,CVE-2015-17720,2024-11-10 10:05:36 PM,Apache HTTP Server Command Injection,2.5,LOW
+FIND-00029,CVE-2016-99597,2025-11-25 06:00:00 PM,VMware ESXi Cross-Site Scripting,7.3,HIGH
+FIND-00030,CVE-2020-57675,2025-04-23 10:26:57 PM,Linux Kernel Path Traversal,5.1,MEDIUM
+FIND-00031,CVE-2025-04489,2024-09-15 05:00:12 AM,Linux Kernel Cross-Site Scripting,4.8,MEDIUM
+FIND-00032,CVE-2015-85109,2025-07-12 11:35:52 AM,PostgreSQL SQL Injection,3.9,LOW
+FIND-00033,CVE-2020-78802,2024-10-06 06:08:01 PM,OpenSSL SQL Injection,7.3,HIGH
+FIND-00034,CVE-2021-84583,2025-08-24 08:49:49 PM,Apache HTTP Server Command Injection,1.4,LOW
+FIND-00035,CVE-2020-96193,2024-09-16 09:02:18 AM,MySQL Insecure Deserialization,1.7,LOW
+FIND-00036,CVE-2023-90075,2025-03-29 12:29:34 AM,Apache HTTP Server Authentication Bypass,7.3,HIGH
+FIND-00037,CVE-2014-51125,2024-05-09 02:58:43 PM,Apache HTTP Server Privilege Escalation,2.8,LOW
+FIND-00038,CVE-2019-02765,2024-07-01 12:03:06 PM,Chrome Insecure Deserialization,5.8,MEDIUM
+FIND-00039,CVE-2025-12586,2024-01-27 11:20:29 AM,Apache HTTP Server Directory Traversal,2.7,LOW
+FIND-00040,CVE-2025-93241,2024-03-09 02:04:40 AM,Nginx Cross-Site Scripting,2.1,LOW
+FIND-00041,CVE-2017-63477,2024-12-08 12:54:08 PM,PostgreSQL SQL Injection,5.0,MEDIUM
+FIND-00042,CVE-2015-32252,2025-10-20 09:47:16 PM,Chrome Privilege Escalation,1.5,LOW
+FIND-00043,CVE-2024-61435,2025-09-02 02:55:33 PM,VMware ESXi Insecure Deserialization,7.1,HIGH
+FIND-00044,CVE-2017-84386,2025-07-26 09:24:09 PM,Linux Kernel SQL Injection,2.2,LOW
+FIND-00045,CVE-2016-56141,2025-11-30 04:05:28 AM,VMware ESXi Privilege Escalation,6.8,MEDIUM
+FIND-00046,CVE-2025-81614,2025-09-17 07:51:18 AM,VMware ESXi Information Disclosure,0.1,LOW
+FIND-00047,CVE-2019-67221,2025-07-22 05:26:53 AM,Docker Engine Directory Traversal,3.2,LOW
+FIND-00048,CVE-2016-75402,2025-04-30 06:30:12 PM,MySQL Authentication Bypass,4.3,MEDIUM
+FIND-00049,CVE-2023-25124,2025-04-12 07:34:12 AM,Nginx Insecure Deserialization,5.1,MEDIUM
+FIND-00050,CVE-2020-87929,2024-04-08 01:30:15 PM,Chrome Directory Traversal,6.4,MEDIUM
+FIND-00051,CVE-2025-34178,2024-11-18 03:40:46 AM,Citrix ADC Authentication Bypass,6.1,MEDIUM
+FIND-00052,CVE-2021-81407,2025-07-31 10:59:57 AM,Docker Engine Remote Code Execution,2.4,LOW
+FIND-00053,CVE-2016-86749,2024-06-18 09:33:28 AM,Apache HTTP Server Remote Code Execution,4.7,MEDIUM
+FIND-00054,CVE-2016-95915,2025-03-15 10:53:02 PM,Windows Server SQL Injection,8.0,HIGH
+FIND-00055,CVE-2018-18258,2025-02-10 11:46:55 PM,OpenSSL Privilege Escalation,4.5,MEDIUM
+FIND-00056,CVE-2014-80067,2025-11-14 12:43:06 PM,Fortinet FortiOS Directory Traversal,9.6,CRITICAL
+FIND-00057,CVE-2014-07432,2024-11-07 01:49:03 PM,Docker Engine Cross-Site Scripting,2.6,LOW
+FIND-00058,CVE-2016-15038,2024-12-30 09:29:30 PM,Microsoft Exchange Path Traversal,4.8,MEDIUM
+FIND-00059,CVE-2014-20462,2025-08-28 08:47:44 AM,OpenSSL Cross-Site Scripting,5.6,MEDIUM
+FIND-00060,CVE-2015-17477,2024-05-06 09:06:29 PM,Docker Engine Information Disclosure,0.6,LOW
+FIND-00061,CVE-2016-80185,2024-04-24 03:26:22 AM,Kubernetes API Server Authentication Bypass,3.4,LOW
+FIND-00062,CVE-2022-57387,2025-09-10 11:59:39 AM,PostgreSQL Information Disclosure,0.7,LOW
+FIND-00063,CVE-2025-18222,2024-03-17 10:16:44 AM,Cisco ASA Authentication Bypass,9.2,CRITICAL
+FIND-00064,CVE-2024-10413,2025-03-09 09:34:35 PM,Citrix ADC Insecure Deserialization,4.4,MEDIUM
+FIND-00065,CVE-2024-72708,2024-04-25 07:42:11 PM,MySQL Information Disclosure,8.7,HIGH
+FIND-00066,CVE-2020-15075,2024-01-18 09:38:03 PM,Cisco ASA Cross-Site Scripting,3.1,LOW
+FIND-00067,CVE-2022-95408,2025-07-25 04:11:25 PM,Chrome Cross-Site Scripting,4.4,MEDIUM
+FIND-00068,CVE-2021-49048,2025-01-01 07:23:20 AM,Windows Server Insecure Deserialization,1.6,LOW
+FIND-00069,CVE-2016-27141,2025-09-28 06:31:47 PM,VMware ESXi Privilege Escalation,0.0,NONE
+FIND-00070,CVE-2014-66136,2024-10-22 06:31:50 AM,MySQL Information Disclosure,5.0,MEDIUM
+FIND-00071,CVE-2014-40087,2024-07-26 09:32:49 PM,Windows Server SQL Injection,6.1,MEDIUM
+FIND-00072,CVE-2022-61578,2025-02-03 06:24:03 PM,MySQL Authentication Bypass,7.8,HIGH
+FIND-00073,CVE-2018-39288,2025-10-25 10:49:41 AM,Nginx Information Disclosure,9.8,CRITICAL
+FIND-00074,CVE-2023-60296,2024-04-03 05:32:57 AM,MySQL SQL Injection,1.7,LOW
+FIND-00075,CVE-2023-52487,2025-07-04 12:16:57 PM,Linux Kernel Authentication Bypass,5.2,MEDIUM
+FIND-00076,CVE-2016-32894,2024-10-27 01:07:41 AM,Chrome Path Traversal,4.2,MEDIUM
+FIND-00077,CVE-2023-92632,2025-12-04 02:21:19 AM,PostgreSQL Cross-Site Scripting,3.1,LOW
+FIND-00078,CVE-2024-97818,2025-03-11 11:32:57 PM,Firefox SQL Injection,5.0,MEDIUM
+FIND-00079,CVE-2020-26652,2024-08-26 02:34:24 PM,Kubernetes API Server Remote Code Execution,2.2,LOW
+FIND-00080,CVE-2025-94467,2025-12-15 07:39:32 PM,VMware ESXi Insecure Deserialization,6.7,MEDIUM
+FIND-00081,CVE-2020-24790,2025-10-09 07:48:49 PM,Windows Server Path Traversal,7.4,HIGH
+FIND-00082,CVE-2014-78652,2024-07-01 07:42:44 AM,VMware ESXi Insecure Deserialization,3.2,LOW
+FIND-00083,CVE-2025-48563,2024-03-11 11:48:46 PM,Chrome Privilege Escalation,3.7,LOW
+FIND-00084,CVE-2017-94276,2025-11-11 02:51:42 AM,Apache HTTP Server SQL Injection,2.3,LOW
+FIND-00085,CVE-2018-09406,2024-04-05 07:03:26 AM,Linux Kernel Information Disclosure,0.5,LOW
+FIND-00086,CVE-2019-17350,2024-03-01 06:06:14 PM,Windows Server Directory Traversal,6.3,MEDIUM
+FIND-00087,CVE-2017-49092,2024-06-03 05:44:12 PM,Nginx Remote Code Execution,2.6,LOW
+FIND-00088,CVE-2024-60823,2024-04-07 11:33:39 PM,Microsoft Exchange Command Injection,8.9,HIGH
+FIND-00089,CVE-2020-12705,2025-01-12 07:52:22 PM,Linux Kernel Command Injection,4.7,MEDIUM
+FIND-00090,CVE-2025-21798,2025-10-31 06:54:52 PM,Docker Engine Authentication Bypass,0.5,LOW
+FIND-00091,CVE-2020-63860,2024-08-05 09:30:26 AM,Firefox Path Traversal,9.2,CRITICAL
+FIND-00092,CVE-2014-06424,2024-10-03 05:15:24 AM,Citrix ADC Directory Traversal,3.0,LOW
+FIND-00093,CVE-2024-04067,2025-01-23 12:56:03 AM,Fortinet FortiOS Directory Traversal,5.7,MEDIUM
+FIND-00094,CVE-2016-73989,2024-12-28 07:34:30 PM,Cisco ASA Insecure Deserialization,6.2,MEDIUM
+FIND-00095,CVE-2022-89536,2024-10-01 05:34:07 PM,Kubernetes API Server Privilege Escalation,8.9,HIGH
+FIND-00096,CVE-2018-92128,2025-12-19 11:38:34 PM,OpenSSL Command Injection,5.9,MEDIUM
+FIND-00097,CVE-2021-86257,2024-02-03 11:45:52 PM,Docker Engine Privilege Escalation,1.0,LOW
+FIND-00098,CVE-2019-63533,2025-07-07 09:40:46 AM,Citrix ADC Information Disclosure,4.4,MEDIUM
+FIND-00099,CVE-2023-53434,2025-09-06 10:32:52 AM,Windows Server Information Disclosure,1.0,LOW
+FIND-00100,CVE-2017-69397,2024-10-23 08:06:08 AM,VMware ESXi Path Traversal,2.5,LOW
+`
+  },
+  {
     id: "findings-vluns",
     label: "Findings Vluns",
     filename: "findings-vluns.csv",
-    contents: `CVE [link],Title,Risk [c],CVSS [c],CISA KEV [boolean|c],EPSS,Affected Assets [r],Findings [r],First Detected,Last Detected
-CVE-2024-62436,Apache HTTP Server Path Traversal,7.2,3.0,True,0.918,78,20,2024-09-26 06:24:52 PM,2024-10-19 06:24:52 PM
-CVE-2016-15454,Windows SMBv3 Remote Code Execution,6.19,9.8,True,0.081,37,7,2025-05-20 06:24:52 PM,2025-07-06 06:24:52 PM
-CVE-2015-49402,OpenSSL Padding Oracle Vulnerability,5.18,7.2,True,0.808,67,1,2024-10-04 06:24:52 PM,2024-11-24 06:24:52 PM
-CVE-2020-60752,Docker Privilege Escalation,6.97,7.9,False,0.726,88,5,2025-02-04 06:24:52 PM,2025-03-06 06:24:52 PM
-CVE-2017-66993,Kubernetes API Misconfiguration,0.39,9.1,True,0.64,43,1,2025-05-07 06:24:52 PM,2025-05-15 06:24:52 PM
-CVE-2022-15561,SQL Injection in Admin Panel,3.42,2.0,False,0.145,119,15,2025-04-22 06:24:52 PM,2025-05-25 06:24:52 PM
-CVE-2023-50782,PHP CGI Argument Injection,8.34,6.2,False,0.014,37,23,2024-09-25 06:24:52 PM,2024-10-18 06:24:52 PM
-CVE-2018-20475,Nginx Cache Poisoning,4.38,6.8,False,0.122,95,4,2024-08-27 06:24:52 PM,2024-10-09 06:24:52 PM
-CVE-2015-33698,Linux Kernel LPE via OverlayFS,6.41,3.5,True,0.049,18,6,2025-02-12 06:24:52 PM,2025-03-17 06:24:52 PM
-CVE-2022-73920,Java Spring Remote Code Execution,1.97,7.4,False,0.412,36,34,2024-08-04 06:24:52 PM,2024-09-23 06:24:52 PM
-CVE-2016-64997,Log4j JNDI Injection,4.78,4.7,True,0.408,85,13,2025-05-11 06:24:52 PM,2025-07-09 06:24:52 PM
-CVE-2020-98562,SolarWinds Orion API Exposure,9.38,6.9,False,0.508,12,5,2024-08-01 06:24:52 PM,2024-08-09 06:24:52 PM
-CVE-2020-4390,Zimbra Auth Bypass,5.54,1.4,False,0.445,97,18,2024-12-19 06:24:52 PM,2025-02-01 06:24:52 PM
-CVE-2015-90808,Chrome Use-After-Free,6.76,7.4,False,0.733,103,39,2024-12-30 06:24:52 PM,2025-02-26 06:24:52 PM
-CVE-2022-6027,Mozilla Firefox Memory Corruption,1.98,8.5,False,0.548,76,20,2024-08-15 06:24:52 PM,2024-09-01 06:24:52 PM
-CVE-2024-6461,Microsoft Exchange SSRF,4.75,0.1,True,0.311,43,17,2024-10-02 06:24:52 PM,2024-11-11 06:24:52 PM
-CVE-2016-16832,Adobe Acrobat JS Engine Overflow,5.12,1.0,False,0.878,50,39,2025-07-11 06:24:52 PM,2025-07-27 06:24:52 PM
-CVE-2024-87667,Fortinet SSL VPN Path Traversal,1.79,5.3,False,0.238,60,8,2024-11-24 06:24:52 PM,2025-01-18 06:24:52 PM
-CVE-2023-68960,Cisco ASA DNS Rebinding,5.21,2.4,True,0.631,17,27,2024-10-30 06:24:52 PM,2024-11-20 06:24:52 PM
-CVE-2020-22826,VMware ESXi Shell Injection,1.77,3.9,False,0.98,53,36,2025-06-05 06:24:52 PM,2025-06-16 06:24:52 PM
-CVE-2023-29055,Citrix ADC Directory Traversal,2.0,3.7,True,0.497,9,31,2025-06-23 06:24:52 PM,2025-06-27 06:24:52 PM
-CVE-2018-13103,F5 BIG-IP SSRF,9.03,3.9,False,0.674,1,37,2024-08-10 06:24:52 PM,2024-08-20 06:24:52 PM
-CVE-2023-81025,Drupal Remote Code Execution,5.7,0.2,True,0.545,94,10,2025-04-19 06:24:52 PM,2025-06-03 06:24:52 PM
-CVE-2021-76728,Jenkins Script Console Exposure,0.92,5.0,True,0.743,101,36,2025-02-19 06:24:52 PM,2025-03-15 06:24:52 PM
-CVE-2022-4006,Jira XML External Entity Injection,7.15,7.7,False,0.496,50,6,2024-10-14 06:24:52 PM,2024-10-18 06:24:52 PM`
+    contents: `ID [link],Title,Risk Score [c],CVSS Score [c],Exploitable [boolean|c],EPSS Score [r],Affected Assets [link|r],Vulnerabilities [link|r],First Detected,Last Detected
+CVE-2024-62436,Apache HTTP Server Path Traversal,7.2,3.0,True,91%,78,20,2024-09-26 06:24:52 PM,2024-10-19 06:24:52 PM
+CVE-2016-15454,Windows SMBv3 Remote Code Execution,6.19,9.8,True,08%,37,7,2025-05-20 06:24:52 PM,2025-07-06 06:24:52 PM
+CVE-2015-49402,OpenSSL Padding Oracle Vulnerability,5.18,7.2,True,80%,67,1,2024-10-04 06:24:52 PM,2024-11-24 06:24:52 PM
+CVE-2020-60752,Docker Privilege Escalation,6.97,7.9,False,72%,88,5,2025-02-04 06:24:52 PM,2025-03-06 06:24:52 PM
+CVE-2017-66993,Kubernetes API Misconfiguration,0.39,9.1,True,64%,43,1,2025-05-07 06:24:52 PM,2025-05-15 06:24:52 PM
+CVE-2022-15561,SQL Injection in Admin Panel,3.42,2.0,False,14%,119,15,2025-04-22 06:24:52 PM,2025-05-25 06:24:52 PM
+CVE-2023-50782,PHP CGI Argument Injection,8.34,6.2,False,14%,37,23,2024-09-25 06:24:52 PM,2024-10-18 06:24:52 PM
+CVE-2018-20475,Nginx Cache Poisoning,4.38,6.8,False,12%,95,4,2024-08-27 06:24:52 PM,2024-10-09 06:24:52 PM
+CVE-2015-33698,Linux Kernel LPE via OverlayFS,6.41,3.5,True,49%,18,6,2025-02-12 06:24:52 PM,2025-03-17 06:24:52 PM
+CVE-2022-73920,Java Spring Remote Code Execution,1.97,7.4,False,12%,36,34,2024-08-04 06:24:52 PM,2024-09-23 06:24:52 PM
+CVE-2016-64997,Log4j JNDI Injection,4.78,4.7,True,40%,85,13,2025-05-11 06:24:52 PM,2025-07-09 06:24:52 PM
+CVE-2020-98562,SolarWinds Orion API Exposure,9.38,6.9,False,50%,12,5,2024-08-01 06:24:52 PM,2024-08-09 06:24:52 PM
+CVE-2020-4390,Zimbra Auth Bypass,5.54,1.4,False,44%,97,18,2024-12-19 06:24:52 PM,2025-02-01 06:24:52 PM
+CVE-2015-90808,Chrome Use-After-Free,6.76,7.4,False,73%,103,39,2024-12-30 06:24:52 PM,2025-02-26 06:24:52 PM
+CVE-2022-6027,Mozilla Firefox Memory Corruption,1.98,8.5,False,54%,76,20,2024-08-15 06:24:52 PM,2024-09-01 06:24:52 PM
+CVE-2024-6461,Microsoft Exchange SSRF,4.75,0.1,True,31%,43,17,2024-10-02 06:24:52 PM,2024-11-11 06:24:52 PM
+CVE-2016-16832,Adobe Acrobat JS Engine Overflow,5.12,1.0,False,87%,50,39,2025-07-11 06:24:52 PM,2025-07-27 06:24:52 PM
+CVE-2024-87667,Fortinet SSL VPN Path Traversal,1.79,5.3,False,23%,60,8,2024-11-24 06:24:52 PM,2025-01-18 06:24:52 PM
+CVE-2023-68960,Cisco ASA DNS Rebinding,5.21,2.4,True,63%,17,27,2024-10-30 06:24:52 PM,2024-11-20 06:24:52 PM
+CVE-2020-22826,VMware ESXi Shell Injection,1.77,3.9,False,98%,53,36,2025-06-05 06:24:52 PM,2025-06-16 06:24:52 PM
+CVE-2023-29055,Citrix ADC Directory Traversal,2.0,3.7,True,49%,9,31,2025-06-23 06:24:52 PM,2025-06-27 06:24:52 PM
+CVE-2018-13103,F5 BIG-IP SSRF,9.03,3.9,False,67%,1,37,2024-08-10 06:24:52 PM,2024-08-20 06:24:52 PM
+CVE-2023-81025,Drupal Remote Code Execution,5.7,0.2,True,54%,94,10,2025-04-19 06:24:52 PM,2025-06-03 06:24:52 PM
+CVE-2021-76728,Jenkins Script Console Exposure,0.92,5.0,True,74%,101,36,2025-02-19 06:24:52 PM,2025-03-15 06:24:52 PM
+CVE-2022-4006,Jira XML External Entity Injection,7.15,7.7,False,49%,50,6,2024-10-14 06:24:52 PM,2024-10-18 06:24:52 PM
+CVE-2023-90501,Jira Server CSRF,2.79,4.4,True,60%,127,22,2024-03-22 02:57:46 AM,2024-05-13 02:57:46 AM
+CVE-2020-90495,Apache HTTP Server SSRF,3.79,3.2,False,28%,76,5,2025-06-21 11:43:04 AM,2025-08-13 11:43:04 AM
+CVE-2018-19983,Cisco ASA Access Control Bypass,3.03,0.4,True,57%,64,14,2025-11-09 06:57:45 PM,2025-11-14 06:57:45 PM
+CVE-2024-105586,PHP-FPM SQL Injection,0.62,5.7,False,52%,133,16,2024-07-08 11:14:22 AM,2024-09-11 11:14:22 AM
+CVE-2024-72514,Microsoft Exchange SSRF,0.06,5.5,False,20%,124,5,2025-06-24 10:26:39 AM,2025-09-24 10:26:39 AM
+CVE-2024-96407,Firefox Browser Insecure Default Config,8.66,1.5,True,68%,62,10,2025-07-03 08:20:17 PM,2025-09-21 08:20:17 PM
+CVE-2025-71107,Adobe Acrobat Deserialization Vulnerability,2.22,7.9,False,24%,39,2,2024-02-03 08:03:48 PM,2024-02-14 08:03:48 PM
+CVE-2023-34825,Cisco ASA Information Disclosure,3.37,5.3,False,12%,28,12,2025-01-31 03:50:50 AM,2025-03-02 03:50:50 AM
+CVE-2024-43450,Zimbra Mail Deserialization Vulnerability,8.18,2.4,False,38%,140,29,2025-03-10 08:40:21 PM,2025-05-02 08:40:21 PM
+CVE-2025-15144,F5 BIG-IP Authentication Bypass,4.63,8.5,False,07%,16,32,2024-10-07 03:38:15 PM,2024-10-28 03:38:15 PM
+CVE-2017-29860,Apache HTTP Server Remote Code Execution,5.52,7.9,False,89%,83,15,2025-09-16 02:55:07 AM,2025-11-19 02:55:07 AM
+CVE-2018-62828,Microsoft Exchange Remote Code Execution,8.2,6.6,False,38%,70,25,2024-05-25 09:15:43 PM,2024-06-30 09:15:43 PM
+CVE-2020-90167,OpenSSL Path Traversal,2.89,5.7,False,58%,119,30,2025-07-03 06:04:31 AM,2025-09-27 06:04:31 AM
+CVE-2021-45311,OpenSSL Cross-Site Scripting,8.18,0.4,False,19%,141,25,2024-12-26 04:29:53 AM,2025-02-14 04:29:53 AM
+CVE-2024-26968,Drupal Core Access Control Bypass,6.02,9.7,False,65%,41,35,2024-06-11 02:54:42 AM,2024-07-17 02:54:42 AM
+CVE-2016-101202,F5 BIG-IP Deserialization Vulnerability,5.66,5.5,True,26%,98,28,2025-04-04 02:11:01 AM,2025-06-17 02:11:01 AM
+CVE-2020-91756,Docker Engine Authentication Bypass,1,1.8,False,30%,146,5,2024-11-04 09:51:36 AM,2025-02-24 09:51:36 AM
+CVE-2017-27184,Windows Server Cross-Site Scripting,8.46,3.6,True,40%,80,30,2024-07-16 02:51:35 AM,2024-09-12 02:51:35 AM
+CVE-2018-20221,F5 BIG-IP Privilege Escalation,5.71,10,True,55%,133,18,2025-08-14 06:16:28 AM,2025-09-23 06:16:28 AM
+CVE-2016-101920,Kubernetes API Server XML External Entity Injection,4.09,4.6,False,87%,97,22,2025-06-17 02:21:27 PM,2025-09-29 02:21:27 PM
+CVE-2015-87616,PHP-FPM SQL Injection,6.33,1.3,True,22%,22,22,2025-12-24 01:43:43 PM,2025-02-15 01:43:43 PM
+CVE-2015-65687,Docker Engine Path Traversal,9.02,3.5,False,36%,93,9,2025-06-09 09:32:43 AM,2025-06-11 09:32:43 AM
+CVE-2016-42682,Adobe Acrobat Use-After-Free,6.16,6.4,True,07%,53,22,2025-05-11 07:27:43 AM,2025-06-04 07:27:43 AM
+CVE-2021-30108,Zimbra Mail Directory Traversal,0.84,7.5,True,35%,85,8,2024-05-29 01:23:15 AM,2024-08-11 01:23:15 AM
+CVE-2020-22428,Linux Kernel Cross-Site Scripting,1.38,7.4,False,87%,46,2,2025-01-25 01:33:42 PM,2025-02-18 01:33:42 PM
+CVE-2016-21879,Windows Server Privilege Escalation,3.72,6.7,True,53%,131,34,2024-04-20 09:04:06 AM,2024-07-23 09:04:06 AM
+CVE-2023-79391,PHP-FPM SQL Injection,8.39,1.3,True,00%,20,34,2025-12-09 10:46:21 PM,2025-12-18 10:46:21 PM
+CVE-2015-85130,Cisco ASA Remote Code Execution,4.61,1.4,False,24%,9,39,2024-01-22 04:56:45 PM,2024-04-12 04:56:45 PM
+CVE-2018-65945,Fortinet SSL VPN CSRF,2.87,1,False,32%,55,36,2025-09-01 09:25:33 AM,2025-11-05 09:25:33 AM
+CVE-2018-94561,Log4j Library Memory Corruption,0.76,9.3,False,07%,109,1,2025-09-02 10:17:40 AM,2025-09-21 10:17:40 AM
+CVE-2022-90615,Zimbra Mail Privilege Escalation,9.47,1.6,True,29%,129,24,2024-10-09 02:23:59 PM,2024-11-08 02:23:59 PM
+CVE-2020-11996,Jira Server Memory Corruption,9.98,3.9,False,50%,30,28,2025-03-07 02:26:43 PM,2025-03-11 02:26:43 PM
+CVE-2015-65233,Nginx Use-After-Free,0.94,5.9,True,15%,25,22,2024-04-13 07:14:29 PM,2024-04-13 07:14:29 PM
+CVE-2018-32797,F5 BIG-IP Authentication Bypass,5.54,0.5,True,47%,36,29,2025-08-31 04:28:15 AM,2025-09-21 04:28:15 AM
+CVE-2016-90054,F5 BIG-IP Information Disclosure,1.05,5,True,61%,110,30,2024-03-29 12:06:38 AM,2024-07-10 12:06:38 AM
+CVE-2015-27787,Jira Server CSRF,0.06,5.1,True,79%,71,33,2025-04-06 04:30:55 AM,2025-06-13 04:30:55 AM
+CVE-2022-84579,F5 BIG-IP SSRF,0.21,4.5,True,03%,2,31,2024-10-21 02:06:29 AM,2024-11-15 02:06:29 AM
+CVE-2021-46333,Adobe Acrobat Directory Traversal,9.75,8.5,False,54%,58,24,2025-09-23 05:26:52 AM,2025-01-19 05:26:52 AM
+CVE-2016-66061,Citrix ADC Deserialization Vulnerability,1.66,6.6,False,54%,123,37,2025-02-27 03:11:30 PM,2025-05-07 03:11:30 PM
+CVE-2018-46746,Apache HTTP Server Path Traversal,2.49,10,False,70%,24,36,2025-05-24 05:32:27 AM,2025-07-20 05:32:27 AM
+CVE-2017-66810,PHP-FPM Access Control Bypass,8.09,5.1,False,85%,23,32,2024-12-03 04:29:01 PM,2024-12-05 04:29:01 PM
+CVE-2015-40674,Jenkins Controller SQL Injection,6.63,8.8,True,43%,77,19,2024-11-27 01:36:59 PM,2024-12-10 01:36:59 PM
+CVE-2024-67237,Windows Server CSRF,6.64,0.7,True,22%,114,7,2024-04-11 09:22:13 PM,2024-08-04 09:22:13 PM
+CVE-2024-87864,OpenSSL Authentication Bypass,7.43,0.9,True,66%,142,27,2024-10-12 10:31:43 PM,2024-11-25 10:31:43 PM
+CVE-2024-92498,F5 BIG-IP Remote Code Execution,0.04,2.1,True,85%,83,21,2025-01-06 08:43:02 AM,2025-04-17 08:43:02 AM
+CVE-2024-83696,Drupal Core Use-After-Free,6.69,9.5,False,22%,39,39,2025-01-26 01:44:42 PM,2025-04-08 01:44:42 PM
+CVE-2017-30241,Linux Kernel Memory Corruption,4.37,2.5,False,86%,62,1,2025-03-30 02:15:27 PM,2025-04-01 02:15:27 PM
+CVE-2018-63226,Jira Server Use-After-Free,0.87,5.8,True,32%,149,14,2025-09-04 12:23:30 PM,2025-09-11 12:23:30 PM
+CVE-2023-90854,Zimbra Mail Directory Traversal,0.58,0.6,True,67%,91,15,2024-08-06 08:12:12 AM,2024-10-22 08:12:12 AM
+CVE-2021-75365,Citrix ADC Insecure Default Config,3.85,5,True,28%,81,37,2025-08-01 03:24:02 AM,2025-10-02 03:24:02 AM
+CVE-2025-24055,Zimbra Mail Command Injection,4.75,9.2,True,17%,48,14,2024-03-14 11:05:16 PM,2024-06-06 11:05:16 PM
+CVE-2020-76895,Citrix ADC Access Control Bypass,5.75,7.4,True,59%,89,18,2024-02-04 09:39:09 PM,2024-02-09 09:39:09 PM
+CVE-2023-41962,Java Spring Boot CSRF,2.44,6.5,True,70%,97,19,2025-02-09 10:24:40 AM,2025-03-04 10:24:40 AM
+CVE-2023-44611,Kubernetes API Server SQL Injection,1.42,0.2,True,05%,101,14,2025-02-23 01:02:28 AM,2025-03-11 01:02:28 AM
+CVE-2021-103811,Drupal Core XML External Entity Injection,0.64,7.8,True,75%,111,5,2024-05-31 08:38:55 AM,2024-08-25 08:38:55 AM
+CVE-2025-77832,Linux Kernel Authentication Bypass,9.42,0.9,True,40%,148,36,2024-01-14 03:12:30 AM,2024-02-28 03:12:30 AM
+CVE-2021-90600,PHP-FPM SQL Injection,7.08,8.9,False,50%,106,3,2024-08-01 08:30:37 AM,2024-10-26 08:30:37 AM
+CVE-2016-16793,Jira Server Information Disclosure,5.95,2.2,True,69%,76,28,2024-05-05 07:55:23 PM,2024-05-24 07:55:23 PM
+CVE-2015-27687,VMware ESXi XML External Entity Injection,9.5,9.6,True,29%,71,18,2025-05-26 02:28:25 PM,2025-08-10 02:28:25 PM
+CVE-2023-43516,Log4j Library Cross-Site Scripting,9.1,6.1,False,61%,120,9,2024-01-20 12:14:56 AM,2024-02-29 12:14:56 AM
+CVE-2015-75324,Adobe Acrobat Deserialization Vulnerability,4.36,2.8,False,48%,32,38,2025-12-13 07:37:59 AM,2025-12-13 07:37:59 AM
+CVE-2022-91504,Log4j Library XML External Entity Injection,5.67,6.3,True,70%,43,28,2025-12-30 02:43:47 AM,2025-04-19 02:43:47 AM
+CVE-2017-100250,Firefox Browser XML External Entity Injection,5.09,1.8,False,56%,37,18,2024-07-30 05:50:44 PM,2024-11-07 05:50:44 PM
+CVE-2017-76460,PHP-FPM Information Disclosure,0.88,1,True,55%,99,24,2025-08-18 03:31:01 PM,2025-11-03 03:31:01 PM
+CVE-2022-91808,Firefox Browser Remote Code Execution,0.24,3.9,False,36%,109,39,2024-11-10 11:40:28 PM,2025-01-16 11:40:28 PM
+CVE-2022-20421,Microsoft Exchange Path Traversal,2.06,4.9,False,44%,40,23,2024-06-16 07:03:50 PM,2024-07-18 07:03:50 PM
+CVE-2016-102626,Zimbra Mail Information Disclosure,9.66,2,True,97%,46,10,2025-07-14 05:59:17 PM,2025-09-23 05:59:17 PM
+CVE-2024-54017,Citrix ADC Information Disclosure,4.54,9.2,True,86%,133,37,2024-05-10 06:09:34 AM,2024-07-06 06:09:34 AM
+CVE-2022-85413,Jira Server Memory Corruption,2.51,4.8,False,76%,103,14,2024-11-26 03:13:42 AM,2024-12-17 03:13:42 AM
+CVE-2016-21050,Drupal Core Use-After-Free,5.28,7.9,True,29%,134,35,2025-12-07 10:18:18 PM,2025-12-13 10:18:18 PM
+CVE-2017-25177,Firefox Browser Directory Traversal,4.82,2.4,True,15%,38,8,2024-04-08 09:12:40 AM,2024-05-01 09:12:40 AM
+CVE-2018-91708,PHP-FPM Cross-Site Scripting,2.24,9.7,False,37%,102,24,2024-06-28 01:19:58 AM,2024-09-27 01:19:58 AM
+CVE-2017-40146,Apache HTTP Server XML External Entity Injection,8.43,2.8,True,55%,80,22,2024-01-29 07:14:20 AM,2024-04-19 07:14:20 AM
+CVE-2022-97594,VMware ESXi Information Disclosure,3.72,1.3,False,15%,64,22,2025-11-13 05:32:51 AM,2025-01-27 05:32:51 AM
+CVE-2022-97846,Firefox Browser Command Injection,7.55,8.8,True,48%,49,29,2025-05-12 09:58:51 AM,2025-06-05 09:58:51 AM
+`
   },
   {
     id: "remediations-remediations",
@@ -962,6 +1272,113 @@ cloud,Rotate API keys and credentials,816,1593,146,282,9
 cloud,Patch Docker to 3.15.3,731,1471,1456,987,12
 cloud,Update container base image to ubi9,732,4757,872,1053,8
 Onprem,Upgrade Kubernetes to 2.10.12,947,8477,1296,286,1
+`
+  },
+  {
+    id: "vuln finding",
+    label: "Vuln Finding",
+    filename: "vuln Finding.csv",
+    contents: `finding_id,detection_id,cve_id,asset_id,source,proof,first_detected,reintroduced,last_detected,software_name,software_version
+FIND-00001,DET-00006,CVE-2020-99792,ASSET-00089,Agent,Evidence of CVE-2020-99792 on ASSET-00089 via Agent,2025-01-21 04:31:15 AM,2025-03-01 04:31:15 AM,2025-04-02 04:31:15 AM,Chrome,8.2.4
+FIND-00002,DET-00027,CVE-2024-55723,ASSET-00135,Manual,Evidence of CVE-2024-55723 on ASSET-00135 via Manual,2025-07-06 04:29:34 PM,2025-09-05 04:29:34 PM,2025-09-26 04:29:34 PM,OpenSSL,4.4.8
+FIND-00003,DET-00006,CVE-2024-43723,ASSET-00027,InsightVM,Evidence of CVE-2024-43723 on ASSET-00027 via InsightVM,2025-07-10 02:02:30 AM,2025-10-06 02:02:30 AM,2025-10-23 02:02:30 AM,Docker Engine,12.20.6
+FIND-00004,DET-00028,CVE-2020-25600,ASSET-00088,SIEM,Evidence of CVE-2020-25600 on ASSET-00088 via SIEM,2024-11-13 04:41:46 PM,,2025-02-14 04:41:46 PM,Docker Engine,12.5.1
+FIND-00005,DET-00035,CVE-2017-39070,ASSET-00179,Agent,Evidence of CVE-2017-39070 on ASSET-00179 via Agent,2023-06-30 03:51:35 AM,,2023-07-25 03:51:35 AM,Chrome,6.2.6
+FIND-00006,DET-00006,CVE-2017-78952,ASSET-00045,Scanner,Evidence of CVE-2017-78952 on ASSET-00045 via Scanner,2023-07-15 07:26:18 AM,2023-09-21 07:26:18 AM,2023-11-17 07:26:18 AM,Nginx,12.4.4
+FIND-00007,DET-00031,CVE-2017-18046,ASSET-00079,Manual,Evidence of CVE-2017-18046 on ASSET-00079 via Manual,2023-09-04 03:38:00 AM,2023-11-06 03:38:00 AM,2023-12-11 03:38:00 AM,Nginx,11.7.0
+FIND-00008,DET-00017,CVE-2022-03289,ASSET-00027,Agent,Evidence of CVE-2022-03289 on ASSET-00027 via Agent,2025-02-25 05:59:06 AM,2025-04-27 05:59:06 AM,2025-06-19 05:59:06 AM,Chrome,8.16.6
+FIND-00009,DET-00022,CVE-2021-69511,ASSET-00146,SIEM,Evidence of CVE-2021-69511 on ASSET-00146 via SIEM,2025-04-20 02:35:59 AM,2025-07-02 02:35:59 AM,2025-07-13 02:35:59 AM,Ubuntu Linux,9.0.4
+FIND-00010,DET-00028,CVE-2018-69854,ASSET-00102,InsightIDR,Evidence of CVE-2018-69854 on ASSET-00102 via InsightIDR,2025-09-27 12:30:10 AM,2025-10-04 12:30:10 AM,2025-10-21 12:30:10 AM,OpenSSL,7.12.2
+FIND-00011,DET-00004,CVE-2014-26793,ASSET-00005,Scanner,Evidence of CVE-2014-26793 on ASSET-00005 via Scanner,2025-07-15 12:36:09 AM,,2025-08-02 12:36:09 AM,Firefox,15.0.0
+FIND-00012,DET-00023,CVE-2020-75165,ASSET-00120,InsightVM,Evidence of CVE-2020-75165 on ASSET-00120 via InsightVM,2024-07-04 04:16:37 AM,2024-07-12 04:16:37 AM,2024-07-19 04:16:37 AM,PostgreSQL,12.8.10
+FIND-00013,DET-00038,CVE-2019-73402,ASSET-00007,InsightIDR,Evidence of CVE-2019-73402 on ASSET-00007 via InsightIDR,2023-12-04 06:15:43 PM,,2024-02-04 06:15:43 PM,Nginx,8.15.3
+FIND-00014,DET-00019,CVE-2015-59289,ASSET-00048,InsightIDR,Evidence of CVE-2015-59289 on ASSET-00048 via InsightIDR,2023-12-22 10:47:02 AM,2024-01-11 10:47:02 AM,2024-01-20 10:47:02 AM,Ubuntu Linux,3.13.1
+FIND-00015,DET-00005,CVE-2025-06583,ASSET-00090,Agent,Evidence of CVE-2025-06583 on ASSET-00090 via Agent,2024-07-26 01:26:28 AM,,2024-11-15 01:26:28 AM,Nginx,14.0.0
+FIND-00016,DET-00039,CVE-2014-10812,ASSET-00108,Manual,Evidence of CVE-2014-10812 on ASSET-00108 via Manual,2023-10-12 06:16:45 PM,2023-12-11 06:16:45 PM,2024-01-21 06:16:45 PM,PostgreSQL,6.4.3
+FIND-00017,DET-00030,CVE-2014-36843,ASSET-00177,Agent,Evidence of CVE-2014-36843 on ASSET-00177 via Agent,2023-11-04 01:37:39 PM,,2023-11-26 01:37:39 PM,MySQL,10.8.6
+FIND-00018,DET-00011,CVE-2022-30166,ASSET-00104,InsightIDR,Evidence of CVE-2022-30166 on ASSET-00104 via InsightIDR,2023-12-29 11:51:29 PM,2024-03-16 11:51:29 PM,2024-04-23 11:51:29 PM,Microsoft Exchange,13.20.3
+FIND-00019,DET-00003,CVE-2022-13512,ASSET-00008,SIEM,Evidence of CVE-2022-13512 on ASSET-00008 via SIEM,2024-03-24 09:24:26 AM,2024-06-21 09:24:26 AM,2024-07-16 09:24:26 AM,Java Runtime,4.14.7
+FIND-00020,DET-00022,CVE-2023-82726,ASSET-00131,InsightVM,Evidence of CVE-2023-82726 on ASSET-00131 via InsightVM,2025-04-27 04:55:19 PM,2025-06-13 04:55:19 PM,2025-07-16 04:55:19 PM,Firefox,8.10.6
+FIND-00021,DET-00009,CVE-2024-33630,ASSET-00167,InsightIDR,Evidence of CVE-2024-33630 on ASSET-00167 via InsightIDR,2024-08-28 08:05:30 PM,2024-11-11 08:05:30 PM,2024-12-02 08:05:30 PM,Chrome,10.20.4
+FIND-00022,DET-00005,CVE-2020-44872,ASSET-00083,Scanner,Evidence of CVE-2020-44872 on ASSET-00083 via Scanner,2023-08-28 11:05:12 AM,2023-11-07 11:05:12 AM,2023-12-22 11:05:12 AM,OpenSSL,7.10.9
+FIND-00023,DET-00040,CVE-2023-14292,ASSET-00167,Scanner,Evidence of CVE-2023-14292 on ASSET-00167 via Scanner,2024-11-03 04:21:01 PM,2025-01-28 04:21:01 PM,2025-03-07 04:21:01 PM,Apache HTTP Server,11.8.10
+FIND-00024,DET-00011,CVE-2016-22659,ASSET-00072,Scanner,Evidence of CVE-2016-22659 on ASSET-00072 via Scanner,2025-01-30 05:37:30 PM,,2025-02-19 05:37:30 PM,MySQL,14.20.7
+FIND-00025,DET-00009,CVE-2016-91711,ASSET-00066,SIEM,Evidence of CVE-2016-91711 on ASSET-00066 via SIEM,2024-06-13 08:09:27 PM,2024-06-25 08:09:27 PM,2024-08-24 08:09:27 PM,MySQL,7.8.10
+FIND-00026,DET-00018,CVE-2024-63255,ASSET-00172,Agent,Evidence of CVE-2024-63255 on ASSET-00172 via Agent,2025-11-25 03:28:41 PM,2026-02-05 03:28:41 PM,2026-03-02 03:28:41 PM,PostgreSQL,6.16.7
+FIND-00027,DET-00010,CVE-2018-48866,ASSET-00185,InsightVM,Evidence of CVE-2018-48866 on ASSET-00185 via InsightVM,2023-02-25 12:16:28 PM,2023-04-06 12:16:28 PM,2023-05-21 12:16:28 PM,Microsoft Exchange,1.0.10
+FIND-00028,DET-00024,CVE-2020-51571,ASSET-00164,SIEM,Evidence of CVE-2020-51571 on ASSET-00164 via SIEM,2024-12-01 09:16:43 AM,2025-02-27 09:16:43 AM,2025-03-15 09:16:43 AM,PostgreSQL,5.18.8
+FIND-00029,DET-00026,CVE-2016-03354,ASSET-00047,InsightVM,Evidence of CVE-2016-03354 on ASSET-00047 via InsightVM,2023-09-15 02:36:49 PM,2023-12-13 02:36:49 PM,2024-01-06 02:36:49 PM,Ubuntu Linux,8.14.1
+FIND-00030,DET-00028,CVE-2022-93705,ASSET-00045,SIEM,Evidence of CVE-2022-93705 on ASSET-00045 via SIEM,2023-12-23 06:13:47 AM,2024-01-06 06:13:47 AM,2024-01-18 06:13:47 AM,OpenSSL,11.8.1
+FIND-00031,DET-00002,CVE-2016-25896,ASSET-00156,Agent,Evidence of CVE-2016-25896 on ASSET-00156 via Agent,2024-06-23 05:51:16 PM,,2024-08-20 05:51:16 PM,Java Runtime,14.1.6
+FIND-00032,DET-00011,CVE-2023-44372,ASSET-00095,InsightIDR,Evidence of CVE-2023-44372 on ASSET-00095 via InsightIDR,2025-10-22 11:35:19 AM,,2026-01-21 11:35:19 AM,PostgreSQL,1.13.9
+FIND-00033,DET-00021,CVE-2019-12997,ASSET-00047,SIEM,Evidence of CVE-2019-12997 on ASSET-00047 via SIEM,2024-10-10 07:54:47 PM,,2024-12-23 07:54:47 PM,Docker Engine,3.1.2
+FIND-00034,DET-00019,CVE-2014-30492,ASSET-00079,Agent,Evidence of CVE-2014-30492 on ASSET-00079 via Agent,2023-06-04 06:59:21 PM,,2023-07-20 06:59:21 PM,Apache HTTP Server,5.10.0
+FIND-00035,DET-00024,CVE-2016-65953,ASSET-00157,Manual,Evidence of CVE-2016-65953 on ASSET-00157 via Manual,2023-12-02 06:20:03 AM,2024-02-24 06:20:03 AM,2024-03-20 06:20:03 AM,OpenSSL,12.14.4
+FIND-00036,DET-00011,CVE-2018-17058,ASSET-00046,SIEM,Evidence of CVE-2018-17058 on ASSET-00046 via SIEM,2024-11-21 04:18:38 AM,2025-01-26 04:18:38 AM,2025-02-06 04:18:38 AM,MySQL,12.14.7
+FIND-00037,DET-00012,CVE-2021-39468,ASSET-00188,SIEM,Evidence of CVE-2021-39468 on ASSET-00188 via SIEM,2023-05-18 11:24:49 PM,2023-07-28 11:24:49 PM,2023-08-02 11:24:49 PM,Chrome,4.20.5
+FIND-00038,DET-00012,CVE-2017-68355,ASSET-00060,Agent,Evidence of CVE-2017-68355 on ASSET-00060 via Agent,2025-11-10 08:44:17 PM,,2026-01-27 08:44:17 PM,Nginx,7.16.9
+FIND-00039,DET-00016,CVE-2017-39202,ASSET-00167,Scanner,Evidence of CVE-2017-39202 on ASSET-00167 via Scanner,2024-08-15 01:35:57 PM,,2024-09-09 01:35:57 PM,Ubuntu Linux,15.16.1
+FIND-00040,DET-00034,CVE-2020-18604,ASSET-00198,Manual,Evidence of CVE-2020-18604 on ASSET-00198 via Manual,2025-03-29 02:00:36 AM,2025-06-19 02:00:36 AM,2025-07-10 02:00:36 AM,Microsoft Exchange,1.20.4
+FIND-00041,DET-00031,CVE-2022-64105,ASSET-00059,InsightVM,Evidence of CVE-2022-64105 on ASSET-00059 via InsightVM,2024-12-18 07:07:54 AM,2025-02-09 07:07:54 AM,2025-03-12 07:07:54 AM,Java Runtime,10.2.6
+FIND-00042,DET-00036,CVE-2025-87617,ASSET-00185,Scanner,Evidence of CVE-2025-87617 on ASSET-00185 via Scanner,2023-08-31 12:21:24 AM,,2023-10-03 12:21:24 AM,PostgreSQL,13.4.10
+FIND-00043,DET-00007,CVE-2019-19774,ASSET-00096,Scanner,Evidence of CVE-2019-19774 on ASSET-00096 via Scanner,2025-07-11 12:02:41 PM,,2025-09-06 12:02:41 PM,OpenSSL,5.15.6
+FIND-00044,DET-00016,CVE-2018-86283,ASSET-00054,InsightVM,Evidence of CVE-2018-86283 on ASSET-00054 via InsightVM,2023-06-28 07:22:56 PM,2023-07-30 07:22:56 PM,2023-09-19 07:22:56 PM,Nginx,9.17.1
+FIND-00045,DET-00015,CVE-2021-28253,ASSET-00004,InsightVM,Evidence of CVE-2021-28253 on ASSET-00004 via InsightVM,2024-01-21 04:41:47 PM,2024-04-09 04:41:47 PM,2024-04-21 04:41:47 PM,Chrome,13.0.4
+FIND-00046,DET-00034,CVE-2023-14962,ASSET-00196,SIEM,Evidence of CVE-2023-14962 on ASSET-00196 via SIEM,2025-11-29 07:09:41 AM,2026-01-25 07:09:41 AM,2026-03-15 07:09:41 AM,Docker Engine,9.15.5
+FIND-00047,DET-00033,CVE-2018-85314,ASSET-00135,Agent,Evidence of CVE-2018-85314 on ASSET-00135 via Agent,2025-10-23 08:45:34 PM,,2025-11-21 08:45:34 PM,Firefox,13.15.9
+FIND-00048,DET-00024,CVE-2016-10976,ASSET-00069,SIEM,Evidence of CVE-2016-10976 on ASSET-00069 via SIEM,2024-04-23 11:52:17 AM,2024-06-28 11:52:17 AM,2024-08-22 11:52:17 AM,MySQL,6.8.5
+FIND-00049,DET-00039,CVE-2016-34467,ASSET-00196,Scanner,Evidence of CVE-2016-34467 on ASSET-00196 via Scanner,2024-06-01 06:56:10 AM,2024-08-25 06:56:10 AM,2024-10-11 06:56:10 AM,PostgreSQL,3.4.1
+FIND-00050,DET-00013,CVE-2016-53602,ASSET-00155,InsightVM,Evidence of CVE-2016-53602 on ASSET-00155 via InsightVM,2024-03-14 06:18:55 AM,2024-04-21 06:18:55 AM,2024-06-12 06:18:55 AM,Apache HTTP Server,2.3.6
+FIND-00051,DET-00038,CVE-2020-40821,ASSET-00062,InsightVM,Evidence of CVE-2020-40821 on ASSET-00062 via InsightVM,2023-10-29 02:02:29 PM,2023-12-22 02:02:29 PM,2024-01-21 02:02:29 PM,Windows Server,12.20.10
+FIND-00052,DET-00008,CVE-2014-82850,ASSET-00145,SIEM,Evidence of CVE-2014-82850 on ASSET-00145 via SIEM,2025-11-08 10:49:24 AM,,2025-12-21 10:49:24 AM,Ubuntu Linux,7.0.10
+FIND-00053,DET-00007,CVE-2022-52570,ASSET-00118,Agent,Evidence of CVE-2022-52570 on ASSET-00118 via Agent,2024-12-19 10:34:21 AM,,2025-03-09 10:34:21 AM,Docker Engine,7.8.10
+FIND-00054,DET-00015,CVE-2017-75203,ASSET-00118,Scanner,Evidence of CVE-2017-75203 on ASSET-00118 via Scanner,2024-10-03 06:54:27 PM,2024-11-27 06:54:27 PM,2024-12-25 06:54:27 PM,Java Runtime,12.7.0
+FIND-00055,DET-00009,CVE-2023-97353,ASSET-00056,InsightIDR,Evidence of CVE-2023-97353 on ASSET-00056 via InsightIDR,2025-09-04 05:45:01 PM,2025-10-01 05:45:01 PM,2025-10-23 05:45:01 PM,Ubuntu Linux,7.14.5
+FIND-00056,DET-00005,CVE-2021-42436,ASSET-00018,InsightIDR,Evidence of CVE-2021-42436 on ASSET-00018 via InsightIDR,2023-06-24 06:40:35 AM,,2023-08-24 06:40:35 AM,MySQL,1.18.3
+FIND-00057,DET-00030,CVE-2024-32725,ASSET-00018,Agent,Evidence of CVE-2024-32725 on ASSET-00018 via Agent,2024-02-23 05:03:52 PM,,2024-06-21 05:03:52 PM,Chrome,3.6.8
+FIND-00058,DET-00025,CVE-2025-87558,ASSET-00016,InsightIDR,Evidence of CVE-2025-87558 on ASSET-00016 via InsightIDR,2025-10-24 06:52:07 AM,2025-11-25 06:52:07 AM,2026-01-20 06:52:07 AM,Ubuntu Linux,2.12.8
+FIND-00059,DET-00017,CVE-2021-76491,ASSET-00034,Scanner,Evidence of CVE-2021-76491 on ASSET-00034 via Scanner,2024-09-30 04:33:12 AM,,2024-12-05 04:33:12 AM,Windows Server,7.7.2
+FIND-00060,DET-00009,CVE-2024-36823,ASSET-00037,SIEM,Evidence of CVE-2024-36823 on ASSET-00037 via SIEM,2024-01-03 07:30:29 AM,2024-03-29 07:30:29 AM,2024-04-11 07:30:29 AM,Java Runtime,13.18.8
+FIND-00061,DET-00006,CVE-2024-53360,ASSET-00083,InsightVM,Evidence of CVE-2024-53360 on ASSET-00083 via InsightVM,2025-06-13 10:07:13 PM,2025-06-27 10:07:13 PM,2025-07-18 10:07:13 PM,MySQL,15.9.4
+FIND-00062,DET-00001,CVE-2020-04164,ASSET-00023,Scanner,Evidence of CVE-2020-04164 on ASSET-00023 via Scanner,2024-11-24 06:53:48 AM,2024-12-15 06:53:48 AM,2024-12-23 06:53:48 AM,OpenSSL,13.12.4
+FIND-00063,DET-00020,CVE-2023-12953,ASSET-00123,InsightVM,Evidence of CVE-2023-12953 on ASSET-00123 via InsightVM,2024-07-29 07:40:04 PM,2024-09-11 07:40:04 PM,2024-09-17 07:40:04 PM,Kubernetes API Server,11.1.0
+FIND-00064,DET-00025,CVE-2014-20727,ASSET-00087,Scanner,Evidence of CVE-2014-20727 on ASSET-00087 via Scanner,2024-03-01 04:49:37 PM,2024-05-19 04:49:37 PM,2024-05-25 04:49:37 PM,OpenSSL,1.2.8
+FIND-00065,DET-00026,CVE-2018-58755,ASSET-00089,Scanner,Evidence of CVE-2018-58755 on ASSET-00089 via Scanner,2023-11-09 01:42:11 AM,2023-11-16 01:42:11 AM,2023-12-06 01:42:11 AM,Ubuntu Linux,4.3.2
+FIND-00066,DET-00029,CVE-2020-79641,ASSET-00071,InsightVM,Evidence of CVE-2020-79641 on ASSET-00071 via InsightVM,2024-10-13 05:32:40 AM,,2025-01-14 05:32:40 AM,Java Runtime,7.12.9
+FIND-00067,DET-00039,CVE-2023-60996,ASSET-00050,Manual,Evidence of CVE-2023-60996 on ASSET-00050 via Manual,2023-02-03 02:37:10 PM,,2023-03-05 02:37:10 PM,PostgreSQL,2.15.0
+FIND-00068,DET-00037,CVE-2018-61983,ASSET-00146,Scanner,Evidence of CVE-2018-61983 on ASSET-00146 via Scanner,2024-09-01 06:21:33 PM,2024-11-16 06:21:33 PM,2024-12-13 06:21:33 PM,PostgreSQL,11.17.7
+FIND-00069,DET-00038,CVE-2018-75502,ASSET-00194,Scanner,Evidence of CVE-2018-75502 on ASSET-00194 via Scanner,2023-07-30 11:40:51 PM,,2023-11-09 11:40:51 PM,Apache HTTP Server,9.17.0
+FIND-00070,DET-00015,CVE-2017-06620,ASSET-00013,InsightIDR,Evidence of CVE-2017-06620 on ASSET-00013 via InsightIDR,2025-11-22 12:56:40 PM,2026-02-13 12:56:40 PM,2026-03-05 12:56:40 PM,PostgreSQL,9.7.4
+FIND-00071,DET-00008,CVE-2025-45016,ASSET-00037,InsightIDR,Evidence of CVE-2025-45016 on ASSET-00037 via InsightIDR,2024-11-23 05:34:51 AM,2024-12-16 05:34:51 AM,2025-01-01 05:34:51 AM,Windows Server,12.15.6
+FIND-00072,DET-00011,CVE-2024-13688,ASSET-00055,InsightIDR,Evidence of CVE-2024-13688 on ASSET-00055 via InsightIDR,2025-08-31 08:33:39 PM,2025-11-14 08:33:39 PM,2026-01-09 08:33:39 PM,Apache HTTP Server,10.17.1
+FIND-00073,DET-00010,CVE-2023-16032,ASSET-00068,InsightVM,Evidence of CVE-2023-16032 on ASSET-00068 via InsightVM,2023-07-27 10:09:51 PM,,2023-09-10 10:09:51 PM,Chrome,5.15.7
+FIND-00074,DET-00038,CVE-2015-91590,ASSET-00027,Manual,Evidence of CVE-2015-91590 on ASSET-00027 via Manual,2025-03-18 12:26:45 AM,2025-03-23 12:26:45 AM,2025-05-20 12:26:45 AM,MySQL,6.0.7
+FIND-00075,DET-00003,CVE-2017-83446,ASSET-00006,Scanner,Evidence of CVE-2017-83446 on ASSET-00006 via Scanner,2024-07-11 02:42:46 PM,2024-07-25 02:42:46 PM,2024-09-15 02:42:46 PM,Windows Server,12.4.2
+FIND-00076,DET-00012,CVE-2017-68285,ASSET-00092,InsightIDR,Evidence of CVE-2017-68285 on ASSET-00092 via InsightIDR,2025-11-20 07:57:26 PM,,2026-01-09 07:57:26 PM,MySQL,7.18.6
+FIND-00077,DET-00031,CVE-2014-44063,ASSET-00177,Manual,Evidence of CVE-2014-44063 on ASSET-00177 via Manual,2025-01-27 09:27:17 PM,2025-03-22 09:27:17 PM,2025-04-12 09:27:17 PM,Windows Server,14.5.0
+FIND-00078,DET-00006,CVE-2024-05953,ASSET-00026,SIEM,Evidence of CVE-2024-05953 on ASSET-00026 via SIEM,2025-10-07 08:01:18 AM,2025-12-11 08:01:18 AM,2026-02-02 08:01:18 AM,Apache HTTP Server,13.4.4
+FIND-00079,DET-00011,CVE-2019-02709,ASSET-00099,SIEM,Evidence of CVE-2019-02709 on ASSET-00099 via SIEM,2025-01-15 04:40:25 AM,2025-04-12 04:40:25 AM,2025-04-19 04:40:25 AM,Firefox,6.11.8
+FIND-00080,DET-00013,CVE-2014-32611,ASSET-00117,Manual,Evidence of CVE-2014-32611 on ASSET-00117 via Manual,2023-08-11 09:19:36 AM,2023-10-25 09:19:36 AM,2023-12-12 09:19:36 AM,Windows Server,11.9.7
+FIND-00081,DET-00031,CVE-2018-82522,ASSET-00078,Agent,Evidence of CVE-2018-82522 on ASSET-00078 via Agent,2025-03-17 02:34:18 PM,,2025-07-13 02:34:18 PM,PostgreSQL,8.14.5
+FIND-00082,DET-00034,CVE-2015-52579,ASSET-00031,SIEM,Evidence of CVE-2015-52579 on ASSET-00031 via SIEM,2024-02-25 02:47:28 AM,,2024-02-29 02:47:28 AM,Firefox,3.20.5
+FIND-00083,DET-00039,CVE-2023-80070,ASSET-00102,Scanner,Evidence of CVE-2023-80070 on ASSET-00102 via Scanner,2025-06-30 04:41:07 AM,,2025-07-14 04:41:07 AM,Ubuntu Linux,12.4.9
+FIND-00084,DET-00032,CVE-2020-53464,ASSET-00049,Scanner,Evidence of CVE-2020-53464 on ASSET-00049 via Scanner,2023-10-13 12:31:35 AM,,2023-10-17 12:31:35 AM,Nginx,5.3.7
+FIND-00085,DET-00021,CVE-2017-14709,ASSET-00196,InsightIDR,Evidence of CVE-2017-14709 on ASSET-00196 via InsightIDR,2024-09-06 12:04:48 PM,,2024-12-26 12:04:48 PM,MySQL,15.9.3
+FIND-00086,DET-00038,CVE-2022-28476,ASSET-00144,InsightIDR,Evidence of CVE-2022-28476 on ASSET-00144 via InsightIDR,2023-03-22 09:30:54 AM,,2023-04-08 09:30:54 AM,Nginx,15.1.1
+FIND-00087,DET-00006,CVE-2023-74911,ASSET-00161,Scanner,Evidence of CVE-2023-74911 on ASSET-00161 via Scanner,2025-05-27 05:58:02 PM,,2025-07-10 05:58:02 PM,Chrome,12.10.2
+FIND-00088,DET-00016,CVE-2022-56277,ASSET-00034,InsightVM,Evidence of CVE-2022-56277 on ASSET-00034 via InsightVM,2025-04-20 02:19:26 PM,2025-07-02 02:19:26 PM,2025-07-17 02:19:26 PM,Chrome,3.7.3
+FIND-00089,DET-00018,CVE-2015-02687,ASSET-00130,Scanner,Evidence of CVE-2015-02687 on ASSET-00130 via Scanner,2025-07-01 05:00:00 PM,,2025-07-22 05:00:00 PM,Kubernetes API Server,5.20.1
+FIND-00090,DET-00020,CVE-2015-91548,ASSET-00148,InsightIDR,Evidence of CVE-2015-91548 on ASSET-00148 via InsightIDR,2025-05-25 06:06:45 PM,2025-06-03 06:06:45 PM,2025-07-09 06:06:45 PM,Apache HTTP Server,4.9.9
+FIND-00091,DET-00022,CVE-2017-32251,ASSET-00087,InsightVM,Evidence of CVE-2017-32251 on ASSET-00087 via InsightVM,2024-01-23 11:51:19 AM,2024-02-26 11:51:19 AM,2024-03-30 11:51:19 AM,Kubernetes API Server,14.19.5
+FIND-00092,DET-00027,CVE-2020-74027,ASSET-00099,Manual,Evidence of CVE-2020-74027 on ASSET-00099 via Manual,2023-09-24 09:59:01 PM,2023-10-21 09:59:01 PM,2023-12-20 09:59:01 PM,OpenSSL,10.6.7
+FIND-00093,DET-00004,CVE-2017-78578,ASSET-00047,Scanner,Evidence of CVE-2017-78578 on ASSET-00047 via Scanner,2024-03-20 06:10:08 AM,2024-04-10 06:10:08 AM,2024-05-26 06:10:08 AM,Ubuntu Linux,4.9.8
+FIND-00094,DET-00030,CVE-2024-96797,ASSET-00083,InsightIDR,Evidence of CVE-2024-96797 on ASSET-00083 via InsightIDR,2025-04-11 08:40:59 AM,2025-07-02 08:40:59 AM,2025-07-03 08:40:59 AM,Chrome,9.8.1
+FIND-00095,DET-00035,CVE-2024-95467,ASSET-00124,Manual,Evidence of CVE-2024-95467 on ASSET-00124 via Manual,2023-08-12 09:29:08 AM,2023-10-15 09:29:08 AM,2023-11-28 09:29:08 AM,Apache HTTP Server,11.20.8
+FIND-00096,DET-00021,CVE-2016-23218,ASSET-00036,Manual,Evidence of CVE-2016-23218 on ASSET-00036 via Manual,2024-07-25 03:18:10 AM,2024-08-26 03:18:10 AM,2024-10-17 03:18:10 AM,Ubuntu Linux,15.3.8
+FIND-00097,DET-00027,CVE-2016-92351,ASSET-00146,Manual,Evidence of CVE-2016-92351 on ASSET-00146 via Manual,2023-02-21 09:11:07 PM,,2023-03-17 09:11:07 PM,OpenSSL,15.12.3
+FIND-00098,DET-00008,CVE-2023-63477,ASSET-00109,Agent,Evidence of CVE-2023-63477 on ASSET-00109 via Agent,2024-12-31 03:22:33 PM,2025-03-06 03:22:33 PM,2025-03-06 03:22:33 PM,MySQL,6.11.10
+FIND-00099,DET-00029,CVE-2024-35454,ASSET-00029,SIEM,Evidence of CVE-2024-35454 on ASSET-00029 via SIEM,2023-10-11 01:14:21 AM,2023-11-06 01:14:21 AM,2023-11-24 01:14:21 AM,Java Runtime,2.6.7
+FIND-00100,DET-00013,CVE-2024-64341,ASSET-00057,InsightIDR,Evidence of CVE-2024-64341 on ASSET-00057 via InsightIDR,2023-10-22 11:12:13 AM,2023-11-30 11:12:13 AM,2023-12-06 11:12:13 AM,Docker Engine,9.12.6
 `
   }
 ]
