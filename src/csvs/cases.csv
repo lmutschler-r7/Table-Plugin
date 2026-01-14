@@ -1,4 +1,4 @@
-Case ID,Title [link],Created,Type,Severity [status],Status,Assignee,SLA,Progress,Due date
+Case ID,Title [link],Created,Type,Severity [status],Status,Assignee,SLA,Progress [progress],Due date
 INC-2025-0001,Phishing Campaign Targeting Finance Team,2025-02-21 08:28:40,Policy,Medium,Resolved,Alex Murphy,On track,72%,2025-02-27 08:28:40
 INC-2025-0002,Unauthorized Cloud Console Login Attempt,2024-04-20 04:41:48,Custom,Medium,Active,Jordan Blake,On track,65%,2024-05-09 04:41:48
 INC-2024-0003,Privilege Escalation on Domain Controller,2025-06-30 09:30:08,Threat,Medium,Active,Riley O'Connor,On track,85%,2025-07-04 09:30:08

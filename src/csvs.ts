@@ -472,7 +472,7 @@ silver-hot-vault-keywfd,True,False,False,True,False,sox,"HIPAA, Regional US"
     id: "cases",
     label: "Cases",
     filename: "cases.csv",
-    contents: `Case ID,Title [link],Created,Type,Severity [status],Status,Assignee,SLA,Progress,Due date
+    contents: `Case ID,Title [link],Created,Type,Severity [status],Status,Assignee,SLA,Progress [progress],Due date
 INC-2025-0001,Phishing Campaign Targeting Finance Team,2025-02-21 08:28:40,Policy,Medium,Resolved,Alex Murphy,On track,72%,2025-02-27 08:28:40
 INC-2025-0002,Unauthorized Cloud Console Login Attempt,2024-04-20 04:41:48,Custom,Medium,Active,Jordan Blake,On track,65%,2024-05-09 04:41:48
 INC-2024-0003,Privilege Escalation on Domain Controller,2025-06-30 09:30:08,Threat,Medium,Active,Riley O'Connor,On track,85%,2025-07-04 09:30:08
@@ -1278,7 +1278,7 @@ CVE-2022-97846,Firefox Browser Command Injection,7.55,8.8,True,48%,49,29,2025-05
     id: "remediations",
     label: "Remediations",
     filename: "remediations.csv",
-    contents: `Remediation Action [stack][link],Description,Event Type,Findings,Assets,Images,Campaign[link|r],Actors[link|r],Automations[link|r],Risk Reduction,Progress,Environment,Source
+    contents: `Remediation Action [stack][link],Description,Event Type,Findings[r],Assets[r],Images[r],Campaign[link|r],Actors[link|r],Automations[link|r],Risk Reduction,Progress [progress],Environment,Source
 Upgrade pip to version 23.3 (batch 1),Brief explanation and category for this remediation item,Vulnerability,954,112,38,9,2,2,3.4%,86%,Hybrid,SIEM
 Upgrade requests to version 2.32.4 (batch 2),Short remediation description and category label for this action,Misconfiguration,403,2114,-,-,1,3,4.7%,39%,Hybrid,Scan Engine
 Upgrade golang.org/x/net to version 0.38.0 (batch 3),Suitable short description / category for this remediation,Vulnerability,710,2856,4,9,-,-,4.0%,84%,On-Premises,Scan Engine
