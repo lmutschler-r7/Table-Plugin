@@ -1,3 +1,4 @@
+
 import { on, showUI } from '@create-figma-plugin/utilities'
 
 /* ============================================================
@@ -33,6 +34,9 @@ const CARD_HEADER_COMPONENT_KEY     = '122ad5be139c3f20d9e821f8d39251b95b97ac76'
 // NEW: navigation component to the left of the table inside page
 const NAV_COMPONENT_KEY            = 'a4972ab1fd8b2d5fa7e3faef7f6574c3660701d3'
 const FILTER_BAR_COMPONENT_KEY     = 'eb91002156214553b38ad0f626a751c4e3819fae'
+
+// NEW: Progress component key
+const PROGRESS_COMPONENT_KEY       = 'c8d6a51f189de6374d3054d56a7becac1363ed0d'
 
 /* ============================================================
    Types
@@ -106,6 +110,25 @@ function parseStackExplicit(header: string): { title?: string; desc?: string } |
   const m = header.match(/\[stack=([^|\]]+)\|([^|\]]+)\]/i)
   if (!m) return null
   return { title: m[1].trim(), desc: m[2].trim() }
+}
+
+// NEW: detect [progress]
+function headerHasProgress(header: string): boolean {
+  const m = header.match(/\[([^\]]+)\]/g)
+  return !!m && m.some(s => /\bprogress\b/i.test(s))
+}
+
+// Parse "NN" or "NN%" -> 0..100 number
+function parseProgress(raw: string): number {
+  const t = (raw || '').trim()
+  if (!t) return 0
+  const m = t.match(/^(\d+(?:\.\d+)?)\s*%?$/)
+  let v = 0
+  if (m) v = parseFloat(m[1])
+  if (!Number.isFinite(v)) v = 0
+  if (v < 0) v = 0
+  if (v > 100) v = 100
+  return Math.round(v)
 }
 
 type Align = 'LEFT' | 'CENTER' | 'RIGHT'
@@ -423,8 +446,9 @@ function createIconNode(iconMaster: ComponentNode | null, raw: string): SceneNod
   t.fontName = { family: 'Inter', style: 'Regular' }
   t.fontSize = 12
   t.lineHeight = { value: 20, unit: 'PIXELS' }
-  t.characters = raw.trim()
   t.textAutoResize = 'WIDTH_AND_HEIGHT'
+  t.characters = raw.trim()
+  t.fills = [{ type: 'SOLID', color: { r: 0.16, g: 0.18, b: 0.22 } }]
   return t
 }
 
@@ -564,6 +588,9 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
     const navMaster     = await figma.importComponentByKeyAsync(NAV_COMPONENT_KEY).catch(() => null)
     const filterBarMaster = await figma.importComponentByKeyAsync(FILTER_BAR_COMPONENT_KEY).catch(() => null)
 
+    // NEW: progress component
+    const progressMaster = await figma.importComponentByKeyAsync(PROGRESS_COMPONENT_KEY).catch(() => null)
+
     const headerHeight = 55
     const rowHeight = 51
     const cellHPad = 10
@@ -574,6 +601,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
     const isIconCol      = headers.map(h => headerHasIcon(h))
     const isLinkCol      = headers.map(h => headerHasLink(h))
     const isStackCol     = headers.map(h => headerHasStack(h))
+    const isProgressCol  = headers.map(h => headerHasProgress(h))
     const aligns: Align[] = headers.map(h => headerAlign(h))
     const prettyHeaders  = headers.map(h => prettyHeaderLabel(h))
 
@@ -667,6 +695,13 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
             colWidths[c] = Math.max(colWidths[c], w)
           }
         }
+      } else if (isProgressCol[c]) {
+        // Enforce a minimum width for progress columns to avoid clipping
+        // and allow room for the track + text.
+        const minProgressCol = 180
+        const textWidth = await measureTextWidth('100%')
+        const reserve = Math.max(minProgressCol, textWidth + 24) // +24 padding/track visuals
+        colWidths[c] = Math.max(colWidths[c], reserve)
       } else {
         for (let r = 0; r < rows.length; r++) {
           const w = await measureTextWidth(rows[r][headers[c]] ?? '')
@@ -802,7 +837,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
           vwrap.appendChild(tBottom)
 
           cell.appendChild(vwrap)
-        } else if (headerHasChips(headers[c])) {
+        } else if (isChipsCol[c]) {
           const wrap = figma.createFrame()
           wrap.layoutMode = 'HORIZONTAL'
           wrap.primaryAxisSizingMode = 'AUTO'
@@ -812,12 +847,50 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
           const tokens = (val || '').split(/[,|]/g).map(s => s.trim()).filter(Boolean)
           for (const token of tokens) wrap.appendChild(createChipFromComponent(chipMaster, token, textVar))
           cell.appendChild(wrap)
-        } else if (headerHasStatus(headers[c])) {
+        } else if (isStatusCol[c]) {
           cell.appendChild(createStatusNode(statusMaster, val || ''))
-        } else if (headerHasBoolean(headers[c])) {
+        } else if (isBooleanCol[c]) {
           cell.appendChild(createBooleanNode(booleanMaster, val || ''))
-        } else if (headerHasIcon(headers[c])) {
+        } else if (isIconCol[c]) {
           cell.appendChild(createIconNode(iconMaster, val || ''))
+        } else if (isProgressCol[c]) {
+          // PROGRESS CELL
+          const pct = parseProgress(val || '')
+          const label = `${pct}%`
+          if (progressMaster) {
+            const inst = progressMaster.createInstance()
+            // Detach so we can edit internals (text + background padding)
+            const node = inst.detachInstance()
+            node.name = `progress ${label}`
+            // Swap the single text node to label
+            const textNode = node.findOne(n => n.type === 'TEXT') as TextNode | null
+            if (textNode) {
+              textNode.fontName = { family: 'Inter', style: 'Medium' }
+              textNode.fontSize = 12
+              textNode.lineHeight = { value: 20, unit: 'PIXELS' }
+              textNode.characters = label
+              textNode.textAutoResize = 'WIDTH_AND_HEIGHT'
+              textNode.fills = [variablePaint(textVar, { r: 0.16, g: 0.18, b: 0.22 })]
+            }
+            // Adjust background right padding to (100 - pct)
+            const bg = node.findOne(n => n.name.toLowerCase() === 'background') as FrameNode | null
+            if (bg && ('paddingRight' in bg)) {
+              try {
+                bg.paddingRight = Math.max(0, 100 - pct)
+              } catch {}
+            }
+            cell.appendChild(node)
+          } else {
+            // Fallback simple text
+            const t = figma.createText()
+            t.fontName = { family: 'Inter', style: 'Medium' }
+            t.fontSize = 12
+            t.lineHeight = { value: 20, unit: 'PIXELS' }
+            t.textAutoResize = 'WIDTH_AND_HEIGHT'
+            t.characters = label
+            t.fills = [variablePaint(textVar, { r: 0.16, g: 0.18, b: 0.22 })]
+            cell.appendChild(t)
+          }
         } else {
           const t = figma.createText()
           t.fontName = { family: 'Inter', style: 'Regular' }
