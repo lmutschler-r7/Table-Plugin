@@ -96,6 +96,18 @@ function someLink(m: RegExpMatchArray | null): boolean {
   return !!m && m.some(s => /link/i.test(s))
 }
 
+// NEW: detect [stack] (shorthand) or [stack=Title|Description] (explicit)
+function headerHasStack(header: string): boolean {
+  const m = header.match(/\[([^\]]+)\]/g)
+  if (!m) return false
+  return m.some(s => /^\[?stack(\]|\||=)/i.test(s))
+}
+function parseStackExplicit(header: string): { title?: string; desc?: string } | null {
+  const m = header.match(/\[stack=([^|\]]+)\|([^|\]]+)\]/i)
+  if (!m) return null
+  return { title: m[1].trim(), desc: m[2].trim() }
+}
+
 type Align = 'LEFT' | 'CENTER' | 'RIGHT'
 function headerAlign(header: string): Align {
   const tags = header.match(/\[([^\]]+)\]/g)?.join(' ').toLowerCase() ?? ''
@@ -492,6 +504,39 @@ function makeComparator(
 }
 
 /* ============================================================
+   Stack parsing
+============================================================ */
+function buildStackMap(headers: string[]): Map<number, number> {
+  // returns parentIndex -> childIndex
+  const map = new Map<number, number>()
+  const pretty = headers.map(prettyHeaderLabel)
+
+  // First collect explicit declarations
+  for (let i = 0; i < headers.length; i++) {
+    const exp = parseStackExplicit(headers[i])
+    if (exp && exp.title && exp.desc) {
+      const ti = pretty.findIndex(h => h === exp.title)
+      const di = pretty.findIndex(h => h === exp.desc)
+      if (ti >= 0 && di >= 0 && ti !== di) {
+        map.set(ti, di)
+      }
+    }
+  }
+  // Then apply shorthand where not already used
+  for (let i = 0; i < headers.length; i++) {
+    if (map.has(i)) continue
+    if (Array.from(map.values()).includes(i)) continue // already a child
+    if (headerHasStack(headers[i])) {
+      const child = i + 1
+      if (child < headers.length && !Array.from(map.values()).includes(child) && !map.has(child)) {
+        map.set(i, child)
+      }
+    }
+  }
+  return map
+}
+
+/* ============================================================
    Table builder
 ============================================================ */
 on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, placeWithinCard, placeWithinPage, rows, sort}) => {
@@ -528,8 +573,14 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
     const isBooleanCol   = headers.map(h => headerHasBoolean(h))
     const isIconCol      = headers.map(h => headerHasIcon(h))
     const isLinkCol      = headers.map(h => headerHasLink(h))
+    const isStackCol     = headers.map(h => headerHasStack(h))
     const aligns: Align[] = headers.map(h => headerAlign(h))
     const prettyHeaders  = headers.map(h => prettyHeaderLabel(h))
+
+    // Build stack pairs
+    const stackMap = buildStackMap(headers)
+    const childSet = new Set<number>(Array.from(stackMap.values()))
+    const visibleCols = headers.map((_, i) => i).filter(i => !childSet.has(i))
 
     // Representative widths
     let statusRepWidth = 0
@@ -625,7 +676,12 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
       colWidths[c] = Math.max(colWidths[c], 8)
     }
 
-    // Smart sorting
+    // For stack parents, width should fit the wider of parent/child
+    for (const [parent, child] of stackMap.entries()) {
+      colWidths[parent] = Math.max(colWidths[parent], colWidths[child])
+    }
+
+    // Smart sorting (no change for stacked; uses original columns)
     let finalRows = rows
     const sortColIndex = sort && sort.by && sort.dir ? headers.findIndex(h => h === sort.by) : -1
     if (sortColIndex >= 0 && (sort!.dir === 'asc' || sort!.dir === 'desc')) {
@@ -640,7 +696,8 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
       finalRows = rows.slice().sort(cmp)
     }
 
-    const tableWidth = colWidths.reduce((sum, w) => sum + w + cellHPad * 2, 0)
+    // Effective table width excludes child columns
+    const tableWidth = visibleCols.reduce((sum, c) => sum + colWidths[c] + cellHPad * 2, 0)
 
     // Root content frame (scrollable area)
     const content = figma.createFrame()
@@ -663,22 +720,25 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
       row.counterAxisSizingMode = 'AUTO'
       row.itemSpacing = 0
       row.fills = []
-      for (let c = 0; c < values.length; c++) {
+      for (let i = 0; i < visibleCols.length; i++) {
+        const c = visibleCols[i]
         const val = values[c]
-        const align = aligns[c]
+        const align = headerAlign(headers[c])
         const cell = figma.createFrame()
         cell.name = opts.header ? 'header cell' : 'cell'
         cell.layoutMode = 'VERTICAL'
         cell.primaryAxisSizingMode = 'FIXED'
         cell.counterAxisSizingMode = 'AUTO'
-        cell.paddingLeft = cellHPad
-        cell.paddingRight = cellHPad
+        cell.paddingLeft = 10
+        cell.paddingRight = 10
         cell.paddingTop = opts.header ? 0 : 10
         cell.paddingBottom = opts.header ? 0 : 10
         cell.fills = []
         cell.counterAxisAlignItems = align === 'LEFT' ? 'MIN' : align === 'RIGHT' ? 'MAX' : 'CENTER'
         cell.primaryAxisAlignItems = 'CENTER'
-        cell.resize(colWidths[c] + cellHPad * 2, opts.header ? headerHeight : rowHeight)
+        cell.resize(colWidths[c] + 20, opts.header ? 55 : 51)
+
+        const child = stackMap.get(c)
 
         if (opts.header) {
           const hWrap = figma.createFrame()
@@ -695,7 +755,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
           t.fontSize = 14
           t.lineHeight = { value: 24, unit: 'PIXELS' }
           t.textAutoResize = 'WIDTH_AND_HEIGHT'
-          t.characters = prettyHeaderLabel(val)
+          t.characters = prettyHeaderLabel(headers[c])
           t.fills = [variablePaint(textVar, { r: 0.12, g: 0.14, b: 0.20 })]
           hWrap.appendChild(t)
 
@@ -703,29 +763,68 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
             hWrap.appendChild(createSortIconNode(sort.dir, textVar))
           }
           cell.appendChild(hWrap)
-        } else if (isChipsCol[c]) {
+        } else if (child !== undefined) {
+          // STACKED CELL
+          const vwrap = figma.createFrame()
+          vwrap.name = 'stack'
+          vwrap.layoutMode = 'VERTICAL'
+          vwrap.primaryAxisSizingMode = 'AUTO'
+          vwrap.counterAxisSizingMode = 'AUTO'
+          vwrap.itemSpacing = 2
+          vwrap.fills = []
+
+          const tTop = figma.createText()
+          tTop.fontName = { family: 'Inter', style: 'Medium' }
+          tTop.fontSize = 12
+          tTop.lineHeight = { value: 20, unit: 'PIXELS' }
+          tTop.textAutoResize = 'WIDTH_AND_HEIGHT'
+          tTop.characters = val || ''
+          tTop.fills = [
+            variablePaint(
+              isLinkCol[c] ? linkTextVar : textVar,
+              isLinkCol[c] ? { r: 0.12, g: 0.39, b: 0.96 } : { r: 0.16, g: 0.18, b: 0.22 }
+            )
+          ]
+          vwrap.appendChild(tTop)
+
+          const tBottom = figma.createText()
+          tBottom.fontName = { family: 'Inter', style: 'Regular' }
+          tBottom.fontSize = 12
+          tBottom.lineHeight = { value: 20, unit: 'PIXELS' }
+          tBottom.textAutoResize = 'WIDTH_AND_HEIGHT'
+          tBottom.characters = values[child] || ''
+          tBottom.fills = [
+            variablePaint(
+              isLinkCol[child] ? linkTextVar : textVar,
+              isLinkCol[child] ? { r: 0.12, g: 0.39, b: 0.96 } : { r: 0.16, g: 0.18, b: 0.22 }
+            )
+          ]
+          vwrap.appendChild(tBottom)
+
+          cell.appendChild(vwrap)
+        } else if (headerHasChips(headers[c])) {
           const wrap = figma.createFrame()
           wrap.layoutMode = 'HORIZONTAL'
           wrap.primaryAxisSizingMode = 'AUTO'
           wrap.counterAxisSizingMode = 'AUTO'
           wrap.itemSpacing = 4
           wrap.fills = []
-          const tokens = val.split(/[,|]/g).map(s => s.trim()).filter(Boolean)
+          const tokens = (val || '').split(/[,|]/g).map(s => s.trim()).filter(Boolean)
           for (const token of tokens) wrap.appendChild(createChipFromComponent(chipMaster, token, textVar))
           cell.appendChild(wrap)
-        } else if (isStatusCol[c]) {
-          cell.appendChild(createStatusNode(statusMaster, val))
-        } else if (isBooleanCol[c]) {
-          cell.appendChild(createBooleanNode(booleanMaster, val))
-        } else if (isIconCol[c]) {
-          cell.appendChild(createIconNode(iconMaster, val))
+        } else if (headerHasStatus(headers[c])) {
+          cell.appendChild(createStatusNode(statusMaster, val || ''))
+        } else if (headerHasBoolean(headers[c])) {
+          cell.appendChild(createBooleanNode(booleanMaster, val || ''))
+        } else if (headerHasIcon(headers[c])) {
+          cell.appendChild(createIconNode(iconMaster, val || ''))
         } else {
           const t = figma.createText()
           t.fontName = { family: 'Inter', style: 'Regular' }
           t.fontSize = 12
           t.lineHeight = { value: 20, unit: 'PIXELS' }
           t.textAutoResize = 'WIDTH_AND_HEIGHT'
-          t.characters = val
+          t.characters = val || ''
           t.fills = [
             variablePaint(
               isLinkCol[c] ? linkTextVar : textVar,
@@ -809,7 +908,7 @@ on<CsvParsedEvent>('CSV_PARSED', async ({fileName, headers, includeCheckboxes, p
         cell.primaryAxisAlignItems = 'MIN'
         cell.paddingLeft = 14
         cell.fills = []
-        cell.resize(64, rowHeight)
+        cell.resize(64, 51)
         if (rowCheckboxMaster) {
           const inst = rowCheckboxMaster.createInstance()
           cell.appendChild(inst)
