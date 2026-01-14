@@ -1,0 +1,101 @@
+Task [link],Category,Status,Priority [status],Owner,Tickets [link|r],Automation
+Update Mozilla Firefox to v120.0.6100 - HR 002,Remediation,In Progress,High,SC Sarah Chen,9,SOAR
+Update Mozilla Firefox to v120.0.6101 - IT 007,Remediation,Completed,High,MK Maria Kim,1,Manual
+Update Mozilla Firefox to v120.0.6102 - IT 007,Remediation,In Progress,Medium,JD John Davis,—,AI
+Update Mozilla Firefox to v120.0.6103 - Sales 006,Remediation,In Progress,High,JD John Davis,—,SOAR
+Update Mozilla Firefox to v120.0.6104 - IT 007,Remediation,In Progress,High,RB Riley Brooks,12,SOAR
+Update Mozilla Firefox to v120.0.6105 - IT 007,Remediation,In Progress,Medium,MK Maria Kim,12,Manual
+Update Microsoft Edge to v120.0.6106 - Finance 001,Remediation,Pending,High,SC Sarah Chen,9,SOAR
+Update Microsoft Edge to v120.0.6107 - Finance 001,Remediation,In Progress,Critical,SC Sarah Chen,—,SOAR
+Update Microsoft Edge to v120.0.6108 - Sales 006,Remediation,Completed,Medium,SC Sarah Chen,2,Manual
+Update Mozilla Firefox to v120.0.6109 - IT 003,Remediation,Pending,Medium,MK Maria Kim,13,Manual
+Update Microsoft Edge to v120.0.6110 - Sales 006,Remediation,Completed,High,JD John Davis,—,Manual
+Update Mozilla Firefox to v120.0.6111 - HR 002,Remediation,Pending,Medium,AL Alex Lee,11,AI
+Update Google Chrome to v120.0.6112 - Eng 004,Remediation,In Progress,Medium,SC Sarah Chen,8,Manual
+Update Microsoft Edge to v120.0.6113 - Sales 006,Remediation,Completed,High,AL Alex Lee,3,AI
+Update Microsoft Edge to v120.0.6114 - IT 003,Remediation,Pending,High,JD John Davis,13,Manual
+Update Google Chrome to v120.0.6115 - Finance 001,Remediation,Completed,Critical,AL Alex Lee,8,AI
+Update Mozilla Firefox to v120.0.6116 - Finance 001,Remediation,Pending,High,MK Maria Kim,—,Manual
+Update Microsoft Edge to v120.0.6117 - Finance 001,Remediation,In Progress,Critical,SC Sarah Chen,—,AI
+Update Google Chrome to v120.0.6118 - IT 003,Remediation,Pending,Medium,JD John Davis,8,Manual
+Update Google Chrome to v120.0.6119 - Sales 006,Remediation,In Progress,Medium,SC Sarah Chen,11,SOAR
+Update Mozilla Firefox to v120.0.6120 - IT 007,Remediation,Completed,Critical,JD John Davis,11,Manual
+Update Microsoft Edge to v120.0.6121 - Sales 006,Remediation,Pending,Medium,MK Maria Kim,—,Manual
+Update Microsoft Edge to v120.0.6122 - HR 002,Remediation,Pending,High,MK Maria Kim,—,Manual
+Update Microsoft Edge to v120.0.6123 - Eng 004,Remediation,In Progress,Medium,RB Riley Brooks,—,AI
+Update Mozilla Firefox to v121.0.6124 - Finance 001,Remediation,Completed,High,RB Riley Brooks,13,Manual
+Update Mozilla Firefox to v121.0.6125 - IT 003,Remediation,In Progress,Medium,JD John Davis,1,Manual
+Update Mozilla Firefox to v121.0.6126 - Sales 006,Remediation,In Progress,High,MK Maria Kim,7,Manual
+Update Google Chrome to v121.0.6127 - IT 007,Remediation,Pending,High,RB Riley Brooks,14,AI
+Update Google Chrome to v121.0.6128 - IT 003,Remediation,Pending,Critical,AL Alex Lee,1,Manual
+Update Mozilla Firefox to v121.0.6129 - IT 003,Remediation,Completed,Medium,MK Maria Kim,4,Manual
+Update Microsoft Edge to v121.0.6130 - Finance 001,Remediation,Pending,Medium,AL Alex Lee,3,Manual
+Update Mozilla Firefox to v121.0.6131 - IT 003,Remediation,Completed,High,RB Riley Brooks,15,SOAR
+Update Mozilla Firefox to v121.0.6132 - Eng 004,Remediation,Completed,Critical,SC Sarah Chen,15,Manual
+Update Microsoft Edge to v121.0.6133 - HR 002,Remediation,Pending,Critical,RB Riley Brooks,—,AI
+Update Google Chrome to v121.0.6134 - Eng 004,Remediation,In Progress,Medium,JD John Davis,7,AI
+Update Google Chrome to v121.0.6135 - Finance 001,Remediation,Completed,Medium,SC Sarah Chen,12,Manual
+Update Google Chrome to v121.0.6136 - IT 007,Remediation,In Progress,Critical,MK Maria Kim,5,SOAR
+Update Microsoft Edge to v121.0.6137 - IT 003,Remediation,Pending,High,SC Sarah Chen,12,Manual
+Update Google Chrome to v121.0.6138 - IT 007,Remediation,Completed,High,MK Maria Kim,1,SOAR
+Update Microsoft Edge to v121.0.6139 - HR 002,Remediation,Pending,Medium,RB Riley Brooks,11,SOAR
+Update Mozilla Firefox to v121.0.6140 - Sales 006,Remediation,Pending,High,RB Riley Brooks,15,AI
+Update Microsoft Edge to v121.0.6141 - HR 002,Remediation,Completed,Critical,JD John Davis,—,Manual
+Update Microsoft Edge to v121.0.6142 - Finance 001,Remediation,In Progress,Critical,RB Riley Brooks,7,Manual
+Update Google Chrome to v121.0.6143 - HR 002,Remediation,Pending,Critical,SC Sarah Chen,2,Manual
+Update Mozilla Firefox to v121.0.6144 - Sales 006,Remediation,Pending,Medium,JD John Davis,1,Manual
+Update Microsoft Edge to v121.0.6145 - IT 007,Remediation,In Progress,Medium,SC Sarah Chen,3,Manual
+Update Google Chrome to v121.0.6146 - IT 003,Remediation,In Progress,Critical,AL Alex Lee,5,AI
+Update Microsoft Edge to v121.0.6147 - Sales 006,Remediation,In Progress,Medium,MK Maria Kim,15,AI
+Update Mozilla Firefox to v121.0.6148 - Eng 004,Remediation,Pending,Critical,MK Maria Kim,10,AI
+Update Microsoft Edge to v122.0.6149 - IT 007,Remediation,Completed,Medium,RB Riley Brooks,6,Manual
+Update Microsoft Edge to v122.0.6150 - HR 002,Remediation,Completed,Medium,JD John Davis,5,Manual
+Update Mozilla Firefox to v122.0.6151 - Sales 006,Remediation,In Progress,High,JD John Davis,—,AI
+Update Google Chrome to v122.0.6152 - IT 003,Remediation,Completed,Medium,RB Riley Brooks,15,AI
+Update Mozilla Firefox to v122.0.6153 - Sales 006,Remediation,Pending,High,SC Sarah Chen,—,Manual
+Update Microsoft Edge to v122.0.6154 - Sales 006,Remediation,Pending,Critical,RB Riley Brooks,9,Manual
+Update Google Chrome to v122.0.6155 - Sales 006,Remediation,In Progress,Medium,AL Alex Lee,13,Manual
+Update Microsoft Edge to v122.0.6156 - Finance 001,Remediation,Pending,High,MK Maria Kim,13,Manual
+Update Mozilla Firefox to v122.0.6157 - Sales 006,Remediation,Pending,High,MK Maria Kim,2,SOAR
+Update Mozilla Firefox to v122.0.6158 - HR 002,Remediation,In Progress,High,MK Maria Kim,2,SOAR
+Update Mozilla Firefox to v122.0.6159 - Sales 006,Remediation,In Progress,Critical,RB Riley Brooks,—,SOAR
+Update Mozilla Firefox to v122.0.6160 - HR 002,Remediation,Pending,Medium,MK Maria Kim,3,AI
+Update Google Chrome to v122.0.6161 - IT 003,Remediation,Pending,Critical,MK Maria Kim,4,SOAR
+Update Microsoft Edge to v122.0.6162 - Eng 004,Remediation,In Progress,Medium,JD John Davis,3,AI
+Update Google Chrome to v122.0.6163 - Finance 001,Remediation,Pending,High,RB Riley Brooks,—,Manual
+Update Google Chrome to v122.0.6164 - IT 007,Remediation,Completed,Medium,SC Sarah Chen,—,SOAR
+Update Microsoft Edge to v122.0.6165 - Sales 006,Remediation,Completed,Medium,AL Alex Lee,4,Manual
+Update Mozilla Firefox to v122.0.6166 - IT 003,Remediation,Completed,High,AL Alex Lee,9,Manual
+Update Mozilla Firefox to v122.0.6167 - Sales 006,Remediation,In Progress,Medium,JD John Davis,3,Manual
+Update Mozilla Firefox to v122.0.6168 - IT 003,Remediation,Pending,Critical,JD John Davis,7,Manual
+Update Mozilla Firefox to v122.0.6169 - Finance 001,Remediation,Pending,Critical,MK Maria Kim,—,AI
+Update Mozilla Firefox to v122.0.6170 - IT 003,Remediation,Pending,High,RB Riley Brooks,6,AI
+Update Google Chrome to v122.0.6171 - HR 002,Remediation,In Progress,Medium,AL Alex Lee,—,Manual
+Update Microsoft Edge to v122.0.6172 - HR 002,Remediation,Pending,High,AL Alex Lee,4,Manual
+Update Mozilla Firefox to v122.0.6173 - Finance 001,Remediation,In Progress,High,MK Maria Kim,15,SOAR
+Update Microsoft Edge to v123.0.6174 - HR 002,Remediation,Pending,High,MK Maria Kim,9,SOAR
+Update Google Chrome to v123.0.6175 - IT 007,Remediation,In Progress,High,JD John Davis,7,SOAR
+Update Google Chrome to v123.0.6176 - Eng 004,Remediation,In Progress,Medium,AL Alex Lee,9,AI
+Update Mozilla Firefox to v123.0.6177 - Sales 006,Remediation,In Progress,Medium,JD John Davis,14,SOAR
+Update Google Chrome to v123.0.6178 - Sales 006,Remediation,Pending,High,JD John Davis,15,SOAR
+Update Google Chrome to v123.0.6179 - Eng 004,Remediation,Pending,Critical,MK Maria Kim,11,AI
+Update Mozilla Firefox to v123.0.6180 - IT 007,Remediation,Completed,High,RB Riley Brooks,3,Manual
+Update Microsoft Edge to v123.0.6181 - IT 007,Remediation,Completed,High,RB Riley Brooks,—,SOAR
+Update Microsoft Edge to v123.0.6182 - Finance 001,Remediation,Pending,High,MK Maria Kim,13,Manual
+Update Mozilla Firefox to v123.0.6183 - Sales 006,Remediation,In Progress,High,AL Alex Lee,1,SOAR
+Update Google Chrome to v123.0.6184 - IT 007,Remediation,In Progress,Critical,RB Riley Brooks,7,Manual
+Update Google Chrome to v123.0.6185 - IT 007,Remediation,Pending,Critical,JD John Davis,15,AI
+Update Microsoft Edge to v123.0.6186 - Finance 001,Remediation,Completed,Medium,AL Alex Lee,2,Manual
+Update Mozilla Firefox to v123.0.6187 - Sales 006,Remediation,Completed,Critical,RB Riley Brooks,15,Manual
+Update Google Chrome to v123.0.6188 - Finance 001,Remediation,In Progress,Critical,JD John Davis,—,Manual
+Update Google Chrome to v123.0.6189 - HR 002,Remediation,Pending,Medium,MK Maria Kim,2,AI
+Update Google Chrome to v123.0.6190 - IT 003,Remediation,In Progress,Critical,SC Sarah Chen,8,Manual
+Update Mozilla Firefox to v123.0.6191 - Eng 004,Remediation,Completed,Medium,MK Maria Kim,9,AI
+Update Mozilla Firefox to v123.0.6192 - Sales 006,Remediation,Completed,Medium,AL Alex Lee,14,Manual
+Update Microsoft Edge to v123.0.6193 - Sales 006,Remediation,In Progress,High,JD John Davis,12,Manual
+Update Microsoft Edge to v123.0.6194 - IT 003,Remediation,Completed,Medium,AL Alex Lee,12,SOAR
+Update Microsoft Edge to v123.0.6195 - IT 007,Remediation,In Progress,Critical,MK Maria Kim,—,Manual
+Update Mozilla Firefox to v123.0.6196 - Finance 001,Remediation,In Progress,Critical,AL Alex Lee,3,Manual
+Update Google Chrome to v123.0.6197 - Sales 006,Remediation,In Progress,High,JD John Davis,—,AI
+Update Google Chrome to v123.0.6198 - Sales 006,Remediation,In Progress,Critical,SC Sarah Chen,14,Manual
+Update Google Chrome to v124.0.6199 - IT 003,Remediation,Completed,Medium,JD John Davis,2,Manual

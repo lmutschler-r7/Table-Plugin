@@ -469,6 +469,113 @@ silver-hot-vault-keywfd,True,False,False,True,False,sox,"HIPAA, Regional US"
 `
   },
   {
+    id: "cases",
+    label: "Cases",
+    filename: "cases.csv",
+    contents: `Case ID,Title [link],Created,Type,Severity [status],Status,Assignee,SLA,Progress,Due date
+INC-2025-0001,Phishing Campaign Targeting Finance Team,2025-02-21 08:28:40,Policy,Medium,Resolved,Alex Murphy,On track,72%,2025-02-27 08:28:40
+INC-2025-0002,Unauthorized Cloud Console Login Attempt,2024-04-20 04:41:48,Custom,Medium,Active,Jordan Blake,On track,65%,2024-05-09 04:41:48
+INC-2024-0003,Privilege Escalation on Domain Controller,2025-06-30 09:30:08,Threat,Medium,Active,Riley O'Connor,On track,85%,2025-07-04 09:30:08
+INC-2025-0004,Critical Vulnerability Exploit Attempt Detected,2024-01-16 20:59:09,Custom,Medium,Contained,Morgan Lee,On track,71%,2024-02-03 20:59:09
+INC-2025-0005,Potential Business Email Compromise,2025-04-29 13:49:05,Threat,Critical,Contained,Samir Patel,At risk,59%,2025-05-19 13:49:05
+INC-2024-0006,Anomalous Admin Account Creation,2025-11-08 13:07:32,Phishing,Medium,Resolved,Jordan Blake,At risk,77%,2025-11-17 13:07:32
+INC-2024-0007,Suspected Ransomware Attack - Production Environment,2025-03-10 15:35:53,Phishing,Critical,Investigation,Alex Murphy,Breached,73%,2025-03-21 15:35:53
+INC-2024-0008,Suspicious PowerShell Execution on Endpoint,2024-09-21 15:34:59,Policy,Medium,Resolved,Riley O'Connor,On track,81%,2024-09-24 15:34:59
+INC-2025-0009,Unusual Lateral Movement Detected,2024-05-03 21:41:46,Threat,Medium,Active,Morgan Lee,On track,55%,2024-05-14 21:41:46
+INC-2025-0010,Anomalous Admin Account Creation,2025-08-04 18:23:36,Threat,Medium,Resolved,Alex Murphy,At risk,81%,2025-08-20 18:23:36
+INC-2024-0011,Policy Violation - Unapproved SaaS Application,2025-11-09 14:56:33,Custom,Critical,Active,Samir Patel,On track,67%,2025-11-26 14:56:33
+INC-2025-0012,Potential Business Email Compromise,2025-03-27 02:10:31,Threat,Critical,Investigation,Jordan Blake,On track,56%,2025-04-14 02:10:31
+INC-2025-0013,Privilege Escalation on Domain Controller,2024-09-06 10:04:57,Exposure,Medium,Active,Alex Murphy,On track,84%,2024-09-14 10:04:57
+INC-2025-0014,Data Exfiltration via Suspicious HTTPS Traffic,2025-09-28 15:55:23,Custom,High,Active,Riley O'Connor,On track,85%,2025-10-17 15:55:23
+INC-2024-0015,Unusual Lateral Movement Detected,2025-01-07 00:23:07,Threat,High,Contained,Taylor Chen,At risk,56%,2025-01-14 00:23:07
+INC-2024-0016,Malicious Macro Document Delivered to HR,2025-07-10 17:59:40,Phishing,Critical,Resolved,Alex Murphy,At risk,73%,2025-07-28 17:59:40
+INC-2025-0017,Brute Force Login Attempts Against VPN Portal,2024-09-29 02:12:12,Phishing,Medium,Investigation,Morgan Lee,Breached,84%,2024-10-20 02:12:12
+INC-2025-0018,Phishing Campaign Targeting Finance Team,2024-06-04 05:22:13,Exposure,Critical,Active,Samir Patel,On track,59%,2024-06-23 05:22:13
+INC-2025-0019,Privilege Escalation on Domain Controller,2025-11-01 16:56:38,Policy,Medium,Active,Riley O'Connor,At risk,83%,2025-11-04 16:56:38
+INC-2025-0020,Suspicious PowerShell Execution on Endpoint,2025-07-24 15:50:45,Phishing,Medium,Investigation,Morgan Lee,On track,75%,2025-08-02 15:50:45
+INC-2025-0021,Unauthorized Cloud Console Login Attempt,2025-02-13 15:15:15,Exposure,Critical,Contained,Taylor Chen,On track,52%,2025-02-15 15:15:15
+INC-2025-0022,Malicious Macro Document Delivered to HR,2025-06-11 05:47:13,Custom,High,Contained,Jordan Blake,On track,71%,2025-06-21 05:47:13
+INC-2025-0023,Critical Vulnerability Exploit Attempt Detected,2025-08-17 04:12:56,Policy,Medium,Active,Riley O'Connor,On track,58%,2025-09-03 04:12:56
+INC-2024-0024,Unusual Lateral Movement Detected,2024-05-12 02:58:47,Custom,High,Contained,Taylor Chen,At risk,39%,2024-05-23 02:58:47
+INC-2025-0025,Anomalous Admin Account Creation,2024-12-15 14:49:05,Policy,Medium,Active,Riley O'Connor,At risk,40%,2024-12-20 14:49:05
+INC-2024-0026,Exposed Storage Bucket with Sensitive Data,2024-09-09 03:08:43,Phishing,High,Investigation,Riley O'Connor,At risk,63%,2024-09-29 03:08:43
+INC-2024-0027,Policy Violation - Unapproved SaaS Application,2024-08-27 21:36:34,Policy,High,Investigation,Riley O'Connor,On track,67%,2024-09-08 21:36:34
+INC-2024-0028,Critical Vulnerability Exploit Attempt Detected,2025-08-27 00:46:06,Policy,Medium,Investigation,Morgan Lee,On track,41%,2025-09-01 00:46:06
+INC-2024-0029,Privilege Escalation on Domain Controller,2024-10-24 03:51:34,Custom,Medium,Contained,Alex Murphy,On track,97%,2024-10-28 03:51:34
+INC-2024-0030,Privilege Escalation on Domain Controller,2025-10-23 23:52:56,Custom,High,Investigation,Alex Murphy,Breached,100%,2025-11-01 23:52:56
+INC-2024-0031,Critical Vulnerability Exploit Attempt Detected,2025-12-20 06:03:01,Threat,Medium,Resolved,Jordan Blake,At risk,58%,2026-01-07 06:03:01
+INC-2024-0032,Data Exfiltration via Suspicious HTTPS Traffic,2025-07-25 23:22:10,Phishing,Critical,Contained,Riley O'Connor,On track,78%,2025-08-04 23:22:10
+INC-2025-0033,Phishing Campaign Targeting Finance Team,2024-12-15 15:56:30,Policy,High,Active,Alex Murphy,At risk,70%,2024-12-29 15:56:30
+INC-2025-0034,Suspicious PowerShell Execution on Endpoint,2025-01-08 17:21:28,Exposure,High,Contained,Samir Patel,At risk,89%,2025-01-22 17:21:28
+INC-2024-0035,Unauthorized Cloud Console Login Attempt,2024-12-06 23:28:57,Phishing,High,Contained,Alex Murphy,At risk,86%,2024-12-23 23:28:57
+INC-2025-0036,Data Exfiltration via Suspicious HTTPS Traffic,2024-08-26 22:48:10,Exposure,Critical,Contained,Samir Patel,Breached,75%,2024-08-30 22:48:10
+INC-2024-0037,Data Exfiltration via Suspicious HTTPS Traffic,2025-07-24 16:42:02,Policy,Medium,Active,Samir Patel,On track,90%,2025-08-01 16:42:02
+INC-2025-0038,Brute Force Login Attempts Against VPN Portal,2024-09-03 01:23:46,Policy,Medium,Contained,Jordan Blake,On track,83%,2024-09-16 01:23:46
+INC-2025-0039,Potential Business Email Compromise,2025-09-04 16:59:24,Custom,Medium,Contained,Riley O'Connor,At risk,38%,2025-09-25 16:59:24
+INC-2025-0040,Malware Beaconing from Server Network,2024-01-20 05:31:39,Threat,High,Resolved,Samir Patel,At risk,74%,2024-01-21 05:31:39
+INC-2024-0041,Critical Vulnerability Exploit Attempt Detected,2024-03-16 11:07:08,Exposure,Medium,Investigation,Alex Murphy,Breached,64%,2024-04-01 11:07:08
+INC-2024-0042,Suspected Ransomware Attack - Production Environment,2025-03-10 11:48:40,Phishing,High,Contained,Jordan Blake,Breached,82%,2025-03-18 11:48:40
+INC-2024-0043,Unusual Lateral Movement Detected,2024-04-01 22:51:09,Threat,Critical,Contained,Riley O'Connor,At risk,58%,2024-04-21 22:51:09
+INC-2025-0044,Policy Violation - Unapproved SaaS Application,2024-01-05 00:51:07,Phishing,Medium,Active,Morgan Lee,At risk,52%,2024-01-19 00:51:07
+INC-2024-0045,Suspected Ransomware Attack - Production Environment,2024-10-07 18:22:28,Phishing,Medium,Resolved,Samir Patel,At risk,67%,2024-10-16 18:22:28
+INC-2025-0046,Suspected Ransomware Attack - Production Environment,2024-05-11 11:49:02,Policy,High,Active,Alex Murphy,Breached,88%,2024-05-24 11:49:02
+INC-2024-0047,Malicious Macro Document Delivered to HR,2025-07-23 01:26:30,Policy,Medium,Resolved,Morgan Lee,At risk,37%,2025-08-13 01:26:30
+INC-2024-0048,Malware Beaconing from Server Network,2024-07-24 22:09:14,Threat,Medium,Investigation,Morgan Lee,At risk,64%,2024-07-28 22:09:14
+INC-2025-0049,Suspicious PowerShell Execution on Endpoint,2024-08-17 05:48:15,Phishing,High,Active,Alex Murphy,On track,86%,2024-09-06 05:48:15
+INC-2025-0050,Exposed Storage Bucket with Sensitive Data,2025-10-06 01:54:11,Threat,Medium,Resolved,Alex Murphy,At risk,88%,2025-10-22 01:54:11
+INC-2024-0051,Potential Business Email Compromise,2024-08-03 09:55:21,Exposure,Medium,Contained,Morgan Lee,On track,71%,2024-08-08 09:55:21
+INC-2024-0052,Unauthorized Cloud Console Login Attempt,2025-11-30 01:20:26,Threat,Medium,Resolved,Alex Murphy,Breached,65%,2025-12-08 01:20:26
+INC-2024-0053,Policy Violation - Unapproved SaaS Application,2024-01-16 20:01:45,Threat,Critical,Resolved,Morgan Lee,Breached,95%,2024-02-02 20:01:45
+INC-2025-0054,Malicious Macro Document Delivered to HR,2024-02-18 20:24:54,Custom,Critical,Contained,Jordan Blake,At risk,87%,2024-03-01 20:24:54
+INC-2024-0055,Unusual Lateral Movement Detected,2025-02-05 07:24:53,Phishing,Critical,Active,Jordan Blake,On track,49%,2025-02-12 07:24:53
+INC-2024-0056,Suspicious PowerShell Execution on Endpoint,2024-02-15 16:42:21,Custom,High,Investigation,Morgan Lee,At risk,34%,2024-02-26 16:42:21
+INC-2024-0057,Malware Beaconing from Server Network,2024-12-04 11:57:58,Policy,Medium,Investigation,Taylor Chen,On track,46%,2024-12-15 11:57:58
+INC-2025-0058,Critical Vulnerability Exploit Attempt Detected,2024-10-01 00:58:51,Threat,Critical,Resolved,Morgan Lee,Breached,65%,2024-10-16 00:58:51
+INC-2024-0059,Unusual Lateral Movement Detected,2025-05-03 00:03:52,Phishing,Critical,Investigation,Jordan Blake,On track,54%,2025-05-07 00:03:52
+INC-2024-0060,Unusual Lateral Movement Detected,2024-06-08 22:12:16,Custom,Critical,Resolved,Taylor Chen,At risk,65%,2024-06-23 22:12:16
+INC-2024-0061,Policy Violation - Unapproved SaaS Application,2024-04-03 09:04:26,Custom,Medium,Investigation,Jordan Blake,At risk,61%,2024-04-08 09:04:26
+INC-2025-0062,Unusual Lateral Movement Detected,2025-10-17 11:30:44,Exposure,High,Contained,Morgan Lee,At risk,31%,2025-10-25 11:30:44
+INC-2024-0063,Suspected Ransomware Attack - Production Environment,2025-06-30 20:02:41,Custom,High,Resolved,Taylor Chen,Breached,96%,2025-07-19 20:02:41
+INC-2025-0064,Data Exfiltration via Suspicious HTTPS Traffic,2025-04-15 06:53:25,Phishing,Critical,Active,Jordan Blake,Breached,80%,2025-04-19 06:53:25
+INC-2024-0065,Anomalous Admin Account Creation,2025-05-12 00:54:26,Policy,Medium,Investigation,Alex Murphy,Breached,83%,2025-05-26 00:54:26
+INC-2024-0066,Brute Force Login Attempts Against VPN Portal,2024-07-14 10:59:59,Policy,Medium,Investigation,Riley O'Connor,Breached,80%,2024-07-22 10:59:59
+INC-2025-0067,Unusual Lateral Movement Detected,2025-11-10 11:22:49,Policy,High,Active,Taylor Chen,On track,66%,2025-11-24 11:22:49
+INC-2024-0068,Privilege Escalation on Domain Controller,2024-05-07 12:37:50,Policy,Critical,Contained,Samir Patel,Breached,91%,2024-05-27 12:37:50
+INC-2024-0069,Suspected Ransomware Attack - Production Environment,2024-11-27 16:58:46,Threat,High,Resolved,Samir Patel,Breached,81%,2024-12-17 16:58:46
+INC-2024-0070,Phishing Campaign Targeting Finance Team,2025-11-28 10:50:17,Phishing,High,Investigation,Samir Patel,At risk,52%,2025-12-02 10:50:17
+INC-2025-0071,Data Exfiltration via Suspicious HTTPS Traffic,2024-09-12 05:25:29,Threat,High,Investigation,Morgan Lee,Breached,58%,2024-10-02 05:25:29
+INC-2025-0072,Policy Violation - Unapproved SaaS Application,2025-02-17 18:13:02,Threat,Critical,Resolved,Alex Murphy,On track,87%,2025-02-20 18:13:02
+INC-2024-0073,Phishing Campaign Targeting Finance Team,2025-03-30 15:53:51,Policy,Medium,Contained,Riley O'Connor,Breached,78%,2025-04-15 15:53:51
+INC-2025-0074,Unauthorized Cloud Console Login Attempt,2024-09-30 21:30:41,Threat,Medium,Investigation,Taylor Chen,Breached,56%,2024-10-05 21:30:41
+INC-2024-0075,Critical Vulnerability Exploit Attempt Detected,2024-01-28 21:09:35,Exposure,High,Investigation,Riley O'Connor,At risk,66%,2024-02-03 21:09:35
+INC-2024-0076,Unauthorized Cloud Console Login Attempt,2024-03-02 17:45:18,Policy,High,Contained,Jordan Blake,Breached,56%,2024-03-10 17:45:18
+INC-2024-0077,Malicious Macro Document Delivered to HR,2024-03-10 12:03:45,Phishing,Medium,Contained,Morgan Lee,At risk,68%,2024-03-27 12:03:45
+INC-2025-0078,Privilege Escalation on Domain Controller,2024-12-05 03:55:43,Custom,Critical,Active,Morgan Lee,At risk,78%,2024-12-19 03:55:43
+INC-2025-0079,Potential Business Email Compromise,2025-03-15 12:00:04,Threat,Critical,Contained,Taylor Chen,On track,57%,2025-03-23 12:00:04
+INC-2025-0080,Unauthorized Cloud Console Login Attempt,2024-06-07 07:56:46,Policy,Critical,Active,Jordan Blake,At risk,51%,2024-06-16 07:56:46
+INC-2025-0081,Malicious Macro Document Delivered to HR,2024-06-03 05:54:40,Custom,Medium,Investigation,Alex Murphy,At risk,46%,2024-06-16 05:54:40
+INC-2024-0082,Privilege Escalation on Domain Controller,2025-10-24 14:54:53,Exposure,High,Contained,Morgan Lee,Breached,53%,2025-11-07 14:54:53
+INC-2025-0083,Malware Beaconing from Server Network,2025-03-19 19:10:28,Threat,Critical,Contained,Jordan Blake,Breached,75%,2025-03-30 19:10:28
+INC-2024-0084,Potential Business Email Compromise,2025-11-04 03:01:01,Threat,Critical,Resolved,Jordan Blake,Breached,69%,2025-11-22 03:01:01
+INC-2024-0085,Privilege Escalation on Domain Controller,2024-12-04 10:32:01,Phishing,Medium,Resolved,Alex Murphy,Breached,98%,2024-12-19 10:32:01
+INC-2025-0086,Malicious Macro Document Delivered to HR,2025-03-08 11:20:18,Custom,Medium,Contained,Taylor Chen,Breached,55%,2025-03-14 11:20:18
+INC-2024-0087,Critical Vulnerability Exploit Attempt Detected,2024-02-29 22:11:20,Threat,Critical,Active,Samir Patel,Breached,60%,2024-03-07 22:11:20
+INC-2025-0088,Suspicious PowerShell Execution on Endpoint,2024-01-08 14:03:00,Custom,High,Resolved,Alex Murphy,At risk,83%,2024-01-27 14:03:00
+INC-2024-0089,Anomalous Admin Account Creation,2024-04-28 01:54:47,Exposure,Critical,Investigation,Morgan Lee,At risk,71%,2024-05-15 01:54:47
+INC-2025-0090,Anomalous Admin Account Creation,2025-05-08 23:01:24,Policy,Critical,Resolved,Taylor Chen,Breached,65%,2025-05-11 23:01:24
+INC-2024-0091,Critical Vulnerability Exploit Attempt Detected,2024-09-22 06:48:54,Exposure,High,Investigation,Jordan Blake,Breached,71%,2024-09-25 06:48:54
+INC-2025-0092,Unauthorized Cloud Console Login Attempt,2025-04-11 09:29:26,Exposure,High,Contained,Riley O'Connor,On track,59%,2025-05-01 09:29:26
+INC-2024-0093,Brute Force Login Attempts Against VPN Portal,2024-10-25 16:23:38,Phishing,Medium,Investigation,Samir Patel,Breached,55%,2024-11-01 16:23:38
+INC-2025-0094,Suspicious PowerShell Execution on Endpoint,2024-07-06 18:23:45,Custom,Critical,Investigation,Samir Patel,At risk,73%,2024-07-12 18:23:45
+INC-2024-0095,Suspected Ransomware Attack - Production Environment,2025-03-24 01:15:13,Exposure,Critical,Investigation,Jordan Blake,Breached,99%,2025-03-30 01:15:13
+INC-2025-0096,Malicious Macro Document Delivered to HR,2025-10-04 10:24:23,Policy,High,Investigation,Riley O'Connor,On track,35%,2025-10-16 10:24:23
+INC-2025-0097,Unusual Lateral Movement Detected,2024-03-08 13:11:15,Exposure,High,Resolved,Morgan Lee,Breached,85%,2024-03-14 13:11:15
+INC-2025-0098,Policy Violation - Unapproved SaaS Application,2025-01-24 03:22:58,Custom,High,Investigation,Samir Patel,On track,90%,2025-02-05 03:22:58
+INC-2024-0099,Suspected Ransomware Attack - Production Environment,2025-04-16 21:14:29,Custom,Critical,Contained,Jordan Blake,At risk,44%,2025-04-20 21:14:29
+INC-2025-0100,Policy Violation - Unapproved SaaS Application,2024-11-14 10:56:59,Phishing,High,Resolved,Riley O'Connor,At risk,56%,2024-11-21 10:56:59
+`
+  },
+  {
     id: "correlation-rules",
     label: "Correlation Rules",
     filename: "correlation-rules.csv",
@@ -1272,6 +1379,220 @@ cloud,Rotate API keys and credentials,816,1593,146,282,9
 cloud,Patch Docker to 3.15.3,731,1471,1456,987,12
 cloud,Update container base image to ubi9,732,4757,872,1053,8
 Onprem,Upgrade Kubernetes to 2.10.12,947,8477,1296,286,1
+`
+  },
+  {
+    id: "remediations",
+    label: "Remediations",
+    filename: "remediations.csv",
+    contents: `Remediation Action [link],Description,Event Type,Findings,Assets,Images,Campaigns,Actors,Automations,Risk Reduction,Progress,Environment,Source
+Upgrade pip to version 23.3 (batch 1),Brief explanation and category for this remediation item,Vulnerability,954,112,38,9,2,2,3.4%,86%,Hybrid,SIEM
+Upgrade requests to version 2.32.4 (batch 2),Short remediation description and category label for this action,Misconfiguration,403,2114,-,-,1,3,4.7%,39%,Hybrid,Scan Engine
+Upgrade golang.org/x/net to version 0.38.0 (batch 3),Suitable short description / category for this remediation,Vulnerability,710,2856,4,9,-,-,4.0%,84%,On-Premises,Scan Engine
+Upgrade to the latest version of Google Chrome - Wave 4,Suitable short description / category for this remediation,Vulnerability,744,514,37,-,1,-,4.8%,31%,On-Premises,Agent
+"2025-07 Cumulative Update for Microsoft Windows 10, version 1607 (KB5062560) - Deployment group 5",Brief explanation and category for this remediation item,Threat,347,533,-,-,2,2,3.5%,32%,Hybrid,Scan Engine
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 6,High-level remediation summary text for this action,Misconfiguration,1179,2321,-,-,2,-,4.1%,67%,On-Premises,Cloud Connector
+"2025-07 Cumulative Update for Microsoft Windows 10, version 1607 (KB5062560) - Deployment group 7",Suitable short description / category for this remediation,Misconfiguration,713,292,66,10,-,1,2.9%,62%,On-Premises,Manual Entry
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 8,Short remediation description and category label for this action,Threat,800,301,72,1,2,2,1.2%,61%,On-Premises,SIEM
+Upgrade requests to version 2.32.4 (batch 9),Brief explanation and category for this remediation item,Misconfiguration,926,1663,-,5,3,-,0.6%,90%,Hybrid,SIEM
+Uninstall Apple Safari on Windows - Campaign 10,High-level remediation summary text for this action,Misconfiguration,87,640,30,-,3,2,1.0%,64%,Hybrid,Cloud Connector
+Uninstall Apple Safari on Windows - Campaign 11,Suitable short description / category for this remediation,App Vulnerability,565,1623,-,3,1,1,1.7%,76%,Cloud,Cloud Connector
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 12),High-level remediation summary text for this action,Threat,531,3390,-,-,-,2,1.1%,27%,Hybrid,Agent
+Upgrade golang.org/x/net to version 0.38.0 (batch 13),Short remediation description and category label for this action,Vulnerability,474,3957,77,-,1,-,0.8%,66%,Cloud,Manual Entry
+"2025-07 Cumulative Update for Microsoft Windows 10, version 1607 (KB5062560) - Deployment group 14",Short remediation description and category label for this action,Misconfiguration,537,2875,-,-,1,3,3.9%,28%,Hybrid,Cloud Connector
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 15),High-level remediation summary text for this action,App Vulnerability,382,2680,14,-,3,2,2.2%,66%,On-Premises,Cloud Connector
+Upgrade to the latest version of Google Chrome - Wave 16,High-level remediation summary text for this action,App Vulnerability,1195,1214,-,4,-,3,2.3%,88%,Cloud,Scan Engine
+Upgrade pip to version 23.3 (batch 17),Suitable short description / category for this remediation,Threat,1183,992,50,9,1,-,1.1%,62%,Cloud,SIEM
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 18),High-level remediation summary text for this action,Misconfiguration,769,374,-,-,-,-,3.0%,23%,Cloud,Agent
+Upgrade to the latest version of Google Chrome - Wave 19,Brief explanation and category for this remediation item,Misconfiguration,146,2899,-,-,2,3,3.3%,46%,On-Premises,Scan Engine
+Uninstall Apple Safari on Windows - Campaign 20,Suitable short description / category for this remediation,Threat,1427,2937,-,3,-,3,2.4%,75%,Hybrid,SIEM
+"2025-07 Cumulative Update for Microsoft Windows 10, version 1607 (KB5062560) - Deployment group 21",Brief explanation and category for this remediation item,Threat,1044,1393,30,-,3,3,1.7%,65%,Hybrid,Cloud Connector
+Upgrade golang.org/x/net to version 0.38.0 (batch 22),Brief explanation and category for this remediation item,App Vulnerability,609,1470,68,-,3,-,3.8%,45%,Hybrid,Cloud Connector
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 23),Short remediation description and category label for this action,Misconfiguration,425,1058,26,-,2,3,3.6%,58%,Hybrid,Cloud Connector
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 24)",Short remediation description and category label for this action,Threat,514,695,40,8,-,2,3.7%,62%,Hybrid,Manual Entry
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 25),Brief explanation and category for this remediation item,App Vulnerability,753,2155,-,-,-,3,1.5%,35%,On-Premises,Scan Engine
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 26),Suitable short description / category for this remediation,Threat,986,2488,68,3,3,1,3.2%,72%,Cloud,Manual Entry
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 27)",Suitable short description / category for this remediation,App Vulnerability,1250,3370,61,-,2,3,1.3%,86%,On-Premises,Agent
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 28,Brief explanation and category for this remediation item,Vulnerability,75,2152,-,9,-,3,4.2%,31%,Hybrid,Scan Engine
+Uninstall Apple Safari on Windows - Campaign 29,High-level remediation summary text for this action,Threat,1460,1603,49,-,2,2,4.5%,24%,Hybrid,Cloud Connector
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 30,High-level remediation summary text for this action,Vulnerability,975,3434,-,7,3,3,1.4%,81%,On-Premises,SIEM
+Upgrade to the latest version of Google Chrome - Wave 31,Brief explanation and category for this remediation item,App Vulnerability,1303,3225,-,-,3,1,3.0%,73%,On-Premises,Cloud Connector
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 32,High-level remediation summary text for this action,Threat,667,3156,-,1,1,3,1.3%,53%,Hybrid,SIEM
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 33)",Suitable short description / category for this remediation,Vulnerability,440,987,20,8,-,1,4.9%,48%,Hybrid,Cloud Connector
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 34),High-level remediation summary text for this action,Misconfiguration,682,2674,1,9,-,2,4.7%,59%,On-Premises,Cloud Connector
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 35)",Brief explanation and category for this remediation item,Vulnerability,1132,1454,24,7,-,3,1.9%,32%,Hybrid,Cloud Connector
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 36)",High-level remediation summary text for this action,App Vulnerability,389,3954,-,9,1,3,3.7%,89%,Hybrid,Cloud Connector
+Upgrade requests to version 2.32.4 (batch 37),Short remediation description and category label for this action,Misconfiguration,372,575,39,5,-,2,2.7%,41%,Cloud,Manual Entry
+Upgrade golang.org/x/net to version 0.38.0 (batch 38),Suitable short description / category for this remediation,App Vulnerability,360,938,43,5,2,2,2.4%,85%,Cloud,Cloud Connector
+Upgrade requests to version 2.32.4 (batch 39),Short remediation description and category label for this action,App Vulnerability,1175,2608,21,-,2,-,3.8%,69%,On-Premises,Agent
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 40)",Short remediation description and category label for this action,App Vulnerability,334,333,-,-,3,3,4.8%,69%,Cloud,SIEM
+Upgrade to the latest version of Google Chrome - Wave 41,Brief explanation and category for this remediation item,App Vulnerability,924,2605,-,2,1,-,2.5%,47%,Cloud,Scan Engine
+Upgrade golang.org/x/net to version 0.38.0 (batch 42),High-level remediation summary text for this action,App Vulnerability,1241,2719,46,5,3,3,4.9%,29%,Cloud,Scan Engine
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 43),Brief explanation and category for this remediation item,Threat,1298,2151,-,7,3,1,3.1%,44%,On-Premises,Agent
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 44),Brief explanation and category for this remediation item,Threat,139,3398,-,-,1,-,3.4%,61%,Hybrid,Manual Entry
+Upgrade pip to version 23.3 (batch 45),Brief explanation and category for this remediation item,Vulnerability,1200,239,47,-,1,-,3.3%,80%,Hybrid,Cloud Connector
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 46),High-level remediation summary text for this action,Threat,669,3416,47,-,3,3,3.4%,77%,On-Premises,Manual Entry
+Upgrade pip to version 23.3 (batch 47),High-level remediation summary text for this action,App Vulnerability,240,2088,23,3,-,3,3.3%,74%,Hybrid,Agent
+Uninstall Apple Safari on Windows - Campaign 48,Brief explanation and category for this remediation item,Vulnerability,971,445,16,-,2,-,2.2%,74%,Cloud,Scan Engine
+Upgrade requests to version 2.32.4 (batch 49),High-level remediation summary text for this action,Misconfiguration,224,3338,-,2,3,-,3.9%,36%,Hybrid,SIEM
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 50),Suitable short description / category for this remediation,Threat,564,951,-,-,2,1,3.1%,87%,Hybrid,Agent
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 51),Brief explanation and category for this remediation item,Threat,1279,3863,-,-,-,3,4.0%,75%,Hybrid,Cloud Connector
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 52,Brief explanation and category for this remediation item,Misconfiguration,1145,430,54,-,3,-,1.7%,29%,On-Premises,Agent
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 53),High-level remediation summary text for this action,Threat,1294,3157,-,-,2,1,4.2%,28%,Hybrid,Cloud Connector
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 54)",Suitable short description / category for this remediation,Misconfiguration,377,1347,47,6,1,3,1.1%,80%,Hybrid,SIEM
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 55,High-level remediation summary text for this action,App Vulnerability,838,1757,-,9,3,3,3.8%,39%,On-Premises,Cloud Connector
+Uninstall Apple Safari on Windows - Campaign 56,High-level remediation summary text for this action,Vulnerability,434,3709,48,3,2,2,2.8%,71%,On-Premises,SIEM
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 57,Short remediation description and category label for this action,Vulnerability,1007,1524,59,9,-,3,0.8%,20%,Cloud,Scan Engine
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 58,Brief explanation and category for this remediation item,Threat,1005,1637,-,3,-,2,2.0%,65%,Hybrid,Agent
+Upgrade to the latest version of Google Chrome - Wave 59,Short remediation description and category label for this action,Vulnerability,226,2616,59,7,2,2,2.9%,61%,Hybrid,Scan Engine
+Upgrade pip to version 23.3 (batch 60),Short remediation description and category label for this action,Misconfiguration,536,1807,1,-,1,2,2.7%,78%,Cloud,Agent
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 61),Brief explanation and category for this remediation item,Threat,1095,1104,-,-,3,1,4.9%,40%,Cloud,Scan Engine
+Uninstall Apple Safari on Windows - Campaign 62,Brief explanation and category for this remediation item,App Vulnerability,346,3715,-,4,-,3,4.7%,36%,Hybrid,Agent
+Upgrade to the latest version of Google Chrome - Wave 63,Suitable short description / category for this remediation,Vulnerability,363,819,-,6,-,2,1.1%,78%,On-Premises,Manual Entry
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 64)",Suitable short description / category for this remediation,App Vulnerability,1493,760,-,1,1,-,3.7%,74%,Cloud,Scan Engine
+Upgrade to the latest version of Google Chrome - Wave 65,Suitable short description / category for this remediation,Threat,1473,1345,-,10,2,2,2.8%,74%,Hybrid,Manual Entry
+Upgrade golang.org/x/net to version 0.38.0 (batch 66),Short remediation description and category label for this action,App Vulnerability,1409,3224,56,-,2,1,4.1%,43%,Hybrid,Agent
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 67),Suitable short description / category for this remediation,App Vulnerability,192,1206,49,-,2,2,3.5%,67%,Cloud,SIEM
+Upgrade to the latest version of Google Chrome - Wave 68,Suitable short description / category for this remediation,Misconfiguration,1190,181,-,-,3,3,3.9%,34%,Cloud,Scan Engine
+Upgrade requests to version 2.32.4 (batch 69),Short remediation description and category label for this action,Misconfiguration,343,160,36,-,-,3,0.5%,56%,Cloud,Scan Engine
+Upgrade golang.org/x/net to version 0.38.0 (batch 70),High-level remediation summary text for this action,App Vulnerability,172,812,42,5,2,3,4.7%,83%,Cloud,Manual Entry
+Upgrade to the latest version of Google Chrome - Wave 71,Brief explanation and category for this remediation item,Vulnerability,660,3240,-,-,-,-,4.3%,89%,Hybrid,Cloud Connector
+Upgrade golang.org/x/net to version 0.38.0 (batch 72),Brief explanation and category for this remediation item,Vulnerability,1447,154,70,1,-,-,1.8%,20%,Cloud,Cloud Connector
+Uninstall Apple Safari on Windows - Campaign 73,High-level remediation summary text for this action,App Vulnerability,558,3721,-,3,-,-,3.1%,39%,Cloud,SIEM
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 74),Brief explanation and category for this remediation item,Vulnerability,50,3164,5,-,1,-,3.2%,86%,Cloud,Manual Entry
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 75)",Suitable short description / category for this remediation,App Vulnerability,1194,1024,-,7,2,3,0.9%,89%,Cloud,Cloud Connector
+"2025-07 Cumulative Update for Microsoft Windows 10, version 1607 (KB5062560) - Deployment group 76",Brief explanation and category for this remediation item,Vulnerability,481,2486,-,8,-,2,1.3%,25%,Cloud,SIEM
+Upgrade requests to version 2.32.4 (batch 77),Brief explanation and category for this remediation item,Threat,53,324,25,2,-,1,0.8%,62%,Cloud,Agent
+Upgrade golang.org/x/net to version 0.38.0 (batch 78),Brief explanation and category for this remediation item,App Vulnerability,242,3202,-,9,2,3,0.5%,38%,Hybrid,Cloud Connector
+Upgrade pip to version 23.3 (batch 79),Brief explanation and category for this remediation item,Threat,570,777,-,-,3,-,4.7%,75%,On-Premises,Agent
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 80)",High-level remediation summary text for this action,App Vulnerability,1207,122,31,7,2,1,0.7%,34%,On-Premises,Cloud Connector
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 81,Short remediation description and category label for this action,Threat,999,2945,-,8,2,3,0.9%,50%,Hybrid,Manual Entry
+Upgrade pip to version 23.3 (batch 82),Short remediation description and category label for this action,Threat,172,2686,16,5,2,-,2.7%,27%,On-Premises,Agent
+Upgrade to the latest version of Google Chrome - Wave 83,Suitable short description / category for this remediation,App Vulnerability,554,222,3,-,3,3,1.7%,27%,Cloud,SIEM
+Upgrade requests to version 2.32.4 (batch 84),Short remediation description and category label for this action,App Vulnerability,747,3547,53,-,2,1,1.9%,33%,On-Premises,Cloud Connector
+Uninstall Apple Safari on Windows - Campaign 85,High-level remediation summary text for this action,Vulnerability,950,736,50,-,3,-,2.6%,33%,On-Premises,Agent
+Uninstall Apple Safari on Windows - Campaign 86,Brief explanation and category for this remediation item,Misconfiguration,473,1894,-,-,-,-,1.2%,39%,On-Premises,Cloud Connector
+Uninstall Apple Safari on Windows - Campaign 87,High-level remediation summary text for this action,App Vulnerability,986,111,34,6,1,1,1.5%,39%,Cloud,Scan Engine
+Uninstall Apple Safari on Windows - Campaign 88,Suitable short description / category for this remediation,Vulnerability,1001,3963,-,-,3,-,3.0%,75%,On-Premises,Agent
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 89),High-level remediation summary text for this action,Vulnerability,61,745,-,-,2,3,2.2%,38%,Cloud,SIEM
+"Upgrade stdlib to version 1.23.10, 1.24.4 (batch 90)",Brief explanation and category for this remediation item,Threat,402,953,-,-,3,-,1.5%,90%,Hybrid,Agent
+Upgrade to the latest version of Google Chrome - Wave 91,Short remediation description and category label for this action,Threat,752,2099,12,6,2,3,3.2%,67%,On-Premises,Scan Engine
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 92),High-level remediation summary text for this action,App Vulnerability,1163,2343,-,-,2,2,4.0%,70%,On-Premises,Agent
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 93),Short remediation description and category label for this action,Threat,713,1650,-,5,-,1,3.2%,42%,On-Premises,Agent
+Upgrade golang.org/x/net to version 0.38.0 (batch 94),Short remediation description and category label for this action,Misconfiguration,196,2513,60,-,-,3,1.6%,30%,Hybrid,Scan Engine
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 95),High-level remediation summary text for this action,App Vulnerability,277,926,-,6,3,1,2.8%,50%,Hybrid,Cloud Connector
+Security Update for Microsoft Office Compatibility Pack Service Pack 3 (KB4018354) - Campaign 96,Suitable short description / category for this remediation,App Vulnerability,1141,1783,20,4,3,3,3.4%,36%,Hybrid,SIEM
+Uninstall Apple Safari on Windows - Campaign 97,Suitable short description / category for this remediation,Vulnerability,1463,2995,15,7,1,2,4.3%,83%,Hybrid,SIEM
+Upgrade to Adobe Flash version 23.0.0.162 for Windows (batch 98),Suitable short description / category for this remediation,Vulnerability,1182,821,-,10,2,-,3.7%,70%,Cloud,SIEM
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 99),High-level remediation summary text for this action,Misconfiguration,1111,2681,75,-,2,-,1.6%,43%,Hybrid,Cloud Connector
+Upgrade glib2 to version 2.82.2-766.amzn2023 (batch 100),High-level remediation summary text for this action,Threat,594,3399,42,4,-,1,2.6%,21%,On-Premises,Manual Entry
+`
+  },
+  {
+    id: "task",
+    label: "Task",
+    filename: "task.csv",
+    contents: `Task [link],Category,Status,Priority [status],Owner,Tickets [link|r],Automation
+Update Mozilla Firefox to v120.0.6100 - HR 002,Remediation,In Progress,High,SC Sarah Chen,9,SOAR
+Update Mozilla Firefox to v120.0.6101 - IT 007,Remediation,Completed,High,MK Maria Kim,1,Manual
+Update Mozilla Firefox to v120.0.6102 - IT 007,Remediation,In Progress,Medium,JD John Davis,—,AI
+Update Mozilla Firefox to v120.0.6103 - Sales 006,Remediation,In Progress,High,JD John Davis,—,SOAR
+Update Mozilla Firefox to v120.0.6104 - IT 007,Remediation,In Progress,High,RB Riley Brooks,12,SOAR
+Update Mozilla Firefox to v120.0.6105 - IT 007,Remediation,In Progress,Medium,MK Maria Kim,12,Manual
+Update Microsoft Edge to v120.0.6106 - Finance 001,Remediation,Pending,High,SC Sarah Chen,9,SOAR
+Update Microsoft Edge to v120.0.6107 - Finance 001,Remediation,In Progress,Critical,SC Sarah Chen,—,SOAR
+Update Microsoft Edge to v120.0.6108 - Sales 006,Remediation,Completed,Medium,SC Sarah Chen,2,Manual
+Update Mozilla Firefox to v120.0.6109 - IT 003,Remediation,Pending,Medium,MK Maria Kim,13,Manual
+Update Microsoft Edge to v120.0.6110 - Sales 006,Remediation,Completed,High,JD John Davis,—,Manual
+Update Mozilla Firefox to v120.0.6111 - HR 002,Remediation,Pending,Medium,AL Alex Lee,11,AI
+Update Google Chrome to v120.0.6112 - Eng 004,Remediation,In Progress,Medium,SC Sarah Chen,8,Manual
+Update Microsoft Edge to v120.0.6113 - Sales 006,Remediation,Completed,High,AL Alex Lee,3,AI
+Update Microsoft Edge to v120.0.6114 - IT 003,Remediation,Pending,High,JD John Davis,13,Manual
+Update Google Chrome to v120.0.6115 - Finance 001,Remediation,Completed,Critical,AL Alex Lee,8,AI
+Update Mozilla Firefox to v120.0.6116 - Finance 001,Remediation,Pending,High,MK Maria Kim,—,Manual
+Update Microsoft Edge to v120.0.6117 - Finance 001,Remediation,In Progress,Critical,SC Sarah Chen,—,AI
+Update Google Chrome to v120.0.6118 - IT 003,Remediation,Pending,Medium,JD John Davis,8,Manual
+Update Google Chrome to v120.0.6119 - Sales 006,Remediation,In Progress,Medium,SC Sarah Chen,11,SOAR
+Update Mozilla Firefox to v120.0.6120 - IT 007,Remediation,Completed,Critical,JD John Davis,11,Manual
+Update Microsoft Edge to v120.0.6121 - Sales 006,Remediation,Pending,Medium,MK Maria Kim,—,Manual
+Update Microsoft Edge to v120.0.6122 - HR 002,Remediation,Pending,High,MK Maria Kim,—,Manual
+Update Microsoft Edge to v120.0.6123 - Eng 004,Remediation,In Progress,Medium,RB Riley Brooks,—,AI
+Update Mozilla Firefox to v121.0.6124 - Finance 001,Remediation,Completed,High,RB Riley Brooks,13,Manual
+Update Mozilla Firefox to v121.0.6125 - IT 003,Remediation,In Progress,Medium,JD John Davis,1,Manual
+Update Mozilla Firefox to v121.0.6126 - Sales 006,Remediation,In Progress,High,MK Maria Kim,7,Manual
+Update Google Chrome to v121.0.6127 - IT 007,Remediation,Pending,High,RB Riley Brooks,14,AI
+Update Google Chrome to v121.0.6128 - IT 003,Remediation,Pending,Critical,AL Alex Lee,1,Manual
+Update Mozilla Firefox to v121.0.6129 - IT 003,Remediation,Completed,Medium,MK Maria Kim,4,Manual
+Update Microsoft Edge to v121.0.6130 - Finance 001,Remediation,Pending,Medium,AL Alex Lee,3,Manual
+Update Mozilla Firefox to v121.0.6131 - IT 003,Remediation,Completed,High,RB Riley Brooks,15,SOAR
+Update Mozilla Firefox to v121.0.6132 - Eng 004,Remediation,Completed,Critical,SC Sarah Chen,15,Manual
+Update Microsoft Edge to v121.0.6133 - HR 002,Remediation,Pending,Critical,RB Riley Brooks,—,AI
+Update Google Chrome to v121.0.6134 - Eng 004,Remediation,In Progress,Medium,JD John Davis,7,AI
+Update Google Chrome to v121.0.6135 - Finance 001,Remediation,Completed,Medium,SC Sarah Chen,12,Manual
+Update Google Chrome to v121.0.6136 - IT 007,Remediation,In Progress,Critical,MK Maria Kim,5,SOAR
+Update Microsoft Edge to v121.0.6137 - IT 003,Remediation,Pending,High,SC Sarah Chen,12,Manual
+Update Google Chrome to v121.0.6138 - IT 007,Remediation,Completed,High,MK Maria Kim,1,SOAR
+Update Microsoft Edge to v121.0.6139 - HR 002,Remediation,Pending,Medium,RB Riley Brooks,11,SOAR
+Update Mozilla Firefox to v121.0.6140 - Sales 006,Remediation,Pending,High,RB Riley Brooks,15,AI
+Update Microsoft Edge to v121.0.6141 - HR 002,Remediation,Completed,Critical,JD John Davis,—,Manual
+Update Microsoft Edge to v121.0.6142 - Finance 001,Remediation,In Progress,Critical,RB Riley Brooks,7,Manual
+Update Google Chrome to v121.0.6143 - HR 002,Remediation,Pending,Critical,SC Sarah Chen,2,Manual
+Update Mozilla Firefox to v121.0.6144 - Sales 006,Remediation,Pending,Medium,JD John Davis,1,Manual
+Update Microsoft Edge to v121.0.6145 - IT 007,Remediation,In Progress,Medium,SC Sarah Chen,3,Manual
+Update Google Chrome to v121.0.6146 - IT 003,Remediation,In Progress,Critical,AL Alex Lee,5,AI
+Update Microsoft Edge to v121.0.6147 - Sales 006,Remediation,In Progress,Medium,MK Maria Kim,15,AI
+Update Mozilla Firefox to v121.0.6148 - Eng 004,Remediation,Pending,Critical,MK Maria Kim,10,AI
+Update Microsoft Edge to v122.0.6149 - IT 007,Remediation,Completed,Medium,RB Riley Brooks,6,Manual
+Update Microsoft Edge to v122.0.6150 - HR 002,Remediation,Completed,Medium,JD John Davis,5,Manual
+Update Mozilla Firefox to v122.0.6151 - Sales 006,Remediation,In Progress,High,JD John Davis,—,AI
+Update Google Chrome to v122.0.6152 - IT 003,Remediation,Completed,Medium,RB Riley Brooks,15,AI
+Update Mozilla Firefox to v122.0.6153 - Sales 006,Remediation,Pending,High,SC Sarah Chen,—,Manual
+Update Microsoft Edge to v122.0.6154 - Sales 006,Remediation,Pending,Critical,RB Riley Brooks,9,Manual
+Update Google Chrome to v122.0.6155 - Sales 006,Remediation,In Progress,Medium,AL Alex Lee,13,Manual
+Update Microsoft Edge to v122.0.6156 - Finance 001,Remediation,Pending,High,MK Maria Kim,13,Manual
+Update Mozilla Firefox to v122.0.6157 - Sales 006,Remediation,Pending,High,MK Maria Kim,2,SOAR
+Update Mozilla Firefox to v122.0.6158 - HR 002,Remediation,In Progress,High,MK Maria Kim,2,SOAR
+Update Mozilla Firefox to v122.0.6159 - Sales 006,Remediation,In Progress,Critical,RB Riley Brooks,—,SOAR
+Update Mozilla Firefox to v122.0.6160 - HR 002,Remediation,Pending,Medium,MK Maria Kim,3,AI
+Update Google Chrome to v122.0.6161 - IT 003,Remediation,Pending,Critical,MK Maria Kim,4,SOAR
+Update Microsoft Edge to v122.0.6162 - Eng 004,Remediation,In Progress,Medium,JD John Davis,3,AI
+Update Google Chrome to v122.0.6163 - Finance 001,Remediation,Pending,High,RB Riley Brooks,—,Manual
+Update Google Chrome to v122.0.6164 - IT 007,Remediation,Completed,Medium,SC Sarah Chen,—,SOAR
+Update Microsoft Edge to v122.0.6165 - Sales 006,Remediation,Completed,Medium,AL Alex Lee,4,Manual
+Update Mozilla Firefox to v122.0.6166 - IT 003,Remediation,Completed,High,AL Alex Lee,9,Manual
+Update Mozilla Firefox to v122.0.6167 - Sales 006,Remediation,In Progress,Medium,JD John Davis,3,Manual
+Update Mozilla Firefox to v122.0.6168 - IT 003,Remediation,Pending,Critical,JD John Davis,7,Manual
+Update Mozilla Firefox to v122.0.6169 - Finance 001,Remediation,Pending,Critical,MK Maria Kim,—,AI
+Update Mozilla Firefox to v122.0.6170 - IT 003,Remediation,Pending,High,RB Riley Brooks,6,AI
+Update Google Chrome to v122.0.6171 - HR 002,Remediation,In Progress,Medium,AL Alex Lee,—,Manual
+Update Microsoft Edge to v122.0.6172 - HR 002,Remediation,Pending,High,AL Alex Lee,4,Manual
+Update Mozilla Firefox to v122.0.6173 - Finance 001,Remediation,In Progress,High,MK Maria Kim,15,SOAR
+Update Microsoft Edge to v123.0.6174 - HR 002,Remediation,Pending,High,MK Maria Kim,9,SOAR
+Update Google Chrome to v123.0.6175 - IT 007,Remediation,In Progress,High,JD John Davis,7,SOAR
+Update Google Chrome to v123.0.6176 - Eng 004,Remediation,In Progress,Medium,AL Alex Lee,9,AI
+Update Mozilla Firefox to v123.0.6177 - Sales 006,Remediation,In Progress,Medium,JD John Davis,14,SOAR
+Update Google Chrome to v123.0.6178 - Sales 006,Remediation,Pending,High,JD John Davis,15,SOAR
+Update Google Chrome to v123.0.6179 - Eng 004,Remediation,Pending,Critical,MK Maria Kim,11,AI
+Update Mozilla Firefox to v123.0.6180 - IT 007,Remediation,Completed,High,RB Riley Brooks,3,Manual
+Update Microsoft Edge to v123.0.6181 - IT 007,Remediation,Completed,High,RB Riley Brooks,—,SOAR
+Update Microsoft Edge to v123.0.6182 - Finance 001,Remediation,Pending,High,MK Maria Kim,13,Manual
+Update Mozilla Firefox to v123.0.6183 - Sales 006,Remediation,In Progress,High,AL Alex Lee,1,SOAR
+Update Google Chrome to v123.0.6184 - IT 007,Remediation,In Progress,Critical,RB Riley Brooks,7,Manual
+Update Google Chrome to v123.0.6185 - IT 007,Remediation,Pending,Critical,JD John Davis,15,AI
+Update Microsoft Edge to v123.0.6186 - Finance 001,Remediation,Completed,Medium,AL Alex Lee,2,Manual
+Update Mozilla Firefox to v123.0.6187 - Sales 006,Remediation,Completed,Critical,RB Riley Brooks,15,Manual
+Update Google Chrome to v123.0.6188 - Finance 001,Remediation,In Progress,Critical,JD John Davis,—,Manual
+Update Google Chrome to v123.0.6189 - HR 002,Remediation,Pending,Medium,MK Maria Kim,2,AI
+Update Google Chrome to v123.0.6190 - IT 003,Remediation,In Progress,Critical,SC Sarah Chen,8,Manual
+Update Mozilla Firefox to v123.0.6191 - Eng 004,Remediation,Completed,Medium,MK Maria Kim,9,AI
+Update Mozilla Firefox to v123.0.6192 - Sales 006,Remediation,Completed,Medium,AL Alex Lee,14,Manual
+Update Microsoft Edge to v123.0.6193 - Sales 006,Remediation,In Progress,High,JD John Davis,12,Manual
+Update Microsoft Edge to v123.0.6194 - IT 003,Remediation,Completed,Medium,AL Alex Lee,12,SOAR
+Update Microsoft Edge to v123.0.6195 - IT 007,Remediation,In Progress,Critical,MK Maria Kim,—,Manual
+Update Mozilla Firefox to v123.0.6196 - Finance 001,Remediation,In Progress,Critical,AL Alex Lee,3,Manual
+Update Google Chrome to v123.0.6197 - Sales 006,Remediation,In Progress,High,JD John Davis,—,AI
+Update Google Chrome to v123.0.6198 - Sales 006,Remediation,In Progress,Critical,SC Sarah Chen,14,Manual
+Update Google Chrome to v124.0.6199 - IT 003,Remediation,Completed,Medium,JD John Davis,2,Manual
 `
   },
   {
